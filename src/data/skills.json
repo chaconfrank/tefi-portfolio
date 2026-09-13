@@ -1,0 +1,14 @@
+[
+  {
+    "categoria": "Lenguajes",
+    "items": ["TypeScript", "JavaScript", "HTML", "CSS"]
+  },
+  {
+    "categoria": "Frameworks",
+    "items": ["Astro", "React", "Tailwind CSS"]
+  },
+  {
+    "categoria": "Herramientas",
+    "items": ["Git", "Vite", "Figma", "Playwright"]
+  }
+]

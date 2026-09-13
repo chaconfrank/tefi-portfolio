@@ -1,0 +1,17 @@
+---
+import skills from '../data/skills.json';
+---
+
+<section class="py-8">
+  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Stack</h2>
+  <dl class="mt-4 grid gap-5 sm:grid-cols-3">
+    {
+      skills.map(({ categoria, items }) => (
+        <div>
+          <dt class="text-sm font-medium">{categoria}</dt>
+          <dd class="mt-1.5 text-sm text-ink-soft">{items.join(' · ')}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

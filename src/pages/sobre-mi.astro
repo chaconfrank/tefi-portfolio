@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SkillList from '../components/SkillList.astro';
+---
+
+<BaseLayout title="Sobre mí" description="Quién soy, cómo trabajo y qué me interesa.">
+  <section class="py-12">
+    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Sobre mí</h1>
+
+    <div class="mt-8 space-y-4 text-pretty text-ink-soft">
+      <p>
+        Llevo varios años construyendo interfaces web. Me interesa especialmente
+        el punto donde se cruzan el diseño y el rendimiento: una web puede ser
+        bonita y cargar en menos de un segundo, no hay que elegir.
+      </p>
+      <p>
+        Trabajo sobre todo con TypeScript, y últimamente con Astro por lo bien
+        que se porta enviando cero JavaScript por defecto.
+      </p>
+      <p>
+        Fuera del teclado: <span class="text-ink">TODO — añade aquí lo tuyo</span>.
+      </p>
+    </div>
+
+    <SkillList />
+  </section>
+</BaseLayout>

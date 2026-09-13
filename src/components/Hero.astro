@@ -1,0 +1,37 @@
+---
+import { SOCIALS } from '../consts';
+---
+
+<section class="py-16 sm:py-24">
+  <p class="mb-3 text-sm font-medium text-accent">Hola, soy Tefi 👋</p>
+  <h1 class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+    Desarrolladora front-end enfocada en interfaces rápidas y accesibles
+  </h1>
+  <p class="mt-5 max-w-xl text-lg text-pretty text-ink-soft">
+    Diseño y construyo productos web con foco en rendimiento, accesibilidad y
+    una experiencia de uso cuidada. Actualmente trabajando en
+    <span class="text-ink">proyectos propios</span>.
+  </p>
+
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    <a
+      href="/proyectos"
+      class="rounded-xl bg-accent px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+    >
+      Ver proyectos
+    </a>
+    <a
+      href="/cv-tefi.pdf"
+      class="rounded-xl border border-line px-5 py-2.5 text-sm font-medium transition hover:bg-paper-soft"
+    >
+      Descargar CV
+    </a>
+    {
+      SOCIALS.map(({ href, label }) => (
+        <a href={href} class="px-2 text-sm text-ink-soft transition hover:text-ink" target="_blank" rel="noopener">
+          {label}
+        </a>
+      ))
+    }
+  </div>
+</section>

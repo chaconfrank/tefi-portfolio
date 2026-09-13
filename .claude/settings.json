@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(npm run preview)",
+      "Bash(npm install)",
+      "Bash(npx astro check)",
+      "Bash(npx astro dev status)",
+      "Bash(npx astro dev logs)",
+      "Bash(npx astro dev stop)",
+      "Bash(npx astro info)",
+      "Bash(npx astro sync)",
+      "Bash(nvm use)"
+    ]
+  }
+}

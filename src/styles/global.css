@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Dark mode por clase en <html>, controlado por ThemeToggle.astro */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens: cámbialos aquí y cambia todo el sitio */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: oklch(0.22 0.01 260);
+  --color-ink-soft: oklch(0.48 0.01 260);
+  --color-paper: oklch(0.99 0 0);
+  --color-paper-soft: oklch(0.96 0.003 260);
+  --color-accent: oklch(0.58 0.19 255);
+  --color-line: oklch(0.9 0.005 260);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --color-ink: oklch(0.95 0.005 260);
+    --color-ink-soft: oklch(0.72 0.01 260);
+    --color-paper: oklch(0.17 0.01 260);
+    --color-paper-soft: oklch(0.22 0.012 260);
+    --color-line: oklch(0.3 0.012 260);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/25;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+}

@@ -1,0 +1,42 @@
+# Contenido y colecciones
+
+> Convenciones específicas de este proyecto. Lo que aquí se documenta es una decisión nuestra o una trampa que el build no avisa, no el comportamiento por defecto de Astro.
+
+## Las dos colecciones
+
+Definidas en `src/content.config.ts` con el `glob()` loader y validadas con Zod. El schema es la fuente de verdad: si un `.md` no lo cumple, **el build falla**, que es justo lo que queremos.
+
+| Colección | Ruta | Frontmatter |
+| --- | --- | --- |
+| `proyectos` | `src/content/proyectos/` | `titulo`, `descripcion`, `stack[]`, `fecha`, `portada?`, `repo?`, `demo?`, `destacado`, `borrador` |
+| `blog` | `src/content/blog/` | `title`, `description`, `pubDate`, `updatedDate?`, `tags[]`, `borrador` |
+
+## La regla del flag `borrador`
+
+Ambas colecciones tienen `borrador` con default `false`. **Todo `getCollection()` tiene que filtrarlo:**
+
+```ts
+const posts = await getCollection('blog', ({ data }) => !data.borrador);
+```
+
+Olvidarlo no da error ni aviso: publica los borradores en silencio. Es el fallo más fácil de cometer en este proyecto.
+
+## Rutas de detalle
+
+Las colecciones viven fuera de `src/pages/`, así que **no generan rutas solas**. Cada una tiene su `[...slug].astro` que:
+
+1. Llama a `getCollection()` dentro de `getStaticPaths()` — filtrando `borrador`.
+2. Usa `entry.id` como `params.slug` (el `id` lo deriva Astro del nombre del archivo).
+3. Pasa la entrada entera por `props` y la renderiza con `const { Content } = await render(entry)`.
+
+El nombre del archivo es `[...slug].astro` con **rest parameter**, no `[slug].astro`: permite slugs con `/` si algún día se usa la propiedad `slug` del frontmatter para anidar.
+
+## Markdown
+
+Shiki resalta los bloques de código por defecto con el tema `github-dark`, sin CSS ni JS extra en el cliente.
+
+Si se añaden temas claro/oscuro (`markdown.shikiConfig.themes`), el CSS se escribe contra la clase **`.astro-code`** y las variables `--astro-code-*` — no contra `.shiki` / `--shiki-*`, que es lo que dice la documentación de Shiki y aquí no aplica.
+
+`markdown.remarkPlugins` y `rehypePlugins` están **deprecados** en esta versión de Astro: los plugins van dentro de `markdown.processor`.
+
+El estilado del Markdown renderizado está en `ProjectLayout` y `PostLayout` bajo la clase `.prose-portfolio`, con selectores `:global()` — ver `styling.md` para por qué son necesarios.

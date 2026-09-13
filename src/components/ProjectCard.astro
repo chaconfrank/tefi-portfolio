@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+}
+
+const { proyecto } = Astro.props;
+const { titulo, descripcion, portada, portadaAlt, stack } = proyecto.data;
+---
+
+<article class="group rounded-2xl border border-line bg-paper-soft/50 p-5 transition hover:border-accent/50">
+  <a href={`/proyectos/${proyecto.id}/`} class="block">
+    {
+      portada ? (
+        <Image
+          src={portada}
+          alt={portadaAlt ?? ''}
+          widths={[400, 800]}
+          sizes="(max-width: 640px) 100vw, 400px"
+          class="mb-4 aspect-video w-full rounded-xl object-cover"
+        />
+      ) : (
+        <div class="mb-4 aspect-video w-full rounded-xl bg-linear-to-br from-accent/25 to-accent/5" />
+      )
+    }
+
+    <h3 class="font-medium tracking-tight transition group-hover:text-accent">{titulo}</h3>
+    <p class="mt-1.5 text-sm text-pretty text-ink-soft">{descripcion}</p>
+  </a>
+
+  <ul class="mt-4 flex flex-wrap gap-1.5">
+    {
+      stack.map((tech) => (
+        <li class="rounded-md border border-line px-2 py-0.5 text-xs text-ink-soft">{tech}</li>
+      ))
+    }
+  </ul>
+</article>
