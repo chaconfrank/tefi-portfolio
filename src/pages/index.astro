@@ -2,46 +2,58 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import SkillList from '../components/SkillList.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import experiencia from '../data/experiencia.json';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import skills from '../data/skills.json';
 
-const destacados = (await getCollection('proyectos', ({ data }) => !data.borrador && data.destacado))
-  .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf())
-  .slice(0, 4);
+const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
+  (a, b) => a.data.orden - b.data.orden || b.data.fecha.valueOf() - a.data.fecha.valueOf(),
+);
 ---
 
 <BaseLayout>
   <Hero />
 
-  <section class="py-8">
-    <div class="flex items-baseline justify-between">
-      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Proyectos destacados</h2>
-      <a href="/proyectos" class="text-sm text-accent hover:underline">Ver todos →</a>
+  <section id="proyectos" class="py-8">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Case studies</h2>
+      <a href="/proyectos/" class="text-sm text-accent hover:underline">Ver todos →</a>
     </div>
 
-    <div class="mt-5 grid gap-4 sm:grid-cols-2">
-      {destacados.map((proyecto) => <ProjectCard proyecto={proyecto} />)}
+    <div class="mt-6 grid gap-5">
+      {proyectos.map((proyecto) => <CaseStudyCard proyecto={proyecto} />)}
     </div>
   </section>
 
-  <SkillList />
+  <section class="py-10">
+    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Sobre mí</h2>
+    <div class="mt-5 max-w-2xl space-y-4">
+      <p class="text-lg text-pretty">
+        Diseñadora de producto con más de 2 años especializada en soluciones SaaS
+        accesibles y centradas en el usuario.
+      </p>
+      <p class="text-pretty text-ink-soft">
+        He llevado iniciativas de diseño de la concepción al lanzamiento en gestión
+        de eventos, herramientas de proyectos y control de calidad, y turismo
+        inclusivo. Sistemas de diseño, accesos por roles y accesibilidad: productos
+        que funcionan y además son equitativos.
+      </p>
+      <p>
+        <a href="/sobre-mi/" class="text-sm text-accent hover:underline">Más sobre cómo trabajo →</a>
+      </p>
+    </div>
 
-  <section class="py-8">
-    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Experiencia</h2>
-    <ol class="mt-5 space-y-6 border-l border-line pl-6">
+    <dl class="mt-8 grid gap-6 sm:grid-cols-2">
       {
-        experiencia.map((item) => (
-          <li class="relative">
-            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-accent" />
-            <p class="text-xs text-ink-soft">{item.periodo}</p>
-            <h3 class="mt-0.5 font-medium">
-              {item.puesto} · <span class="text-ink-soft">{item.empresa}</span>
-            </h3>
-            <p class="mt-1 text-sm text-pretty text-ink-soft">{item.descripcion}</p>
-          </li>
+        skills.map(({ categoria, items }) => (
+          <div>
+            <dt class="text-sm font-medium">{categoria}</dt>
+            <dd class="mt-2 text-sm text-pretty text-ink-soft">{items.join(' · ')}</dd>
+          </div>
         ))
       }
-    </ol>
+    </dl>
   </section>
+
+  <ContactCTA />
 </BaseLayout>

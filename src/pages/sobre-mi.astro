@@ -1,27 +1,111 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkillList from '../components/SkillList.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { SITE_ROLE, UBICACION, CV_PATH } from '../consts';
+import experiencia from '../data/experiencia.json';
+import educacion from '../data/educacion.json';
+
+// Especialidad: tres frases cortas. Es lo que diferencia el perfil.
+const especialidad = [
+  {
+    titulo: 'Sistemas que sostienen el producto',
+    texto:
+      'Diseño atómico y design systems mantenidos de verdad: menos renegociar lo mismo en cada iteración y una marca coherente en todas las plataformas.',
+  },
+  {
+    titulo: 'Accesibilidad como criterio, no como repaso',
+    texto:
+      'La accesibilidad entra en la definición del problema. Cuando se deja para el final sólo queda maquillar decisiones ya tomadas.',
+  },
+  {
+    titulo: 'Diseño que llega a producción',
+    texto:
+      'Historias de usuario y criterios de aceptación en Jira y Linear, y QA del ciclo completo del error. Un diseño no está hecho hasta que funciona en manos del usuario.',
+  },
+];
 ---
 
-<BaseLayout title="Sobre mí" description="Quién soy, cómo trabajo y qué me interesa.">
+<BaseLayout
+  title="Sobre mí"
+  description="Product Designer UX/UI en Valencia: sistemas de diseño, accesibilidad y producto SaaS."
+>
   <section class="py-12">
-    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Sobre mí</h1>
+    <p class="text-sm font-medium text-accent">{SITE_ROLE} · {UBICACION}</p>
+    <h1 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Sobre mí</h1>
 
-    <div class="mt-8 space-y-4 text-pretty text-ink-soft">
-      <p>
-        Llevo varios años construyendo interfaces web. Me interesa especialmente
-        el punto donde se cruzan el diseño y el rendimiento: una web puede ser
-        bonita y cargar en menos de un segundo, no hay que elegir.
+    <!-- Bio: 2-3 párrafos cortos. Si crece, deja de leerse. -->
+    <div class="mt-6 max-w-2xl space-y-4">
+      <p class="text-lg text-pretty">
+        Diseñadora de producto con más de 2 años especializada en soluciones SaaS
+        accesibles y centradas en el usuario. Lo que mejor hago es traducir
+        necesidades complejas en interfaces intuitivas, apoyadas en sistemas de
+        diseño y en datos.
       </p>
-      <p>
-        Trabajo sobre todo con TypeScript, y últimamente con Astro por lo bien
-        que se porta enviando cero JavaScript por defecto.
+      <p class="text-pretty text-ink-soft">
+        He llevado iniciativas de diseño desde la concepción hasta el lanzamiento en
+        plataformas de gestión de eventos, herramientas de gestión de proyectos y
+        control de calidad, y aplicaciones de turismo inclusivo. El hilo común es
+        mejorar la usabilidad, implementar accesos basados en roles y cuidar la
+        accesibilidad: productos que no sólo funcionan, también son equitativos.
       </p>
-      <p>
-        Fuera del teclado: <span class="text-ink">TODO — añade aquí lo tuyo</span>.
+      <p class="text-pretty text-ink-soft">
+        Me muevo bien en entornos ágiles, pegada a equipos multifuncionales y
+        gestionando sprints en Jira o Linear para que diseño, desarrollo y negocio
+        apunten al mismo sitio.
       </p>
     </div>
 
+    <h2 class="mt-14 text-sm font-medium tracking-wide text-ink-soft uppercase">Especialidad</h2>
+    <div class="mt-5 grid gap-5 sm:grid-cols-3">
+      {
+        especialidad.map(({ titulo, texto }) => (
+          <div class="rounded-2xl border border-line bg-paper-soft/40 p-5">
+            <h3 class="font-medium text-balance">{titulo}</h3>
+            <p class="mt-2 text-sm text-pretty text-ink-soft">{texto}</p>
+          </div>
+        ))
+      }
+    </div>
+
     <SkillList />
+
+    <h2 class="mt-6 text-sm font-medium tracking-wide text-ink-soft uppercase">Experiencia</h2>
+    <ol class="mt-5 space-y-6 border-l border-line pl-6">
+      {
+        experiencia.map((item) => (
+          <li class="relative">
+            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-accent" />
+            <p class="text-xs text-ink-soft">{item.periodo}</p>
+            <h3 class="mt-0.5 font-medium">
+              {item.puesto} · <span class="text-ink-soft">{item.empresa}</span>
+            </h3>
+            <p class="mt-1 text-sm text-pretty text-ink-soft">{item.descripcion}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="mt-14 text-sm font-medium tracking-wide text-ink-soft uppercase">Formación</h2>
+    <ol class="mt-5 space-y-6 border-l border-line pl-6">
+      {
+        educacion.map((item) => (
+          <li class="relative">
+            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-accent" />
+            <p class="text-xs text-ink-soft">{item.periodo}</p>
+            <h3 class="mt-0.5 font-medium">
+              {item.titulo} · <span class="text-ink-soft">{item.centro}</span>
+            </h3>
+            <p class="mt-1 text-sm text-pretty text-ink-soft">{item.descripcion}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="mt-8">
+      <a href={CV_PATH} class="text-sm text-accent hover:underline">Descargar CV completo (PDF) →</a>
+    </p>
   </section>
+
+  <ContactCTA titulo="¿Hablamos?" texto="Cuéntame qué estáis construyendo y te digo si encajo." />
 </BaseLayout>

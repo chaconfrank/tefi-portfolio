@@ -22,7 +22,18 @@ const {
   <head>
     <BaseHead title={title} description={description} image={image} />
   </head>
-  <body class="flex min-h-dvh flex-col">
+  <body class="relative flex min-h-dvh flex-col">
+    <!--
+      Halo morado de la cabecera: centrado arriba, justo detrás de la nav, y se
+      disuelve en transparente hacia abajo. Decorativo y fuera de flujo; los
+      colores salen de los tokens --color-hero-* de global.css.
+    -->
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[26rem] bg-[radial-gradient(80%_130%_at_50%_-15%,var(--color-hero-to)_0%,var(--color-hero-via)_45%,transparent_80%)]"
+      aria-hidden="true"
+    >
+    </div>
+
     <Header />
     <main class="mx-auto w-full max-w-3xl grow px-6">
       <slot />

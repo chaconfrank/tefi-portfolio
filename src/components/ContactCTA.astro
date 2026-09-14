@@ -1,0 +1,41 @@
+---
+import { EMAIL, LINKEDIN, CV_PATH } from '../consts';
+
+interface Props {
+  titulo?: string;
+  texto?: string;
+}
+
+const {
+  titulo = '¿Encaja mi perfil en tu equipo?',
+  texto = 'Respondo en 1-2 días. Si prefieres el resumen rápido, descarga el CV.',
+} = Astro.props;
+---
+
+<section class="my-16 rounded-2xl border border-line bg-paper-soft/40 p-6 sm:p-8">
+  <h2 class="text-xl font-semibold tracking-tight text-balance">{titulo}</h2>
+  <p class="mt-2 max-w-lg text-pretty text-ink-soft">{texto}</p>
+
+  <div class="mt-6 flex flex-wrap items-center gap-3">
+    <a
+      href={`mailto:${EMAIL}`}
+      class="rounded-xl bg-accent px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+    >
+      {EMAIL}
+    </a>
+    <a
+      href={LINKEDIN}
+      target="_blank"
+      rel="noopener"
+      class="rounded-xl border border-line px-5 py-2.5 text-sm font-medium transition hover:bg-paper"
+    >
+      LinkedIn ↗
+    </a>
+    <a
+      href={CV_PATH}
+      class="rounded-xl border border-line px-5 py-2.5 text-sm font-medium transition hover:bg-paper"
+    >
+      Descargar CV
+    </a>
+  </div>
+</section>

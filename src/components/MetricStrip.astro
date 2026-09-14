@@ -1,0 +1,20 @@
+---
+interface Props {
+  metricas: readonly { valor: string; etiqueta: string }[];
+}
+
+const { metricas } = Astro.props;
+---
+
+{
+  metricas.length > 0 && (
+    <dl class="grid gap-6 rounded-2xl border border-line bg-paper-soft/40 p-6 sm:grid-cols-3">
+      {metricas.map(({ valor, etiqueta }) => (
+        <div>
+          <dd class="text-3xl font-semibold tracking-tight text-accent">{valor}</dd>
+          <dt class="mt-1 text-sm text-pretty text-ink-soft">{etiqueta}</dt>
+        </div>
+      ))}
+    </dl>
+  )
+}

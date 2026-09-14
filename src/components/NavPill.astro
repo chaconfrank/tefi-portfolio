@@ -1,0 +1,26 @@
+---
+import { NAV_LINKS } from '../consts';
+
+// Nav en pastilla con efecto glass: el halo morado del fondo se ve a través.
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<nav class="glass flex w-max items-center gap-0.5 rounded-full p-1" aria-label="Principal">
+  {
+    NAV_LINKS.map(({ href, label }) => (
+      <a
+        href={href}
+        aria-current={isActive(href) ? 'page' : undefined}
+        class:list={[
+          'rounded-full px-2 py-1.5 text-xs whitespace-nowrap transition sm:px-3.5 sm:text-sm',
+          isActive(href)
+            ? 'bg-paper/90 text-ink font-medium shadow-sm'
+            : 'text-ink-soft hover:text-ink',
+        ]}
+      >
+        {label}
+      </a>
+    ))
+  }
+</nav>

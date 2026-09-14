@@ -1,37 +1,58 @@
 ---
-import { SOCIALS } from '../consts';
+import {
+  SITE_AUTHOR,
+  SITE_ROLE,
+  SITE_TAGLINE,
+  UBICACION,
+  CV_PATH,
+  EMAIL,
+  BUSCANDO_TRABAJO,
+  DISPONIBILIDAD,
+} from '../consts';
 ---
 
-<section class="py-16 sm:py-24">
-  <p class="mb-3 text-sm font-medium text-accent">Hola, soy Tefi 👋</p>
-  <h1 class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-    Desarrolladora front-end enfocada en interfaces rápidas y accesibles
+<section class="pt-10 pb-12 sm:pt-16 sm:pb-16">
+  {
+    BUSCANDO_TRABAJO && (
+      <p class="glass inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-ink-soft">
+        <span class="relative flex size-2">
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/70" />
+          <span class="relative inline-flex size-2 rounded-full bg-emerald-500" />
+        </span>
+        {DISPONIBILIDAD} · {UBICACION}
+      </p>
+    )
+  }
+
+  <h1 class="mt-5 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+    {SITE_AUTHOR}
+    <span class="mt-1 block text-2xl font-normal text-ink-soft sm:text-3xl">{SITE_ROLE}</span>
   </h1>
-  <p class="mt-5 max-w-xl text-lg text-pretty text-ink-soft">
-    Diseño y construyo productos web con foco en rendimiento, accesibilidad y
-    una experiencia de uso cuidada. Actualmente trabajando en
-    <span class="text-ink">proyectos propios</span>.
+
+  <p class="mt-5 max-w-lg text-base leading-relaxed text-pretty sm:text-lg">
+    {SITE_TAGLINE}{' '}
+    <span class="text-ink-soft">
+      Traduzco necesidades complejas en interfaces intuitivas, respaldadas por
+      sistemas de diseño y decisiones basadas en datos.
+    </span>
   </p>
 
-  <div class="mt-8 flex flex-wrap items-center gap-3">
+  <!-- Un único CTA primario: el resto son secundarios y no compiten. -->
+  <div class="mt-8 flex flex-wrap items-center gap-2.5">
     <a
-      href="/proyectos"
-      class="rounded-xl bg-accent px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+      href="/proyectos/"
+      class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
     >
-      Ver proyectos
+      Ver los 3 case studies
     </a>
-    <a
-      href="/cv-tefi.pdf"
-      class="rounded-xl border border-line px-5 py-2.5 text-sm font-medium transition hover:bg-paper-soft"
-    >
+    <a href={CV_PATH} class="glass rounded-full px-5 py-2.5 text-sm font-medium transition hover:bg-paper/70">
       Descargar CV
     </a>
-    {
-      SOCIALS.map(({ href, label }) => (
-        <a href={href} class="px-2 text-sm text-ink-soft transition hover:text-ink" target="_blank" rel="noopener">
-          {label}
-        </a>
-      ))
-    }
+    <a
+      href={`mailto:${EMAIL}`}
+      class="px-2 text-sm text-ink-soft underline-offset-4 transition hover:text-ink hover:underline"
+    >
+      Escríbeme
+    </a>
   </div>
 </section>

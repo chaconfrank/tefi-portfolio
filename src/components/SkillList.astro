@@ -1,15 +1,25 @@
 ---
 import skills from '../data/skills.json';
+
+interface Props {
+  titulo?: string;
+}
+
+const { titulo = 'Herramientas y métodos' } = Astro.props;
 ---
 
-<section class="py-8">
-  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Stack</h2>
-  <dl class="mt-4 grid gap-5 sm:grid-cols-3">
+<section class="py-10">
+  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">{titulo}</h2>
+  <dl class="mt-5 grid gap-6 sm:grid-cols-2">
     {
       skills.map(({ categoria, items }) => (
         <div>
           <dt class="text-sm font-medium">{categoria}</dt>
-          <dd class="mt-1.5 text-sm text-ink-soft">{items.join(' · ')}</dd>
+          <dd class="mt-2 flex flex-wrap gap-1.5">
+            {items.map((item) => (
+              <span class="rounded-md border border-line px-2 py-0.5 text-xs text-ink-soft">{item}</span>
+            ))}
+          </dd>
         </div>
       ))
     }

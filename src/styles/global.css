@@ -5,14 +5,35 @@
 
 /* Design tokens: cámbialos aquí y cambia todo el sitio */
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-
-  --color-ink: oklch(0.22 0.01 260);
-  --color-ink-soft: oklch(0.48 0.01 260);
+  --color-ink: oklch(0.2 0.012 265);
+  --color-ink-soft: oklch(0.5 0.012 265);
   --color-paper: oklch(0.99 0 0);
-  --color-paper-soft: oklch(0.96 0.003 260);
-  --color-accent: oklch(0.58 0.19 255);
-  --color-line: oklch(0.9 0.005 260);
+  --color-paper-soft: oklch(0.965 0.004 265);
+  --color-accent: oklch(0.55 0.16 265);
+  --color-line: oklch(0.9 0.006 265);
+
+  /* Halo morado de la cabecera (BaseLayout). `to` es el centro, `via` el anillo
+     que rodea la nav; el borde exterior se disuelve en transparente. */
+  --color-hero-from: oklch(0.985 0.004 290);
+  --color-hero-via: oklch(0.86 0.085 292);
+  --color-hero-to: oklch(0.68 0.18 292);
+}
+
+/* Bloque aparte: `inline` resuelve la variable de la fuente que monta <Font /> */
+@theme inline {
+  --font-sans: var(--font-inter);
+}
+
+/*
+  Efecto glass de la nav, el toggle y los botones secundarios: fondo a media
+  opacidad + desenfoque y saturación del fondo, borde claro y un brillo interior
+  en el borde superior. Es lo que deja ver el halo morado a través.
+*/
+@utility glass {
+  @apply border border-white/50 bg-paper/40 backdrop-blur-xl backdrop-saturate-150;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.55),
+    0 10px 30px -14px rgb(23 23 40 / 0.45);
 }
 
 @layer base {
@@ -22,11 +43,15 @@
 
   .dark {
     color-scheme: dark;
-    --color-ink: oklch(0.95 0.005 260);
-    --color-ink-soft: oklch(0.72 0.01 260);
-    --color-paper: oklch(0.17 0.01 260);
-    --color-paper-soft: oklch(0.22 0.012 260);
-    --color-line: oklch(0.3 0.012 260);
+    --color-ink: oklch(0.96 0.004 265);
+    --color-ink-soft: oklch(0.73 0.012 265);
+    --color-paper: oklch(0.165 0.012 265);
+    --color-paper-soft: oklch(0.215 0.014 265);
+    --color-line: oklch(0.3 0.014 265);
+
+    --color-hero-from: oklch(0.19 0.015 290);
+    --color-hero-via: oklch(0.32 0.09 292);
+    --color-hero-to: oklch(0.47 0.17 292);
   }
 
   html {
@@ -35,6 +60,13 @@
 
   body {
     @apply bg-paper text-ink antialiased;
+  }
+
+  .dark .glass {
+    border-color: rgb(255 255 255 / 0.12);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.1),
+      0 10px 30px -14px rgb(0 0 0 / 0.65);
   }
 
   ::selection {

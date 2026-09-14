@@ -1,14 +1,18 @@
 [
   {
-    "categoria": "Lenguajes",
-    "items": ["TypeScript", "JavaScript", "HTML", "CSS"]
+    "categoria": "Diseño y prototipado",
+    "items": ["Figma (avanzado)", "Adobe Illustrator (avanzado)", "Design systems", "Diseño atómico", "Prototipado"]
   },
   {
-    "categoria": "Frameworks",
-    "items": ["Astro", "React", "Tailwind CSS"]
+    "categoria": "Research y validación",
+    "items": ["Entrevistas", "Encuestas", "Diagramas de flujo", "Diseño centrado en el usuario", "A/B testing"]
   },
   {
-    "categoria": "Herramientas",
-    "items": ["Git", "Vite", "Figma", "Playwright"]
+    "categoria": "Producto y equipo",
+    "items": ["Linear (avanzado)", "Jira (intermedio)", "Notion", "Slack", "Metodologías ágiles", "QA y ciclo de vida de bugs"]
+  },
+  {
+    "categoria": "Idiomas",
+    "items": ["Español (nativo)", "Inglés (fluido)"]
   }
 ]

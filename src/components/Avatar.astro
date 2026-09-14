@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import { SITE_AUTHOR, SITE_ROLE } from '../consts';
+import avatar from '../assets/avatar.jpg';
+
+interface Props {
+  /* Clases de tamaño; el radio y el resto del estilo son fijos. */
+  class?: string;
+}
+
+const { class: clase = 'size-10' } = Astro.props;
+---
+
+<!-- Cuadrado con el mismo radio que las tarjetas, no círculo. -->
+<Image
+  src={avatar}
+  alt={`${SITE_AUTHOR}, ${SITE_ROLE}`}
+  widths={[80, 160, 240]}
+  sizes="40px"
+  class:list={[clase, 'rounded-xl border border-white/60 object-cover shadow-sm dark:border-white/15']}
+/>

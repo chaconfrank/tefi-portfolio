@@ -1,20 +1,20 @@
 [
   {
-    "periodo": "2023 — actualidad",
-    "puesto": "Front-end Developer",
-    "empresa": "Empresa Actual",
-    "descripcion": "Desarrollo de la interfaz del producto principal. Reduje el LCP de 3.4s a 1.1s migrando a renderizado estático."
+    "periodo": "Oct 2023 — Sep 2025",
+    "puesto": "Product Designer UX/UI",
+    "empresa": "Amaia App",
+    "descripcion": "Creé y mantuve un design system escalable, diseñé las interfaces a partir de investigación de usuarios, lideré la planificación de sprints con historias de usuario en Jira y Linear, e implanté el proceso de QA del producto."
   },
   {
-    "periodo": "2021 — 2023",
-    "puesto": "Desarrolladora web",
-    "empresa": "Estudio Anterior",
-    "descripcion": "Sitios corporativos y e-commerce para clientes. Implantación del design system compartido entre proyectos."
+    "periodo": "2019 — 2022",
+    "puesto": "Diseñadora gráfica freelance",
+    "empresa": "Por cuenta propia",
+    "descripcion": "Soluciones de diseño end-to-end para pequeñas empresas y proyectos personales: branding, identidad visual, gestión de redes sociales y diseño textil."
   },
   {
-    "periodo": "2020 — 2021",
-    "puesto": "Junior Developer",
-    "empresa": "Primer Trabajo",
-    "descripcion": "Mantenimiento de landings y automatización del despliegue con CI."
+    "periodo": "2017 — 2018",
+    "puesto": "Diseñadora gráfica",
+    "empresa": "Entrename",
+    "descripcion": "Infografías, iconos web, informes de estadísticas, newsletters, ilustración para el blog y banners para campañas de Facebook Ads y Google Ads."
   }
 ]
