@@ -23,6 +23,35 @@ Toda convención nueva se añade a `.claude/conventions/`, **nunca a este archiv
 @.claude/conventions/assets.md
 @.claude/conventions/git-workflow.md
 
+## Dominio del portfolio
+
+El portfolio existe para conseguir entrevistas de Product Designer. Estephany
+tiene dos años de experiencia, así que la baza no es la antigüedad: es demostrar
+impacto y proceso. Esa es la regla que decide qué entra y qué no.
+
+**Lenguaje del dominio**
+
+| Término | Qué significa aquí |
+| --- | --- |
+| Case study | Un proyecto contado como caso: qué problema había, cómo se abordó, qué hizo ella en concreto y qué cambió al final. No es una ficha técnica. |
+| Tipo de proyecto | De dónde viene el encargo: startup, freelance o proyecto propio. Distingue el trabajo con cliente real del trabajo sin cliente, y un recruiter lo lee distinto. |
+| Métrica de impacto | Una cifra o un hecho que muestra qué cambió gracias al trabajo de diseño. Máximo tres por case study. |
+| Aprendizaje clave | Lo que ella se lleva del proyecto, en una frase. Si no cabe en una frase, no es el aprendizaje clave. |
+| Borrador | Contenido escrito que todavía no debe verse publicado. |
+
+**Reglas**
+
+1. **Ninguna cifra publicada es inventada.** No se publica un dato falso aunque
+   nadie vaya a comprobarlo. Cuando no hay número real, se dice el hecho
+   cualitativo que sí es cierto en lugar de estimar uno.
+2. **Un case study dice qué hizo ella en concreto**, no qué hizo el equipo. Si
+   su papel no se puede describir sin ambigüedad, el proyecto todavía no está
+   listo para publicarse.
+3. **El móvil no aparece en ninguna página del sitio.** Sí viaja dentro del CV
+   en PDF, y es deliberado: lo que se evita es que los rastreadores lo recojan
+   del texto de la web, no que lo tenga alguien que se descarga el CV a
+   propósito.
+
 ## Entorno y comandos
 
 **Stack:** Astro 7 · TypeScript strict · Tailwind CSS v4 · sitio estático, sin framework de UI.
@@ -69,8 +98,9 @@ y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
 `TODO` — búscalos con `grep -rn TODO src astro.config.mjs`:
 
 - `site` en `astro.config.mjs` sigue siendo el placeholder `https://tefi.dev`.
-- **Métricas de los case studies**: las actuales son cualitativas y trazables al CV
-  (no hay números inventados). Cada `.md` lleva un comentario con las preguntas
+- **Métricas de los case studies**: Amaia ya lleva cifras reales dadas por
+  Estephany (tiempo de resolución de incidencias y tamaño del backlog). Wedify y
+  Handsport siguen con métricas cualitativas y llevan dentro las preguntas
   concretas que faltan por responder.
 
 Puntos donde el código todavía no sigue las convenciones — arréglalos si tocas esa zona:

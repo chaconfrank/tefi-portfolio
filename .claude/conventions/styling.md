@@ -36,6 +36,25 @@ brillo interior arriba. La variante oscura se ajusta con `.dark .glass`.
 si el cristal cambia, cambia en un sitio. Y **no le pongas fondo sólido al
 `Header`**: el efecto depende de que se vea el halo morado por detrás.
 
+## Jerarquía de llamadas a la acción
+
+Tres niveles, y **sólo un primario por pantalla**:
+
+| Nivel | Estilo |
+| --- | --- |
+| Primario | `rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper` |
+| Secundario | `glass rounded-full px-5 py-2.5 text-sm font-medium` |
+| Terciario | enlace de texto `text-ink-soft`, subrayado al hover |
+
+El primario es **negro y redondo**, no del color de acento: el acento se reserva
+para las métricas y los enlaces dentro del texto, y así el botón no compite con
+ellos. Además va con tokens (`bg-ink`/`text-paper`), así que el modo oscuro sale
+solo — el estilo viejo usaba `text-white`, que en oscuro no se invierte.
+
+`ContactCTA`, `404` y `/contacto` todavía llevan el estilo viejo
+(`rounded-xl bg-accent … text-white`). Es deuda conocida: alinéalos al primario
+cuando toques esos archivos.
+
 ## `@apply` dentro de un componente
 
 Un `<style>` de componente que use `@apply` necesita esto como **primera línea del bloque**:

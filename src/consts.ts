@@ -19,8 +19,9 @@ export const LINKEDIN = 'https://www.linkedin.com/in/estephanymago';
 // El archivo vive en public/ con este nombre exacto.
 export const CV_PATH = '/cv-estephany-mago.pdf';
 
-// El móvil del CV NO está publicado a propósito: en una web indexada es un imán
-// de spam. Si lo quieres visible, añádelo aquí y píntalo en /contacto.
+// El móvil no se pinta en ninguna página: en HTML indexado es un imán de spam.
+// Sí viaja dentro del CV en PDF, y es deliberado — descargarlo es un acto
+// consciente. Si lo quieres visible en la web, añádelo aquí y píntalo en /contacto.
 
 // Ponlo a false cuando ya no busques activamente: oculta el badge del hero.
 export const BUSCANDO_TRABAJO = true;
