@@ -8,8 +8,17 @@ Definidas en `src/content.config.ts` con el `glob()` loader y validadas con Zod.
 
 | Colección | Ruta | Frontmatter |
 | --- | --- | --- |
-| `proyectos` | `src/content/proyectos/` | `titulo`, `descripcion`, `stack[]`, `fecha`, `portada?`, `repo?`, `demo?`, `destacado`, `borrador` |
+| `proyectos` | `src/content/proyectos/` | `titulo`, `descripcion`, `tipo`, `rol`, `periodo`, `herramientas[]`, `metricas[]`, `aprendizaje`, `orden`, `fecha`, `equipo?`, `portada?`, `repo?`, `demo?`, `destacado`, `borrador` |
 | `blog` | `src/content/blog/` | `title`, `description`, `pubDate`, `updatedDate?`, `tags[]`, `borrador` |
+
+Un proyecto **es un case study**, no una ficha: el schema obliga a decir el rol
+concreto, el impacto (`metricas`, máximo 3) y el aprendizaje en una frase. El cuerpo
+lleva siempre las mismas cuatro secciones `##` — contexto, proceso, rol, resultado —
+para que los tres proyectos se puedan comparar de un vistazo. Detalle en la skill
+`/nuevo-contenido`.
+
+Los listados ordenan por `orden` ascendente (y `fecha` descendente para empatar):
+con tres proyectos manda el criterio editorial, no la cronología.
 
 ## La regla del flag `borrador`
 

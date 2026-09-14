@@ -13,7 +13,14 @@ Crear una entrada nueva en `proyectos` o `blog` cumpliendo el schema a la primer
 
 ## Paso 1: Determinar colección y datos
 
-Pregunta sólo lo que falte. Para un **proyecto** hacen falta: título, descripción de una línea, stack, fecha, y si va destacado en la home. Opcionales: repo, demo, portada.
+Pregunta sólo lo que falte. Un **proyecto** es un case study, así que hacen falta:
+título, descripción de una línea (con el resultado, no la categoría), tipo
+(`Startup` / `Freelance` / `Proyecto propio`), rol concreto, periodo, herramientas,
+hasta 3 métricas, el aprendizaje clave en una frase y el orden en el listado.
+Opcionales: equipo, repo, demo, portada.
+
+Si no hay métricas duras, usa cualitativas (`12 entrevistas`, `0 → 1`): la tira de
+impacto vacía se nota más que una métrica modesta.
 
 Para un **post**: título, descripción, tags.
 
@@ -36,7 +43,16 @@ Frontmatter de proyecto (campos en **español**):
 ---
 titulo: 
 descripcion: 
-stack: ['Astro', 'TypeScript']
+tipo: Startup            # Startup | Freelance | Proyecto propio
+rol: 
+periodo: '2026 · 8 semanas'
+equipo: 'Con 1 PM y 3 ingenieros'   # opcional
+herramientas: ['Figma', 'FigJam']
+metricas:                # máximo 3
+  - valor: '38% → 61%'
+    etiqueta: 'Activación a 7 días'
+aprendizaje: 'Una sola frase.'
+orden: 4                 # menor = más arriba en el listado
 fecha: 2026-01-15
 destacado: false
 borrador: false
@@ -63,7 +79,16 @@ borrador: false
 
 Markdown normal. Empieza por `##`, nunca por `#`: el `<h1>` lo pone el layout a partir del título del frontmatter, y duplicarlo rompe la jerarquía de encabezados.
 
-Para un proyecto, la estructura que siguen los existentes es: contexto o problema → decisiones tomadas → resultado con números si los hay.
+Un proyecto lleva **siempre estas cuatro secciones `##`, en este orden** — es lo que
+hace comparables los case studies entre sí:
+
+1. `## Contexto y problema` — 3 bullets de situación y la pregunta real en negrita.
+2. `## Proceso` — lista numerada de pasos de research/diseño/validación.
+3. `## Mi rol` — bullets en primera persona con verbos concretos (definí, moderé, diseñé).
+4. `## Resultado e impacto` — bullets con números, incluyendo lo que **no** funcionó.
+
+El aprendizaje clave **no va en el cuerpo**: va en el frontmatter y lo pinta el layout
+al final. Si no cabe en una frase, no es el aprendizaje clave.
 
 ## Paso 4: Imagen de portada (si la hay)
 
@@ -78,6 +103,6 @@ nvm use && npm run build
 El build valida el frontmatter contra el schema Zod. Si falta un campo obligatorio o una fecha no parsea, falla ahí y dice cuál es.
 
 Comprueba que la entrada aparece donde toca:
-- Un post → `/blog` y el feed `/rss.xml`.
-- Un proyecto → `/proyectos`, y la home si `destacado: true`.
+- Un post → `/blog/` y el feed `/rss.xml` (el blog está fuera de la navegación).
+- Un proyecto → `/proyectos/` y la home (salen todos, ordenados por `orden`).
 - Con `borrador: true` **no debe aparecer en ningún sitio**. Si aparece, el listado correspondiente ha olvidado filtrar el flag: arréglalo ahí (ver `.claude/conventions/content.md`).

@@ -16,14 +16,27 @@ Tres fuentes, cada una con su mecanismo. Al añadir datos, elige la que correspo
 2. **Datos estructurados** (`src/data/*.json`) — experiencia y skills. Listas cortas, sin schema, que sólo se pintan. Si una de estas listas empieza a necesitar validación o cuerpo en Markdown, promociónala a colección.
 3. **Configuración del sitio** (`src/consts.ts`) — título, descripción, navegación y redes. El nav del header y los enlaces del footer se derivan de aquí: **no hardcodees enlaces de navegación en los componentes**.
 
+El portfolio es de **Product Designer**: la navegación son cuatro entradas (Inicio,
+Proyectos, Sobre mí, Contacto) y los proyectos son case studies. La colección `blog`
+y su feed siguen existiendo y compilando, pero **están fuera de `NAV_LINKS`** a
+propósito: un blog con un post de relleno resta en un portfolio que se enseña a
+recruiters. Si se retoma, se vuelve a añadir al nav.
+
 ## Composición de páginas
 
 ```
 BaseLayout            shell <html>, Header, <main><slot/></main>, Footer
-  └─ BaseHead         <head>: canónica, Open Graph, RSS, script de tema
+  └─ BaseHead         <head>: canónica, Open Graph, <Font />, script de tema
+  └─ halo morado      <div> decorativo en -z-10, detrás de la nav
 ProjectLayout         BaseLayout + cabecera de proyecto + estilos del Markdown
 PostLayout            BaseLayout + cabecera de post + estilos del Markdown
 ```
+
+El `Header` es igual en todas las páginas: **sin fondo propio**, con la nav centrada
+en una pastilla translúcida (`NavPill`) y el toggle a la derecha. El color de la
+cabecera no lo pone el header sino un **halo morado** que pinta `BaseLayout` como
+`<div>` decorativo absoluto en `-z-10`, centrado arriba y disuelto en transparente.
+Si le pones fondo sólido al header, tapas el halo y se pierde el efecto.
 
 Una página nueva usa `BaseLayout` y le pasa `title` y `description`; si no lo hace, hereda los valores de `consts.ts` y **dos páginas distintas compiten por el mismo título en buscadores**.
 
@@ -31,9 +44,9 @@ Las páginas de detalle de contenido no llaman a `BaseLayout` directamente: usan
 
 ## Rutas y enlaces
 
-`build.format` vale `'directory'` por defecto: cada página se genera como `/ruta/index.html` y `Astro.url.pathname` lleva barra final. Con ese formato la doc de Astro recomienda fijar `trailingSlash: 'always'` (o `'never'` si algún día se cambia a `format: 'file'`) para que dev y build no difieran.
+`build.format` vale `'directory'` por defecto: cada página se genera como `/ruta/index.html` y `Astro.url.pathname` lleva barra final. Por eso `astro.config.mjs` fija **`trailingSlash: 'always'`**, que es lo que recomienda la doc de Astro con ese formato para que dev y build no difieran.
 
-Sea cual sea la elección, aplícala en **los tres sitios a la vez**:
+La decisión está aplicada en **los tres sitios a la vez**; si alguna vez se cambia a `'never'`, hay que cambiarlos los tres:
 
 1. Los `href` de `NAV_LINKS` en `src/consts.ts`.
 2. Los `href` construidos con `entry.id` en tarjetas y listados.

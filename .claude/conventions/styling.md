@@ -25,6 +25,17 @@ Por clase, no por media query: `@custom-variant dark` en el CSS, la clase `dark`
 
 Usa `dark:` sólo para lo que no es color de token (mostrar/ocultar los iconos del toggle, por ejemplo).
 
+## La utilidad `glass`
+
+La nav, el toggle, el badge de disponibilidad y los botones secundarios comparten
+el mismo cristal, definido una sola vez en `global.css` con `@utility glass`:
+fondo a media opacidad, `backdrop-blur` + `backdrop-saturate`, borde claro y un
+brillo interior arriba. La variante oscura se ajusta con `.dark .glass`.
+
+Úsala siempre en lugar de repetir `bg-paper/40 backdrop-blur-xl border-white/50…`:
+si el cristal cambia, cambia en un sitio. Y **no le pongas fondo sólido al
+`Header`**: el efecto depende de que se vea el halo morado por detrás.
+
 ## `@apply` dentro de un componente
 
 Un `<style>` de componente que use `@apply` necesita esto como **primera línea del bloque**:

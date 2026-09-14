@@ -64,10 +64,20 @@ Detalle de las excepciones en `code-style.md`.
 
 ## Estado y desviaciones conocidas
 
-Portfolio recién inicializado: el contenido de `src/content/`, `src/data/` y `src/consts.ts` son ejemplos de relleno, y `site` es un placeholder. No hay repositorio git.
+Portfolio de **Estephany Mago**, Product Designer UX/UI. El esqueleto está completo
+y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
+`TODO` — búscalos con `grep -rn TODO src astro.config.mjs`:
+
+- `site` en `astro.config.mjs` sigue siendo el placeholder `https://tefi.dev`.
+- **Métricas de los case studies**: las actuales son cualitativas y trazables al CV
+  (no hay números inventados). Cada `.md` lleva un comentario con las preguntas
+  concretas que faltan por responder.
 
 Puntos donde el código todavía no sigue las convenciones — arréglalos si tocas esa zona:
 
-1. **La fuente no se carga.** `global.css` declara `--font-sans: 'Inter Variable'` y nada la sirve, así que el sitio cae al stack del sistema. Se resuelve con la API de fuentes de Astro (`assets.md`), no con un `<link>`.
-2. **Barra final inconsistente.** `NAV_LINKS` usa `/proyectos` y las tarjetas enlazan a `/proyectos/id/`. Falta decidir `trailingSlash` y unificar los tres sitios (`architecture.md`).
-3. **Sin `astro check`.** `@astrojs/check` no está instalado, así que nada comprueba tipos.
+1. **Sin `astro check`.** `@astrojs/check` no está instalado, así que nada comprueba tipos.
+2. **Sin imágenes.** Ningún case study tiene `portada`; las tarjetas se pintan sin
+   imagen. Al añadirlas, van en `src/content/proyectos/` o `src/assets/`, nunca en
+   `public/` (ver `assets.md`).
+3. **Sin `og-default.png`.** `BaseHead` apunta a `/og-default.png` y ese archivo no
+   existe: las previsualizaciones en LinkedIn salen sin imagen.
