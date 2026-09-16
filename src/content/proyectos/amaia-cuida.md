@@ -1,5 +1,6 @@
 ---
-titulo: 'Amaia — design systems para tres productos y proceso de QA'
+titulo: 'Amaia Cuida — design systems para tres productos y proceso de QA'
+titular: 'Optimizar la gestión de un SaaS y su QA'
 descripcion: 'Dos años diseñando tres productos SaaS. Al montar el proceso de QA, las incidencias pasaron de tardar hasta dos semanas a resolverse en 24 h.'
 tipo: Startup
 rol: 'Única diseñadora de los tres productos: research, diseño, design systems y QA'
@@ -28,8 +29,9 @@ borrador: false
 
 ## Contexto y problema
 
-Amaia no es un producto, son tres: **Amaia Profesionales**, **Amaia Conecta** y
-**Amaia App**. Entré como única persona de diseño de producto, con todos en marcha.
+**Amaia Cuida** es la startup, y no tiene un producto sino tres: **Amaia
+Profesionales**, **Amaia Conecta** y **Amaia App**. Entré como única persona de
+diseño de producto, con los tres en marcha.
 
 - Cada producto había crecido por su lado: **la misma acción se resolvía distinto en
   cada uno**.

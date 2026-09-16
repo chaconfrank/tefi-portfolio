@@ -1,5 +1,6 @@
 ---
 titulo: 'Wedify — SaaS multiusuario para gestión de eventos'
+titular: 'Simplificar la gestión de eventos multiusuario'
 descripcion: 'Tres tipos de usuario con objetivos opuestos dentro del mismo producto. Definí la arquitectura de información y un acceso por roles con su propio panel para cada uno.'
 tipo: Freelance
 rol: 'Product Designer UX/UI — arquitectura de información, flujos y UI'
@@ -10,8 +11,8 @@ metricas:
     etiqueta: 'Superadmin, administrador de recintos y cliente'
   - valor: '3 paneles'
     etiqueta: 'Un panel de control por rol, con sus propias tareas'
-  - valor: 'Adaptable'
-    etiqueta: 'Interfaz accesible y responsive en todos los perfiles'
+  - valor: 'En producción'
+    etiqueta: 'La plataforma llegó a publicarse'
 aprendizaje: 'Diseñar “una pantalla que sirva para todos” habría sido más barato y peor: separar los paneles por rol fue justo lo que hizo el producto usable para los tres.'
 destacado: true
 orden: 2
@@ -20,11 +21,12 @@ borrador: false
 ---
 
 <!--
-  TODO (Estephany): confirma si Wedify fue freelance, colaboración o producto de
-  empresa, y cambia `tipo` si hace falta. Añade también:
-  - ¿qué validaste con usuarios y con cuántos?
-  - ¿llegó a lanzarse? ¿algún dato de uso?
-  - si puedes enseñar pantallas, añade `demo` o una `portada`.
+  La plataforma se publicó, pero Estephany no siguió en el proyecto en las
+  iteraciones posteriores, así que no hay datos de uso ni validación con usuarios
+  finales. Lo único que se validó fue con el antiguo propietario de la
+  plataforma, y su devolución fue cualitativa. No inventar métricas de uso aquí.
+
+  TODO (Estephany): faltan pantallas — añade `portada` cuando las tengas.
 -->
 
 ## Contexto y problema
@@ -70,3 +72,7 @@ tres productos que comparten datos?
   ya nacen sabiendo qué enseñar a quién.
 - Separar los paneles costó más trabajo de diseño y evitó un producto que habría
   sido mediocre para los tres perfiles.
+- **La plataforma llegó a publicarse.** La validación fue con el antiguo
+  propietario, que destacó la mejora de usabilidad y que los flujos por fin se
+  entendían. No hay datos de uso: no seguí en el proyecto en las iteraciones
+  siguientes.

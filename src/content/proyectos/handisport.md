@@ -1,13 +1,15 @@
 ---
-titulo: 'Handsport — turismo accesible para personas con discapacidad'
-descripcion: 'Aplicación web para encontrar actividades turísticas adaptadas. La accesibilidad fue el requisito de partida, no una revisión al final.'
+titulo: 'Handisport — actividades adaptadas para personas con discapacidad'
+titular: 'Redefinir la accesibilidad en la experiencia digital'
+descripcion: 'Aplicación web para encontrar actividades adaptadas a cada discapacidad. La accesibilidad fue el requisito de partida, no una revisión al final.'
 tipo: Freelance
 rol: 'Product Designer UX/UI — usabilidad, accesibilidad y UI'
 periodo: 'May — Ago 2024'
 herramientas: ['Figma', 'Adobe Illustrator', 'Notion']
+demo: https://handisportmallorca.org/
 metricas:
-  - valor: 'Accesibilidad'
-    etiqueta: 'Criterio de diseño desde el primer boceto'
+  - valor: '4 tipos'
+    etiqueta: 'De discapacidad cubiertos por las actividades'
   - valor: 'Design system'
     etiqueta: 'Personalizado para las necesidades del producto'
   - valor: '1 flujo clave'
@@ -19,17 +21,18 @@ borrador: false
 ---
 
 <!--
-  TODO (Estephany): completa con lo que tengas:
-  - ¿hablaste con personas con discapacidad o con asociaciones? ¿cuántas?
-  - ¿qué tipos de discapacidad cubristeis?
-  - ¿qué nivel de accesibilidad perseguisteis (WCAG AA, por ejemplo)?
-  - si hay pantallas que puedas enseñar, añade `portada` o `demo`.
+  El producto está publicado en handisportmallorca.org (Fundación Handisport
+  Mallorca). No hubo research con personas con discapacidad ni con asociaciones:
+  se partió de las cuatro discapacidades para las que la fundación ya tenía
+  actividades. La accesibilidad técnica (lectura de pantalla y demás) la resolvió
+  el desarrollador; lo de aquí es la parte de diseño.
+
+  TODO (Estephany): faltan pantallas — añade `portada` cuando las tengas.
 -->
 
 ## Contexto y problema
 
-Handsport ayuda a encontrar actividades turísticas adaptadas a personas con
-discapacidad.
+Handisport ayuda a encontrar actividades adaptadas a personas con discapacidad.
 
 - La información sobre accesibilidad suele estar **dispersa, incompleta o escrita
   para el proveedor**, no para quien la necesita.
@@ -57,6 +60,9 @@ seguro de que esa actividad le sirve?
 - Diseñé la experiencia y la interfaz completas de la aplicación web.
 - Personalicé el design system para las necesidades de accesibilidad del producto.
 - Trabajé usabilidad y accesibilidad como un mismo criterio, no como dos fases.
+- La accesibilidad **técnica** —lectura de pantalla y ajustes equivalentes— la
+  implementó el desarrollador del proyecto; mi parte fue que el producto se
+  pudiera entender y recorrer, no la capa asistiva.
 
 ## Resultado e impacto
 
