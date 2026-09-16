@@ -8,6 +8,10 @@ interface Props {
 const { titulo = 'Herramientas y métodos' } = Astro.props;
 ---
 
+<!--
+  Nivel escrito, no barra de porcentaje: un "97%" en una skill no significa nada
+  y en un perfil de producto se lee como relleno.
+-->
 <section class="py-10">
   <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">{titulo}</h2>
   <dl class="mt-5 grid gap-6 sm:grid-cols-2">
@@ -16,8 +20,11 @@ const { titulo = 'Herramientas y métodos' } = Astro.props;
         <div>
           <dt class="text-sm font-medium">{categoria}</dt>
           <dd class="mt-2 flex flex-wrap gap-1.5">
-            {items.map((item) => (
-              <span class="rounded-md border border-line px-2 py-0.5 text-xs text-ink-soft">{item}</span>
+            {items.map(({ nombre, nivel }) => (
+              <span class="inline-flex items-center gap-1.5 rounded-md border border-line px-2 py-0.5 text-xs">
+                {nombre}
+                <span class="text-ink-soft/70">{nivel}</span>
+              </span>
             ))}
           </dd>
         </div>

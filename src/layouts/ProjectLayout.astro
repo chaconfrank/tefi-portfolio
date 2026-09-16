@@ -13,6 +13,7 @@ interface Props {
 const { proyecto, siguiente } = Astro.props;
 const {
   titulo,
+  titular,
   descripcion,
   tipo,
   rol,
@@ -45,7 +46,20 @@ const ficha = [
       <span>{periodo}</span>
     </p>
 
-    <h1 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{titulo}</h1>
+    {
+      titular && (
+        <p class="mt-5 text-xs font-medium tracking-wide text-ink-soft uppercase">{titular}</p>
+      )
+    }
+
+    <h1
+      class:list={[
+        titular ? 'mt-2' : 'mt-4',
+        'text-3xl font-semibold tracking-tight text-balance sm:text-4xl',
+      ]}
+    >
+      {titulo}
+    </h1>
     <p class="mt-4 max-w-2xl text-lg text-pretty text-ink-soft">{descripcion}</p>
 
     {

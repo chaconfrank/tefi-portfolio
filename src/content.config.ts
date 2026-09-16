@@ -9,6 +9,9 @@ const proyectos = defineCollection({
   schema: ({ image }) =>
     z.object({
       titulo: z.string(),
+      // Línea de encuadre que va encima del título en la tarjeta: de qué va el
+      // proyecto en cuatro palabras. El título dice qué es, esto dice el ángulo.
+      titular: z.string().optional(),
       // Una línea. Es lo único que se lee en la tarjeta: di el resultado,
       // no la categoría ("Rediseño que subió la activación un 34%").
       descripcion: z.string(),

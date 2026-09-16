@@ -14,10 +14,15 @@ import {
 <section class="pt-10 pb-12 sm:pt-16 sm:pb-16">
   {
     BUSCANDO_TRABAJO && (
-      <p class="glass inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-ink-soft">
+      <p class="glass-strong inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-ink">
+        <!--
+          El aro oscuro no es decorativo: el amarillo solo, sobre el cristal
+          casi blanco, da 1,43:1 y el punto desaparece. El aro le pone el borde
+          que el color no puede poner.
+        -->
         <span class="relative flex size-2">
-          <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/70" />
-          <span class="relative inline-flex size-2 rounded-full bg-emerald-500" />
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-highlight" />
+          <span class="relative inline-flex size-2 rounded-full bg-highlight ring-1 ring-ink/30 ring-inset" />
         </span>
         {DISPONIBILIDAD} · {UBICACION}
       </p>
@@ -32,8 +37,8 @@ import {
   <p class="mt-5 max-w-lg text-base leading-relaxed text-pretty sm:text-lg">
     {SITE_TAGLINE}{' '}
     <span class="text-ink-soft">
-      Traduzco necesidades complejas en interfaces intuitivas, respaldadas por
-      sistemas de diseño y decisiones basadas en datos.
+      Con sistemas de diseño que sostienen el producto y decisiones respaldadas
+      por datos.
     </span>
   </p>
 
@@ -43,9 +48,9 @@ import {
       href="/proyectos/"
       class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
     >
-      Ver los 3 case studies
+      Ver proyectos
     </a>
-    <a href={CV_PATH} class="glass rounded-full px-5 py-2.5 text-sm font-medium transition hover:bg-paper/70">
+    <a href={CV_PATH} class="glass rounded-full px-5 py-2.5 text-sm font-medium transition hover:bg-accent-soft">
       Descargar CV
     </a>
     <a

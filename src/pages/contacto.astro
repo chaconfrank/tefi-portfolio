@@ -1,64 +1,100 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { EMAIL, LINKEDIN, CV_PATH, UBICACION, BUSCANDO_TRABAJO, DISPONIBILIDAD } from '../consts';
+import AvailabilityBadge from '../components/AvailabilityBadge.astro';
+import { EMAIL, LINKEDIN, CV_PATH, UBICACION, BUSCANDO_TRABAJO } from '../consts';
 
 const canales = [
   { etiqueta: 'Email', valor: EMAIL, href: `mailto:${EMAIL}`, externo: false },
-  { etiqueta: 'LinkedIn', valor: LINKEDIN.replace(/^https?:\/\/(www\.)?|\/$/g, ''), href: LINKEDIN, externo: true },
+  {
+    etiqueta: 'LinkedIn',
+    valor: LINKEDIN.replace(/^https?:\/\/(www\.)?|\/$/g, ''),
+    href: LINKEDIN,
+    externo: true,
+  },
+  { etiqueta: 'Ubicación', valor: UBICACION, href: null, externo: false },
 ];
 ---
 
 <BaseLayout title="Contacto" description="Email, LinkedIn y CV en PDF.">
   <section class="py-12">
-    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Contacto</h1>
-    <p class="mt-3 max-w-lg text-pretty text-ink-soft">
-      La vía más rápida es el email: respondo en 1-2 días.
+    <h1 class="max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+      ¿Cómo puedo ayudarte en tu próximo proyecto?
+    </h1>
+    <p class="mt-4 max-w-lg text-lg text-pretty text-ink-soft">
+      Tanto si tienes una vacante definida como si sólo quieres contrastar una
+      idea, escríbeme y le damos forma.
     </p>
 
-    {
-      BUSCANDO_TRABAJO && (
-        <p class="mt-5 inline-flex items-center gap-2 rounded-full border border-line bg-paper-soft px-3 py-1 text-xs text-ink-soft">
-          <span class="size-2 rounded-full bg-emerald-500" />
-          {DISPONIBILIDAD} · {UBICACION}
-        </p>
-      )
-    }
-
-    <dl class="mt-10 divide-y divide-line border-y border-line">
-      {
-        canales.map(({ etiqueta, valor, href, externo }) => (
-          <div class="flex items-baseline justify-between gap-4 py-4">
-            <dt class="text-sm text-ink-soft">{etiqueta}</dt>
-            <dd>
-              <a
-                class="text-accent hover:underline"
-                href={href}
-                target={externo ? '_blank' : undefined}
-                rel={externo ? 'noopener' : undefined}
-              >
-                {valor}
-                {externo && ' ↗'}
-              </a>
-            </dd>
-          </div>
-        ))
-      }
-    </dl>
-
-    <a
-      href={CV_PATH}
-      class="mt-8 inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
-    >
-      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
-      </svg>
-      Descargar CV (PDF)
-    </a>
-
     <!--
-      Para un formulario real necesitas un endpoint: servicio externo
-      (Formspree, Web3Forms) o `output: 'server'` + un adaptador y
-      un endpoint en src/pages/api/contacto.ts
+      Tarjeta de datos: los canales y el CTA al final. No hay formulario a
+      propósito — el sitio es estático y un email directo llega antes que un
+      formulario que nadie sabe si funciona.
+
+      `relative` sin `overflow-hidden`: el sello va pegado como una pegatina en
+      la esquina, y el desplazamiento negativo es justo la mitad de su tamaño
+      para que quede medio dentro y medio fuera. Si cambias el tamaño, cambia
+      el `-top-*` a la mitad exacta o deja de estar centrado en el borde.
     -->
+    <div class="relative mt-16 rounded-2xl border border-line bg-paper-soft/40 p-6 sm:p-8">
+      {
+        BUSCANDO_TRABAJO && (
+          <AvailabilityBadge clase="absolute -top-10 right-6 size-20 sm:-top-12 sm:right-8 sm:size-24" />
+        )
+      }
+
+      <h2 class="text-xl font-semibold tracking-tight">Hablemos</h2>
+
+      <dl class="mt-6 divide-y divide-line border-y border-line">
+        {
+          canales.map(({ etiqueta, valor, href, externo }) => (
+            <div class="flex items-baseline justify-between gap-4 py-4">
+              <dt class="text-sm text-ink-soft">{etiqueta}</dt>
+              <dd class="text-right">
+                {href ? (
+                  <a
+                    class="underline-offset-4 transition hover:text-accent hover:underline"
+                    href={href}
+                    target={externo ? '_blank' : undefined}
+                    rel={externo ? 'noopener' : undefined}
+                  >
+                    {valor}
+                    {externo && ' ↗'}
+                  </a>
+                ) : (
+                  <span>{valor}</span>
+                )}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div class="mt-8 flex flex-wrap items-center gap-2.5">
+        <a
+          href={`mailto:${EMAIL}`}
+          class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
+        >
+          Escríbeme
+        </a>
+        <a
+          href={CV_PATH}
+          class="glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition hover:bg-accent-soft"
+        >
+          <svg
+            class="size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+          </svg>
+          Descargar CV (PDF)
+        </a>
+      </div>
+    </div>
   </section>
 </BaseLayout>

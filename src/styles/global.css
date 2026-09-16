@@ -5,18 +5,48 @@
 
 /* Design tokens: cámbialos aquí y cambia todo el sitio */
 @theme {
-  --color-ink: oklch(0.2 0.012 265);
-  --color-ink-soft: oklch(0.5 0.012 265);
+  --color-ink: #1f2937;
+  --color-ink-soft: oklch(0.5 0.012 182);
   --color-paper: oklch(0.99 0 0);
-  --color-paper-soft: oklch(0.965 0.004 265);
-  --color-accent: oklch(0.55 0.16 265);
-  --color-line: oklch(0.9 0.006 265);
+  --color-paper-soft: oklch(0.965 0.004 182);
+  --color-accent: #008080;
+  /* Teal claro: fondo de estados hover y de superficies de interacción. */
+  --color-accent-soft: #e6f2f2;
+  --color-line: #e5e7eb;
 
-  /* Halo morado de la cabecera (BaseLayout). `to` es el centro, `via` el anillo
-     que rodea la nav; el borde exterior se disuelve en transparente. */
-  --color-hero-from: oklch(0.985 0.004 290);
-  --color-hero-via: oklch(0.86 0.085 292);
-  --color-hero-to: oklch(0.68 0.18 292);
+  /* Naranja de las cifras: métricas de los case studies y trayectoria. Sólo
+     para texto grande y grueso — sobre el papel da 3,7:1, que pasa AA en texto
+     grande pero NO en texto de cuerpo. No lo uses en texto pequeño. */
+  --color-metric: #d26900;
+  /* Su fondo suave: cajas de los iconos de metodología. */
+  --color-metric-soft: #faecdc;
+
+  /* Amarillo del sello de disponibilidad. Siempre como FONDO con
+     --color-highlight-ink encima: como color de texto sobre el papel da 1,43:1
+     y desaparece. */
+  --color-highlight: #ffd269;
+
+  /* Tinta de lo que va encima del amarillo. NO se redefine en oscuro a
+     propósito: el disco sigue siendo claro en los dos modos, así que su texto
+     tiene que seguir siendo oscuro o se vuelve ilegible. */
+  --color-highlight-ink: #1f2937;
+
+  /* Giro del sello. Lento a propósito: a más velocidad marea y distrae del CTA. */
+  --animate-seal-spin: seal-spin 22s linear infinite;
+
+  @keyframes seal-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Halo teal de la cabecera (BaseLayout). `to` es el centro, `via` el anillo
+     que rodea la nav; el borde exterior se disuelve en transparente.
+     El teal admite menos croma que el morado que llevaba el sitio antes: subir `to` por
+     encima de ~0.13 se sale de gamut y el navegador lo recorta a un cian sucio. */
+  --color-hero-from: oklch(0.985 0.004 182);
+  --color-hero-via: oklch(0.88 0.075 182);
+  --color-hero-to: oklch(0.75 0.12 182);
 }
 
 /* Bloque aparte: `inline` resuelve la variable de la fuente que monta <Font /> */
@@ -27,13 +57,50 @@
 /*
   Efecto glass de la nav, el toggle y los botones secundarios: fondo a media
   opacidad + desenfoque y saturación del fondo, borde claro y un brillo interior
-  en el borde superior. Es lo que deja ver el halo morado a través.
+  en el borde superior. Es lo que deja ver el halo teal a través.
 */
 @utility glass {
   @apply border border-white/50 bg-paper/40 backdrop-blur-xl backdrop-saturate-150;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.55),
     0 10px 30px -14px rgb(23 23 40 / 0.45);
+}
+
+/*
+  Cristal más opaco para elementos pequeños que van sobre el halo: con el 40 %
+  de `glass` un badge de 12 px se funde con el fondo y deja de leerse.
+*/
+@utility glass-strong {
+  @apply glass bg-paper/75;
+}
+
+/*
+  Entrada al hacer scroll (tarjetas, tiras de métricas). CSS puro con
+  scroll-driven animations: donde el navegador no las soporta, el @supports
+  entero se ignora y el contenido se pinta normal — nunca hay riesgo de
+  contenido invisible, que es la trampa clásica del reveal con JS.
+  La animación termina en cuanto el elemento lleva un 35% visible, así que
+  nada queda a medias en pantalla.
+*/
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 @layer base {
@@ -43,15 +110,29 @@
 
   .dark {
     color-scheme: dark;
-    --color-ink: oklch(0.96 0.004 265);
-    --color-ink-soft: oklch(0.73 0.012 265);
-    --color-paper: oklch(0.165 0.012 265);
-    --color-paper-soft: oklch(0.215 0.014 265);
-    --color-line: oklch(0.3 0.014 265);
+    --color-ink: oklch(0.96 0.004 182);
+    --color-ink-soft: oklch(0.73 0.012 182);
+    --color-paper: oklch(0.165 0.012 182);
+    --color-paper-soft: oklch(0.215 0.014 182);
+    --color-line: oklch(0.3 0.014 182);
+    --color-accent-soft: oklch(0.28 0.045 182);
 
-    --color-hero-from: oklch(0.19 0.015 290);
-    --color-hero-via: oklch(0.32 0.09 292);
-    --color-hero-to: oklch(0.47 0.17 292);
+    /* Las cifras se aclaran en oscuro: el naranja de modo claro se apaga
+       contra el fondo oscuro. */
+    --color-metric: #f09b3f;
+    --color-metric-soft: oklch(0.27 0.045 60);
+
+    /* El acento sí se aclara en oscuro: el teal de modo claro es demasiado
+       apagado sobre fondo oscuro y los enlaces se pierden. */
+    --color-accent: oklch(0.75 0.11 182);
+
+    /* El amarillo se apaga un punto en modo oscuro: a plena luz sobre fondo
+       oscuro vibra y se come el texto que lleva dentro. */
+    --color-highlight: #f5c14a;
+
+    --color-hero-from: oklch(0.19 0.015 182);
+    --color-hero-via: oklch(0.33 0.065 182);
+    --color-hero-to: oklch(0.47 0.1 182);
   }
 
   html {

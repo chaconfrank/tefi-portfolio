@@ -1,0 +1,60 @@
+---
+import metodologia from '../data/metodologia.json';
+
+// Iconos de línea, mismo trazo que el resto de SVGs del sitio. La clave viene
+// del JSON; si añades un paso nuevo, añade aquí su dibujo.
+const iconos: Record<string, string> = {
+  lupa: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  estructura:
+    '<rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4m0 0H6v4m6-4h6v4"/>',
+  test: '<path d="M9.5 3h5M10.5 3v5.2L5 17.5a2 2 0 0 0 1.8 2.9h10.4a2 2 0 0 0 1.8-2.9L13.5 8.2V3"/><path d="M7.5 14h9"/>',
+  calidad:
+    '<path d="M12 3l7 3v5.5c0 4.3-2.9 7.3-7 8.9-4.1-1.6-7-4.6-7-8.9V6l7-3Z"/><path d="m9 11.8 2.1 2.1 3.9-4.2"/>',
+};
+---
+
+<!--
+  Cómo trabaja, en cuatro pasos. Es la mitad que un recruiter no puede deducir
+  de los case studies: allí ve el resultado, aquí ve el método que lo produce.
+-->
+<section id="metodo" class="py-10">
+  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Cómo trabajo</h2>
+
+  <p class="mt-5 max-w-2xl text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+    Diseño estratégico que hace que los productos funcionen.
+  </p>
+  <p class="mt-4 max-w-2xl text-pretty text-ink-soft">
+    Trabajo para reducir la fricción entre la visión de diseño y la realidad del
+    desarrollo. Desde la investigación inicial hasta el QA final sigo un método
+    estructurado, pero ágil, para que cada funcionalidad aporte valor real.
+  </p>
+
+  <ol class="mt-8 grid gap-4 sm:grid-cols-2">
+    {
+      metodologia.map(({ paso, titulo, texto, icono }) => (
+        <li class="reveal rounded-2xl border border-line bg-paper-soft/40 p-5">
+          <div class="flex items-start justify-between">
+            <span
+              class="flex size-10 items-center justify-center rounded-xl bg-metric-soft text-metric"
+              aria-hidden="true"
+            >
+              <svg
+                class="size-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={iconos[icono]}
+              />
+            </span>
+            <p class="text-sm font-semibold text-ink-soft tabular-nums">({paso})</p>
+          </div>
+          <h3 class="mt-4 font-medium text-balance">{titulo}</h3>
+          <p class="mt-2 text-sm text-pretty text-ink-soft">{texto}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

@@ -37,17 +37,17 @@ const especialidad = [
     <!-- Bio: 2-3 párrafos cortos. Si crece, deja de leerse. -->
     <div class="mt-6 max-w-2xl space-y-4">
       <p class="text-lg text-pretty">
-        Diseñadora de producto con más de 2 años especializada en soluciones SaaS
-        accesibles y centradas en el usuario. Lo que mejor hago es traducir
-        necesidades complejas en interfaces intuitivas, apoyadas en sistemas de
-        diseño y en datos.
+        Diseñadora de producto especializada en soluciones SaaS accesibles y
+        centradas en el usuario. Lo que mejor hago es traducir necesidades de
+        negocio en interfaces intuitivas, apoyadas en sistemas de diseño y en datos.
       </p>
       <p class="text-pretty text-ink-soft">
-        He llevado iniciativas de diseño desde la concepción hasta el lanzamiento en
-        plataformas de gestión de eventos, herramientas de gestión de proyectos y
-        control de calidad, y aplicaciones de turismo inclusivo. El hilo común es
-        mejorar la usabilidad, implementar accesos basados en roles y cuidar la
-        accesibilidad: productos que no sólo funcionan, también son equitativos.
+        Llevo nueve años en el sector del diseño y los dos últimos diseñando
+        producto. He trabajado en productos de naturalezas muy distintas
+        —plataformas de gestión de eventos, herramientas internas de producto y
+        QA, y aplicaciones de actividades adaptadas—, y esa variedad es lo que me
+        ha dado criterio: el hilo común es mejorar la usabilidad, resolver accesos
+        por roles y cuidar la accesibilidad.
       </p>
       <p class="text-pretty text-ink-soft">
         Me muevo bien en entornos ágiles, pegada a equipos multifuncionales y
@@ -76,7 +76,7 @@ const especialidad = [
         experiencia.map((item) => (
           <li class="relative">
             <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-accent" />
-            <p class="text-xs text-ink-soft">{item.periodo}</p>
+            <p class="text-xs text-ink-soft">{item.periodo} · {item.ubicacion}</p>
             <h3 class="mt-0.5 font-medium">
               {item.puesto} · <span class="text-ink-soft">{item.empresa}</span>
             </h3>

@@ -3,12 +3,22 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
+import Methodology from '../components/Methodology.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import skills from '../data/skills.json';
+import { ANIOS_DISENO, ANIOS_PRODUCTO } from '../consts';
 
 const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
   (a, b) => a.data.orden - b.data.orden || b.data.fecha.valueOf() - a.data.fecha.valueOf(),
 );
+
+// Trayectoria, no impacto de proyecto: las dos cifras de años son ciertas y
+// dicen cosas distintas. Los 3 productos son los tres case studies publicados.
+const trayectoria = [
+  { valor: `${ANIOS_DISENO} años`, etiqueta: 'En el sector del diseño, desde 2017' },
+  { valor: `${ANIOS_PRODUCTO} años`, etiqueta: 'Diseñando producto SaaS' },
+  { valor: '3 productos', etiqueta: 'Llevados de principio a fin' },
+];
 ---
 
 <BaseLayout>
@@ -17,7 +27,7 @@ const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador
   <section id="proyectos" class="py-8">
     <div class="flex items-baseline justify-between gap-4">
       <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Case studies</h2>
-      <a href="/proyectos/" class="text-sm text-accent hover:underline">Ver todos →</a>
+      <a href="/proyectos/" class="text-sm font-medium text-accent underline-offset-4 hover:underline">Ver todos →</a>
     </div>
 
     <div class="mt-6 grid gap-5">
@@ -29,17 +39,17 @@ const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador
     <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Sobre mí</h2>
     <div class="mt-5 max-w-2xl space-y-4">
       <p class="text-lg text-pretty">
-        Diseñadora de producto con más de 2 años especializada en soluciones SaaS
-        accesibles y centradas en el usuario.
+        Diseñadora de producto especializada en soluciones SaaS accesibles y
+        centradas en el usuario, con nueve años de recorrido en diseño.
       </p>
       <p class="text-pretty text-ink-soft">
-        He llevado iniciativas de diseño de la concepción al lanzamiento en gestión
-        de eventos, herramientas de proyectos y control de calidad, y turismo
-        inclusivo. Sistemas de diseño, accesos por roles y accesibilidad: productos
-        que funcionan y además son equitativos.
+        He llevado iniciativas de diseño de la concepción al lanzamiento en
+        productos muy distintos entre sí: plataformas de gestión de eventos,
+        herramientas internas de producto y QA, y aplicaciones de actividades
+        adaptadas. Esa variedad es justo lo que me ha dado criterio.
       </p>
       <p>
-        <a href="/sobre-mi/" class="text-sm text-accent hover:underline">Más sobre cómo trabajo →</a>
+        <a href="/sobre-mi/" class="text-sm font-medium text-accent underline-offset-4 hover:underline">Más sobre cómo trabajo →</a>
       </p>
     </div>
 
@@ -48,12 +58,37 @@ const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador
         skills.map(({ categoria, items }) => (
           <div>
             <dt class="text-sm font-medium">{categoria}</dt>
-            <dd class="mt-2 text-sm text-pretty text-ink-soft">{items.join(' · ')}</dd>
+            <dd class="mt-2 text-sm text-pretty text-ink-soft">
+              {items.map(({ nombre }) => nombre).join(' · ')}
+            </dd>
           </div>
         ))
       }
     </dl>
   </section>
+
+  <!--
+    Franja a sangre completa: los márgenes negativos calc(50% - 50vw) la sacan
+    del contenedor de 3xl hasta los bordes del viewport, y el div interior
+    vuelve a centrar el contenido en la misma columna que el resto.
+  -->
+  <section class="reveal mx-[calc(50%-50vw)] my-10 border-y border-line bg-paper-soft/60 py-10">
+    <div class="mx-auto max-w-3xl px-6">
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Trayectoria</h2>
+      <dl class="mt-6 grid gap-8 sm:grid-cols-3">
+        {
+          trayectoria.map(({ valor, etiqueta }) => (
+            <div>
+              <dd class="text-3xl font-semibold tracking-tight text-metric sm:text-4xl">{valor}</dd>
+              <dt class="mt-1 text-sm text-pretty text-ink-soft">{etiqueta}</dt>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <Methodology />
 
   <ContactCTA />
 </BaseLayout>

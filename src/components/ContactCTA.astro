@@ -1,41 +1,51 @@
 ---
-import { EMAIL, LINKEDIN, CV_PATH } from '../consts';
+import AvailabilityBadge from './AvailabilityBadge.astro';
+import { EMAIL, LINKEDIN, CV_PATH, BUSCANDO_TRABAJO } from '../consts';
 
 interface Props {
   titulo?: string;
   texto?: string;
 }
 
+// Por defecto habla de incorporarse a un equipo, no de "colaborar": el objetivo
+// del portfolio es una vacante, y decirlo en claro filtra mejor que insinuarlo.
 const {
-  titulo = '¿Encaja mi perfil en tu equipo?',
-  texto = 'Respondo en 1-2 días. Si prefieres el resumen rápido, descarga el CV.',
+  titulo = 'Lista para unirme a tu equipo de producto.',
+  texto = 'Estoy abierta a nuevos retos profesionales y a oportunidades a jornada completa. Escríbeme y te respondo en 1-2 días.',
 } = Astro.props;
 ---
 
 <section class="my-16 rounded-2xl border border-line bg-paper-soft/40 p-6 sm:p-8">
-  <h2 class="text-xl font-semibold tracking-tight text-balance">{titulo}</h2>
-  <p class="mt-2 max-w-lg text-pretty text-ink-soft">{texto}</p>
+  <div class="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+    <div class="max-w-lg">
+      <h2 class="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">{titulo}</h2>
+      <p class="mt-3 text-pretty text-ink-soft">{texto}</p>
 
-  <div class="mt-6 flex flex-wrap items-center gap-3">
-    <a
-      href={`mailto:${EMAIL}`}
-      class="rounded-xl bg-accent px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
-    >
-      {EMAIL}
-    </a>
-    <a
-      href={LINKEDIN}
-      target="_blank"
-      rel="noopener"
-      class="rounded-xl border border-line px-5 py-2.5 text-sm font-medium transition hover:bg-paper"
-    >
-      LinkedIn ↗
-    </a>
-    <a
-      href={CV_PATH}
-      class="rounded-xl border border-line px-5 py-2.5 text-sm font-medium transition hover:bg-paper"
-    >
-      Descargar CV
-    </a>
+      <!-- Un único primario: el resto son secundarios y no compiten con él. -->
+      <div class="mt-6 flex flex-wrap items-center gap-2.5">
+        <a
+          href={`mailto:${EMAIL}`}
+          class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
+        >
+          Escríbeme
+        </a>
+        <a
+          href={LINKEDIN}
+          target="_blank"
+          rel="noopener"
+          class="glass rounded-full px-5 py-2.5 text-sm font-medium transition hover:bg-accent-soft"
+        >
+          LinkedIn ↗
+        </a>
+        <a
+          href={CV_PATH}
+          class="px-2 text-sm text-ink-soft underline-offset-4 transition hover:text-ink hover:underline"
+        >
+          Descargar CV
+        </a>
+      </div>
+    </div>
+
+    {BUSCANDO_TRABAJO && <AvailabilityBadge />}
   </div>
 </section>
