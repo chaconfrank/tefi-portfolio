@@ -8,7 +8,7 @@ Definidas en `src/content.config.ts` con el `glob()` loader y validadas con Zod.
 
 | Colección | Ruta | Frontmatter |
 | --- | --- | --- |
-| `proyectos` | `src/content/proyectos/` | `titulo`, `descripcion`, `tipo`, `rol`, `periodo`, `herramientas[]`, `metricas[]`, `aprendizaje`, `orden`, `fecha`, `equipo?`, `portada?`, `repo?`, `demo?`, `destacado`, `borrador` |
+| `proyectos` | `src/content/proyectos/` | `titulo`, `titular?`, `descripcion`, `tipo`, `rol`, `periodo`, `herramientas[]`, `metricas[]`, `aprendizaje`, `orden`, `fecha`, `equipo?`, `portada?`, `repo?`, `demo?`, `destacado`, `borrador` |
 | `blog` | `src/content/blog/` | `title`, `description`, `pubDate`, `updatedDate?`, `tags[]`, `borrador` |
 
 Un proyecto **es un case study**, no una ficha: el schema obliga a decir el rol
@@ -16,6 +16,18 @@ concreto, el impacto (`metricas`, máximo 3) y el aprendizaje en una frase. El c
 lleva siempre las mismas cuatro secciones `##` — contexto, proceso, rol, resultado —
 para que los tres proyectos se puedan comparar de un vistazo. Detalle en la skill
 `/nuevo-contenido`.
+
+`titular` es la línea de encuadre que se pinta **encima** del título, en
+mayúsculas pequeñas, tanto en la tarjeta como en la cabecera del detalle: el
+título dice qué es el proyecto y el titular dice desde qué ángulo se cuenta
+("Simplificar la gestión de eventos multiusuario").
+
+**Trampa al tocar el schema:** Astro cachea las entradas ya validadas en
+`.astro/`. Si añades un campo al schema y rellenas los `.md`, el build lo recoge
+pero **`astro dev` puede seguir sirviendo las entradas viejas sin el campo
+nuevo**, sin dar ningún error: Zod descarta las claves que no conoce. Si un campo
+recién añadido "no aparece" en dev y sí en `dist/`, es esto — borra `.astro/` y
+reinicia el dev server.
 
 Los listados ordenan por `orden` ascendente (y `fecha` descendente para empatar):
 con tres proyectos manda el criterio editorial, no la cronología.

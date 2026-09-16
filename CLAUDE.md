@@ -25,9 +25,12 @@ Toda convención nueva se añade a `.claude/conventions/`, **nunca a este archiv
 
 ## Dominio del portfolio
 
-El portfolio existe para conseguir entrevistas de Product Designer. Estephany
-tiene dos años de experiencia, así que la baza no es la antigüedad: es demostrar
-impacto y proceso. Esa es la regla que decide qué entra y qué no.
+El portfolio existe para conseguir entrevistas de Product Designer. Son **dos
+cifras distintas y las dos son ciertas**: nueve años en el sector del diseño
+(desde 2017) y dos diseñando producto. La primera da criterio y trayectoria, la
+segunda acota la especialidad — no se mezclan ni se redondea una en la otra.
+Aun así la baza principal no es la antigüedad: es demostrar impacto y proceso.
+Esa es la regla que decide qué entra y qué no.
 
 **Lenguaje del dominio**
 
@@ -37,6 +40,7 @@ impacto y proceso. Esa es la regla que decide qué entra y qué no.
 | Tipo de proyecto | De dónde viene el encargo: startup, freelance o proyecto propio. Distingue el trabajo con cliente real del trabajo sin cliente, y un recruiter lo lee distinto. |
 | Métrica de impacto | Una cifra o un hecho que muestra qué cambió gracias al trabajo de diseño. Máximo tres por case study. |
 | Aprendizaje clave | Lo que ella se lleva del proyecto, en una frase. Si no cabe en una frase, no es el aprendizaje clave. |
+| Titular | La línea de encuadre de un case study: desde qué ángulo se cuenta, no qué es. Va encima del título. |
 | Borrador | Contenido escrito que todavía no debe verse publicado. |
 
 **Reglas**
@@ -98,10 +102,17 @@ y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
 `TODO` — búscalos con `grep -rn TODO src astro.config.mjs`:
 
 - `site` en `astro.config.mjs` sigue siendo el placeholder `https://tefi.dev`.
-- **Métricas de los case studies**: Amaia ya lleva cifras reales dadas por
-  Estephany (tiempo de resolución de incidencias y tamaño del backlog). Wedify y
-  Handsport siguen con métricas cualitativas y llevan dentro las preguntas
-  concretas que faltan por responder.
+- **Métricas de los case studies**: Amaia Cuida lleva cifras reales (tiempo de
+  resolución de incidencias y tamaño del backlog); Handisport lleva los 4 tipos
+  de discapacidad; Wedify, que la plataforma llegó a producción. Lo que **no**
+  hay y no se va a inventar: datos de uso de Wedify (ella no siguió en el
+  proyecto) ni research con usuarios en Handisport (no lo hubo).
+- **El blog está oculto**: el único post era de relleno y va con `borrador: true`.
+  La colección y el feed siguen compilando por si se retoma.
+- **Pendiente de decidir**: el sitio será bilingüe ES/EN — español por defecto en
+  `/`, inglés en `/en/`, traducción completa incluidos los case studies, y un
+  enlace con globo (no un toggle) arriba a la derecha. Se hace **después** de
+  cerrar el contenido, para no traducir textos que aún se están puliendo.
 
 Puntos donde el código todavía no sigue las convenciones — arréglalos si tocas esa zona:
 

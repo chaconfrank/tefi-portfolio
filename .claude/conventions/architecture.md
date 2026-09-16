@@ -27,14 +27,14 @@ recruiters. Si se retoma, se vuelve a añadir al nav.
 ```
 BaseLayout            shell <html>, Header, <main><slot/></main>, Footer
   └─ BaseHead         <head>: canónica, Open Graph, <Font />, script de tema
-  └─ halo morado      <div> decorativo en -z-10, detrás de la nav
+  └─ halo teal        <div> decorativo en -z-10, detrás de la nav
 ProjectLayout         BaseLayout + cabecera de proyecto + estilos del Markdown
 PostLayout            BaseLayout + cabecera de post + estilos del Markdown
 ```
 
 El `Header` es igual en todas las páginas: **sin fondo propio**, con la nav centrada
 en una pastilla translúcida (`NavPill`) y el toggle a la derecha. El color de la
-cabecera no lo pone el header sino un **halo morado** que pinta `BaseLayout` como
+cabecera no lo pone el header sino un **halo teal** que pinta `BaseLayout` como
 `<div>` decorativo absoluto en `-z-10`, centrado arriba y disuelto en transparente.
 Si le pones fondo sólido al header, tapas el halo y se pierde el efecto.
 
