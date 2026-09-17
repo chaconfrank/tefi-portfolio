@@ -1,8 +1,7 @@
 ---
 import metodologia from '../data/metodologia.json';
 
-// Iconos de línea, mismo trazo que el resto de SVGs del sitio. La clave viene
-// del JSON; si añades un paso nuevo, añade aquí su dibujo.
+// Iconos de línea grandes y tenues, protagonistas del centro de cada tarjeta.
 const iconos: Record<string, string> = {
   lupa: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   estructura:
@@ -14,45 +13,68 @@ const iconos: Record<string, string> = {
 ---
 
 <!--
-  Cómo trabaja, en cuatro pasos. Es la mitad que un recruiter no puede deducir
-  de los case studies: allí ve el resultado, aquí ve el método que lo produce.
+  Cómo trabaja, en cuatro pasos: número arriba y título en primary, el icono
+  como pieza central en trazo tenue del primary, y flechas curvas en tertiary
+  uniendo las tarjetas en escritorio. Tres disposiciones: apiladas en móvil, carrusel con
+  scroll-snap y zoom en mediana, y las cuatro en fila en grande.
+
+  El `reveal` va en el CONTENEDOR: dentro de un scroller horizontal,
+  `animation-timeline: view()` mediría el eje del carrusel y las tarjetas se
+  quedarían congeladas a mitad de animación.
 -->
 <section id="metodo" class="py-10">
-  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Cómo trabajo</h2>
+  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Cómo trabajo</h2>
 
-  <p class="mt-5 max-w-2xl text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+  <p class="mt-5 pl-4 text-2xl font-semibold sm:pl-6 tracking-tight text-balance sm:text-3xl">
     Diseño estratégico que hace que los productos funcionen.
   </p>
-  <p class="mt-4 max-w-2xl text-pretty text-ink-soft">
+  <p class="mt-4 pl-4 text-pretty text-ink-soft sm:pl-6">
     Trabajo para reducir la fricción entre la visión de diseño y la realidad del
     desarrollo. Desde la investigación inicial hasta el QA final sigo un método
     estructurado, pero ágil, para que cada funcionalidad aporte valor real.
   </p>
 
-  <ol class="mt-8 grid gap-4 sm:grid-cols-2">
+  <ol
+    class="reveal mt-10 flex flex-col gap-5 pl-4 sm:pl-6 md:snap-x md:snap-mandatory md:flex-row md:overflow-x-auto md:pb-2 lg:gap-8 lg:overflow-visible lg:pb-0"
+  >
     {
-      metodologia.map(({ paso, titulo, texto, icono }) => (
-        <li class="reveal rounded-2xl border border-line bg-paper-soft/40 p-5">
-          <div class="flex items-start justify-between">
-            <span
-              class="flex size-10 items-center justify-center rounded-xl bg-metric-soft text-metric"
+      metodologia.map(({ paso, titulo, texto, icono }, i) => (
+        <li class="carousel-zoom relative flex flex-col rounded-3xl border border-line bg-paper p-6 shadow-[0_24px_50px_-28px_rgb(0_0_0/0.35)] md:w-80 md:shrink-0 md:snap-center lg:w-auto lg:flex-1 lg:shrink">
+          <p class="text-sm font-semibold text-ink-soft tabular-nums">{paso}</p>
+          <h3 class="mt-1 text-lg font-semibold tracking-tight text-balance text-accent">{titulo}</h3>
+
+          <!-- m-auto vertical: el espacio sobrante de la card se reparte a
+               partes iguales encima y debajo del icono, en vez de acumularse
+               entero entre el icono y el párrafo. -->
+          <svg
+            class="m-auto size-20 text-accent/20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            set:html={iconos[icono]}
+          />
+
+          <p class="mt-3.5 text-sm text-pretty text-ink-soft">{texto}</p>
+
+          {i < metodologia.length - 1 && (
+            <svg
+              class="pointer-events-none absolute top-16 -right-10 z-10 hidden w-12 text-metric lg:block"
+              viewBox="0 0 48 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
               aria-hidden="true"
             >
-              <svg
-                class="size-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                set:html={iconos[icono]}
-              />
-            </span>
-            <p class="text-sm font-semibold text-ink-soft tabular-nums">({paso})</p>
-          </div>
-          <h3 class="mt-4 font-medium text-balance">{titulo}</h3>
-          <p class="mt-2 text-sm text-pretty text-ink-soft">{texto}</p>
+              <path d="M4 19 C 16 5, 30 5, 42 14" />
+              <path d="m36 10 7 4-8 3" />
+            </svg>
+          )}
         </li>
       ))
     }

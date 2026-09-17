@@ -1,23 +1,17 @@
 [
   {
-    "periodo": "Oct 2023 — Sep 2025",
+    "periodo": "2023 — 2025",
     "puesto": "Product Designer UX/UI",
-    "empresa": "Amaia Cuida",
-    "ubicacion": "Valencia, España",
-    "descripcion": "Creé y mantuve design systems escalables que cerraron la distancia entre diseño y desarrollo, con una marca coherente en las tres plataformas. Optimicé el trabajo ágil y el QA implantando un proceso de testing centralizado en Jira y Linear que redujo los tiempos de resolución de incidencias."
+    "empresa": "Amaia Cuida"
   },
   {
-    "periodo": "Feb 2019 — Sep 2022",
+    "periodo": "2019 — 2022",
     "puesto": "Diseñadora gráfica freelance",
-    "empresa": "Por cuenta propia",
-    "ubicacion": "Valencia, España",
-    "descripcion": "Soluciones de diseño de principio a fin para pequeñas empresas: branding, identidad visual y gestión de redes sociales. Llevé el ciclo completo de cada proyecto, traduciendo lo que pedía el cliente en piezas visuales coherentes y en diseño textil."
+    "empresa": "Por cuenta propia"
   },
   {
-    "periodo": "Sep 2017 — Ene 2019",
+    "periodo": "2017 — 2019",
     "puesto": "Diseñadora gráfica",
-    "empresa": "Entrenarme",
-    "ubicacion": "Valencia, España",
-    "descripcion": "Piezas visuales de alto impacto —iconografía web, infografías e ilustración— para reforzar el contenido editorial y los informes de datos. Materiales de marketing multicanal para campañas de Facebook Ads y Google Ads."
+    "empresa": "Entrenarme"
   }
 ]

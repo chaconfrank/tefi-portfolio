@@ -34,7 +34,7 @@ import {
     <span class="mt-1 block text-2xl font-normal text-ink-soft sm:text-3xl">{SITE_ROLE}</span>
   </h1>
 
-  <p class="mt-5 max-w-lg text-base leading-relaxed text-pretty sm:text-lg">
+  <p class="mt-5 text-base leading-relaxed text-pretty sm:text-lg">
     {SITE_TAGLINE}{' '}
     <span class="text-ink-soft">
       Con sistemas de diseño que sostienen el producto y decisiones respaldadas
@@ -42,21 +42,39 @@ import {
     </span>
   </p>
 
-  <!-- Un único CTA primario: el resto son secundarios y no compiten. -->
+  <!-- Un único CTA primario: el resto son secundarios y no compiten.
+       Los tres llevan icono; «Descargar CV» es un outlined (borde + texto en
+       primary, sin relleno). -->
   <div class="mt-8 flex flex-wrap items-center gap-2.5">
     <a
       href="/proyectos/"
-      class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
+      class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
     >
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14" />
+        <path d="m13 6 6 6-6 6" />
+      </svg>
       Ver proyectos
     </a>
-    <a href={CV_PATH} class="glass rounded-full px-5 py-2.5 text-sm font-medium transition hover:bg-accent-soft">
+    <a
+      href={CV_PATH}
+      class="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-accent transition hover:border-accent/50 hover:bg-accent-soft"
+    >
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12" />
+        <path d="m7 10 5 5 5-5" />
+        <path d="M4 19h16" />
+      </svg>
       Descargar CV
     </a>
     <a
       href={`mailto:${EMAIL}`}
-      class="px-2 text-sm text-ink-soft underline-offset-4 transition hover:text-ink hover:underline"
+      class="inline-flex items-center gap-2 px-2 text-sm text-ink-soft underline-offset-4 transition hover:text-ink hover:underline"
     >
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3 7 9 6 9-6" />
+      </svg>
       Escríbeme
     </a>
   </div>

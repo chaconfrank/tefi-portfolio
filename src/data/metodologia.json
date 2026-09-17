@@ -19,7 +19,7 @@
   },
   {
     "paso": "04",
-    "titulo": "Pulir y QA",
+    "titulo": "Testear e iterar",
     "texto": "Lo que llega a producción tiene que cumplir el estándar. Lidero el proceso de QA y reviso el detalle para que la experiencia sea consistente y fiable, no sólo en el Figma.",
     "icono": "calidad"
   }

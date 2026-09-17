@@ -16,7 +16,7 @@ const href = `/proyectos/${proyecto.id}/`;
 ---
 
 <article
-  class="reveal group relative rounded-2xl border border-line bg-paper-soft/40 p-5 transition hover:border-accent/50 sm:p-6"
+  class="reveal group relative rounded-2xl border border-line bg-paper p-5 shadow-sm transition hover:border-accent/50 sm:p-6"
 >
   <div class="flex items-center gap-3 text-xs text-ink-soft">
     <span class="rounded-md border border-line bg-paper px-2 py-0.5 font-medium text-ink">{tipo}</span>
@@ -59,7 +59,7 @@ const href = `/proyectos/${proyecto.id}/`;
         {metricas.map(({ valor, etiqueta }) => (
           <div>
             <dt class="sr-only">{etiqueta}</dt>
-            <dd class="text-lg font-semibold tracking-tight text-metric">{valor}</dd>
+            <dd class="text-lg font-semibold tracking-tight text-accent">{valor}</dd>
             <p class="text-xs text-ink-soft">{etiqueta}</p>
           </div>
         ))}
@@ -75,5 +75,5 @@ const href = `/proyectos/${proyecto.id}/`;
     }
   </ul>
 
-  <p class="mt-5 text-sm font-medium text-accent underline-offset-4 group-hover:underline">Ver case study →</p>
+  <p class="mt-5 text-sm font-medium text-link underline-offset-4 group-hover:underline">Ver case study →</p>
 </article>

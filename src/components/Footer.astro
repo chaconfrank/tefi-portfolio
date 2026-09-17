@@ -4,9 +4,14 @@ import { SOCIALS, SITE_AUTHOR, SITE_ROLE } from '../consts';
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-20 border-t border-line">
+<!--
+  Footer en primary plano. En las páginas con ContactCTA queda pegado a él y
+  forman un solo bloque; en el resto cierra la página él solo. Sin margen
+  superior propio: la separación la pone la sección anterior.
+-->
+<footer class="bg-accent text-paper">
   <div
-    class="mx-auto flex max-w-3xl flex-col gap-3 px-6 py-8 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between"
+    class="flex w-full flex-col gap-3 border-t border-paper/20 px-6 py-8 text-sm text-paper/80 sm:flex-row sm:items-center sm:justify-between sm:px-10"
   >
     <p>© {year} {SITE_AUTHOR} · {SITE_ROLE}</p>
     <ul class="flex gap-4">
@@ -14,7 +19,7 @@ const year = new Date().getFullYear();
         SOCIALS.map(({ href, label, externo }) => (
           <li>
             <a
-              class="transition hover:text-ink"
+              class="transition hover:text-paper"
               href={href}
               target={externo ? '_blank' : undefined}
               rel={externo ? 'me noopener' : undefined}

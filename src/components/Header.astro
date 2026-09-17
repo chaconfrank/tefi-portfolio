@@ -10,16 +10,27 @@ import ThemeToggle from './ThemeToggle.astro';
   Las columnas 1fr/auto/1fr centran la nav pase lo que pase a los lados.
 -->
 <header class="sticky top-0 z-50 py-3">
-  <div class="mx-auto grid w-full max-w-3xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 sm:px-6">
-    <a href="/" class="col-start-1 justify-self-start" aria-label="Inicio">
+  <!--
+    En móvil el header son dos filas: avatar + toggle arriba y la pastilla
+    centrada debajo a todo el ancho (en una fila se cortaba o aplastaba el
+    avatar a 2px por el max-width:100% del preflight). En sm+ vuelve la
+    rejilla 1fr/auto/1fr que centra la pastilla exactamente.
+  -->
+  <div class="flex w-full flex-wrap items-center gap-2 px-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-10">
+    <a href="/" class="shrink-0 sm:col-start-1 sm:justify-self-start" aria-label="Inicio">
       <Avatar />
     </a>
 
-    <div class="col-start-2 overflow-x-auto">
+    <!--
+      El overflow-x-auto es SÓLO para móvil (la pastilla puede no caber): en
+      sm+ tiene que ser visible — un scroller recorta el backdrop-blur del
+      cristal en un rectángulo y sus esquinas asoman al hacer scroll.
+    -->
+    <div class="order-3 flex w-full justify-center overflow-x-auto sm:order-none sm:col-start-2 sm:w-auto sm:overflow-visible">
       <NavPill />
     </div>
 
-    <div class="col-start-3 justify-self-end">
+    <div class="ml-auto sm:col-start-3 sm:ml-0 sm:justify-self-end">
       <ThemeToggle />
     </div>
   </div>

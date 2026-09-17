@@ -1,52 +1,52 @@
-[
-  {
-    "categoria": "Diseño y prototipado",
-    "items": [
-      { "nombre": "Figma", "nivel": "Avanzado" },
-      { "nombre": "Design systems", "nivel": "Avanzado" },
-      { "nombre": "Diseño atómico", "nivel": "Avanzado" },
-      { "nombre": "Prototipado", "nivel": "Avanzado" },
-      { "nombre": "Diseño web", "nivel": "Avanzado" },
-      { "nombre": "Diseño mobile", "nivel": "Avanzado" },
-      { "nombre": "Diseño responsive", "nivel": "Intermedio" }
-    ]
-  },
-  {
-    "categoria": "Research y validación",
-    "items": [
-      { "nombre": "Diseño centrado en el usuario", "nivel": "Avanzado" },
-      { "nombre": "Diagramas de flujo", "nivel": "Avanzado" },
-      { "nombre": "Entrevistas", "nivel": "Intermedio" },
-      { "nombre": "Encuestas", "nivel": "Intermedio" },
-      { "nombre": "Tests con usuarios", "nivel": "Intermedio" },
-      { "nombre": "A/B testing", "nivel": "Intermedio" },
-      { "nombre": "Accesibilidad", "nivel": "Intermedio" }
-    ]
-  },
-  {
-    "categoria": "Producto y equipo",
-    "items": [
-      { "nombre": "Metodologías ágiles", "nivel": "Avanzado" },
-      { "nombre": "QA y ciclo de vida del bug", "nivel": "Avanzado" },
-      { "nombre": "Linear", "nivel": "Avanzado" },
-      { "nombre": "Notion", "nivel": "Avanzado" },
-      { "nombre": "Slack", "nivel": "Avanzado" },
-      { "nombre": "Jira", "nivel": "Intermedio" }
-    ]
-  },
-  {
-    "categoria": "Gráfico y marca",
-    "items": [
-      { "nombre": "Adobe Illustrator", "nivel": "Avanzado" },
-      { "nombre": "Photoshop", "nivel": "Avanzado" },
-      { "nombre": "Identidad y branding", "nivel": "Avanzado" }
-    ]
-  },
-  {
-    "categoria": "Idiomas",
-    "items": [
-      { "nombre": "Español", "nivel": "Nativo" },
-      { "nombre": "Inglés", "nivel": "Fluido" }
-    ]
-  }
-]
+{
+  "metodos": [
+    {
+      "categoria": "Diseño de producto",
+      "items": [
+        "Design systems",
+        "Diseño UX/UI",
+        "Diseño de interacción",
+        "Prototipado",
+        "Diseño responsive",
+        "Accesibilidad"
+      ]
+    },
+    {
+      "categoria": "Research y estrategia",
+      "items": [
+        "Entrevistas con usuarios",
+        "Tests de usabilidad",
+        "Definición de hipótesis",
+        "Flujos de usuario",
+        "Análisis de insights"
+      ]
+    },
+    {
+      "categoria": "Producto y colaboración",
+      "items": [
+        "Historias de usuario",
+        "Criterios de aceptación",
+        "Documentación de producto",
+        "QA y mejora continua",
+        "Trabajo con equipos técnicos"
+      ]
+    }
+  ],
+  "herramientas": [
+    "Figma",
+    "Jira",
+    "Linear",
+    "Notion",
+    "Slack"
+  ],
+  "idiomas": [
+    {
+      "nombre": "Español",
+      "nivel": "Nativo"
+    },
+    {
+      "nombre": "Inglés",
+      "nivel": "Fluido"
+    }
+  ]
+}

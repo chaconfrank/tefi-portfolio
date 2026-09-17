@@ -1,68 +1,131 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkillList from '../components/SkillList.astro';
 import ContactCTA from '../components/ContactCTA.astro';
-import { SITE_ROLE, UBICACION, CV_PATH } from '../consts';
+import { SITE_AUTHOR, SITE_ROLE, UBICACION, CV_PATH } from '../consts';
 import experiencia from '../data/experiencia.json';
 import educacion from '../data/educacion.json';
+import avatar from '../assets/avatar.jpg';
 
-// Especialidad: tres frases cortas. Es lo que diferencia el perfil.
+// Las tres cosas que un hiring manager tiene que recordar del perfil.
+// Los iconos van igual que los de metodología en el inicio: caja naranja
+// suave con trazo naranja — es el acento cálido de las tarjetas del sitio.
 const especialidad = [
   {
-    titulo: 'Sistemas que sostienen el producto',
+    icono: 'embudo',
+    titulo: 'Simplifico productos complejos',
     texto:
-      'Diseño atómico y design systems mantenidos de verdad: menos renegociar lo mismo en cada iteración y una marca coherente en todas las plataformas.',
+      'Convierto procesos, roles y necesidades distintas en flujos claros que funcionan en contextos reales de uso.',
   },
   {
-    titulo: 'Accesibilidad como criterio, no como repaso',
+    icono: 'capas',
+    titulo: 'Diseño sistemas, no pantallas aisladas',
     texto:
-      'La accesibilidad entra en la definición del problema. Cuando se deja para el final sólo queda maquillar decisiones ya tomadas.',
+      'Construyo experiencias consistentes y escalables mediante sistemas de diseño que conectan producto, diseño y desarrollo.',
   },
   {
-    titulo: 'Diseño que llega a producción',
+    icono: 'ciclo',
+    titulo: 'Busco aprender, entender e iterar',
     texto:
-      'Historias de usuario y criterios de aceptación en Jira y Linear, y QA del ciclo completo del error. Un diseño no está hecho hasta que funciona en manos del usuario.',
+      'Valido decisiones con usuarios, itero con el equipo y acompaño las soluciones hasta producción, incluyendo QA y mejora continua.',
   },
 ];
----
+
+const iconos: Record<string, string> = {
+  embudo: '<path d="M4 5h16l-6.5 7.5V19l-3 1.5v-8L4 5Z"/>',
+  capas: '<path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="m4 12.5 8 4.5 8-4.5"/><path d="m4 16.5 8 4.5 8-4.5"/>',
+  ciclo: '<path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v5h-5"/><path d="m9 12.5 2 2 4-4.5"/>',
+};---
 
 <BaseLayout
   title="Sobre mí"
   description="Product Designer UX/UI en Valencia: sistemas de diseño, accesibilidad y producto SaaS."
 >
   <section class="py-12">
-    <p class="text-sm font-medium text-accent">{SITE_ROLE} · {UBICACION}</p>
-    <h1 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Sobre mí</h1>
+    <!--
+      Dos contenedores hermanos dentro de uno: el primero lleva titular, dos
+      frases y la foto (que se estira al alto del bloque de texto con
+      self-stretch + h-auto); el segundo, el párrafo largo a todo el ancho.
+      Así arriba hay equilibrio texto/foto y el detalle no compite con ella.
+    -->
+    <div>
+      <div class="flex flex-col-reverse items-start gap-8 sm:flex-row sm:items-stretch sm:justify-between">
+        <div class="grow">
+          <p class="text-sm font-medium text-link">{SITE_ROLE} · {UBICACION}</p>
+          <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+            ¡Hola! Soy {SITE_AUTHOR.split(' ')[0]}.
+          </h1>
 
-    <!-- Bio: 2-3 párrafos cortos. Si crece, deja de leerse. -->
-    <div class="mt-6 max-w-2xl space-y-4">
-      <p class="text-lg text-pretty">
-        Diseñadora de producto especializada en soluciones SaaS accesibles y
-        centradas en el usuario. Lo que mejor hago es traducir necesidades de
-        negocio en interfaces intuitivas, apoyadas en sistemas de diseño y en datos.
-      </p>
-      <p class="text-pretty text-ink-soft">
-        Llevo nueve años en el sector del diseño y los dos últimos diseñando
-        producto. He trabajado en productos de naturalezas muy distintas
-        —plataformas de gestión de eventos, herramientas internas de producto y
-        QA, y aplicaciones de actividades adaptadas—, y esa variedad es lo que me
-        ha dado criterio: el hilo común es mejorar la usabilidad, resolver accesos
-        por roles y cuidar la accesibilidad.
-      </p>
-      <p class="text-pretty text-ink-soft">
-        Me muevo bien en entornos ágiles, pegada a equipos multifuncionales y
-        gestionando sprints en Jira o Linear para que diseño, desarrollo y negocio
-        apunten al mismo sitio.
+          <p class="mt-5 text-lg text-pretty">
+            Diseño productos digitales que convierten procesos complejos en
+            experiencias sencillas.
+          </p>
+          <p class="mt-4 text-pretty text-ink-soft">
+            Soy Product Designer UX/UI con experiencia en productos SaaS B2B,
+            trabajando de principio a fin: desde entender el problema y validar
+            soluciones con usuarios hasta definir flujos, diseñar interfaces y
+            acompañar su implementación junto a desarrollo.
+          </p>
+        </div>
+
+        <!--
+          Cuadrada en móvil; en columna, del alto EXACTO del texto: la foto va
+          absoluta dentro de un marco que se estira (self-stretch), así no
+          aporta altura propia a la fila y el hueco hasta el tercer párrafo no
+          crece al ensancharse el navegador.
+        -->
+        <div class="relative size-40 shrink-0 sm:h-auto sm:w-60 sm:self-stretch">
+          <Image
+            src={avatar}
+            alt={`${SITE_AUTHOR}, ${SITE_ROLE}`}
+            widths={[320, 483]}
+            sizes="(max-width: 640px) 160px, 240px"
+            class="size-full rounded-2xl border border-white/60 object-cover shadow-sm sm:absolute sm:inset-0 dark:border-white/15"
+          />
+        </div>
+      </div>
+
+      <p class="mt-6 text-pretty text-ink-soft">
+        En los últimos años he trabajado especialmente en productos para
+        profesionales, diseñando experiencias multidispositivo, sistemas de
+        diseño y funcionalidades que incorporan IA para transformar información
+        compleja en herramientas útiles para el trabajo diario. Mi experiencia
+        previa en diseño gráfico me aporta además una base visual sólida que
+        aplico hoy con una mirada mucho más orientada a producto, negocio y
+        usuario.
       </p>
     </div>
 
-    <h2 class="mt-14 text-sm font-medium tracking-wide text-ink-soft uppercase">Especialidad</h2>
-    <div class="mt-5 grid gap-5 sm:grid-cols-3">
+    <h2 class="mt-24 text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> En qué destaco</h2>
+    <!--
+      Tres afirmaciones lado a lado, sin tarjeta: icono en caja blanca elevada
+      con trazo primary a la izquierda, texto a la derecha. El hover levanta la
+      caja del icono — el detalle vivo que evita que la fila sea plana.
+    -->
+    <div class="reveal mt-8 grid gap-8 pl-4 sm:pl-6 md:grid-cols-3 md:gap-6 lg:gap-10">
       {
-        especialidad.map(({ titulo, texto }) => (
-          <div class="rounded-2xl border border-line bg-paper-soft/40 p-5">
-            <h3 class="font-medium text-balance">{titulo}</h3>
-            <p class="mt-2 text-sm text-pretty text-ink-soft">{texto}</p>
+        especialidad.map(({ icono, titulo, texto }) => (
+          <div class="group flex items-start gap-4">
+            <span
+              class="flex size-12 shrink-0 items-center justify-center rounded-2xl border border-accent/15 bg-accent-soft text-accent shadow-[0_14px_30px_-18px_rgb(0_0_0/0.4)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:border-accent/40"
+              aria-hidden="true"
+            >
+              <svg
+                class="size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={iconos[icono]}
+              />
+            </span>
+            <div>
+              <h3 class="font-semibold tracking-tight text-balance text-accent">{titulo}</h3>
+              <p class="mt-1.5 text-sm text-pretty text-ink-soft">{texto}</p>
+            </div>
           </div>
         ))
       }
@@ -70,40 +133,43 @@ const especialidad = [
 
     <SkillList />
 
-    <h2 class="mt-6 text-sm font-medium tracking-wide text-ink-soft uppercase">Experiencia</h2>
-    <ol class="mt-5 space-y-6 border-l border-line pl-6">
+    <!--
+      Comprimidas a propósito: en el portfolio manda el trabajo; la trayectoria
+      completa ya vive en LinkedIn y en el CV. Ni descripciones ni ciudades.
+    -->
+    <h2 class="mt-6 text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Experiencia</h2>
+    <ol class="mt-5 ml-4 space-y-5 border-l border-line pl-6 sm:ml-6">
       {
         experiencia.map((item) => (
-          <li class="relative">
-            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-accent" />
-            <p class="text-xs text-ink-soft">{item.periodo} · {item.ubicacion}</p>
-            <h3 class="mt-0.5 font-medium">
-              {item.puesto} · <span class="text-ink-soft">{item.empresa}</span>
+          <li class="reveal relative">
+            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-metric" />
+            <h3 class="font-medium">
+              <span class="text-ink-soft">{item.periodo} ·</span> {item.puesto}
             </h3>
-            <p class="mt-1 text-sm text-pretty text-ink-soft">{item.descripcion}</p>
+            <p class="text-sm text-ink-soft">{item.empresa}</p>
           </li>
         ))
       }
     </ol>
 
-    <h2 class="mt-14 text-sm font-medium tracking-wide text-ink-soft uppercase">Formación</h2>
-    <ol class="mt-5 space-y-6 border-l border-line pl-6">
+    <h2 class="mt-12 text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Formación</h2>
+    <ul class="mt-5 space-y-5 pl-4 sm:pl-6">
       {
         educacion.map((item) => (
-          <li class="relative">
-            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-accent" />
-            <p class="text-xs text-ink-soft">{item.periodo}</p>
-            <h3 class="mt-0.5 font-medium">
-              {item.titulo} · <span class="text-ink-soft">{item.centro}</span>
+          <li>
+            <h3 class="font-medium">
+              <span class="text-ink-soft">{item.anio} ·</span> {item.titulo}
             </h3>
-            <p class="mt-1 text-sm text-pretty text-ink-soft">{item.descripcion}</p>
+            <p class="text-sm text-ink-soft">{item.centro}</p>
           </li>
         ))
       }
-    </ol>
+    </ul>
 
-    <p class="mt-8">
-      <a href={CV_PATH} class="text-sm text-accent hover:underline">Descargar CV completo (PDF) →</a>
+    <p class="mt-8 pl-4 sm:pl-6">
+      <a href={CV_PATH} class="text-sm font-medium text-link underline-offset-4 hover:underline">
+        Descargar CV completo (PDF) →
+      </a>
     </p>
   </section>
 

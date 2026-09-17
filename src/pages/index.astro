@@ -5,7 +5,6 @@ import Hero from '../components/Hero.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import Methodology from '../components/Methodology.astro';
 import ContactCTA from '../components/ContactCTA.astro';
-import skills from '../data/skills.json';
 import { ANIOS_DISENO, ANIOS_PRODUCTO } from '../consts';
 
 const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
@@ -26,45 +25,43 @@ const trayectoria = [
 
   <section id="proyectos" class="py-8">
     <div class="flex items-baseline justify-between gap-4">
-      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Case studies</h2>
-      <a href="/proyectos/" class="text-sm font-medium text-accent underline-offset-4 hover:underline">Ver todos →</a>
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Case studies</h2>
+      <a href="/proyectos/" class="text-sm font-medium text-link underline-offset-4 hover:underline">Ver todos →</a>
     </div>
 
-    <div class="mt-6 grid gap-5">
-      {proyectos.map((proyecto) => <CaseStudyCard proyecto={proyecto} />)}
+    <!--
+      Apilado al hacer scroll (como en el Framer original): cada tarjeta es
+      sticky con un top escalonado, así la siguiente cubre a la anterior.
+      Sólo en md+: en móvil las tarjetas son demasiado altas para el efecto.
+    -->
+    <div class="mt-6 grid gap-5 pl-4 sm:pl-6">
+      {
+        proyectos.map((proyecto, i) => (
+          <div class="md:sticky" style={`top: calc(5.5rem + ${i * 2}rem)`}>
+            <CaseStudyCard proyecto={proyecto} />
+          </div>
+        ))
+      }
     </div>
   </section>
 
   <section class="py-10">
-    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Sobre mí</h2>
-    <div class="mt-5 max-w-2xl space-y-4">
-      <p class="text-lg text-pretty">
-        Diseñadora de producto especializada en soluciones SaaS accesibles y
-        centradas en el usuario, con nueve años de recorrido en diseño.
-      </p>
-      <p class="text-pretty text-ink-soft">
-        He llevado iniciativas de diseño de la concepción al lanzamiento en
-        productos muy distintos entre sí: plataformas de gestión de eventos,
-        herramientas internas de producto y QA, y aplicaciones de actividades
-        adaptadas. Esa variedad es justo lo que me ha dado criterio.
-      </p>
-      <p>
-        <a href="/sobre-mi/" class="text-sm font-medium text-accent underline-offset-4 hover:underline">Más sobre cómo trabajo →</a>
-      </p>
-    </div>
-
-    <dl class="mt-8 grid gap-6 sm:grid-cols-2">
-      {
-        skills.map(({ categoria, items }) => (
-          <div>
-            <dt class="text-sm font-medium">{categoria}</dt>
-            <dd class="mt-2 text-sm text-pretty text-ink-soft">
-              {items.map(({ nombre }) => nombre).join(' · ')}
-            </dd>
-          </div>
-        ))
-      }
-    </dl>
+    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Sobre mí</h2>
+    <!-- Mismo patrón que «Cómo trabajo»: etiqueta + frase grande + un párrafo.
+         Aquí sólo un vistazo; el perfil completo vive en /sobre-mi. -->
+    <p class="mt-5 pl-4 text-2xl font-semibold tracking-tight text-balance sm:pl-6 sm:text-3xl">
+      Diseño productos digitales que convierten procesos complejos en
+      experiencias sencillas.
+    </p>
+    <p class="mt-4 pl-4 text-pretty text-ink-soft sm:pl-6">
+      Product Designer UX/UI especializada en SaaS B2B. Trabajo los productos de
+      principio a fin —del problema validado a la implementación con
+      desarrollo—, con sistemas de diseño, experiencias multidispositivo y
+      funcionalidades con IA.
+    </p>
+    <p class="mt-4 pl-4 sm:pl-6">
+      <a href="/sobre-mi/" class="text-sm font-medium text-link underline-offset-4 hover:underline">Más sobre cómo trabajo →</a>
+    </p>
   </section>
 
   <!--
@@ -73,13 +70,13 @@ const trayectoria = [
     vuelve a centrar el contenido en la misma columna que el resto.
   -->
   <section class="reveal mx-[calc(50%-50vw)] my-10 border-y border-line bg-paper-soft/60 py-10">
-    <div class="mx-auto max-w-3xl px-6">
-      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Trayectoria</h2>
-      <dl class="mt-6 grid gap-8 sm:grid-cols-3">
+    <div class="w-full px-6 sm:px-10">
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Trayectoria</h2>
+      <dl class="mt-6 grid gap-8 pl-4 sm:grid-cols-3 sm:pl-6">
         {
           trayectoria.map(({ valor, etiqueta }) => (
             <div>
-              <dd class="text-3xl font-semibold tracking-tight text-metric sm:text-4xl">{valor}</dd>
+              <dd class="text-3xl font-semibold tracking-tight text-accent sm:text-4xl">{valor}</dd>
               <dt class="mt-1 text-sm text-pretty text-ink-soft">{etiqueta}</dt>
             </div>
           ))

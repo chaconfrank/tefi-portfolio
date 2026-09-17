@@ -17,10 +17,10 @@ const canales = [
 
 <BaseLayout title="Contacto" description="Email, LinkedIn y CV en PDF.">
   <section class="py-12">
-    <h1 class="max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+    <h1 class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
       ¿Cómo puedo ayudarte en tu próximo proyecto?
     </h1>
-    <p class="mt-4 max-w-lg text-lg text-pretty text-ink-soft">
+    <p class="mt-4 text-lg text-pretty text-ink-soft">
       Tanto si tienes una vacante definida como si sólo quieres contrastar una
       idea, escríbeme y le damos forma.
     </p>
@@ -47,9 +47,9 @@ const canales = [
       <dl class="mt-6 divide-y divide-line border-y border-line">
         {
           canales.map(({ etiqueta, valor, href, externo }) => (
-            <div class="flex items-baseline justify-between gap-4 py-4">
+            <div class="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
               <dt class="text-sm text-ink-soft">{etiqueta}</dt>
-              <dd class="text-right">
+              <dd class="break-all sm:text-right">
                 {href ? (
                   <a
                     class="underline-offset-4 transition hover:text-accent hover:underline"
@@ -72,7 +72,7 @@ const canales = [
       <div class="mt-8 flex flex-wrap items-center gap-2.5">
         <a
           href={`mailto:${EMAIL}`}
-          class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
+          class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
         >
           Escríbeme
         </a>
