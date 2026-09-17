@@ -44,57 +44,48 @@ const iconos: Record<string, string> = {
 >
   <section class="py-12">
     <!--
-      Dos contenedores hermanos dentro de uno: el primero lleva titular, dos
-      frases y la foto (que se estira al alto del bloque de texto con
-      self-stretch + h-auto); el segundo, el párrafo largo a todo el ancho.
-      Así arriba hay equilibrio texto/foto y el detalle no compite con ella.
+      Foto a la izquierda y todo el texto a la derecha, en dos columnas de la
+      misma altura: la foto va absoluta dentro de un marco que se estira
+      (self-stretch), así mide EXACTAMENTE lo que mide el bloque de texto y
+      los bordes superior e inferior quedan alineados a cualquier ancho.
     -->
-    <div>
-      <div class="flex flex-col-reverse items-start gap-8 sm:flex-row sm:items-stretch sm:justify-between">
-        <div class="grow">
-          <p class="text-sm font-medium text-link">{SITE_ROLE} · {UBICACION}</p>
-          <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-            ¡Hola! Soy {SITE_AUTHOR.split(' ')[0]}.
-          </h1>
-
-          <p class="mt-5 text-lg text-pretty">
-            Diseño productos digitales que convierten procesos complejos en
-            experiencias sencillas.
-          </p>
-          <p class="mt-4 text-pretty text-ink-soft">
-            Soy Product Designer UX/UI con experiencia en productos SaaS B2B,
-            trabajando de principio a fin: desde entender el problema y validar
-            soluciones con usuarios hasta definir flujos, diseñar interfaces y
-            acompañar su implementación junto a desarrollo.
-          </p>
-        </div>
-
-        <!--
-          Cuadrada en móvil; en columna, del alto EXACTO del texto: la foto va
-          absoluta dentro de un marco que se estira (self-stretch), así no
-          aporta altura propia a la fila y el hueco hasta el tercer párrafo no
-          crece al ensancharse el navegador.
-        -->
-        <div class="relative size-40 shrink-0 sm:h-auto sm:w-60 sm:self-stretch">
-          <Image
-            src={avatar}
-            alt={`${SITE_AUTHOR}, ${SITE_ROLE}`}
-            widths={[320, 483]}
-            sizes="(max-width: 640px) 160px, 240px"
-            class="size-full rounded-2xl border border-white/60 object-cover shadow-sm sm:absolute sm:inset-0 dark:border-white/15"
-          />
-        </div>
+    <div class="flex flex-col items-start gap-8 sm:flex-row sm:items-stretch sm:gap-10">
+      <div class="relative size-40 shrink-0 sm:h-auto sm:w-64 sm:self-stretch lg:w-72">
+        <Image
+          src={avatar}
+          alt={`${SITE_AUTHOR}, ${SITE_ROLE}`}
+          widths={[320, 483]}
+          sizes="(max-width: 640px) 160px, 288px"
+          class="size-full rounded-2xl border border-white/60 object-cover shadow-sm sm:absolute sm:inset-0 dark:border-white/15"
+        />
       </div>
 
-      <p class="mt-6 text-pretty text-ink-soft">
-        En los últimos años he trabajado especialmente en productos para
-        profesionales, diseñando experiencias multidispositivo, sistemas de
-        diseño y funcionalidades que incorporan IA para transformar información
-        compleja en herramientas útiles para el trabajo diario. Mi experiencia
-        previa en diseño gráfico me aporta además una base visual sólida que
-        aplico hoy con una mirada mucho más orientada a producto, negocio y
-        usuario.
-      </p>
+      <div class="grow">
+        <p class="text-sm font-medium text-link">{SITE_ROLE} · {UBICACION}</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          ¡Hola! Soy {SITE_AUTHOR.split(' ')[0]}.
+        </h1>
+
+        <p class="mt-5 text-lg text-pretty">
+          Diseño productos digitales que convierten procesos complejos en
+          experiencias sencillas.
+        </p>
+        <p class="mt-4 text-pretty text-ink-soft">
+          Soy Product Designer UX/UI con experiencia en productos SaaS B2B,
+          trabajando de principio a fin: desde entender el problema y validar
+          soluciones con usuarios hasta definir flujos, diseñar interfaces y
+          acompañar su implementación junto a desarrollo.
+        </p>
+        <p class="mt-4 text-pretty text-ink-soft">
+          En los últimos años he trabajado especialmente en productos para
+          profesionales, diseñando experiencias multidispositivo, sistemas de
+          diseño y funcionalidades que incorporan IA para transformar información
+          compleja en herramientas útiles para el trabajo diario. Mi experiencia
+          previa en diseño gráfico me aporta además una base visual sólida que
+          aplico hoy con una mirada mucho más orientada a producto, negocio y
+          usuario.
+        </p>
+      </div>
     </div>
 
     <h2 class="mt-24 text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> En qué destaco</h2>
