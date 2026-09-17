@@ -57,9 +57,9 @@ solo). Cada color tiene un papel fijo: el **teal `--color-accent`** es el de
 los enlaces — los de acción («Ver case study →», «Ver todos →») y los de dentro
 del texto — además de iconos y badges; el **naranja `--color-metric`** es sólo
 para las cifras grandes de métricas y trayectoria; el amarillo
-`--color-highlight` es el sello y el punto del badge de disponibilidad (que
-lleva un aro `ring-ink/30` porque el amarillo solo, sobre el cristal, da 1,43:1
-y desaparece).
+`--color-highlight` es el sello y el pomo del toggle en claro; el punto
+parpadeante del badge de disponibilidad es verde `--color-online` (el código
+universal de «disponible»), que contrasta solo sobre el cristal y no lleva aro.
 
 **Restricciones medidas, no negociables sin re-medir:**
 - El cian `#23bece` como color de TEXTO sobre el papel da **2,25:1** —

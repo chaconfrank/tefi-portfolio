@@ -8,7 +8,7 @@ Definidas en `src/content.config.ts` con el `glob()` loader y validadas con Zod.
 
 | Colección | Ruta | Frontmatter |
 | --- | --- | --- |
-| `proyectos` | `src/content/proyectos/` | `titulo`, `titular?`, `descripcion`, `tipo`, `rol`, `periodo`, `herramientas[]`, `metricas[]`, `aprendizaje`, `orden`, `fecha`, `equipo?`, `portada?`, `repo?`, `demo?`, `destacado`, `borrador` |
+| `proyectos` | `src/content/proyectos/` | `titulo`, `titular?`, `descripcion`, `tipo`, `empresa?`, `rol`, `rolResumen?`, `periodo`, `herramientas[]`, `metricas[]`, `aprendizaje`, `orden`, `fecha`, `equipo?`, `portada?`, `repo?`, `demo?`, `destacado`, `borrador` |
 | `blog` | `src/content/blog/` | `title`, `description`, `pubDate`, `updatedDate?`, `tags[]`, `borrador` |
 
 Un proyecto **es un case study**, no una ficha: el schema obliga a decir el rol
