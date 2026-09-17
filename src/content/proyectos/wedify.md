@@ -3,7 +3,9 @@ titulo: 'Wedify — SaaS multiusuario para gestión de eventos'
 titular: 'Simplificar la gestión de eventos multiusuario'
 descripcion: 'Tres tipos de usuario con objetivos opuestos dentro del mismo producto. Definí la arquitectura de información y un acceso por roles con su propio panel para cada uno.'
 tipo: Freelance
+empresa: 'Wedify'
 rol: 'Product Designer UX/UI — arquitectura de información, flujos y UI'
+rolResumen: 'Product Designer · UX/UI'
 periodo: 'Oct 2024 — Ene 2025'
 herramientas: ['Figma', 'Linear', 'Notion']
 metricas:

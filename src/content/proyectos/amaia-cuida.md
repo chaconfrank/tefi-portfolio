@@ -3,7 +3,9 @@ titulo: 'Amaia Cuida — design systems para tres productos y proceso de QA'
 titular: 'Optimizar la gestión de un SaaS y su QA'
 descripcion: 'Dos años diseñando tres productos SaaS. Al montar el proceso de QA, las incidencias pasaron de tardar hasta dos semanas a resolverse en 24 h.'
 tipo: Startup
+empresa: 'Amaia Cuida'
 rol: 'Única diseñadora de los tres productos: research, diseño, design systems y QA'
+rolResumen: 'Product Designer · UX/UI · QA'
 periodo: 'Oct 2023 — Sep 2025'
 equipo: 'Con producto y desarrollo, en sprints sobre Jira y Linear'
 herramientas: ['Figma', 'Jira', 'Linear', 'Notion', 'Slack']

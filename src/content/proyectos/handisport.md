@@ -3,7 +3,9 @@ titulo: 'Handisport — actividades adaptadas para personas con discapacidad'
 titular: 'Redefinir la accesibilidad en la experiencia digital'
 descripcion: 'Aplicación web para encontrar actividades adaptadas a cada discapacidad. La accesibilidad fue el requisito de partida, no una revisión al final.'
 tipo: Freelance
+empresa: 'Handisport'
 rol: 'Product Designer UX/UI — usabilidad, accesibilidad y UI'
+rolResumen: 'Product Designer · UX/UI · Accesibilidad'
 periodo: 'May — Ago 2024'
 herramientas: ['Figma', 'Adobe Illustrator', 'Notion']
 demo: https://handisportmallorca.org/
