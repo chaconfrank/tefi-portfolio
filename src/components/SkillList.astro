@@ -1,17 +1,70 @@
 ---
 import skills from '../data/skills.json';
+
+interface Props {
+  titulo?: string;
+}
+
+const { titulo = 'Áreas de experiencia' } = Astro.props;
+
+// Cada mitad del marquee repite la lista varias veces: así cada mitad supera
+// el ancho de cualquier viewport y el bucle (-50%) nunca muestra huecos.
+const cinta = Array.from({ length: 4 }, () => skills.herramientas).flat();
 ---
 
-<section class="py-8">
-  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Stack</h2>
-  <dl class="mt-4 grid gap-5 sm:grid-cols-3">
+<!--
+  Franja a sangre completa con el bloque de capacidades, y el marquee de
+  herramientas justo DEBAJO de la franja como cinta independiente.
+-->
+<section class="mx-[calc(50%-50vw)] mt-12 border-y border-line bg-paper-soft/60">
+  <div class="w-full px-6 py-12 sm:px-10">
+    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">
+      <span aria-hidden="true">—</span> {titulo}
+    </h2>
+
+    <div class="mt-8 grid gap-x-10 gap-y-10 pl-4 sm:grid-cols-3 sm:pl-6">
+      {
+        skills.metodos.map(({ categoria, items }) => (
+          <div>
+            <h3 class="text-base font-semibold tracking-tight">{categoria}</h3>
+            <ul class="mt-2 divide-y divide-line border-b border-line">
+              {items.map((nombre) => (
+                <li class="py-2.5 text-sm text-ink-soft">{nombre}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <h2 class="mt-10 text-sm font-medium tracking-wide text-ink-soft uppercase">
+      <span aria-hidden="true">—</span> Idiomas
+    </h2>
+    <p class="mt-2 pl-4 text-base font-semibold tracking-tight sm:pl-6">
+      {skills.idiomas.map(({ nombre, nivel }) => `${nombre} (${nivel.toLowerCase()})`).join(' · ')}
+    </p>
+  </div>
+</section>
+
+<!-- Cinta de herramientas, en bucle continuo -->
+<div
+  class="mx-[calc(50%-50vw)] mb-12 overflow-hidden border-b border-line bg-paper py-3 whitespace-nowrap"
+  aria-label="Herramientas que uso"
+>
+  <div class="flex w-max animate-marquee motion-reduce:animate-none">
     {
-      skills.map(({ categoria, items }) => (
-        <div>
-          <dt class="text-sm font-medium">{categoria}</dt>
-          <dd class="mt-1.5 text-sm text-ink-soft">{items.join(' · ')}</dd>
+      [0, 1].map((copia) => (
+        <div class="flex items-center" aria-hidden={copia === 1 ? 'true' : undefined}>
+          {cinta.map((herramienta) => (
+            <span class="flex items-center gap-6 pr-6 text-sm font-medium tracking-[0.18em] text-ink-soft uppercase">
+              {herramienta}
+              <svg class="size-3 text-metric" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2Z" />
+              </svg>
+            </span>
+          ))}
         </div>
       ))
     }
-  </dl>
-</section>
+  </div>
+</div>

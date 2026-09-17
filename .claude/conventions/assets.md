@@ -25,6 +25,23 @@ Este proyecto usa **la estrategia Tailwind**: clases de utilidad en el `<img>` r
 
 La alternativa (prop `layout` de Astro + `responsiveStyles: true`) es válida, pero implica renunciar a estilar imágenes con Tailwind. No mezcles las dos.
 
+## El avatar
+
+`Avatar.astro` vive en la esquina superior izquierda del `Header` y es **cuadrado
+con el mismo radio que las tarjetas** (`rounded-xl`), no un círculo.
+
+La fuente es `src/assets/avatar.jpg`, recortada a cuadrado **483×483 sin
+ampliar** desde `IMG_2927_bajaRes2.jpg` (725×483): se usa la altura completa del
+original y el recorte se centra en la cara. El recorte anterior (290 px ampliado
+a 400) pixelaba en la foto grande de Sobre mí a 240 px sobre pantallas retina.
+El original es apaisado: si hay que rehacer el recorte, hazlo **antes** de meter
+el archivo, no con `object-position` — `<Image>` no recorta, sólo redimensiona.
+Y nunca pidas en `widths` más píxeles de los que tiene el archivo fuente.
+
+```bash
+magick IMG_2927_bajaRes2.jpg -crop 483x483+104+0 +repage src/assets/avatar.jpg
+```
+
 ## Fuentes
 
 Se declaran en `astro.config.mjs` con la API integrada de Astro, **no con `<link>` a Google Fonts ni `@font-face` a mano**:

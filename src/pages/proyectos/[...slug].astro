@@ -4,17 +4,22 @@ import type { GetStaticPaths } from 'astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const proyectos = await getCollection('proyectos', ({ data }) => !data.borrador);
-  return proyectos.map((proyecto) => ({
+  const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
+    (a, b) => a.data.orden - b.data.orden || b.data.fecha.valueOf() - a.data.fecha.valueOf(),
+  );
+
+  return proyectos.map((proyecto, i) => ({
     params: { slug: proyecto.id },
-    props: { proyecto },
+    // El siguiente en el orden del listado, y vuelta al primero al final:
+    // así nunca se llega a un callejón sin salida.
+    props: { proyecto, siguiente: proyectos[(i + 1) % proyectos.length] },
   }));
 };
 
-const { proyecto } = Astro.props;
+const { proyecto, siguiente } = Astro.props;
 const { Content } = await render(proyecto);
 ---
 
-<ProjectLayout proyecto={proyecto}>
+<ProjectLayout proyecto={proyecto} siguiente={siguiente}>
   <Content />
 </ProjectLayout>

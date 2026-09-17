@@ -2,46 +2,90 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import SkillList from '../components/SkillList.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import experiencia from '../data/experiencia.json';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import Methodology from '../components/Methodology.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import { ANIOS_DISENO, ANIOS_PRODUCTO } from '../consts';
 
-const destacados = (await getCollection('proyectos', ({ data }) => !data.borrador && data.destacado))
-  .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf())
-  .slice(0, 4);
+const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
+  (a, b) => a.data.orden - b.data.orden || b.data.fecha.valueOf() - a.data.fecha.valueOf(),
+);
+
+// Trayectoria, no impacto de proyecto: las dos cifras de años son ciertas y
+// dicen cosas distintas. Los 3 productos son los tres case studies publicados.
+const trayectoria = [
+  { valor: `${ANIOS_DISENO} años`, etiqueta: 'En el sector del diseño, desde 2017' },
+  { valor: `${ANIOS_PRODUCTO} años`, etiqueta: 'Diseñando producto SaaS' },
+  { valor: '3 productos', etiqueta: 'Llevados de principio a fin' },
+];
 ---
 
 <BaseLayout>
   <Hero />
 
-  <section class="py-8">
-    <div class="flex items-baseline justify-between">
-      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Proyectos destacados</h2>
-      <a href="/proyectos" class="text-sm text-accent hover:underline">Ver todos →</a>
+  <section id="proyectos" class="py-8">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Case studies</h2>
+      <a href="/proyectos/" class="text-sm font-medium text-link underline-offset-4 hover:underline">Ver todos →</a>
     </div>
 
-    <div class="mt-5 grid gap-4 sm:grid-cols-2">
-      {destacados.map((proyecto) => <ProjectCard proyecto={proyecto} />)}
-    </div>
-  </section>
-
-  <SkillList />
-
-  <section class="py-8">
-    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Experiencia</h2>
-    <ol class="mt-5 space-y-6 border-l border-line pl-6">
+    <!--
+      Apilado al hacer scroll (como en el Framer original): cada tarjeta es
+      sticky con un top escalonado, así la siguiente cubre a la anterior.
+      Sólo en md+: en móvil las tarjetas son demasiado altas para el efecto.
+    -->
+    <div class="mt-6 grid gap-5 pl-4 sm:pl-6">
       {
-        experiencia.map((item) => (
-          <li class="relative">
-            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-accent" />
-            <p class="text-xs text-ink-soft">{item.periodo}</p>
-            <h3 class="mt-0.5 font-medium">
-              {item.puesto} · <span class="text-ink-soft">{item.empresa}</span>
-            </h3>
-            <p class="mt-1 text-sm text-pretty text-ink-soft">{item.descripcion}</p>
-          </li>
+        proyectos.map((proyecto, i) => (
+          <div class="md:sticky" style={`top: calc(5.5rem + ${i * 2}rem)`}>
+            <CaseStudyCard proyecto={proyecto} />
+          </div>
         ))
       }
-    </ol>
+    </div>
   </section>
+
+  <section class="py-10">
+    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Sobre mí</h2>
+    <!-- Mismo patrón que «Cómo trabajo»: etiqueta + frase grande + un párrafo.
+         Aquí sólo un vistazo; el perfil completo vive en /sobre-mi. -->
+    <p class="mt-5 pl-4 text-2xl font-semibold tracking-tight text-balance sm:pl-6 sm:text-3xl">
+      Diseño productos digitales que convierten procesos complejos en
+      experiencias sencillas.
+    </p>
+    <p class="mt-4 pl-4 text-pretty text-ink-soft sm:pl-6">
+      Product Designer UX/UI especializada en SaaS B2B. Trabajo los productos de
+      principio a fin —del problema validado a la implementación con
+      desarrollo—, con sistemas de diseño, experiencias multidispositivo y
+      funcionalidades con IA.
+    </p>
+    <p class="mt-4 pl-4 sm:pl-6">
+      <a href="/sobre-mi/" class="text-sm font-medium text-link underline-offset-4 hover:underline">Más sobre cómo trabajo →</a>
+    </p>
+  </section>
+
+  <!--
+    Franja a sangre completa: los márgenes negativos calc(50% - 50vw) la sacan
+    del contenedor de 3xl hasta los bordes del viewport, y el div interior
+    vuelve a centrar el contenido en la misma columna que el resto.
+  -->
+  <section class="reveal mx-[calc(50%-50vw)] my-10 border-y border-line bg-paper-soft/60 py-10">
+    <div class="w-full px-6 sm:px-10">
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Trayectoria</h2>
+      <dl class="mt-6 grid gap-8 pl-4 sm:grid-cols-3 sm:pl-6">
+        {
+          trayectoria.map(({ valor, etiqueta }) => (
+            <div>
+              <dd class="text-3xl font-semibold tracking-tight text-accent sm:text-4xl">{valor}</dd>
+              <dt class="mt-1 text-sm text-pretty text-ink-soft">{etiqueta}</dt>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <Methodology />
+
+  <ContactCTA />
 </BaseLayout>

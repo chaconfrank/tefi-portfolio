@@ -5,14 +5,169 @@
 
 /* Design tokens: cámbialos aquí y cambia todo el sitio */
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #000000;
+  --color-ink-soft: #575757;
+  --color-paper: #ffffff;
+  --color-paper-soft: #f3f3f3;
+  --color-accent: #810041;
+  /* Teal claro: fondo de estados hover y de superficies de interacción. */
+  --color-accent-soft: #ffecef;
 
-  --color-ink: oklch(0.22 0.01 260);
-  --color-ink-soft: oklch(0.48 0.01 260);
-  --color-paper: oklch(0.99 0 0);
-  --color-paper-soft: oklch(0.96 0.003 260);
-  --color-accent: oklch(0.58 0.19 255);
-  --color-line: oklch(0.9 0.005 260);
+  /* Enlaces de acción: EXACTAMENTE el mismo naranja que los puntos de la
+     línea de tiempo (--color-metric), a petición del usuario. Ojo: a 14px da
+     3,2:1; si algún día hay queja de legibilidad, oscurecer a #a85400. */
+  --color-link: #e07312;
+  --color-line: #d1d1d1;
+
+  /* Naranja (tertiary del tema) de las cifras: métricas de los case studies y trayectoria. Sólo
+     para texto grande y grueso — sobre el papel da 3,7:1, que pasa AA en texto
+     grande pero NO en texto de cuerpo. No lo uses en texto pequeño. */
+  --color-metric: #e07312;
+  /* Su fondo suave: cajas de los iconos de metodología y chips de
+     herramientas. */
+  --color-metric-soft: #ffeede;
+  /* Texto pequeño sobre metric-soft: --color-metric a 14px da 3,1:1 y no pasa
+     AA — éste es el mismo tono oscurecido hasta 4,6:1. */
+  --color-metric-text: #6f3909;
+
+  /* Verde del punto parpadeante del badge de disponibilidad: el código
+     universal de «disponible», sin aro. A este tono da 4,3:1 sobre el
+     cristal casi blanco; no lo aclares sin re-medir. */
+  --color-online: #16a34a;
+
+  /* Amarillo del sello, el pomo del toggle y el punto del badge de disponibilidad. Siempre como FONDO con
+     --color-highlight-ink encima: como color de texto sobre el papel da 1,43:1
+     y desaparece. */
+  --color-highlight: #ffd269;
+
+  /* Tinta de lo que va encima del amarillo. NO se redefine en oscuro a
+     propósito: el disco sigue siendo claro en los dos modos, así que su texto
+     tiene que seguir siendo oscuro o se vuelve ilegible. */
+  --color-highlight-ink: #000000;
+
+  /* Sello de disponibilidad: el amarillo de la primera versión. Vive sobre el
+     cierre primary (#810041), donde contrasta de sobra; su tinta negra da
+     10,3:1. No cambia en oscuro a propósito. */
+  --color-seal: #ffd269;
+
+  /* Cian (secondary del tema) del botón «Escríbeme» del cierre. Siempre como
+     FONDO con --color-secondary-ink encima: como texto sobre el papel da
+     2,25:1 y está prohibido. Sobre el cierre primary contrasta de sobra y su
+     tinta negra da 9,4:1. */
+  --color-secondary: #23bece;
+  --color-secondary-ink: #000000;
+
+  /* Giro del sello. Lento a propósito: a más velocidad marea y distrae del CTA. */
+  --animate-seal-spin: seal-spin 22s linear infinite;
+
+  @keyframes seal-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Marquee de herramientas: el contenido va duplicado y el track se desplaza
+     exactamente un 50%, así el bucle es invisible. */
+  --animate-marquee: marquee 26s linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Halo cian de la cabecera (secondary del tema) (BaseLayout). `to` es el centro, `via` el anillo
+     que rodea la nav; el borde exterior se disuelve en transparente.
+     A esta luminosidad el cian admite ~0.12 de croma; por encima se sale de
+     gamut y el navegador lo recorta sucio. */
+  --color-hero-from: oklch(0.985 0.005 210);
+  --color-hero-via: oklch(0.86 0.07 210);
+  --color-hero-to: oklch(0.68 0.115 210);
+}
+
+/* Bloque aparte: `inline` resuelve la variable de la fuente que monta <Font /> */
+@theme inline {
+  --font-sans: var(--font-inter);
+  /* Manuscrita del cierre («escríbeme hoy» junto a la flecha). */
+  --font-hand: var(--font-caveat);
+}
+
+/*
+  Efecto glass de la nav, el toggle y los botones secundarios: fondo a media
+  opacidad + desenfoque y saturación del fondo, borde claro y un brillo interior
+  en el borde superior. Es lo que deja ver el halo teal a través.
+*/
+@utility glass {
+  @apply border border-white/50 bg-paper/40 backdrop-blur-xl backdrop-saturate-150;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.55),
+    0 10px 30px -14px rgb(23 23 40 / 0.45);
+}
+
+/*
+  Cristal más opaco para elementos pequeños que van sobre el halo: con el 40 %
+  de `glass` un badge de 12 px se funde con el fondo y deja de leerse.
+*/
+@utility glass-strong {
+  @apply glass bg-paper/75;
+}
+
+/*
+  Entrada al hacer scroll (tarjetas, tiras de métricas). CSS puro con
+  scroll-driven animations: donde el navegador no las soporta, el @supports
+  entero se ignora y el contenido se pinta normal — nunca hay riesgo de
+  contenido invisible, que es la trampa clásica del reveal con JS.
+  La animación termina en cuanto el elemento lleva un 35% visible, así que
+  nada queda a medias en pantalla.
+*/
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/*
+  Zoom de carrusel: cada tarjeta escala según su posición en el eje horizontal
+  (view(inline)) — a tamaño completo en el centro, encogida en los bordes.
+  Está acotado EXACTAMENTE al tramo md–lg en que la sección es un carrusel:
+  fuera de él no hay scroller horizontal, la línea de tiempo nunca avanzaría y
+  `both` dejaría las tarjetas congeladas en el fotograma encogido.
+*/
+@supports (animation-timeline: view()) {
+  @media (width >= 48rem) and (width < 64rem) and (prefers-reduced-motion: no-preference) {
+    .carousel-zoom {
+      animation: carousel-zoom linear both;
+      animation-timeline: view(inline);
+      animation-range: cover 0% cover 100%;
+    }
+  }
+
+  @keyframes carousel-zoom {
+    0%,
+    100% {
+      transform: scale(0.88);
+      opacity: 0.75;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 }
 
 @layer base {
@@ -22,11 +177,40 @@
 
   .dark {
     color-scheme: dark;
-    --color-ink: oklch(0.95 0.005 260);
-    --color-ink-soft: oklch(0.72 0.01 260);
-    --color-paper: oklch(0.17 0.01 260);
-    --color-paper-soft: oklch(0.22 0.012 260);
-    --color-line: oklch(0.3 0.012 260);
+    --color-ink: #ffffff;
+    --color-ink-soft: #9e9e9e;
+    --color-paper: #121212;
+    --color-paper-soft: #1d1d1d;
+    --color-line: #414141;
+    --color-accent-soft: oklch(0.3 0.07 350);
+    --color-link: #f5c295;
+
+    /* Las cifras se aclaran en oscuro: el naranja de modo claro se apaga
+       contra el fondo oscuro. */
+    --color-metric: #f5c295;
+    --color-metric-soft: oklch(0.27 0.045 60);
+    --color-metric-text: #f5c295;
+
+    /* El acento sí se aclara en oscuro: el teal de modo claro es demasiado
+       apagado sobre fondo oscuro y los enlaces se pierden. */
+    --color-accent: #ee92c0;
+
+    /* El amarillo se apaga un punto en modo oscuro: a plena luz sobre fondo
+       oscuro vibra y se come el texto que lleva dentro. */
+    --color-highlight: #ffd269;
+
+    /* El verde se aclara en oscuro para no apagarse sobre el cristal. */
+    --color-online: #4ade80;
+
+    /* En oscuro el cierre es rosa (#ee92c0) y el cian claro se funde con él
+       (1,02:1): el botón pasa a un teal oscurecido (3,6:1 contra el rosa) con
+       tinta blanca (7,9:1). */
+    --color-secondary: #0a5a63;
+    --color-secondary-ink: #ffffff;
+
+    --color-hero-from: oklch(0.18 0.02 210);
+    --color-hero-via: oklch(0.32 0.07 210);
+    --color-hero-to: oklch(0.46 0.11 210);
   }
 
   html {
@@ -35,6 +219,13 @@
 
   body {
     @apply bg-paper text-ink antialiased;
+  }
+
+  .dark .glass {
+    border-color: rgb(255 255 255 / 0.12);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.1),
+      0 10px 30px -14px rgb(0 0 0 / 0.65);
   }
 
   ::selection {

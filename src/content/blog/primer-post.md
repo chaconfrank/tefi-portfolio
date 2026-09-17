@@ -3,6 +3,8 @@ title: Por qué elegí Astro para mi portfolio
 description: Cero JavaScript por defecto, contenido en Markdown con tipos y despliegue estático en cualquier sitio.
 pubDate: 2025-08-02
 tags: ['astro', 'rendimiento']
+# Oculto: el blog no se usa por ahora y un post de relleno resta en el portfolio.
+borrador: true
 ---
 
 Llevaba años reconstruyendo mi portfolio con el framework de moda. Esta vez

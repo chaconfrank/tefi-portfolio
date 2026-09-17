@@ -1,0 +1,26 @@
+[
+  {
+    "paso": "01",
+    "titulo": "Entender el problema",
+    "texto": "Exploro datos, señales de usuario y contexto de mercado hasta poder enunciar el problema con claridad. Lo que sale de ahí se convierte en ideas que marcan la dirección, sostienen las decisiones y dejan el proyecto con una base firme.",
+    "icono": "lupa"
+  },
+  {
+    "paso": "02",
+    "titulo": "Definir la solución",
+    "texto": "Aquí pongo orden: arquitectura de información, flujos de usuario y design system. El objetivo es que el producto sea fácil de usar, fácil de mantener y capaz de crecer sin rehacerse.",
+    "icono": "estructura"
+  },
+  {
+    "paso": "03",
+    "titulo": "Probar y mejorar",
+    "texto": "Prototipo para ver qué funciona y qué no. Lo pongo delante de quien lo va a usar y afino los detalles con lo que aprendo antes de pasarlo a desarrollo.",
+    "icono": "test"
+  },
+  {
+    "paso": "04",
+    "titulo": "Testear e iterar",
+    "texto": "Lo que llega a producción tiene que cumplir el estándar. Lidero el proceso de QA y reviso el detalle para que la experiencia sea consistente y fiable, no sólo en el Figma.",
+    "icono": "calidad"
+  }
+]

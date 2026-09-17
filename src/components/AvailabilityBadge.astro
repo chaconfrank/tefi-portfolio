@@ -1,0 +1,53 @@
+---
+import { DISPONIBILIDAD_SELLO } from '../consts';
+
+interface Props {
+  /** Tamaño en utilidades de Tailwind. Por defecto, el del cierre de página. */
+  clase?: string;
+}
+
+const { clase = 'size-28 sm:size-32' } = Astro.props;
+
+// El texto se repite hasta cerrar el círculo, con separador entre vueltas.
+const vuelta = `${DISPONIBILIDAD_SELLO} · `;
+---
+
+<!--
+  Sello giratorio de disponibilidad. Va `aria-hidden`: dice exactamente lo mismo
+  que el párrafo que tiene al lado, así que anunciarlo sería repetirlo dos veces.
+-->
+<svg viewBox="0 0 100 100" class:list={[clase, 'shrink-0']} aria-hidden="true">
+  <circle cx="50" cy="50" r="48" class="fill-seal" />
+
+  <g class="seal-text animate-seal-spin motion-reduce:animate-none">
+    <defs>
+      <!-- Radio 37: deja el texto dentro del disco sin pegarse al borde. -->
+      <path id="seal-path" fill="none" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0" />
+    </defs>
+    <text class="fill-highlight-ink text-[7.5px] font-medium tracking-[0.14em] uppercase">
+      <!-- textLength fuerza el ajuste a la circunferencia (2π·37 ≈ 232). -->
+      <textPath href="#seal-path" textLength="232" lengthAdjust="spacing">{vuelta}</textPath>
+    </text>
+  </g>
+
+  <!-- Flecha del centro: fuera del grupo que gira, así se queda quieta. -->
+  <path
+    d="M44 56 L56 44 M47.5 44 h8.5 v8.5"
+    class="stroke-highlight-ink"
+    fill="none"
+    stroke-width="2.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+
+<style>
+  /*
+    Sin esto el giro toma como origen el (0,0) del viewBox y el texto sale
+    orbitando fuera del disco. `view-box` ancla el origen al lienzo del SVG.
+  */
+  .seal-text {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+  }
+</style>

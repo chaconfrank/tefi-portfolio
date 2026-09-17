@@ -37,6 +37,18 @@ const { mensaje } = Astro.props;
 <mi-widget data-mensaje={mensaje}><button>Ir</button></mi-widget>
 ```
 
+`ThemeToggle` ya está preparado así: va envuelto en `<theme-toggle>` y define el
+custom element con guarda `customElements.get()`. Hoy sólo se pinta una vez por
+página, pero con `document.getElementById` y un `id` fijo bastaría con repetirlo en
+un sitio para que el segundo dejara de responder.
+
+Es un interruptor deslizante (`role="switch"`): pista de cristal y un pomo en
+`--color-highlight` que se desliza a la derecha en oscuro. **La posición la
+decide el CSS** con la variante `dark:` sobre el deslizador, no el JavaScript:
+el script inline de `BaseHead` aplica la clase `dark` antes del primer pintado,
+así que nace en la posición correcta y no salta al cargar. El JS sólo alterna
+la clase, guarda la preferencia y sincroniza `aria-checked`.
+
 Si el componente puede aparecer **varias veces en la misma página**, envuélvelo en un custom element y usa `this.querySelector()` dentro de `connectedCallback()`. Con `document.querySelector()` sólo funcionaría la primera instancia, y el script sólo se ejecuta una vez aunque el componente se repita.
 
 ## Si algún día se añade `<ClientRouter />`

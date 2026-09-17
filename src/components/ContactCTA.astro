@@ -1,0 +1,81 @@
+---
+import AvailabilityBadge from './AvailabilityBadge.astro';
+import { EMAIL, BUSCANDO_TRABAJO } from '../consts';
+
+// Sin props a propósito: es el footer del sitio y dice LO MISMO en todas las
+// páginas. Hubo una variante por página («¿Hablamos?» en Sobre mí) y sólo
+// generó incoherencia.
+const titulo = 'Lista para unirme a tu equipo de producto.';
+const texto = 'Estoy abierta a nuevos retos profesionales y a oportunidades a jornada completa.';
+---
+
+<!--
+  Cierre en primary plano, a sangre completa y pegado al footer (que comparte
+  el mismo fondo): juntos forman un solo bloque. Contenido centrado con UN
+  solo CTA; los canales alternativos (LinkedIn, CV) ya viven en el footer.
+
+  El sello va como pegatina en el borde superior, mitad fuera y mitad dentro
+  (igual que en /contacto): el desplazamiento negativo es justo la mitad de su
+  tamaño. Si cambias el tamaño, cambia el -top-* a la mitad exacta.
+-->
+<section class="relative mx-[calc(50%-50vw)] mt-28 -mb-16 bg-accent py-16 text-paper">
+  {
+    BUSCANDO_TRABAJO && (
+      <AvailabilityBadge clase="absolute -top-12 right-8 size-24 sm:-top-14 sm:right-14 sm:size-28" />
+    )
+  }
+
+  <!--
+    Contenedor del contenido: anclado al centro y a todo el ancho del
+    navegador (sólo los px-* de margen), con la frase grande y el párrafo
+    cada uno en su propio contenedor hijo.
+  -->
+  <div class="mx-auto flex w-full flex-col items-center px-6 text-center sm:px-10">
+    <!-- Bocadillo de diálogo, en nuestro estilo: papel con los puntos en primary. -->
+    <svg class="w-16" viewBox="0 0 64 54" aria-hidden="true">
+      <rect x="2" y="2" width="60" height="38" rx="12" class="fill-paper" />
+      <path d="M16 38v12l12-10z" class="fill-paper" />
+      <circle cx="21" cy="21" r="3.4" class="fill-accent" />
+      <circle cx="32" cy="21" r="3.4" class="fill-accent" />
+      <circle cx="43" cy="21" r="3.4" class="fill-accent" />
+    </svg>
+
+    <div class="mt-8 w-full">
+      <h2 class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{titulo}</h2>
+    </div>
+    <div class="mt-4 w-full">
+      <p class="text-pretty text-paper/80 sm:text-lg">{texto}</p>
+    </div>
+
+    <div class="relative mt-9 flex flex-col items-center">
+      <a
+        href={`mailto:${EMAIL}`}
+        class="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-medium text-secondary-ink transition hover:opacity-90"
+      >
+        ¡Hablemos!
+      </a>
+
+      <!-- Flecha dibujada + frase manuscrita, como una anotación al margen.
+           En móvil no cabe a la derecha del botón (desborda el viewport):
+           baja debajo de él, con la flecha apuntándole igualmente. -->
+      <div
+        class="pointer-events-none mt-1 flex w-max translate-x-8 flex-col items-start sm:absolute sm:top-1/2 sm:left-full sm:mt-0 sm:ml-3 sm:translate-x-0"
+        aria-hidden="true"
+      >
+        <svg
+          class="w-9 text-paper/80"
+          viewBox="0 0 44 34"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M41 31 C 37 17, 26 9, 10 8" />
+          <path d="m16 3-7 5 6 6" />
+        </svg>
+        <span class="mt-1 ml-5 -rotate-6 font-hand text-2xl leading-none">contáctame hoy</span>
+      </div>
+    </div>
+  </div>
+</section>

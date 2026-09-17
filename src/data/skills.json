@@ -1,14 +1,52 @@
-[
-  {
-    "categoria": "Lenguajes",
-    "items": ["TypeScript", "JavaScript", "HTML", "CSS"]
-  },
-  {
-    "categoria": "Frameworks",
-    "items": ["Astro", "React", "Tailwind CSS"]
-  },
-  {
-    "categoria": "Herramientas",
-    "items": ["Git", "Vite", "Figma", "Playwright"]
-  }
-]
+{
+  "metodos": [
+    {
+      "categoria": "Diseño de producto",
+      "items": [
+        "Design systems",
+        "Diseño UX/UI",
+        "Diseño de interacción",
+        "Prototipado",
+        "Diseño responsive",
+        "Accesibilidad"
+      ]
+    },
+    {
+      "categoria": "Research y estrategia",
+      "items": [
+        "Entrevistas con usuarios",
+        "Tests de usabilidad",
+        "Definición de hipótesis",
+        "Flujos de usuario",
+        "Análisis de insights"
+      ]
+    },
+    {
+      "categoria": "Producto y colaboración",
+      "items": [
+        "Historias de usuario",
+        "Criterios de aceptación",
+        "Documentación de producto",
+        "QA y mejora continua",
+        "Trabajo con equipos técnicos"
+      ]
+    }
+  ],
+  "herramientas": [
+    "Figma",
+    "Jira",
+    "Linear",
+    "Notion",
+    "Slack"
+  ],
+  "idiomas": [
+    {
+      "nombre": "Español",
+      "nivel": "Nativo"
+    },
+    {
+      "nombre": "Inglés",
+      "nivel": "Fluido"
+    }
+  ]
+}
