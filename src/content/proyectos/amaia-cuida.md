@@ -22,6 +22,11 @@ borrador: false
 ---
 
 <!--
+  TODO (Estephany): la bio dice que aquí se diseñaron funcionalidades con IA
+  (transformar información compleja en herramientas de trabajo). Al pulir este
+  case study, contarlo aquí: qué funcionalidad, para quién y qué resolvía — la
+  bio no puede afirmar nada que ningún proyecto respalde.
+
   Las cifras de aquí son reales y aproximadas a la baja. Si te preguntan en una
   entrevista, la respuesta es literalmente lo que está escrito abajo: antes no
   había sistema de priorización y todo entraba con la misma etiqueta.
