@@ -62,11 +62,15 @@ lleva un aro `ring-ink/30` porque el amarillo solo, sobre el cristal, da 1,43:1
 y desaparece).
 
 **Restricciones medidas, no negociables sin re-medir:**
-- El amarillo `#ffd269` como color de TEXTO sobre el papel da **1,43:1** —
-  desaparece. Como fondo lleva `--color-highlight-ink` encima (10,3:1).
-- El naranja `--color-metric` da **3,7:1** sobre el papel: pasa AA sólo como
-  texto grande y grueso, que es como lo usan `MetricStrip` y las tarjetas. No
-  lo uses en texto de cuerpo.
+- El cian `#23bece` como color de TEXTO sobre el papel da **2,25:1** —
+  prohibido como texto; sólo como fondo con `--color-highlight-ink` (negro).
+- El naranja `--color-metric` da **3,2:1** sobre el papel: pasa AA sólo como
+  texto grande y grueso, que es como lo usan `MetricStrip` y las tarjetas.
+- El tema del usuario no trae gris de texto secundario ni modo oscuro coherente
+  con el claro: `--color-ink-soft` (claro #575757, oscuro #9e9e9e) es añadido
+  nuestro, y el modo oscuro se deriva de los matices del claro usando su
+  `inversePrimary` (#EE92C0) como acento — el bloque dark del archivo original
+  (azul/melocotón) no casa con el light y no se usa.
 
 El secundario sigue siendo `glass` para no romper la familia con la nav y el
 toggle; su hover se tiñe de teal (`bg-accent-soft`) para que el feedback use el
@@ -82,6 +86,13 @@ contenido se pinta normal. Por eso NO hay que replicar este patrón con
 IntersectionObserver + `opacity: 0` inicial — ese enfoque deja contenido
 invisible si el JS falla, que es justo lo que este evita. Respeta
 `prefers-reduced-motion` de serie.
+
+La variante `carousel-zoom` (tarjetas de «En qué destaco» en Sobre mí) escala
+cada tarjeta según su posición horizontal con `view(inline)`. Está acotada por
+media query **exactamente al tramo md–lg** en que esa sección es un carrusel:
+fuera de él no existe scroller horizontal, la línea de tiempo no avanzaría y
+`both` congelaría las tarjetas en el fotograma encogido. Si reutilizas el
+patrón en otro carrusel con otros breakpoints, ajusta la media query a la vez.
 
 Los tres niveles están aplicados en todo el sitio: `Hero`, `ContactCTA`, `404` y
 `/contacto`. Si añades una pantalla nueva, cuenta los primarios antes de
