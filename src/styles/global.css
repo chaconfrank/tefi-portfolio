@@ -83,6 +83,8 @@
 /* Bloque aparte: `inline` resuelve la variable de la fuente que monta <Font /> */
 @theme inline {
   --font-sans: var(--font-inter);
+  /* Manuscrita del cierre («escríbeme hoy» junto a la flecha). */
+  --font-hand: var(--font-caveat);
 }
 
 /*

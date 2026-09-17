@@ -30,6 +30,17 @@ export default defineConfig({
       subsets: ['latin', 'latin-ext'],
       fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
     },
+    // Manuscrita: sólo para la frase junto a la flecha del cierre. Sin
+    // preload — es decorativa y puede llegar tarde sin romper nada.
+    {
+      provider: fontProviders.google(),
+      name: 'Caveat',
+      cssVariable: '--font-caveat',
+      weights: ['500'],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['cursive'],
+    },
   ],
 
   vite: {
