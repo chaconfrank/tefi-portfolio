@@ -2,15 +2,11 @@
 import AvailabilityBadge from './AvailabilityBadge.astro';
 import { EMAIL, BUSCANDO_TRABAJO } from '../consts';
 
-interface Props {
-  titulo?: string;
-  texto?: string;
-}
-
-const {
-  titulo = 'Lista para unirme a tu equipo de producto.',
-  texto = 'Estoy abierta a nuevos retos profesionales y a oportunidades a jornada completa.',
-} = Astro.props;
+// Sin props a propósito: es el footer del sitio y dice LO MISMO en todas las
+// páginas. Hubo una variante por página («¿Hablamos?» en Sobre mí) y sólo
+// generó incoherencia.
+const titulo = 'Lista para unirme a tu equipo de producto.';
+const texto = 'Estoy abierta a nuevos retos profesionales y a oportunidades a jornada completa.';
 ---
 
 <!--
@@ -29,7 +25,12 @@ const {
     )
   }
 
-  <div class="mx-auto flex w-full max-w-2xl flex-col items-center px-6 text-center">
+  <!--
+    Contenedor del contenido: anclado al centro y a todo el ancho del
+    navegador (sólo los px-* de margen), con la frase grande y el párrafo
+    cada uno en su propio contenedor hijo.
+  -->
+  <div class="mx-auto flex w-full flex-col items-center px-6 text-center sm:px-10">
     <!-- Bocadillo de diálogo, en nuestro estilo: papel con los puntos en primary. -->
     <svg class="w-16" viewBox="0 0 64 54" aria-hidden="true">
       <rect x="2" y="2" width="60" height="38" rx="12" class="fill-paper" />
@@ -39,15 +40,19 @@ const {
       <circle cx="43" cy="21" r="3.4" class="fill-accent" />
     </svg>
 
-    <h2 class="mt-8 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{titulo}</h2>
-    <p class="mt-4 max-w-xl text-pretty text-paper/80 sm:text-lg">{texto}</p>
+    <div class="mt-8 w-full">
+      <h2 class="text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{titulo}</h2>
+    </div>
+    <div class="mt-4 w-full">
+      <p class="text-pretty text-paper/80 sm:text-lg">{texto}</p>
+    </div>
 
     <div class="relative mt-9 flex flex-col items-center">
       <a
         href={`mailto:${EMAIL}`}
         class="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-medium text-secondary-ink transition hover:opacity-90"
       >
-        Escríbeme
+        ¡Hablemos!
       </a>
 
       <!-- Flecha dibujada + frase manuscrita, como una anotación al margen.
@@ -69,7 +74,7 @@ const {
           <path d="M41 31 C 37 17, 26 9, 10 8" />
           <path d="m16 3-7 5 6 6" />
         </svg>
-        <span class="mt-1 ml-5 -rotate-6 font-hand text-2xl leading-none">escríbeme hoy</span>
+        <span class="mt-1 ml-5 -rotate-6 font-hand text-2xl leading-none">contáctame hoy</span>
       </div>
     </div>
   </div>

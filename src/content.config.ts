@@ -16,8 +16,14 @@ const proyectos = defineCollection({
       // no la categoría ("Rediseño que subió la activación un 34%").
       descripcion: z.string(),
       tipo: z.enum(['Startup', 'Freelance', 'Proyecto propio']),
+      // Nombre de la empresa/producto para el chip de la tarjeta ("Wedify").
+      // Si falta, la tarjeta lo deriva del título (lo que va antes del «—»).
+      empresa: z.string().optional(),
       // Tu rol concreto: "Product Designer (único diseñador)".
       rol: z.string(),
+      // Versión corta del rol para la primera línea de la tarjeta, en
+      // mayúsculas pequeñas: "Product Designer · UX/UI · QA".
+      rolResumen: z.string().optional(),
       periodo: z.string(),
       equipo: z.string().optional(),
       herramientas: z.array(z.string()),

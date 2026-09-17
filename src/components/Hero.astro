@@ -15,14 +15,10 @@ import {
   {
     BUSCANDO_TRABAJO && (
       <p class="glass-strong inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-ink">
-        <!--
-          El aro oscuro no es decorativo: el amarillo solo, sobre el cristal
-          casi blanco, da 1,43:1 y el punto desaparece. El aro le pone el borde
-          que el color no puede poner.
-        -->
+        <!-- Verde «disponible» (--color-online): contrasta solo, sin aro. -->
         <span class="relative flex size-2">
-          <span class="absolute inline-flex size-full animate-ping rounded-full bg-highlight" />
-          <span class="relative inline-flex size-2 rounded-full bg-highlight ring-1 ring-ink/30 ring-inset" />
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-online" />
+          <span class="relative inline-flex size-2 rounded-full bg-online" />
         </span>
         {DISPONIBILIDAD} · {UBICACION}
       </p>

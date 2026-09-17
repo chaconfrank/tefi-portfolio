@@ -2,6 +2,7 @@
 import Avatar from './Avatar.astro';
 import NavPill from './NavPill.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import { CV_PATH } from '../consts';
 ---
 
 <!--
@@ -30,8 +31,30 @@ import ThemeToggle from './ThemeToggle.astro';
       <NavPill />
     </div>
 
-    <div class="ml-auto sm:col-start-3 sm:ml-0 sm:justify-self-end">
+    <div class="ml-auto flex items-center gap-2 sm:col-start-3 sm:ml-0 sm:justify-self-end">
       <ThemeToggle />
+
+      <!-- Acceso rápido al CV: outlined compacto, a la altura del toggle. -->
+      <a
+        href={CV_PATH}
+        class="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-line bg-paper/40 px-3.5 text-sm font-medium whitespace-nowrap text-accent transition hover:border-accent/50 hover:bg-accent-soft"
+      >
+        <svg
+          class="size-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 3v12" />
+          <path d="m7 10 5 5 5-5" />
+          <path d="M4 19h16" />
+        </svg>
+        Descargar CV
+      </a>
     </div>
   </div>
 </header>

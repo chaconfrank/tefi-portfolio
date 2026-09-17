@@ -40,14 +40,14 @@ const iconos: Record<string, string> = {
     {
       metodologia.map(({ paso, titulo, texto, icono }, i) => (
         <li class="carousel-zoom relative flex flex-col rounded-3xl border border-line bg-paper p-6 shadow-[0_24px_50px_-28px_rgb(0_0_0/0.35)] md:w-80 md:shrink-0 md:snap-center lg:w-auto lg:flex-1 lg:shrink">
-          <p class="text-sm font-semibold text-ink-soft tabular-nums">{paso}</p>
+          <p class="text-sm font-semibold text-metric tabular-nums">{paso}</p>
           <h3 class="mt-1 text-lg font-semibold tracking-tight text-balance text-accent">{titulo}</h3>
 
-          <!-- m-auto vertical: el espacio sobrante de la card se reparte a
-               partes iguales encima y debajo del icono, en vez de acumularse
-               entero entre el icono y el párrafo. -->
+          <!-- Márgenes FIJOS a ambos lados del icono: el ritmo
+               título-icono-párrafo es idéntico en las cuatro cards y el
+               espacio sobrante de las de texto corto cae al final. -->
           <svg
-            class="m-auto size-20 text-accent/20"
+            class="mx-auto my-6 size-20 text-accent/20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -58,21 +58,21 @@ const iconos: Record<string, string> = {
             set:html={iconos[icono]}
           />
 
-          <p class="mt-3.5 text-sm text-pretty text-ink-soft">{texto}</p>
+          <p class="text-sm text-pretty text-ink-soft">{texto}</p>
 
           {i < metodologia.length - 1 && (
             <svg
-              class="pointer-events-none absolute top-16 -right-10 z-10 hidden w-12 text-metric lg:block"
-              viewBox="0 0 48 24"
+              class="pointer-events-none absolute top-14 -right-11 z-10 hidden w-14 overflow-visible text-metric lg:block"
+              viewBox="0 0 56 36"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="2.2"
               stroke-linecap="round"
               stroke-linejoin="round"
               aria-hidden="true"
             >
-              <path d="M4 19 C 16 5, 30 5, 42 14" />
-              <path d="m36 10 7 4-8 3" />
+              <path d="M6 28 C 18 12, 34 8, 48 16" />
+              <path d="m41 10 7 6-8 5" />
             </svg>
           )}
         </li>

@@ -30,6 +30,11 @@
      AA — éste es el mismo tono oscurecido hasta 4,6:1. */
   --color-metric-text: #6f3909;
 
+  /* Verde del punto parpadeante del badge de disponibilidad: el código
+     universal de «disponible», sin aro. A este tono da 4,3:1 sobre el
+     cristal casi blanco; no lo aclares sin re-medir. */
+  --color-online: #16a34a;
+
   /* Amarillo del sello, el pomo del toggle y el punto del badge de disponibilidad. Siempre como FONDO con
      --color-highlight-ink encima: como color de texto sobre el papel da 1,43:1
      y desaparece. */
@@ -193,6 +198,9 @@
     /* El amarillo se apaga un punto en modo oscuro: a plena luz sobre fondo
        oscuro vibra y se come el texto que lleva dentro. */
     --color-highlight: #ffd269;
+
+    /* El verde se aclara en oscuro para no apagarse sobre el cristal. */
+    --color-online: #4ade80;
 
     /* En oscuro el cierre es rosa (#ee92c0) y el cian claro se funde con él
        (1,02:1): el botón pasa a un teal oscurecido (3,6:1 contra el rosa) con

@@ -69,28 +69,45 @@ const canales = [
         }
       </dl>
 
+      <!-- Misma pareja que en el hero del inicio: primario con icono y
+           outlined (borde + texto en primary) para el CV. -->
       <div class="mt-8 flex flex-wrap items-center gap-2.5">
         <a
           href={`mailto:${EMAIL}`}
-          class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
-        >
-          Escríbeme
-        </a>
-        <a
-          href={CV_PATH}
-          class="glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition hover:bg-accent-soft"
+          class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
         >
           <svg
             class="size-4"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.8"
+            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
             aria-hidden="true"
           >
-            <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m3 7 9 6 9-6" />
+          </svg>
+          Escríbeme
+        </a>
+        <a
+          href={CV_PATH}
+          class="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-accent transition hover:border-accent/50 hover:bg-accent-soft"
+        >
+          <svg
+            class="size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3v12" />
+            <path d="m7 10 5 5 5-5" />
+            <path d="M4 19h16" />
           </svg>
           Descargar CV (PDF)
         </a>
