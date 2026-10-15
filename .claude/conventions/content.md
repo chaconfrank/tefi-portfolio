@@ -26,8 +26,9 @@ visual de cada sección entra por su slot `media` (`<Fragment slot="media">`
 si son varias piezas). Las pausas sin número van con `CaseReflection` y el cierre, con `CaseClosing`.
 Para alternar texto y visuales dentro de una sección, `CaseText` continúa el
 texto tras una captura; los gráficos ya diseñados (diagramas de flujo) van con
-`Diagram`, sin marco de captura y sobre `--color-figure`, que no cambia en
-oscuro porque esos PNG traen fondo transparente y texto oscuro. Los bloques largos se
+`Diagram`, sin marco de captura ni lámina de fondo: tienen que llegar con
+fondo transparente, o quitarles el blanco exterior antes, para que se vean
+bien también en oscuro. Los bloques largos se
 dividen en pasos con `CaseSubsection` (h3, mismas composiciones que
 `CaseSection`); las capturas que ya llegan dentro de un dispositivo van con
 `DeviceShot` (sin marco), las anotadas con `AnnotatedScreenshot` y dos
@@ -38,7 +39,9 @@ datos dados) y `FindingsMatrix` (síntesis de hallazgos; no es una `<table>`
 para que en móvil se apile sin perder las etiquetas de columna). Dos estados
 de una pantalla sin antes/después van con `ScreenDuo`. Las citas reales de participantes,
 con `QuoteSet` (comillas y atribución; nunca el filete verde, que es para
-ideas de la autora).
+ideas de la autora). Un único botón resaltado sobre una pantalla va con
+`HighlightedShot` (aro en `--color-metric`, sin halos) e insights compactos
+de research con `InsightGrid`.
 
 Los `<p>` del MDX no llevan el scope de esos componentes: se estilan con
 variantes `[&>p]`, no con `<style>`. En MDX los comentarios son `{/* */}`
