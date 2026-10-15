@@ -1,0 +1,19 @@
+---
+interface Props {
+  etiqueta: string;
+}
+
+const { etiqueta } = Astro.props;
+---
+
+<!--
+  Nota editorial al pie de una sección (p. ej. por qué el impacto no lleva
+  métricas). Tono de nota de método, no de aviso: sin caja de color, sin
+  icono, en tinta secundaria y con la etiqueta en una columna aparte.
+-->
+<aside class="mt-20 border-t border-line pt-8 sm:mt-24 lg:mt-28 lg:grid lg:grid-cols-12 lg:gap-x-10">
+  <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase lg:col-span-3 lg:pt-1.5">{etiqueta}</p>
+  <p class="mt-4 max-w-2xl text-lg leading-relaxed text-pretty text-ink-soft lg:col-span-8 lg:col-start-5 lg:mt-0">
+    <slot />
+  </p>
+</aside>

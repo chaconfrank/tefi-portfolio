@@ -57,6 +57,19 @@
   --color-secondary: #23bece;
   --color-secondary-ink: #000000;
 
+  /* Verde de Amaia Cuida, oscurecido para usarse como TEXTO pequeño: el
+     verde de su marca (#1fa98b) da 2,9:1 sobre el papel; éste da 5,8:1.
+     Sólo como acento dentro de sus case studies, nunca en el resto del sitio. */
+  --color-amaia-ink: #0d7360;
+  /* Fondo de las pausas de reflexión del case study: el verde de Amaia casi
+     disuelto en el papel. Distinto del gris de paper-soft a propósito, para
+     que una pausa no se confunda con la banda del design system. */
+  --color-amaia-soft: #eef7f4;
+  /* Superficie de los diagramas con fondo transparente y texto oscuro. NO se
+     redefine en oscuro: en claro se funde con el papel y en oscuro hace de
+     lámina blanca, sin la que el texto del gráfico desaparecería. */
+  --color-figure: #ffffff;
+
   /* Giro del sello. Lento a propósito: a más velocidad marea y distrae del CTA. */
   --animate-seal-spin: seal-spin 22s linear infinite;
 
@@ -198,6 +211,10 @@
     /* El amarillo se apaga un punto en modo oscuro: a plena luz sobre fondo
        oscuro vibra y se come el texto que lleva dentro. */
     --color-highlight: #ffd269;
+
+    /* El verde de Amaia, aclarado para leerse sobre el papel oscuro (8,9:1). */
+    --color-amaia-ink: #5fd0b8;
+    --color-amaia-soft: #16201d;
 
     /* El verde se aclara en oscuro para no apagarse sobre el cristal. */
     --color-online: #4ade80;

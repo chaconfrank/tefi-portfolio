@@ -1,0 +1,28 @@
+---
+interface Pilar {
+  titulo: string;
+  texto: string;
+}
+
+interface Props {
+  pilares: Pilar[];
+}
+
+const { pilares } = Astro.props;
+---
+
+<!--
+  Impacto cualitativo en pilares del mismo peso: mismas columnas, mismo
+  filete y mismo tamaño. Sin cifras ni iconos: si no hay métrica real, no se
+  dibuja nada que lo parezca.
+-->
+<dl class="mt-20 grid gap-y-12 sm:mt-24 md:grid-cols-3 md:gap-x-10 lg:mt-28">
+  {
+    pilares.map(({ titulo, texto }) => (
+      <div class="border-t-2 border-amaia-ink pt-6">
+        <dt class="text-2xl font-semibold tracking-tight">{titulo}</dt>
+        <dd class="mt-4 text-lg leading-relaxed text-pretty text-ink-soft">{texto}</dd>
+      </div>
+    ))
+  }
+</dl>

@@ -1,0 +1,56 @@
+---
+import type { ImageMetadata } from 'astro';
+import Screenshot from './Screenshot.astro';
+
+interface Extremo {
+  // Producto y dispositivo: "Amaia Profesionales · Ordenador".
+  producto: string;
+  // Qué se hace en ese entorno: "Revisar y validar".
+  funcion: string;
+  imagen: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  origen: Extremo;
+  destino: Extremo;
+  pie?: string;
+}
+
+const { origen, destino, pie } = Astro.props;
+---
+
+<!--
+  Un mismo contenido pasando de un producto a otro: cada lado dice el
+  producto y el dispositivo (etiqueta pequeña) y su función (título), y la
+  flecha de Amaia marca el sentido. Misma retícula que ScreenEvolution
+  (1fr · flecha · 1fr, saliéndose hasta 80rem en escritorio) para que la
+  familia de comparaciones del sitio se lea igual. El ensanchado va en la
+  figure entera para que el pie quede alineado con las capturas.
+  Las capturas pueden tener proporciones distintas (ordenador y tablet): las
+  columnas se alinean arriba para que las etiquetas queden a la misma altura,
+  y sólo la flecha se centra. No se recortan.
+-->
+<figure class="mt-16 sm:mt-20 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2">
+  <div class="grid items-start gap-y-8 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-6">
+    {
+      [origen, destino].map(({ producto, funcion, imagen, alt }, i) => (
+        <div class:list={[i === 1 && 'lg:col-start-3 lg:row-start-1']}>
+          <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">{producto}</p>
+          <p class="mt-2 text-xl font-semibold tracking-tight">{funcion}</p>
+          <Screenshot imagen={imagen} alt={alt} ancho={600} class="mt-5" />
+        </div>
+      ))
+    }
+
+    <svg
+      viewBox="0 0 48 16"
+      aria-hidden="true"
+      class="mx-auto h-4 w-12 rotate-90 fill-none stroke-amaia-ink lg:col-start-2 lg:row-start-1 lg:mt-16 lg:rotate-0 lg:self-center"
+    >
+      <path d="M1 8h45M39 1l7 7-7 7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </div>
+
+  {pie && <figcaption class="mt-8 max-w-2xl text-sm leading-relaxed text-pretty text-ink-soft lg:mt-10">{pie}</figcaption>}
+</figure>

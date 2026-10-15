@@ -1,0 +1,29 @@
+---
+import type { ImageMetadata } from 'astro';
+import Screenshot from './Screenshot.astro';
+
+interface Captura {
+  imagen: ImageMetadata;
+  alt: string;
+  etiqueta: string;
+  pie?: string;
+}
+
+interface Props {
+  capturas: [Captura, Captura];
+}
+
+const { capturas } = Astro.props;
+---
+
+<!--
+  Dos estados de una misma pantalla (p. ej. vacío y cargando) lado a lado,
+  sin flecha: no son un antes/después sino variantes que conviven. Misma
+  anchura que ProposalPair (hasta 80rem en escritorio) para que se lean.
+  Columnas alineadas arriba: las etiquetas quedan a la misma altura.
+-->
+<div
+  class="mt-14 grid items-start gap-y-14 sm:mt-16 md:grid-cols-2 md:gap-x-10 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2"
+>
+  {capturas.map((captura) => <Screenshot {...captura} ancho={620} />)}
+</div>

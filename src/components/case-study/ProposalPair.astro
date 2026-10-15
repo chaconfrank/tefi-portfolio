@@ -1,0 +1,51 @@
+---
+import type { ImageMetadata } from 'astro';
+import DeviceShot from './DeviceShot.astro';
+import Screenshot from './Screenshot.astro';
+
+interface Propuesta {
+  titulo: string;
+  texto: string;
+  imagen: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  propuestas: [Propuesta, Propuesta];
+  // true para capturas planas (llevan el marco de Screenshot); false para
+  // las que ya llegan dentro de un dispositivo (DeviceShot, sin marco).
+  marco?: boolean;
+}
+
+const { propuestas, marco = false } = Astro.props;
+---
+
+<!--
+  Dos propuestas (o dos piezas del mismo flujo) en paralelo y con el mismo
+  peso: mismo tamaño, misma altura y el mismo tratamiento de número y título. Ninguna se marca
+  como ganadora; si la decisión llega después, se cuenta después.
+
+  La imagen va primero para que las dos queden a la misma altura aunque las
+  descripciones tengan distinta longitud. En escritorio el par se sale de
+  max-w-6xl hasta 80rem, como ScreenEvolution: a la mitad de 72rem cada
+  propuesta se quedaba pequeña para leer la interfaz.
+-->
+<div
+  class="mt-14 grid gap-y-16 sm:mt-16 md:grid-cols-2 md:gap-x-10 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2"
+>
+  {
+    propuestas.map(({ titulo, texto, imagen, alt }, i) => (
+      <div>
+        {marco ? <Screenshot imagen={imagen} alt={alt} ancho={620} /> : <DeviceShot imagen={imagen} alt={alt} ancho={620} />}
+        <h4 class="mt-8 text-xl leading-tight font-semibold tracking-tight">
+          <span class="text-amaia-ink tabular-nums">{String(i + 1).padStart(2, '0')}</span>{' '}
+          <span aria-hidden="true" class="text-ink-soft">
+            ·
+          </span>{' '}
+          {titulo}
+        </h4>
+        <p class="mt-3 max-w-xl text-lg leading-relaxed text-pretty text-ink-soft">{texto}</p>
+      </div>
+    ))
+  }
+</div>

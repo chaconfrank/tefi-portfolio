@@ -1,0 +1,26 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  imagen: ImageMetadata;
+  alt: string;
+  // Ancho en escritorio, en px CSS: decide `sizes` y los anchos generados.
+  ancho: number;
+  pie?: string;
+  class?: string;
+}
+
+const { imagen, alt, ancho, pie, class: clase } = Astro.props;
+const widths = [...new Set([ancho, ancho * 2].map((w) => Math.min(w, imagen.width)))];
+---
+
+<!--
+  Pantalla que ya llega dentro de un dispositivo (PNG con portátil o tablet
+  y fondo transparente). Va sin el marco de Screenshot: el propio
+  dispositivo hace de marco y ponerle otro encima sería doble.
+-->
+<figure class={clase}>
+  <Image src={imagen} alt={alt} widths={widths} sizes={`(min-width: 64rem) ${ancho}px, 100vw`} quality="high" class="h-auto w-full" />
+  {pie && <figcaption class="mt-4 text-sm leading-relaxed text-pretty text-ink-soft">{pie}</figcaption>}
+</figure>

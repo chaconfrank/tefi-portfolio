@@ -1,0 +1,46 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  imagen: ImageMetadata;
+  alt: string;
+  // Nombre corto de la pantalla o la página del sistema, encima de la captura.
+  etiqueta?: string;
+  // Frase de contexto debajo de la captura ("Reconstrucción de…"). Una
+  // figura sólo admite un figcaption: con pie, el figcaption es el pie y la
+  // etiqueta pasa a ser un párrafo con el mismo aspecto.
+  pie?: string;
+  // Ancho al que se pinta en escritorio, en px CSS: decide `sizes` y los
+  // anchos que se generan (1x y 2x, nunca más de lo que tiene el archivo).
+  ancho: number;
+  // La etiqueta de un estado final o de un elemento protagonista va en el
+  // acento de Amaia; el resto, en gris.
+  acento?: boolean;
+  class?: string;
+}
+
+const { imagen, alt, etiqueta, pie, ancho, acento = false, class: clase } = Astro.props;
+const widths = [...new Set([ancho, ancho * 2].map((w) => Math.min(w, imagen.width)))];
+const Etiqueta = pie ? 'p' : 'figcaption';
+---
+
+<!--
+  Captura tratada como documentación de producto: marco limpio, sin mockup.
+  Se pinta entera, sin recorte ni object-cover.
+-->
+<figure class={clase}>
+  {
+    etiqueta && (
+      <Etiqueta
+        class:list={['mb-3 text-xs font-medium tracking-[0.14em] uppercase', acento ? 'text-amaia-ink' : 'text-ink-soft']}
+      >
+        {etiqueta}
+      </Etiqueta>
+    )
+  }
+  <div class="overflow-hidden rounded-xl bg-paper shadow-xl ring-1 shadow-ink/10 ring-ink/10">
+    <Image src={imagen} alt={alt} widths={widths} sizes={`(min-width: 64rem) ${ancho}px, 100vw`} quality="high" class="h-auto w-full" />
+  </div>
+  {pie && <figcaption class="mt-4 text-sm leading-relaxed text-pretty text-ink-soft">{pie}</figcaption>}
+</figure>

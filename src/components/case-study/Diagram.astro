@@ -1,0 +1,42 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  imagen: ImageMetadata;
+  // Describe el flujo entero, paso a paso: el lector de pantalla no ve el
+  // gráfico y el texto del diagrama vive dentro de la imagen.
+  alt: string;
+  // En móvil, mantener 44rem y desplazar en horizontal. Para diagramas con
+  // texto pequeño; una composición de dispositivos se ve mejor reducida.
+  desplazable?: boolean;
+}
+
+const { imagen, alt, desplazable = true } = Astro.props;
+const widths = [...new Set([768, 1152, 2304].map((w) => Math.min(w, imagen.width)))];
+---
+
+<!--
+  Gráfico entregado ya diseñado (diagramas de flujo, infografías, montajes): se pinta tal cual, a
+  todo el ancho de la sección y sin el marco de captura, porque no es una
+  pantalla del producto.
+  Va sobre --color-figure: el PNG tiene fondo transparente y texto oscuro;
+  en claro la lámina se funde con el papel y en oscuro mantiene el gráfico
+  legible.
+  En móvil el gráfico a todo el ancho queda ilegible: por debajo de md
+  mantiene 44rem de ancho y se desplaza en horizontal dentro de su lámina.
+  Margen superior menor que el de una captura: estos PNG traen su propio
+  aire transparente arriba y abajo, y sumado al margen el hueco se duplicaba.
+-->
+<figure class="mt-12 sm:mt-14 lg:mt-16">
+  <div class:list={['rounded-2xl bg-figure', desplazable ? 'overflow-x-auto md:overflow-hidden' : 'overflow-hidden']}>
+    <Image
+      src={imagen}
+      alt={alt}
+      widths={widths}
+      sizes={desplazable ? '(max-width: 48rem) 44rem, (max-width: 72rem) 100vw, 72rem' : '(max-width: 72rem) 100vw, 72rem'}
+      quality="high"
+      class:list={['h-auto w-full', desplazable && 'min-w-[44rem] md:min-w-0']}
+    />
+  </div>
+</figure>

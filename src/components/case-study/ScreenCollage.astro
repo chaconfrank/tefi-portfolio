@@ -1,0 +1,67 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Captura {
+  imagen: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  // Tres capturas: la principal, la que se apoya a su derecha y la panorámica
+  // que cierra abajo. El orden decide el sitio, no el tamaño del archivo.
+  capturas: [Captura, Captura, Captura];
+  etiqueta: string;
+}
+
+const { capturas, etiqueta } = Astro.props;
+
+// Composición en escritorio, en % del ancho del bloque. Sólo se fijan x,
+// ancho y huecos: la altura de cada captura sale de su proporción real, así
+// que nunca se recorta ni se deforma, y el alto total del bloque se calcula
+// para que la tercera no se salga.
+const [a, b, c] = capturas.map(({ imagen }) => imagen.height / imagen.width);
+const huecoVertical = 3.5;
+const posiciones = [
+  { left: 0, top: 0, width: 58 },
+  // Se mete 1,75 % bajo la principal: las dos capturas tienen ahí margen
+  // vacío, así el solape se nota sin tapar interfaz.
+  { left: 56.25, top: 10.4, width: 43.75 },
+  { left: 8.33, top: 58 * a + huecoVertical, width: 53.8 },
+];
+const alturas = [58 * a, 43.75 * b, 53.8 * c];
+const alto = Math.max(...posiciones.map((p, i) => p.top + alturas[i]));
+---
+
+<!--
+  Capturas de una versión anterior tratadas como documentación de producto:
+  marco limpio, sin mockup de dispositivo. En móvil se apilan a todo el ancho
+  (en pequeño no se leerían); desde lg se componen con ligeros solapes y
+  tamaños distintos, con las posiciones del frontmatter pasadas por
+  variables. La tercera va por encima de la segunda para que no se le tape
+  el logo de la esquina.
+  Las capturas originales miden ~850 px: no se pide ningún ancho mayor.
+-->
+<figure
+  class="relative mt-20 flex flex-col gap-6 sm:mt-24 sm:gap-8 lg:mt-28 lg:block lg:aspect-(--collage-ratio)"
+  style={`--collage-ratio: 100 / ${alto}`}
+>
+  {
+    capturas.map(({ imagen, alt }, i) => (
+      <div
+        class:list={[
+          'overflow-hidden rounded-xl bg-paper shadow-xl ring-1 shadow-ink/10 ring-ink/10 lg:absolute lg:top-(--y) lg:left-(--x) lg:w-(--w)',
+          ['lg:z-10', 'lg:z-0', 'lg:z-20'][i],
+        ]}
+        style={`--x: ${posiciones[i].left}%; --y: ${(posiciones[i].top / alto) * 100}%; --w: ${posiciones[i].width}%`}
+      >
+        <Image src={imagen} alt={alt} quality="high" sizes="(min-width: 64rem) 668px, 100vw" class="h-auto w-full" />
+      </div>
+    ))
+  }
+
+  <figcaption class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase lg:absolute lg:right-0 lg:bottom-0">
+    {etiqueta}
+  </figcaption>
+</figure>
+

@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
@@ -18,8 +19,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const { proyecto, siguiente } = Astro.props;
 const { Content } = await render(proyecto);
+// Las dos plantillas reciben las mismas props: sólo cambia quién maqueta el cuerpo.
+const Layout = proyecto.data.plantilla === 'editorial' ? CaseStudyLayout : ProjectLayout;
 ---
 
-<ProjectLayout proyecto={proyecto} siguiente={siguiente}>
+<Layout proyecto={proyecto} siguiente={siguiente}>
   <Content />
-</ProjectLayout>
+</Layout>

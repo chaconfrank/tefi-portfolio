@@ -1,0 +1,31 @@
+---
+interface Area {
+  titulo: string;
+  texto: string;
+}
+
+interface Props {
+  // En el orden del texto. Se pintan en 2×2 llenando por columnas, que es
+  // como están colocadas en la captura: así cada explicación cae en el
+  // mismo cuadrante que su tarjeta en el Home.
+  areas: [Area, Area, Area, Area];
+}
+
+const { areas } = Astro.props;
+---
+
+<!--
+  Las cuatro áreas de una pantalla, explicadas debajo de su captura.
+  Las columnas siguen la proporción de la captura (la de la izquierda es
+  más ancha) para que la correspondencia se vea sin flechas ni números.
+-->
+<dl class="mt-14 grid gap-y-10 sm:grid-cols-2 sm:grid-rows-2 sm:grid-flow-col sm:gap-x-10 sm:gap-y-12 lg:grid-cols-[57fr_43fr]">
+  {
+    areas.map(({ titulo, texto }) => (
+      <div class="border-t border-line pt-5">
+        <dt class="font-semibold text-ink">{titulo}</dt>
+        <dd class="mt-2 max-w-xl leading-relaxed text-pretty text-ink-soft">{texto}</dd>
+      </div>
+    ))
+  }
+</dl>

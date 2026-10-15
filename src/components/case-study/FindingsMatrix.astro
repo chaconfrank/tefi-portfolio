@@ -1,0 +1,63 @@
+---
+interface Hallazgo {
+  hallazgo: string;
+  observamos: string;
+  indicaba: string;
+}
+
+interface Props {
+  titulo: string;
+  // Cabeceras de las tres columnas, en el orden de los campos.
+  columnas: [string, string, string];
+  hallazgos: Hallazgo[];
+}
+
+const { titulo, columnas, hallazgos } = Astro.props;
+---
+
+<!--
+  Matriz de síntesis de research, editorial y no de hoja de cálculo: sin
+  celdas ni rejilla, filas separadas por un filete, el hallazgo en peso y
+  las otras dos columnas en tamaño de lectura. La última columna (lo que
+  indicaba) va en tinta porque es la conclusión de cada fila.
+
+  No es una <table>: en móvil cada fila se apila y una tabla con display
+  cambiado pierde la semántica en algunos lectores. Cada celda lleva su
+  etiqueta de columna: visible en móvil, sólo para lector de pantalla en
+  escritorio, donde la cabecera común (aria-hidden) ya la muestra.
+-->
+<figure class="mt-12 rounded-2xl bg-paper-soft px-6 py-10 sm:mt-14 sm:px-10 lg:px-12 lg:py-12">
+  <figcaption class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">{titulo}</figcaption>
+
+  <div
+    aria-hidden="true"
+    class="mt-10 hidden gap-x-10 border-b border-line pb-4 text-sm font-medium text-ink-soft lg:grid lg:grid-cols-[2.5rem_1.1fr_1fr_1fr]"
+  >
+    <span></span>
+    {columnas.map((c) => <span>{c}</span>)}
+  </div>
+
+  <ol class="mt-8 lg:mt-0">
+    {
+      hallazgos.map(({ hallazgo, observamos, indicaba }, i) => (
+        <li class="border-t border-line py-8 first:border-t-0 first:pt-0 lg:grid lg:grid-cols-[2.5rem_1.1fr_1fr_1fr] lg:gap-x-10 lg:first:border-t-0 lg:first:pt-8">
+          <span aria-hidden="true" class="text-sm font-medium text-amaia-ink tabular-nums lg:pt-1">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <h4 class="mt-2 text-lg leading-snug font-semibold text-balance lg:mt-0">
+            <span class="sr-only">{columnas[0]}: </span>
+            {hallazgo}
+          </h4>
+          <div class="mt-5 lg:mt-0">
+            <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase lg:sr-only">{columnas[1]}</p>
+            <p class="mt-1.5 leading-relaxed text-pretty text-ink-soft lg:mt-0">{observamos}</p>
+          </div>
+          <div class="mt-5 lg:mt-0">
+            <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase lg:sr-only">{columnas[2]}</p>
+            <p class="mt-1.5 leading-relaxed text-pretty text-ink lg:mt-0">{indicaba}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</figure>

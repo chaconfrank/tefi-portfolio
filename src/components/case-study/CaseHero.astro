@@ -1,0 +1,74 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  // Producto del caso; va en el acento de su marca, delante de la disciplina.
+  producto: string;
+  disciplina: string;
+  titulo: string;
+  imagen: ImageMetadata;
+  imagenAlt: string;
+  // Una línea que sitúa el producto antes de la entradilla, en tono menor.
+  contexto?: string;
+  // La banda gris a sangre bajo la composición. Sólo tiene sentido si justo
+  // debajo va la franja de datos (CaseFacts), que la continúa; sin franja
+  // la banda se cortaría en seco al pie de la imagen.
+  banda?: boolean;
+}
+
+const { producto, disciplina, titulo, imagen, imagenAlt, contexto, banda = true } = Astro.props;
+const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width)))];
+---
+
+<!--
+  Apertura del case study: texto, composición de producto y (justo debajo, en
+  el MDX) la franja de datos se leen como un único bloque.
+
+  - La entradilla llega por el slot: el primer párrafo hace de lead (más
+    grande, en tinta) y el resto baja a texto secundario. Va con variantes
+    [&>p] porque los <p> los genera el MDX y no llevan el scope del componente.
+  - La composición se pinta tal cual: sin recorte (sin object-cover ni
+    aspect-*) y sin pedir más ancho del que tiene el archivo.
+  - El ::after de la figura es la banda gris a sangre que arranca a media
+    altura de los dispositivos y continúa en la franja de datos: es lo que
+    "posa" la composición y la une a la franja. `isolate` mantiene la banda
+    detrás de la imagen sin que se vaya debajo del fondo de la página.
+-->
+<header class="mx-auto max-w-6xl pt-10 sm:pt-16 lg:pt-24">
+  <a href="/proyectos/" class="text-sm text-ink-soft transition hover:text-ink">← Proyectos</a>
+
+  <p class="mt-12 text-xs font-medium tracking-[0.14em] uppercase sm:mt-16">
+    <span class="text-amaia-ink">{producto}</span>{' '}
+    <span class="text-ink-soft"><span aria-hidden="true">·</span> {disciplina}</span>
+  </p>
+
+  <h1 class="mt-5 max-w-4xl text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+    {titulo}
+  </h1>
+
+  {contexto && <p class="mt-8 max-w-xl text-base leading-relaxed text-pretty text-ink-soft sm:mt-10">{contexto}</p>}
+
+  <div
+    class="mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-pretty text-ink-soft sm:mt-12 [&>p:first-child]:text-xl [&>p:first-child]:text-ink sm:[&>p:first-child]:text-2xl sm:[&>p:first-child]:leading-snug"
+  >
+    <slot />
+  </div>
+</header>
+
+<figure
+  class:list={[
+    'relative isolate mt-20 sm:mt-28 lg:mt-32',
+    banda && 'after:absolute after:inset-x-[calc(50%-50vw)] after:top-[68%] after:bottom-0 after:-z-10 after:bg-paper-soft',
+  ]}
+>
+  <Image
+    src={imagen}
+    alt={imagenAlt}
+    widths={widths}
+    sizes="(max-width: 72rem) 100vw, 72rem"
+    loading="eager"
+    fetchpriority="high"
+    class="mx-auto h-auto w-full max-w-6xl"
+  />
+</figure>

@@ -1,0 +1,45 @@
+---
+interface Props {
+  id: string;
+  titulo: string;
+}
+
+const { id, titulo } = Astro.props;
+---
+
+<!--
+  Pausa entre secciones: sólo texto, sin capturas ni número de sección.
+  Va sobre una banda a sangre en --color-amaia-soft, distinta del gris de la
+  banda del design system para que no se lean como un mismo bloque; el
+  margen superior deja papel blanco entre las dos.
+
+  - El texto se reparte en dos columnas de lectura con CSS columns (los <p>
+    del MDX no se parten entre columnas).
+  - El slot "destacado" es la única idea resaltada de la pausa: el primer
+    párrafo grande y en tinta, el resto acompaña en tamaño de lectura.
+-->
+<section
+  id={id}
+  aria-labelledby={`${id}-titulo`}
+  class="mx-[calc(50%-50vw)] mt-28 scroll-mt-28 bg-amaia-soft px-6 py-24 sm:mt-36 sm:px-10 sm:py-32 lg:mt-44 lg:py-40"
+>
+  <div class="mx-auto max-w-6xl">
+    <h2 id={`${id}-titulo`} class="max-w-3xl text-3xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]">
+      {titulo}
+    </h2>
+
+    <div
+      class="mt-12 text-lg leading-relaxed text-pretty text-ink-soft sm:mt-16 lg:columns-2 lg:gap-x-16 [&>p]:mb-6 [&>p]:break-inside-avoid"
+    >
+      <slot />
+    </div>
+
+    <div class="mt-16 lg:mt-24 lg:grid lg:grid-cols-12 lg:gap-x-10">
+      <div
+        class="border-l-2 border-amaia-ink pl-6 text-lg leading-relaxed text-pretty text-ink-soft sm:pl-8 lg:col-span-9 lg:col-start-4 [&>p]:max-w-3xl [&>p+p]:mt-6 [&>p+p]:max-w-2xl [&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl"
+      >
+        <slot name="destacado" />
+      </div>
+    </div>
+  </div>
+</section>

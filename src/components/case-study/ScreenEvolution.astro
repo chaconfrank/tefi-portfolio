@@ -1,0 +1,43 @@
+---
+import type { ImageMetadata } from 'astro';
+import Screenshot from './Screenshot.astro';
+
+interface Captura {
+  imagen: ImageMetadata;
+  alt: string;
+  etiqueta: string;
+}
+
+interface Props {
+  antes: Captura;
+  despues: Captura;
+}
+
+const { antes, despues } = Astro.props;
+---
+
+<!--
+  Dos versiones de la misma pantalla, lado a lado y a la misma altura para
+  que se comparen de un vistazo. Sin slider: las dos se ven siempre enteras.
+
+  En escritorio el bloque se sale de max-w-6xl hasta 80rem (sin pasar del
+  viewport menos el margen de página): a la mitad de 72rem cada captura se
+  quedaba en ~530 px y la interfaz no se leía.
+  Entre ambas, una flecha fina en el acento de Amaia marca el sentido de la
+  evolución; en móvil se apilan y la flecha apunta hacia abajo.
+-->
+<div
+  class="mt-20 grid items-center gap-y-6 sm:mt-24 lg:relative lg:left-1/2 lg:mt-28 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-6"
+>
+  <Screenshot {...antes} ancho={600} />
+
+  <svg
+    viewBox="0 0 48 16"
+    aria-hidden="true"
+    class="mx-auto h-4 w-12 rotate-90 fill-none stroke-amaia-ink lg:mt-7 lg:rotate-0"
+  >
+    <path d="M1 8h45M39 1l7 7-7 7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <Screenshot {...despues} ancho={600} acento />
+</div>
