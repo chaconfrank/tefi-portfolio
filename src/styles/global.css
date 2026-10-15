@@ -65,10 +65,6 @@
      disuelto en el papel. Distinto del gris de paper-soft a propósito, para
      que una pausa no se confunda con la banda del design system. */
   --color-amaia-soft: #eef7f4;
-  /* Superficie de los diagramas con fondo transparente y texto oscuro. NO se
-     redefine en oscuro: en claro se funde con el papel y en oscuro hace de
-     lámina blanca, sin la que el texto del gráfico desaparecería. */
-  --color-figure: #ffffff;
 
   /* Giro del sello. Lento a propósito: a más velocidad marea y distrae del CTA. */
   --animate-seal-spin: seal-spin 22s linear infinite;

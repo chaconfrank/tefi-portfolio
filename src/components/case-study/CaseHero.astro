@@ -15,9 +15,12 @@ interface Props {
   // debajo va la franja de datos (CaseFacts), que la continúa; sin franja
   // la banda se cortaría en seco al pie de la imagen.
   banda?: boolean;
+  // Pasos del recorrido en una línea bajo la entradilla ("Entrevistar →
+  // Agrupar → …"): resume el caso de un vistazo sin otro visual.
+  recorrido?: string[];
 }
 
-const { producto, disciplina, titulo, imagen, imagenAlt, contexto, banda = true } = Astro.props;
+const { producto, disciplina, titulo, imagen, imagenAlt, contexto, banda = true, recorrido } = Astro.props;
 const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width)))];
 ---
 
@@ -54,6 +57,23 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
   >
     <slot />
   </div>
+
+  {
+    recorrido && (
+      <ol aria-label="Recorrido" class="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-base font-medium sm:mt-12 sm:text-lg">
+        {recorrido.map((paso, i) => (
+          <li class="flex items-center gap-x-3">
+            {i > 0 && (
+              <span aria-hidden="true" class="text-amaia-ink">
+                →
+              </span>
+            )}
+            {paso}
+          </li>
+        ))}
+      </ol>
+    )
+  }
 </header>
 
 <figure

@@ -1,0 +1,40 @@
+---
+interface Insight {
+  titulo: string;
+  // El insight y sus ejemplos (Centro A–F), uno por párrafo.
+  parrafos: string[];
+}
+
+interface Props {
+  insights: Insight[];
+}
+
+const { insights } = Astro.props;
+---
+
+<!--
+  Insights de research compactos, en 2×2 desde md: número y título en peso,
+  la idea en tinta y los ejemplos por centro en gris debajo. Más ligero que
+  FindingsMatrix: aquí cada insight se lee de un vistazo, no es una tabla
+  de síntesis.
+-->
+<ol class="mt-14 grid gap-x-10 gap-y-12 sm:mt-16 md:grid-cols-2 md:gap-y-14">
+  {
+    insights.map(({ titulo, parrafos }, i) => (
+      <li class="border-t border-line pt-6">
+        <h4 class="text-xl leading-snug font-semibold tracking-tight text-balance">
+          <span class="text-amaia-ink tabular-nums">{String(i + 1).padStart(2, '0')}</span>{' '}
+          <span aria-hidden="true" class="text-ink-soft">
+            ·
+          </span>{' '}
+          {titulo}
+        </h4>
+        <div class="mt-4 max-w-xl space-y-3 leading-relaxed text-pretty text-ink-soft [&>p:first-child]:text-lg [&>p:first-child]:text-ink">
+          {parrafos.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+      </li>
+    ))
+  }
+</ol>

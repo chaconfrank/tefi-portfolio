@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 
 interface Nota {
   texto: string;
+  // Explicación breve bajo el nombre de la anotación, en tamaño menor.
+  detalle?: string;
   // Posición del marcador en % de la captura (0–100), medida sobre el
   // archivo original: no cambia aunque la captura se escale.
   x: number;
@@ -14,11 +16,13 @@ interface Props {
   imagen: ImageMetadata;
   alt: string;
   notas: Nota[];
-  // Ancho en escritorio, en px CSS (7 de 12 columnas ≈ 655).
-  ancho?: number;
+  // Captura apaisada: 8 de 12 columnas (≈ 755 px) en vez de 7 (≈ 655), y la
+  // leyenda en las 4 restantes.
+  ancha?: boolean;
 }
 
-const { imagen, alt, notas, ancho = 655 } = Astro.props;
+const { imagen, alt, notas, ancha = false } = Astro.props;
+const ancho = ancha ? 755 : 655;
 const widths = [...new Set([ancho, ancho * 2].map((w) => Math.min(w, imagen.width)))];
 const numero = (i: number) => String(i + 1).padStart(2, '0');
 ---
@@ -28,10 +32,11 @@ const numero = (i: number) => String(i + 1).padStart(2, '0');
   interfaz y la leyenda al lado (debajo en móvil). Los marcadores son
   aria-hidden: la leyenda es el texto real y el alt describe la pantalla.
   Los marcadores van en el acento de Amaia con aro del color del papel, para
-  que se separen de la interfaz sin tapar nada que haya que leer.
+  que se separen de la interfaz sin tapar nada que haya que leer. En móvil
+  bajan de tamaño: la captura se reduce mucho y a 28 px tapaban la interfaz.
 -->
 <figure class="mt-20 sm:mt-24 lg:mt-28 lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-10">
-  <div class="relative lg:col-span-7">
+  <div class:list={['relative', ancha ? 'lg:col-span-8' : 'lg:col-span-7']}>
     <div class="overflow-hidden rounded-xl bg-paper shadow-xl ring-1 shadow-ink/10 ring-ink/10">
       <Image src={imagen} alt={alt} widths={widths} sizes={`(min-width: 64rem) ${ancho}px, 100vw`} quality="high" class="h-auto w-full" />
     </div>
@@ -39,7 +44,7 @@ const numero = (i: number) => String(i + 1).padStart(2, '0');
       notas.map(({ x, y }, i) => (
         <span
           aria-hidden="true"
-          class="absolute flex size-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-amaia-ink text-xs font-semibold text-paper tabular-nums shadow-md ring-2 ring-paper"
+          class="absolute flex size-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-amaia-ink text-[0.625rem] font-semibold sm:size-7 sm:text-xs text-paper tabular-nums shadow-md ring-2 ring-paper"
           style={`left: ${x}%; top: ${y}%`}
         >
           {i + 1}
@@ -48,16 +53,17 @@ const numero = (i: number) => String(i + 1).padStart(2, '0');
     }
   </div>
 
-  <figcaption class="mt-10 lg:col-span-4 lg:col-start-9 lg:mt-0">
+  <figcaption class:list={['mt-10 lg:col-span-4 lg:mt-0', !ancha && 'lg:col-start-9']}>
     <ol class="space-y-5">
       {
-        notas.map(({ texto }, i) => (
+        notas.map(({ texto, detalle }, i) => (
           <li class="border-t border-line pt-4 text-lg leading-snug">
             <span class="font-medium text-amaia-ink tabular-nums">{numero(i)}</span>{' '}
             <span aria-hidden="true" class="text-ink-soft">
               ·
             </span>{' '}
             <span class="text-ink">{texto}</span>
+            {detalle && <span class="mt-1.5 block text-base leading-relaxed text-pretty text-ink-soft">{detalle}</span>}
           </li>
         ))
       }

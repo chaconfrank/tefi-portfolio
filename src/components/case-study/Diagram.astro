@@ -10,33 +10,41 @@ interface Props {
   // En móvil, mantener 44rem y desplazar en horizontal. Para diagramas con
   // texto pequeño; una composición de dispositivos se ve mejor reducida.
   desplazable?: boolean;
+  // Ancho máximo en px CSS para gráficos de apoyo que no deben ocupar toda
+  // la sección; se centran. Sin él, van a todo el ancho (72rem).
+  ancho?: number;
+  pie?: string;
 }
 
-const { imagen, alt, desplazable = true } = Astro.props;
-const widths = [...new Set([768, 1152, 2304].map((w) => Math.min(w, imagen.width)))];
+const { imagen, alt, desplazable = true, ancho, pie } = Astro.props;
+const maximo = ancho ?? 1152;
+const widths = [...new Set([768, maximo, maximo * 2].map((w) => Math.min(w, imagen.width)))];
 ---
 
 <!--
   Gráfico entregado ya diseñado (diagramas de flujo, infografías, montajes): se pinta tal cual, a
   todo el ancho de la sección y sin el marco de captura, porque no es una
   pantalla del producto.
-  Va sobre --color-figure: el PNG tiene fondo transparente y texto oscuro;
-  en claro la lámina se funde con el papel y en oscuro mantiene el gráfico
-  legible.
+  Sin lámina de fondo: los gráficos van con fondo transparente y las cajas
+  con relleno claro propio, así que se leen igual en claro y en oscuro. Si
+  llega uno con fondo blanco opaco, se le quita el blanco exterior antes de
+  meterlo (relleno desde las esquinas con poca tolerancia, para no comerse
+  los paneles claros del diseño).
   En móvil el gráfico a todo el ancho queda ilegible: por debajo de md
   mantiene 44rem de ancho y se desplaza en horizontal dentro de su lámina.
   Margen superior menor que el de una captura: estos PNG traen su propio
   aire transparente arriba y abajo, y sumado al margen el hueco se duplicaba.
 -->
-<figure class="mt-12 sm:mt-14 lg:mt-16">
-  <div class:list={['rounded-2xl bg-figure', desplazable ? 'overflow-x-auto md:overflow-hidden' : 'overflow-hidden']}>
+<figure class="mx-auto mt-12 sm:mt-14 lg:mt-16" style={ancho ? `max-width: ${ancho}px` : undefined}>
+  <div class:list={['rounded-2xl', desplazable ? 'overflow-x-auto md:overflow-hidden' : 'overflow-hidden']}>
     <Image
       src={imagen}
       alt={alt}
       widths={widths}
-      sizes={desplazable ? '(max-width: 48rem) 44rem, (max-width: 72rem) 100vw, 72rem' : '(max-width: 72rem) 100vw, 72rem'}
+      sizes={desplazable ? `(max-width: 48rem) 44rem, (max-width: 72rem) 100vw, ${maximo}px` : `(max-width: ${maximo}px) 100vw, ${maximo}px`}
       quality="high"
       class:list={['h-auto w-full', desplazable && 'min-w-[44rem] md:min-w-0']}
     />
   </div>
+  {pie && <figcaption class="mt-4 text-sm leading-relaxed text-pretty text-ink-soft">{pie}</figcaption>}
 </figure>
