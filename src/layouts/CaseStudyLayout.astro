@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+
+interface Props {
+  proyecto: CollectionEntry<'proyectos'>;
+  siguiente?: CollectionEntry<'proyectos'>;
+}
+
+const { proyecto, siguiente } = Astro.props;
+const { titulo, descripcion } = proyecto.data;
+---
+
+<!--
+  Case study editorial: a diferencia de ProjectLayout no pinta cabecera ni
+  estila Markdown. El cuerpo MDX compone la maqueta entera con los
+  componentes de src/components/case-study/, cada sección con su propio
+  ritmo. Aquí sólo queda el marco común: título de página, siguiente caso
+  y cierre.
+-->
+<BaseLayout title={titulo} description={descripcion}>
+  <article>
+    <slot />
+  </article>
+
+  {
+    siguiente && (
+      <nav class="mx-auto mt-24 max-w-6xl border-t border-line pt-8">
+        <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">Siguiente case study</p>
+        <a
+          href={`/proyectos/${siguiente.id}/`}
+          class="mt-2 block text-xl font-semibold tracking-tight text-balance transition hover:text-accent sm:text-2xl"
+        >
+          {siguiente.data.titular ?? siguiente.data.titulo} →
+        </a>
+      </nav>
+    )
+  }
+
+  <ContactCTA />
+</BaseLayout>

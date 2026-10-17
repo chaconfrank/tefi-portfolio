@@ -34,7 +34,13 @@ const proyectos = defineCollection({
         .max(3)
         .default([]),
       // Una frase. Si no cabe en una frase, no es el aprendizaje clave.
-      aprendizaje: z.string(),
+      // Opcional sólo para los case studies editoriales que se montan por
+      // bloques: hasta que llega su bloque no hay frase real que poner.
+      aprendizaje: z.string().optional(),
+      // 'ficha': cabecera + Markdown con las cuatro secciones (ProjectLayout).
+      // 'editorial': el cuerpo MDX compone su propia maqueta con los
+      // componentes de src/components/case-study/ (CaseStudyLayout).
+      plantilla: z.enum(['ficha', 'editorial']).default('ficha'),
       // Imagen en src/assets/ o junto al .md; Astro la optimiza.
       portada: image().optional(),
       portadaAlt: z.string().optional(),

@@ -1,0 +1,61 @@
+---
+import type { ImageMetadata } from 'astro';
+import Screenshot from './Screenshot.astro';
+
+interface Props {
+  // "V1", "V2"... va en el acento de Amaia delante del nombre de la versión.
+  version: string;
+  titulo: string;
+  imagen: ImageMetadata;
+  alt: string;
+  // 'texto-izquierda' / 'texto-derecha': texto en 4 columnas y captura en 8,
+  // alternando lado entre versiones seguidas. 'completa': la versión
+  // protagonista, con el texto arriba y la captura a todo el ancho.
+  disposicion: 'texto-izquierda' | 'texto-derecha' | 'completa';
+}
+
+const { version, titulo, imagen, alt, disposicion } = Astro.props;
+const completa = disposicion === 'completa';
+const textoDerecha = disposicion === 'texto-derecha';
+---
+
+<!--
+  Una versión de una pantalla dentro de una secuencia de iteraciones. Cada
+  versión tiene su propio espacio en vertical: tres columnas a 72rem dejaban
+  las capturas en ~360 px y la interfaz no se leía.
+  Captura a 8 columnas ≈ 755 px; a todo el ancho, 1152 px.
+-->
+<div class="mt-24 sm:mt-28 lg:mt-36">
+  <div class="lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-10">
+    <div
+      class:list={[
+        completa ? 'lg:col-span-12 lg:grid lg:grid-cols-12 lg:gap-x-10' : 'lg:col-span-4',
+        textoDerecha && 'lg:col-start-9 lg:row-start-1',
+      ]}
+    >
+      <h3 class:list={['text-2xl leading-tight font-semibold tracking-tight text-balance', completa && 'lg:col-span-5']}>
+        <span class="text-amaia-ink">{version}</span> <span aria-hidden="true" class="text-ink-soft">·</span>{' '}
+        {titulo}
+      </h3>
+      <div
+        class:list={[
+          'mt-6 max-w-2xl space-y-5 text-lg leading-relaxed text-pretty text-ink-soft',
+          completa && 'lg:col-span-6 lg:col-start-7 lg:mt-0',
+        ]}
+      >
+        <slot />
+      </div>
+    </div>
+
+    <Screenshot
+      imagen={imagen}
+      alt={alt}
+      ancho={completa ? 1152 : 755}
+      class:list={[
+        'mt-10',
+        completa ? 'lg:col-span-12 lg:mt-14' : 'lg:col-span-8 lg:mt-0',
+        textoDerecha && 'lg:col-start-1 lg:row-start-1',
+      ]}
+    />
+  </div>
+</div>

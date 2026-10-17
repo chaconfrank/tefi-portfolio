@@ -30,6 +30,7 @@ BaseLayout            shell <html>, Header, <main><slot/></main>, Footer
   └─ halo teal        <div> decorativo en -z-10, detrás de la nav
 ProjectLayout         BaseLayout + cabecera de proyecto + estilos del Markdown
 PostLayout            BaseLayout + cabecera de post + estilos del Markdown
+CaseStudyLayout       BaseLayout + siguiente caso + cierre; el MDX maqueta el resto
 ```
 
 El `Header` es igual en todas las páginas: **sin fondo propio**, con la nav centrada

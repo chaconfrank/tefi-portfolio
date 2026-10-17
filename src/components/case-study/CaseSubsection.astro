@@ -1,0 +1,78 @@
+---
+interface Props {
+  titulo: string;
+  // Mismo par que CaseSection, a escala de subsección: 'dividida' pone el
+  // subtítulo a la izquierda y el texto a la derecha; 'apilada', el
+  // subtítulo arriba y el texto debajo a la izquierda.
+  composicion?: 'dividida' | 'apilada';
+  // Frase que cierra el razonamiento de la subsección. Mismo recurso que el
+  // destacado de CaseSection (filete de Amaia), en la columna del texto.
+  destacado?: string;
+  // El subtítulo sólo para lector de pantalla: cuando el visual que sigue ya
+  // lleva ese mismo título dibujado y repetirlo en la página sería doble.
+  tituloOculto?: boolean;
+  // El primer párrafo sube a frase de conclusión (grande, en tinta).
+  conclusion?: boolean;
+  // Última subsección del caso: más aire debajo antes de "Siguiente case
+  // study", para que se lea como final.
+  final?: boolean;
+}
+
+const { titulo, composicion = 'dividida', destacado, tituloOculto = false, conclusion = false, final = false } = Astro.props;
+const apilada = composicion === 'apilada';
+const conTexto = Astro.slots.has('default');
+---
+
+<!--
+  Subsección (h3) dentro de una sección numerada, para bloques largos que
+  avanzan en varios pasos. Más margen arriba que un CaseText para que el
+  cambio de paso se note; el texto mantiene el ancho de lectura (max-w-2xl).
+  Puede ir sin texto cuando sólo presenta el visual que sigue.
+-->
+<div
+  class:list={[
+    // Con el título oculto no hay nada visible que separar: sólo el hueco
+    // hasta el visual que lleva el título dibujado.
+    tituloOculto ? 'mt-16 sm:mt-20' : 'mt-28 sm:mt-32 lg:mt-40',
+    'lg:grid lg:grid-cols-12 lg:gap-x-10',
+    final && 'mb-12 sm:mb-20 lg:mb-28',
+  ]}
+>
+  <h3
+    class:list={[
+      'max-w-2xl text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-3xl',
+      apilada ? 'lg:col-span-8' : 'lg:col-span-5',
+      tituloOculto && 'sr-only',
+    ]}
+  >
+    {titulo}
+  </h3>
+
+  {
+    conTexto && (
+      <div
+        class:list={[
+          'mt-8 max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
+          apilada ? 'lg:col-span-7 lg:col-start-1 lg:mt-10' : 'lg:col-span-6 lg:col-start-7 lg:mt-1',
+          conclusion &&
+            '[&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl',
+        ]}
+      >
+        <slot />
+      </div>
+    )
+  }
+
+  {
+    destacado && (
+      <p
+        class:list={[
+          'mt-10 max-w-xl border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
+          apilada ? 'lg:col-span-7 lg:col-start-1' : 'lg:col-span-6 lg:col-start-7',
+        ]}
+      >
+        {destacado}
+      </p>
+    )
+  }
+</div>

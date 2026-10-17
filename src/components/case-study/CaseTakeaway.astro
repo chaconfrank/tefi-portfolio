@@ -1,0 +1,20 @@
+---
+interface Props {
+  etiqueta: string;
+}
+
+const { etiqueta } = Astro.props;
+---
+
+<!--
+  Cierre de una sección: la frase que resume lo aprendido. Va al final, no
+  al principio, y sin comillas ni tamaño de pull quote: es la conclusión de
+  la autora, no una cita. Centrada en un ancho estrecho para que se lea
+  como punto final y no como otro párrafo.
+-->
+<div class="mx-auto mt-28 max-w-3xl text-center sm:mt-32 lg:mt-40">
+  <p class="text-xs font-medium tracking-[0.14em] text-amaia-ink uppercase">{etiqueta}</p>
+  <p class="mt-5 text-2xl leading-snug font-medium text-balance text-ink sm:text-3xl">
+    <slot />
+  </p>
+</div>

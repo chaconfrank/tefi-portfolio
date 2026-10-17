@@ -1,0 +1,45 @@
+---
+interface Pilar {
+  titulo: string;
+  // Uno o varios párrafos.
+  texto: string | string[];
+}
+
+interface Props {
+  pilares: Pilar[];
+  // Antepone 01, 02… en el acento de Amaia al título de cada pilar.
+  numerados?: boolean;
+}
+
+const { pilares, numerados = false } = Astro.props;
+---
+
+<!--
+  Impacto cualitativo en pilares del mismo peso: mismas columnas, mismo
+  filete y mismo tamaño. Sin cifras ni iconos: si no hay métrica real, no se
+  dibuja nada que lo parezca.
+-->
+<dl class="mt-20 grid gap-y-12 sm:mt-24 md:grid-cols-3 md:gap-x-10 lg:mt-28">
+  {
+    pilares.map(({ titulo, texto }, i) => (
+      <div class="border-t-2 border-amaia-ink pt-6">
+        <dt class="text-2xl font-semibold tracking-tight">
+          {numerados && (
+            <>
+              <span class="text-amaia-ink tabular-nums">{String(i + 1).padStart(2, '0')}</span>{' '}
+              <span aria-hidden="true" class="text-ink-soft">
+                ·
+              </span>{' '}
+            </>
+          )}
+          {titulo}
+        </dt>
+        <dd class="mt-4 space-y-4 text-lg leading-relaxed text-pretty text-ink-soft">
+          {(Array.isArray(texto) ? texto : [texto]).map((parrafo) => (
+            <p>{parrafo}</p>
+          ))}
+        </dd>
+      </div>
+    ))
+  }
+</dl>

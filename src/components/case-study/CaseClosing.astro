@@ -1,0 +1,47 @@
+---
+interface Props {
+  id: string;
+  numero: string;
+  etiqueta: string;
+  titulo: string;
+}
+
+const { id, numero, etiqueta, titulo } = Astro.props;
+---
+
+<!--
+  Cierre del case study: la sección más quieta de la página.
+  - Una sola columna desplazada hacia el centro (columnas 3–10), sin
+    capturas ni bandas, con más margen arriba y abajo que cualquier otra
+    sección: tiene que leerse como final y dar aire antes del siguiente caso.
+    Ojo: su margen inferior se colapsa con el mt-24 de la nav "Siguiente
+    case study" del layout, así que el hueco real es el mayor de los dos.
+  - La reflexión final (slot "reflexion") no repite los recursos de antes:
+    ni el filete verde de los destacados ni el centrado con etiqueta del
+    aprendizaje. Es sólo tipografía: más grande, en peso normal y en tinta.
+-->
+<section
+  id={id}
+  aria-labelledby={`${id}-titulo`}
+  class="mx-auto mt-36 mb-24 max-w-6xl scroll-mt-28 sm:mt-44 sm:mb-32 lg:mt-56 lg:mb-48 lg:grid lg:grid-cols-12 lg:gap-x-10"
+>
+  <div class="lg:col-span-8 lg:col-start-3">
+    <p class="text-xs font-medium tracking-[0.14em] uppercase">
+      <span class="text-amaia-ink">{numero}</span>{' '}
+      <span class="text-ink-soft"><span aria-hidden="true">·</span> {etiqueta}</span>
+    </p>
+    <h2 id={`${id}-titulo`} class="mt-5 max-w-2xl text-3xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]">
+      {titulo}
+    </h2>
+
+    <div class="mt-12 max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft sm:mt-16">
+      <slot />
+    </div>
+
+    <div
+      class="mt-20 sm:mt-24 lg:mt-32 [&>p]:max-w-3xl [&>p]:text-2xl [&>p]:leading-snug [&>p]:font-normal [&>p]:tracking-tight [&>p]:text-pretty [&>p]:text-ink sm:[&>p]:text-3xl lg:[&>p]:text-[2.25rem]"
+    >
+      <slot name="reflexion" />
+    </div>
+  </div>
+</section>

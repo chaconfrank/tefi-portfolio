@@ -1,0 +1,33 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  imagen: ImageMetadata;
+  alt: string;
+  // Ancho máximo en px CSS; la imagen se centra.
+  ancho: number;
+  // Rectángulo a resaltar, en % de la imagen (0–100), medido sobre el
+  // archivo original: no cambia aunque la imagen se escale.
+  zona: { x: number; y: number; ancho: number; alto: number };
+}
+
+const { imagen, alt, ancho, zona } = Astro.props;
+const widths = [...new Set([ancho, ancho * 2].map((w) => Math.min(w, imagen.width)))];
+---
+
+<!--
+  Pantalla (normalmente ya dentro de un dispositivo) con un único elemento
+  resaltado: un aro naranja (--color-metric) alrededor del botón del que
+  habla el texto. El naranja es el acento de acción del sitio; nada de halos
+  ni brillos, sólo el contorno. Es decorativo (aria-hidden): el alt ya dice
+  qué botón es.
+-->
+<figure class="relative mx-auto mt-14 sm:mt-16" style={`max-width: ${ancho}px`}>
+  <Image src={imagen} alt={alt} widths={widths} sizes={`(max-width: ${ancho}px) 100vw, ${ancho}px`} quality="high" class="h-auto w-full" />
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute rounded-full ring-2 ring-metric"
+    style={`left: ${zona.x}%; top: ${zona.y}%; width: ${zona.ancho}%; height: ${zona.alto}%`}
+  ></span>
+</figure>

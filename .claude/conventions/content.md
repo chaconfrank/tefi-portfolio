@@ -17,6 +17,42 @@ lleva siempre las mismas cuatro secciones `##` — contexto, proceso, rol, resul
 para que los tres proyectos se puedan comparar de un vistazo. Detalle en la skill
 `/nuevo-contenido`.
 
+**Plantilla `editorial`** (`plantilla: editorial` en el frontmatter, archivo
+`.mdx`): el cuerpo no sigue las cuatro secciones, compone su propia maqueta con
+los componentes de `src/components/case-study/` y la ruta lo pinta con
+`CaseStudyLayout`, que sólo aporta el marco. `CaseSection` tiene dos
+composiciones, `dividida` y `apilada`: altérnalas entre secciones seguidas. Lo
+visual de cada sección entra por su slot `media` (`<Fragment slot="media">`
+si son varias piezas). Las pausas sin número van con `CaseReflection` y el cierre, con `CaseClosing`.
+Para alternar texto y visuales dentro de una sección, `CaseText` continúa el
+texto tras una captura; los gráficos ya diseñados (diagramas de flujo) van con
+`Diagram`, sin marco de captura ni lámina de fondo: tienen que llegar con
+fondo transparente, o quitarles el blanco exterior antes, para que se vean
+bien también en oscuro. Los bloques largos se
+dividen en pasos con `CaseSubsection` (h3, mismas composiciones que
+`CaseSection`); las capturas que ya llegan dentro de un dispositivo van con
+`DeviceShot` (sin marco), las anotadas con `AnnotatedScreenshot` y dos
+propuestas del mismo peso con `ProposalPair` (`marco` para capturas planas). Un
+contenido que pasa de un producto a otro (Profesionales → Conecta) va con
+`ProductHandoff`. Para research: `StudyContext` (ficha del estudio, sólo
+datos dados) y `FindingsMatrix` (síntesis de hallazgos; no es una `<table>`
+para que en móvil se apile sin perder las etiquetas de columna). Dos estados
+de una pantalla sin antes/después van con `ScreenDuo`. Las citas reales de participantes,
+con `QuoteSet` (comillas y atribución; nunca el filete verde, que es para
+ideas de la autora). Un único botón resaltado sobre una pantalla va con
+`HighlightedShot` (aro en `--color-metric`, sin halos) e insights compactos
+de research con `InsightGrid`.
+
+Los `<p>` del MDX no llevan el scope de esos componentes: se estilan con
+variantes `[&>p]`, no con `<style>`. En MDX los comentarios son `{/* */}`
+(`<!-- -->` rompe el build), y el texto que va dentro de un `<p>` del
+componente (`CaseTakeaway`, `CaseNote`) se escribe en la misma línea que la
+etiqueta: con saltos de línea el MDX lo envuelve en otro `<p>`.
+
+Cuidado con los espacios entre elementos en línea de una plantilla
+(`<span>01</span>` + salto + `<span>· …</span>`): el compilador los
+colapsa. Pon `{' '}` explícito.
+
 `titular` es la línea de encuadre que se pinta **encima** del título, en
 mayúsculas pequeñas, tanto en la tarjeta como en la cabecera del detalle: el
 título dice qué es el proyecto y el titular dice desde qué ángulo se cuenta

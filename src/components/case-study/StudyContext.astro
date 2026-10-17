@@ -1,0 +1,41 @@
+---
+interface Dato {
+  valor: string;
+  etiqueta: string;
+}
+
+interface Props {
+  datos: Dato[];
+  // Participantes anonimizados ("Centro A"…): sólo el nombre, sin perfiles.
+  participantes: string[];
+}
+
+const { datos, participantes } = Astro.props;
+---
+
+<!--
+  Contexto de un estudio en una línea: las cifras del diseño del test y los
+  participantes anonimizados. Sin tarjetas ni iconos, entre dos filetes,
+  para que se lea como la ficha del estudio y no como un dashboard.
+  Las cifras van en tinta, no en el naranja de métricas: describen el
+  estudio, no un resultado.
+-->
+<div class="mt-20 border-y border-line py-10 sm:mt-24 lg:mt-28 lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-10 lg:py-12">
+  <dl class="flex flex-wrap gap-x-10 gap-y-6 lg:col-span-6">
+    {
+      datos.map(({ valor, etiqueta }) => (
+        <div class="flex items-baseline gap-x-2">
+          <dt class="sr-only">{etiqueta}</dt>
+          <dd class="text-4xl font-semibold tracking-tight tabular-nums">{valor}</dd>
+          <dd aria-hidden="true" class="text-lg text-ink-soft">
+            {etiqueta}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <ul aria-label="Participantes" class="mt-8 flex flex-wrap gap-2 lg:col-span-6 lg:mt-0 lg:justify-end">
+    {participantes.map((p) => <li class="rounded-full border border-line px-3.5 py-1.5 text-sm text-ink">{p}</li>)}
+  </ul>
+</div>

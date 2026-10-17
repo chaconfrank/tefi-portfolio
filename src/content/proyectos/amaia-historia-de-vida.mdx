@@ -1,0 +1,544 @@
+---
+titulo: 'De una entrevista con IA a información útil para el cuidado'
+descripcion: 'Evolucionar Historia de Vida para convertir el informe generado con IA en información útil para el cuidado diario, con el criterio profesional validando el trabajo de la IA.'
+tipo: Startup
+empresa: 'Amaia Cuida'
+rol: 'Única Product Designer de las tres plataformas'
+rolResumen: 'Product Designer · UX/UI · IA'
+periodo: '2023 — 2025'
+herramientas: []
+plantilla: editorial
+destacado: true
+# Mismo orden que «Rediseño general»: los tres casos de Amaia van juntos y
+# el listado agrupado por proyecto está pendiente.
+orden: 1
+fecha: 2025-09-30
+borrador: false
+---
+
+import CaseHero from '../../components/case-study/CaseHero.astro';
+import CaseSection from '../../components/case-study/CaseSection.astro';
+import CaseText from '../../components/case-study/CaseText.astro';
+import Screenshot from '../../components/case-study/Screenshot.astro';
+import Diagram from '../../components/case-study/Diagram.astro';
+import CaseSubsection from '../../components/case-study/CaseSubsection.astro';
+import AnnotatedScreenshot from '../../components/case-study/AnnotatedScreenshot.astro';
+import DeviceShot from '../../components/case-study/DeviceShot.astro';
+import ProposalPair from '../../components/case-study/ProposalPair.astro';
+import ProductHandoff from '../../components/case-study/ProductHandoff.astro';
+import StudyContext from '../../components/case-study/StudyContext.astro';
+import FindingsMatrix from '../../components/case-study/FindingsMatrix.astro';
+import ScreenDuo from '../../components/case-study/ScreenDuo.astro';
+import ScreenEvolution from '../../components/case-study/ScreenEvolution.astro';
+import QuoteSet from '../../components/case-study/QuoteSet.astro';
+import composicionHero from '../../assets/proyectos/amaia-historia-de-vida/composicion-hero.png';
+import interfazInicial from '../../assets/proyectos/amaia-historia-de-vida/interfaz-inicial.png';
+import flujoInicial from '../../assets/proyectos/amaia-historia-de-vida/flujo-inicial.png';
+import primeraIteracion from '../../assets/proyectos/amaia-historia-de-vida/primera-iteracion.png';
+import flujoManual from '../../assets/proyectos/amaia-historia-de-vida/flujo-manual.png';
+import propuestaEstructurado from '../../assets/proyectos/amaia-historia-de-vida/propuesta-resumen-estructurado.png';
+import propuestaNarrativo from '../../assets/proyectos/amaia-historia-de-vida/propuesta-resumen-narrativo.png';
+import primeraNavegacion from '../../assets/proyectos/amaia-historia-de-vida/primera-navegacion-analisis-resumen.png';
+import decisionesValidacion from '../../assets/proyectos/amaia-historia-de-vida/decisiones-primera-validacion.png';
+import flujoCompleto from '../../assets/proyectos/amaia-historia-de-vida/flujo-completo.png';
+import apAnalisis from '../../assets/proyectos/amaia-historia-de-vida/ap-analisis.png';
+import apResumen from '../../assets/proyectos/amaia-historia-de-vida/ap-resumen.png';
+import acResumen from '../../assets/proyectos/amaia-historia-de-vida/ac-resumen.png';
+import resumenVacio from '../../assets/proyectos/amaia-historia-de-vida/resumen-estado-vacio.png';
+import resumenGenerando from '../../assets/proyectos/amaia-historia-de-vida/resumen-estado-generando.png';
+import grabarAntes from '../../assets/proyectos/amaia-historia-de-vida/grabar-antes-valoraciones.png';
+import grabarDespues from '../../assets/proyectos/amaia-historia-de-vida/grabar-despues-historia-de-vida.png';
+import composicionFinal from '../../assets/proyectos/amaia-historia-de-vida/composicion-final.png';
+import impactoObservado from '../../assets/proyectos/amaia-historia-de-vida/impacto-observado.png';
+
+{/* Los textos son los que ha entregado Estephany, bloque a bloque y sin
+    reescribir. No se añade nada que no esté en su contenido. Desktop es
+    siempre Amaia Profesionales y tablet, Amaia Conecta. */}
+
+<CaseHero
+  producto="Amaia Cuida"
+  disciplina="Historia de Vida"
+  titulo={frontmatter.titulo}
+  contexto="Amaia Cuida es un ecosistema digital que ayuda a centros y residencias a aplicar la Atención Centrada en la Persona (ACP) en el cuidado diario."
+  imagen={composicionHero}
+  imagenAlt="Amaia Profesionales en un portátil mostrando el resumen de puntos clave de una Historia de Vida, y Amaia Conecta en una tablet mostrando Historia de Vida con el guion de la entrevista."
+  banda={false}
+>
+
+Historia de Vida ya utilizaba IA para transformar entrevistas en un informe estructurado sobre la vida de cada persona. Sin embargo, algunos profesionales seguían saliendo de Amaia para crear manualmente una versión más breve y fácil de consultar.
+
+El reto fue evolucionar la funcionalidad para convertir ese contenido en información útil para el cuidado diario, sin perder algo esencial: el criterio profesional debía seguir validando el trabajo realizado por la IA.
+
+</CaseHero>
+
+<CaseSection
+  id="punto-de-partida"
+  numero="01"
+  etiqueta="El punto de partida"
+  titulo="Un informe completo que aún requería trabajo fuera de Amaia"
+>
+
+Historia de Vida ya permitía grabar una entrevista desde Amaia Conecta y utilizar IA para transcribirla y organizar la información por etapas vitales en un informe.
+
+<Fragment slot="media">
+
+<Screenshot
+  imagen={interfazInicial}
+  alt="Interfaz inicial de Historia de Vida, «Valoración de Historia de Vida»: la transcripción de la entrevista por turnos de entrevistador y entrevistado, el botón «Aprobar valoración», el reproductor del audio y el botón «Obtener informe»."
+  pie="Reconstrucción de la interfaz inicial a partir de diseños posteriores."
+  ancho={864}
+  class="mx-auto mt-20 max-w-[54rem] sm:mt-24 lg:mt-28"
+/>
+
+<CaseText columna="izquierda">
+
+El informe cumplía su función como documentación completa de la historia de la persona, pero las conversaciones habituales con los centros empezaron a revelar otro tipo de necesidad: algunos profesionales extraían después la información más relevante y creaban manualmente una versión más breve en Word u otras herramientas.
+
+Dependiendo del centro, ese resumen podía incorporarse a la documentación de la persona, trasladarse a herramientas internas o quedar disponible para que otros profesionales pudieran consultarlo con mayor rapidez.
+
+</CaseText>
+
+<Diagram
+  imagen={flujoInicial}
+  alt="Flujo inicial en cinco pasos: Entrevistar, Transcribir con IA, Generar informe, Salir de Amaia y Resumir manualmente. Los dos últimos pasos, fuera de Amaia, van marcados en rojo."
+/>
+
+<CaseText conclusion>
+
+El problema no era que faltase información, sino que todavía había que transformarla manualmente para hacerla más fácil de consultar y utilizar en el día a día.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  id="primera-iteracion"
+  numero="02"
+  etiqueta="La primera iteración"
+  titulo="Hacer visible y editable el trabajo de la IA"
+  composicion="apilada"
+  destacado="Si mostramos el análisis junto a la transcripción, el profesional podrá contrastar el contenido de la entrevista y corregir el resultado de la IA sin salir de Amaia."
+>
+
+Antes de plantear el resumen, el primer problema que necesitábamos resolver era más inmediato: los profesionales querían revisar y corregir el análisis generado por la IA sin depender únicamente del informe descargado.
+
+A partir del feedback que recibíamos de los centros, planteamos una primera hipótesis:
+
+<Fragment slot="media">
+
+<CaseText columna="izquierda">
+
+La primera iteración llevó el análisis directamente a la interfaz y lo hizo editable. Transcripción y análisis se mostraban en paralelo para que el profesional pudiera comprobar el contenido original mientras revisaba cada etapa vital.
+
+</CaseText>
+
+<AnnotatedScreenshot
+  imagen={primeraIteracion}
+  alt="Primera iteración de «Valoración de Historia de Vida»: a la izquierda, la transcripción de la entrevista; a la derecha, el análisis de la IA por etapas vitales (Infancia, Adolescencia/Juventud/Madurez, Jubilación, Presente y futuro, Preguntas de cierre) con las respuestas en campos editables y el botón «Modo edición»; debajo, el botón «Aprobar valoración»."
+  notas={[
+    { texto: 'Transcripción como referencia', x: 20, y: 15.9 },
+    { texto: 'Análisis visible y editable', x: 78, y: 16.4 },
+    { texto: 'Validación profesional', x: 38.6, y: 85.2 },
+  ]}
+/>
+
+<CaseSubsection
+  titulo="Una solución lógica que reveló un nuevo problema"
+  destacado="La transcripción debía seguir disponible para comprobar información, pero no necesitaba competir visualmente con el resultado que el profesional debía revisar y utilizar."
+>
+
+Al utilizar ambas fuentes en paralelo, descubrimos que estábamos dando prácticamente el mismo peso a dos contenidos que no tenían el mismo valor para el profesional.
+
+La transcripción podía contener errores —por ejemplo, al interpretar una frase o diferenciar interlocutores— que no siempre se trasladaban al análisis. Al mantener ambos contenidos constantemente enfrentados, la interfaz invitaba a comparar y ponía demasiado foco en errores de la transcripción cuando lo que realmente necesitaban trabajar era el análisis.
+
+Esto nos llevó a replantear la jerarquía:
+
+</CaseSubsection>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  id="informacion-dia-a-dia"
+  numero="03"
+  etiqueta="Convertir el análisis en información para el día a día"
+  titulo="Los profesionales necesitaban una capa más breve y accionable"
+>
+
+Amaia ya automatizaba gran parte del proceso, pero convertir el resultado en información fácil de consultar seguía requiriendo trabajo manual.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={flujoManual}
+  alt="Flujo de trabajo en cuatro pasos: 01 Análisis generado por IA, la IA transcribe y analiza la entrevista; 02 Seleccionar información relevante, el profesional extrae los puntos más importantes; 03 Crear resumen manual, en un formato más breve y adaptado a sus necesidades; 04 Compartir / consultar, el resumen se incorpora a la documentación de la persona. Los pasos 02 y 03 van agrupados como «Trabajo manual del profesional»."
+/>
+
+<CaseSubsection titulo="¿Y si Amaia generase también ese primer resumen?" composicion="apilada">
+
+Como la IA ya disponía de la información de la entrevista y del análisis, planteamos incorporar un segundo nivel de información: un resumen generado por IA que sirviera como punto de partida y que cada profesional pudiera revisar y adaptar.
+
+No buscábamos reproducir el formato particular de cada centro. El objetivo era encontrar una estructura común que pudiera resultar útil en distintos contextos de cuidado.
+
+La pregunta pasó entonces de ser únicamente qué información resumir a decidir también cómo presentarla para que realmente fuese fácil de consultar.
+
+</CaseSubsection>
+
+<CaseSubsection titulo="Exploramos dos maneras de sintetizar la información" />
+
+<ProposalPair
+  propuestas={[
+    {
+      titulo: 'Resumen estructurado',
+      texto: 'Organizaba la información en bloques como datos principales, acontecimientos relevantes y temas narrativos, facilitando una lectura más directa y la localización de información concreta.',
+      imagen: propuestaEstructurado,
+      alt: 'Propuesta de resumen estructurado en Amaia Profesionales: bloques «Datos principales extraídos», «Logros personales e historias de redención» y «Temas narrativos», en listas.',
+    },
+    {
+      titulo: 'Resumen narrativo',
+      texto: 'Transformaba la información en recuerdos, vivencias y posibles temas sobre los que conversar con la persona, con un enfoque más narrativo.',
+      imagen: propuestaNarrativo,
+      alt: 'Propuesta de resumen narrativo en Amaia Profesionales: temas para conversar, como «Hablar sobre mi infancia en Galicia», con recuerdos en primera persona entre comillas.',
+    },
+  ]}
+/>
+
+<CaseSubsection titulo="Una primera prueba nos ayudó a decidir la dirección" composicion="apilada">
+
+Llevamos ambas propuestas a una primera prueba con profesionales para contrastar qué tipo de información resultaba más útil.
+
+La prueba nos ayudó a avanzar hacia una estructura más directa y organizada, más cercana al tipo de información que los profesionales necesitaban consultar y adaptar posteriormente.
+
+Pero también nos permitió detectar un problema diferente.
+
+En aquella primera propuesta, Análisis y Resumen ya aparecían como los dos resultados principales, mientras que la transcripción quedaba disponible como información de apoyo. Sin embargo, la pestaña de Resumen permanecía inactiva hasta que el profesional aprobara el Análisis.
+
+</CaseSubsection>
+
+<DeviceShot
+  imagen={primeraNavegacion}
+  alt="Primera arquitectura con dos pestañas en Amaia Profesionales: «Análisis de la entrevista» activa y «Resumen» en gris, con apariencia inactiva; arriba a la derecha, el botón «Ver transcripción»."
+  pie="Primera propuesta de navegación entre Análisis y Resumen utilizada durante la prueba."
+  ancho={960}
+  class="mx-auto mt-16 max-w-[60rem] sm:mt-20"
+/>
+
+<CaseSubsection titulo="Una pestaña visible no servía si parecía inaccesible">
+
+Durante la prueba observamos que los profesionales no intentaban explorar una pestaña que percibían como deshabilitada.
+
+La intención era mostrar que existía un paso posterior al Análisis, pero el estado inactivo conseguía lo contrario: el Resumen estaba presente en la interfaz, pero no ayudaba a comprender qué ocurriría después de aprobar.
+
+Esto nos llevó a cambiar la interacción: Análisis y Resumen debían permanecer visibles y accesibles, incluso cuando el Resumen todavía no estuviera generado.
+
+De esta primera validación salieron, por tanto, dos decisiones que marcarían la siguiente versión: avanzar con un Resumen más estructurado y directo y mantener ambas secciones accesibles para hacer comprensible el recorrido entre Análisis y Resumen.
+
+</CaseSubsection>
+
+<Diagram
+  imagen={decisionesValidacion}
+  alt="Decisiones tras la primera validación. Contenido: de Narrativo a Estructurado. Interacción: de Resumen inactivo a Análisis + Resumen accesibles."
+/>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  id="flujo-completo"
+  numero="04"
+  etiqueta="Diseñar el flujo completo"
+  titulo="La IA genera. El profesional valida."
+  composicion="apilada"
+  destacado="Priorizamos la calidad de la información frente a la inmediatez: la IA agiliza el trabajo, pero el criterio profesional sigue formando parte del proceso."
+>
+
+Incorporar el Resumen planteaba una decisión importante: ¿en qué momento debía generarse y a partir de qué información?
+
+Generarlo directamente desde la entrevista habría sido más inmediato, pero también podía trasladar errores de la IA de un resultado al siguiente. Por eso decidimos mantener una validación intermedia.
+
+El profesional debía revisar, editar y aprobar primero el Análisis. Solo entonces la IA utilizaría esa información ya validada para generar el Resumen.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={flujoCompleto}
+  alt="Flujo completo en cinco pasos: 01 Entrevista, el profesional graba la Historia de Vida desde la tablet; 02 Análisis IA, la IA transcribe y analiza la entrevista; 03 Revisión profesional, revisa, consulta la transcripción si lo necesita y edita el análisis; 04 Aprobación del análisis; 05 Resumen IA, generado a partir del análisis aprobado. Una línea discontinua vuelve del paso 05 al 03: «Se puede volver a editar y regenerar»."
+/>
+
+<CaseSubsection titulo="Dos resultados con funciones diferentes">
+
+Con la nueva arquitectura, Análisis y Resumen pasaron a ocupar el primer nivel de Historia de Vida, mientras que la transcripción quedó disponible como información de apoyo.
+
+El Análisis mantenía el contenido completo organizado por etapas vitales y era el espacio donde el profesional podía revisar y corregir el trabajo realizado por la IA.
+
+El Resumen ofrecía una versión más breve y estructurada, pensada para localizar rápidamente la información más relevante.
+
+Tras la primera validación, ambas secciones permanecían visibles y accesibles, haciendo más evidente que formaban parte del mismo proceso.
+
+</CaseSubsection>
+
+<ProposalPair
+  marco
+  propuestas={[
+    {
+      titulo: 'Análisis',
+      texto: 'Revisar y validar la información completa.',
+      imagen: apAnalisis,
+      alt: 'Pestaña «Análisis» de Historia de Vida en Amaia Profesionales: «Análisis de las entrevistas» con la etapa Infancia desplegada y su texto editable y el botón «Aprobar análisis»; arriba, las pestañas Análisis y Resumen junto a «Subir entrevista» y «Audios entrevistas», el acceso a la transcripción.',
+    },
+    {
+      titulo: 'Resumen',
+      texto: 'Consultar y adaptar la información sintetizada.',
+      imagen: apResumen,
+      alt: 'Pestaña «Resumen» en Amaia Profesionales: «Resumen de puntos claves» con los botones Descargar resumen, Regenerar y Editar, el aviso de que se ha generado con IA y los bloques Datos principales extraídos, Logros personales e historias de redención y Temas narrativos.',
+    },
+  ]}
+/>
+
+<CaseSubsection titulo="Del escritorio al contexto de cuidado" composicion="apilada">
+
+La incorporación del Resumen también amplió el papel de Historia de Vida dentro de Amaia Conecta.
+
+Añadimos una sección propia de Historia de Vida dentro del perfil de cada persona. Una vez que el profesional había revisado y aprobado el Análisis desde Amaia Profesionales y el Resumen estaba generado, este podía consultarse también desde la tablet.
+
+La gestión del contenido permanecía en el ordenador; Amaia Conecta funcionaba como punto de consulta del resultado sintetizado.
+
+Esto evitaba trasladar toda la complejidad de revisión y edición a la tablet y mantenía una función clara para cada entorno.
+
+</CaseSubsection>
+
+<ProductHandoff
+  origen={{
+    producto: 'Amaia Profesionales · Ordenador',
+    funcion: 'Revisar y validar',
+    imagen: apAnalisis,
+    alt: 'Historia de Vida en Amaia Profesionales: el Análisis por etapas vitales, editable y con el botón «Aprobar análisis».',
+  }}
+  destino={{
+    producto: 'Amaia Conecta · Tablet',
+    funcion: 'Consultar',
+    imagen: acResumen,
+    alt: 'Historia de Vida en el perfil de una persona en Amaia Conecta: el «Resumen de puntos claves» para consultar, sin botones de edición.',
+  }}
+  pie="Amaia Profesionales concentraba la revisión y gestión del contenido. Amaia Conecta hacía accesible el resultado para consulta desde la tablet."
+/>
+
+<CaseText conclusion>
+
+Historia de Vida pasaba así de generar un informe a conectar la recogida, validación y consulta de la información entre ambos productos.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  id="validar-flujo"
+  numero="05"
+  etiqueta="Validar el flujo completo"
+  titulo="El mismo recorrido, probado con cinco centros"
+>
+
+Con el nuevo flujo ya integrado en Amaia, realizamos 5 sesiones de usabilidad con profesionales de cinco centros diferentes, representados en este caso como Centro A, B, C, D y E para preservar su identidad.
+
+Todos probaron el mismo recorrido de Historia de Vida: desde el inicio de la entrevista en Amaia Conecta hasta la revisión del Análisis y la consulta del Resumen.
+
+Los participantes tenían distintos niveles de familiaridad con Amaia y de soltura con herramientas digitales. Por eso, el objetivo no era esperar un comportamiento idéntico, sino identificar qué fricciones se repetían entre sesiones y cuáles respondían a situaciones más puntuales.
+
+Para analizar los resultados, contrasté las observaciones de las cinco sesiones con las hipótesis que había definido previamente sobre el happy path.
+
+<Fragment slot="media">
+
+<StudyContext
+  datos={[
+    { valor: '5', etiqueta: 'centros' },
+    { valor: '5', etiqueta: 'profesionales' },
+    { valor: '1', etiqueta: 'mismo flujo' },
+  ]}
+  participantes={['Centro A', 'Centro B', 'Centro C', 'Centro D', 'Centro E']}
+/>
+
+<CaseSubsection
+  titulo="Los problemas no aparecían siempre en el mismo lugar, pero sí encontramos patrones"
+  composicion="apilada"
+/>
+
+<FindingsMatrix
+  titulo="Síntesis de hallazgos · 5 sesiones de usabilidad"
+  columnas={['Hallazgo recurrente', 'Qué observamos', 'Qué nos indicaba']}
+  hallazgos={[
+    {
+      hallazgo: 'El punto de entrada a Historia de Vida no era suficientemente claro',
+      observamos: 'En los Centros A, B, D y E aparecieron dudas entre Historia de Vida, Valoraciones y otros accesos durante el recorrido.',
+      indicaba: 'Necesitábamos reducir la ambigüedad del acceso y hacer que el destino coincidiera mejor con la expectativa del profesional.',
+    },
+    {
+      hallazgo: 'Tareas pendientes no formaba parte del recorrido natural de todos',
+      observamos: 'En los Centros A y B los profesionales tendían a ir directamente al perfil de la persona. En el Centro C, en cambio, se alternaba entre el perfil y el Home.',
+      indicaba: 'No podíamos depender del Home como único punto para comunicar que había contenido pendiente de revisar.',
+    },
+    {
+      hallazgo: 'Los tiempos de procesamiento de la IA generaban incertidumbre',
+      observamos: 'En varios tests surgieron dudas sobre si había que esperar, actualizar o repetir alguna acción cuando el Análisis o el Resumen tardaban en aparecer. En algún caso, la tarea se abandonó temporalmente.',
+      indicaba: 'Necesitábamos comunicar mejor los estados del sistema mientras Amaia procesaba la información.',
+    },
+    {
+      hallazgo: 'El Resumen aportaba valor, pero no siempre se descubría de forma autónoma',
+      observamos: 'En los Centros A, D y E aparecieron dificultades para anticipar o localizar el Resumen después de aprobar. En el Centro C, en cambio, ya formaba parte de su revisión habitual.',
+      indicaba: 'No bastaba con generar el Resumen: el sistema debía comunicar mejor cuándo se estaba generando y cuándo estaba disponible.',
+    },
+    {
+      hallazgo: 'La revisión profesional sí formaba parte del comportamiento real',
+      observamos: 'En los Centros B, C y D observamos cómo los profesionales revisaban etapas, corregían errores, eliminaban repeticiones o adaptaban el contenido antes de aprobarlo.',
+      indicaba: 'La validación humana no era una barrera artificial: encajaba con la forma en la que los profesionales comprobaban el trabajo de la IA.',
+    },
+  ]}
+/>
+
+<CaseSubsection titulo="No todas las observaciones tenían el mismo peso">
+
+Los tests también revelaron cuestiones más puntuales: dudas sobre qué hacía Regenerar, poca visibilidad de algunas herramientas de edición o diferencias en la forma de utilizar determinados elementos del flujo.
+
+Las registramos como oportunidades de mejora, pero no las tratamos como problemas generales cuando la evidencia aparecía únicamente en una o pocas sesiones.
+
+</CaseSubsection>
+
+<CaseSubsection
+  titulo="Lo que validamos"
+  composicion="apilada"
+  destacado="El valor del Resumen se entendía una vez alcanzado. La principal fricción estaba en hacer más claro el recorrido hasta él."
+>
+
+A pesar de las fricciones del recorrido, las sesiones reforzaron dos decisiones fundamentales.
+
+La primera fue el valor del Resumen. Cuando los profesionales llegaban hasta él, entendían su función como una versión más breve de la Historia de Vida y encontraban utilidad en poder consultarlo y adaptarlo.
+
+La segunda fue mantener al profesional dentro del proceso de generación. Durante los tests observamos cómo revisaban, corregían y adaptaban el contenido generado por IA antes de aprobarlo, confirmando que la validación profesional encajaba con su forma real de trabajar.
+
+</CaseSubsection>
+
+<CaseSubsection titulo="Ajustes después de los tests" />
+
+<CaseText titulo="Hacer visible lo que estaba haciendo la IA" pegado>
+
+Uno de los patrones más claros apareció durante los tiempos de espera. Cuando el Análisis o el Resumen no estaban disponibles inmediatamente, los profesionales podían dudar sobre si el proceso seguía funcionando o si debían realizar alguna acción.
+
+Para reducir esa incertidumbre trabajamos estados específicos para comunicar qué estaba ocurriendo mientras se procesaba la información.
+
+</CaseText>
+
+<ScreenDuo
+  capturas={[
+    {
+      imagen: resumenVacio,
+      etiqueta: 'Estado vacío',
+      alt: 'Pestaña Resumen en estado vacío: «Aún no se ha grabado su Historia de Vida. Graba la entrevista desde Amaia Conecta, una vez apruebes el análisis se genera el resumen», con una invitación al botón «¿Cómo funciona?».',
+    },
+    {
+      imagen: resumenGenerando,
+      etiqueta: 'Estado de generación',
+      pie: 'Propuesta de estado durante la generación del Resumen.',
+      alt: 'Pestaña Resumen mientras se genera: «El resumen de su Historia de Vida se está generando… Esto puede demorar unos minutos», con el botón «Comprobar disponibilidad».',
+    },
+  ]}
+/>
+
+<CaseText titulo="Hacer que el acceso lleve donde el usuario espera" columna="izquierda">
+
+Los tests también mostraron una fricción entre el nombre de la acción y su destino. El profesional podía seleccionar “Grabar Historia de Vida” y terminar dentro de Valoraciones, donde se encontraba técnicamente la interfaz de grabación.
+
+Para el usuario, sin embargo, ambas cosas no representaban necesariamente el mismo contexto.
+
+Ajustamos el recorrido para que “Grabar Historia de Vida” llevase directamente a Historia de Vida, alineando el destino de la acción con la expectativa generada por su nombre.
+
+</CaseText>
+
+<ScreenEvolution
+  antes={{
+    imagen: grabarAntes,
+    etiqueta: 'Antes · Valoraciones',
+    alt: 'Antes: la grabación de la entrevista en Amaia Conecta se abría dentro de la pestaña Valoraciones, marcada en naranja.',
+  }}
+  despues={{
+    imagen: grabarDespues,
+    etiqueta: 'Después · Historia de Vida',
+    alt: 'Después: la misma grabación se abre dentro de la pestaña Historia de Vida, marcada en naranja.',
+  }}
+/>
+
+<CaseText conclusion>
+
+Los tests no cambiaron la dirección de la solución. Nos ayudaron a detectar dónde el flujo necesitaba explicar mejor qué estaba ocurriendo y hacer que cada acción respondiera a la expectativa del profesional.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  id="resultado"
+  numero="06"
+  etiqueta="Resultado"
+  titulo="De generar un informe a acompañar el cuidado"
+  composicion="apilada"
+>
+
+Historia de Vida evolucionó de un proceso centrado principalmente en generar un informe a un flujo en el que la IA y el criterio profesional cumplen funciones diferentes.
+
+La IA procesa la entrevista y estructura la información; el profesional revisa, corrige y valida el contenido; y el Resumen convierte ese trabajo en una versión más breve que puede consultarse posteriormente desde Amaia Profesionales y Amaia Conecta.
+
+El objetivo no era sustituir el criterio profesional, sino reducir el trabajo necesario para transformar una entrevista extensa en información que pudiera volver a utilizarse en el cuidado diario.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={composicionFinal}
+  desplazable={false}
+  alt="Composición final: Amaia Profesionales en un portátil con el Resumen de puntos claves de la Historia de Vida, con Descargar resumen, Regenerar y Editar; y Amaia Conecta en una tablet con el mismo Resumen dentro de la pestaña Historia de Vida."
+/>
+
+<CaseSubsection titulo="El Resumen encontró su lugar en el trabajo real">
+
+Las sesiones mostraron que, una vez descubierto, los profesionales entendían la diferencia entre el Análisis completo y el Resumen y podían decidir cuándo necesitaban revisar, modificar o simplemente consultar el resultado.
+
+El valor no estaba únicamente en acortar información. El Resumen permitía que lo aprendido durante una entrevista pudiera quedar disponible también para otros profesionales que atendieran posteriormente a esa persona.
+
+</CaseSubsection>
+
+<QuoteSet
+  principal={{
+    texto: 'Lo bueno es que si en algún momento me quitasen a esta persona, otra compañera puede saber todo lo que necesita de su vida.',
+    autoria: 'Profesional participante',
+  }}
+  secundarias={[
+    { texto: 'Si el resumen me gusta no lo edito y si no me gusta lo modifico.', autoria: 'Profesional participante' },
+    { texto: 'A mí me parece una maravilla porque ya lo da todo, luego solo lo tengo que tunear.', autoria: 'Profesional participante' },
+  ]}
+/>
+
+<CaseSubsection titulo="Impacto observado" tituloOculto />
+
+<Diagram
+  imagen={impactoObservado}
+  alt="Impacto observado, en tres tarjetas: 01 Menos trabajo manual, la información relevante ya no tenía que resumirse desde cero; 02 Información más accesible, el contenido clave podía consultarse de forma más rápida y directa; 03 Criterio profesional, la IA proponía y el profesional revisaba y decidía."
+/>
+
+<CaseSubsection titulo="Mi aprendizaje" composicion="apilada" conclusion final>
+
+Automatizar no siempre significa eliminar pasos.
+
+En un producto que utiliza IA para trabajar con información personal, reducir fricción era importante, pero también lo era decidir dónde no hacerlo. La revisión profesional añadía un paso al proceso, pero permitía validar la información antes de utilizarla para generar un nuevo resultado.
+
+Este proyecto me enseñó a diseñar la IA no como una respuesta final, sino como una herramienta dentro de un proceso donde el usuario sigue teniendo capacidad para revisar, corregir y decidir.
+
+</CaseSubsection>
+
+</Fragment>
+
+</CaseSection>
