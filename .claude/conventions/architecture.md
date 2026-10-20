@@ -80,7 +80,7 @@ por props.
 
 ## Configuración
 
-`site` en `astro.config.mjs` es **obligatorio**, no cosmético: de él dependen el sitemap, el RSS y las URLs canónicas de `BaseHead`. Hoy es el placeholder `https://tefi.dev`.
+`site` en `astro.config.mjs` es **obligatorio**, no cosmético: de él dependen el sitemap, el RSS y las URLs canónicas de `BaseHead`. Es `https://estephanymago.website` (dominio de IONOS apuntando a Render).
 
 Las variables de entorno se leen con `import.meta.env`, nunca con `process.env`. Sólo las que empiezan por `PUBLIC_` llegan al navegador; el resto es servidor. Para tipado y validación, declara el esquema en `env.schema` del config e importa desde `astro:env/client` o `astro:env/server`.
 

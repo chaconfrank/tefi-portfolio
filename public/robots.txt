@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tefi.dev/sitemap-index.xml
+Sitemap: https://estephanymago.website/sitemap-index.xml
