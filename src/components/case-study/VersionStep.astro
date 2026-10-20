@@ -35,7 +35,7 @@ const columna = disposicion === 'columna';
     <span class="text-amaia-ink">{version}</span> <span aria-hidden="true" class="text-ink-soft">·</span>{' '}
     {titulo}
   </h3>
-  <div class="mt-5 max-w-2xl space-y-5 text-lg leading-relaxed text-pretty text-ink-soft">
+  <div class="mt-5 max-w-[52rem] space-y-5 text-lg leading-relaxed text-pretty text-ink-soft">
     <slot />
   </div>
   <Screenshot imagen={imagen} alt={alt} ancho={columna ? 552 : 1152} class:list={['mt-8', !columna && 'lg:mt-10']} />

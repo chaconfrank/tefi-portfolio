@@ -39,7 +39,7 @@ const { id, numero, etiqueta, titulo, compacta = false } = Astro.props;
       {titulo}
     </h2>
 
-    <div class:list={['max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft', compacta ? 'mt-6 sm:mt-8' : 'mt-12 sm:mt-16']}>
+    <div class:list={['max-w-[52rem] space-y-6 text-lg leading-relaxed text-pretty text-ink-soft', compacta ? 'mt-6 sm:mt-8' : 'mt-12 sm:mt-16']}>
       <slot />
     </div>
 

@@ -6,7 +6,7 @@ interface Props {
   etiqueta: string;
   titulo: string;
   // 'dividida': titular a la izquierda y texto en columna a la derecha.
-  // 'apilada': titular arriba, texto a la izquierda y el destacado al lado.
+  // 'apilada': titular arriba, texto debajo y el destacado bajo el texto.
   // Alternarlas es lo que evita que todas las secciones se lean iguales.
   composicion?: 'dividida' | 'apilada';
   // Idea corta que resume la sección. No es una cita: no lleva comillas ni
@@ -15,17 +15,14 @@ interface Props {
   // Ritmo más apretado (capítulos a ~112 px, título y texto más juntos) para
   // casos largos en los que el aire por defecto alarga demasiado la página.
   compacta?: boolean;
-  // En 'apilada', el destacado va debajo del texto en su misma columna en
-  // vez de en el extremo derecho: problema → decisión se leen seguidos.
-  destacadoDebajo?: boolean;
 }
 
-const { id, numero, etiqueta, titulo, composicion = 'dividida', destacado, compacta = false, destacadoDebajo = false } = Astro.props;
+const { id, numero, etiqueta, titulo, composicion = 'dividida', destacado, compacta = false } = Astro.props;
 const apilada = composicion === 'apilada';
 ---
 
 <!--
-  Sección numerada del case study. El texto nunca pasa de max-w-2xl (~65
+  Sección numerada del case study. El texto crece hasta 52rem (~95
   caracteres) aunque la sección use el ancho generoso de max-w-6xl.
   Lo visual de la sección (capturas, diagramas) llega por el slot "media" y
   se pinta debajo con su propio aire.
@@ -51,9 +48,9 @@ const apilada = composicion === 'apilada';
 
     <div
       class:list={[
-        'max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft [&>p:first-child]:text-ink',
+        'max-w-[52rem] space-y-6 text-lg leading-relaxed text-pretty text-ink-soft [&>p:first-child]:text-ink',
         compacta ? 'mt-6 sm:mt-8' : 'mt-10',
-        apilada ? ['lg:col-span-7', compacta ? 'lg:mt-8' : 'lg:mt-14'] : 'lg:col-span-6 lg:col-start-7 lg:mt-14',
+        apilada ? ['lg:col-span-9', compacta ? 'lg:mt-8' : 'lg:mt-14'] : 'lg:col-span-6 lg:col-start-7 lg:mt-14',
       ]}
     >
       <slot />
@@ -63,13 +60,13 @@ const apilada = composicion === 'apilada';
       destacado && (
         <p
           class:list={[
-            compacta ? (destacadoDebajo ? 'mt-8' : 'mt-10') : 'mt-12',
-            destacadoDebajo ? 'max-w-xl' : 'max-w-sm',
+            compacta ? 'mt-8' : 'mt-12',
+            apilada ? 'max-w-[52rem]' : 'max-w-sm',
             'border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
+            // En 'apilada' el destacado va siempre bajo el texto, en su misma
+            // columna: en el extremo derecho quedaba descolgado.
             apilada
-              ? destacadoDebajo
-                ? 'lg:col-span-7 lg:col-start-1'
-                : 'lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end'
+              ? 'lg:col-span-9 lg:col-start-1'
               : 'lg:col-span-6 lg:col-start-7',
           ]}
         >

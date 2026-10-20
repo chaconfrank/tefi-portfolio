@@ -20,7 +20,7 @@ const { columna = 'derecha', conclusion = false, titulo, pegado = false, compact
 
 <!--
   Texto que continúa una sección después de un visual, para alternar texto y
-  capturas sin abrir una sección nueva. Mismo ancho de lectura (max-w-2xl)
+  capturas sin abrir una sección nueva. Mismo ancho de lectura (hasta 52rem)
   y mismo cuerpo que el texto de CaseSection.
 -->
 <div
@@ -33,8 +33,8 @@ const { columna = 'derecha', conclusion = false, titulo, pegado = false, compact
     titulo && (
       <h4
         class:list={[
-          'mb-6 max-w-2xl text-xl leading-snug font-semibold tracking-tight text-balance',
-          columna === 'derecha' ? 'lg:col-span-6 lg:col-start-7' : 'lg:col-span-7',
+          'mb-6 max-w-[52rem] text-xl leading-snug font-semibold tracking-tight text-balance',
+          columna === 'derecha' ? 'lg:col-span-6 lg:col-start-7' : 'lg:col-span-9',
         ]}
       >
         {titulo}
@@ -43,8 +43,8 @@ const { columna = 'derecha', conclusion = false, titulo, pegado = false, compact
   }
   <div
     class:list={[
-      'max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
-      columna === 'derecha' ? 'lg:col-span-6 lg:col-start-7' : 'lg:col-span-7',
+      'max-w-[52rem] space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
+      columna === 'derecha' ? 'lg:col-span-6 lg:col-start-7' : 'lg:col-span-9',
       conclusion &&
         '[&>p:first-child]:text-xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-ink sm:[&>p:first-child]:text-2xl',
     ]}

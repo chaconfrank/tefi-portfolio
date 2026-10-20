@@ -40,7 +40,7 @@ const conTexto = Astro.slots.has('default');
 <!--
   Subsección (h3) dentro de una sección numerada, para bloques largos que
   avanzan en varios pasos. Más margen arriba que un CaseText para que el
-  cambio de paso se note; el texto mantiene el ancho de lectura (max-w-2xl).
+  cambio de paso se note; el texto crece hasta 52rem.
   Puede ir sin texto cuando sólo presenta el visual que sigue.
 -->
 <div
@@ -82,9 +82,9 @@ const conTexto = Astro.slots.has('default');
     conTexto && (
       <div
         class:list={[
-          'max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
+          'max-w-[52rem] space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
           compacta ? 'mt-5 sm:mt-6' : 'mt-8',
-          apilada ? ['lg:col-span-7 lg:col-start-1', compacta ? 'lg:mt-6' : 'lg:mt-10'] : 'lg:col-span-6 lg:col-start-7 lg:mt-1',
+          apilada ? ['lg:col-span-9 lg:col-start-1', compacta ? 'lg:mt-6' : 'lg:mt-10'] : 'lg:col-span-6 lg:col-start-7 lg:mt-1',
           conclusion &&
             '[&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl',
         ]}
@@ -98,8 +98,8 @@ const conTexto = Astro.slots.has('default');
     destacado && (
       <p
         class:list={[
-          'mt-10 max-w-xl border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
-          apilada ? 'lg:col-span-7 lg:col-start-1' : 'lg:col-span-6 lg:col-start-7',
+          'mt-10 max-w-[52rem] border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
+          apilada ? 'lg:col-span-9 lg:col-start-1' : 'lg:col-span-6 lg:col-start-7',
         ]}
       >
         {destacado}

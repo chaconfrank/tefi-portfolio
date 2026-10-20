@@ -52,8 +52,7 @@ también la aceptan, con valor por defecto sin cambios. Para la composición
 de ese caso hay además `CaseHero lateral` (texto a la izquierda y composición
 a la derecha desde lg, alineada arriba con el eyebrow para que se vea al
 entrar) con `CaseFacts fondo={false}` debajo (franja entre filetes, sin gris):
-es el hero de Rediseño general, Wedify y HandiSport. Además, `CaseSection destacadoDebajo` (en 'apilada', el destacado bajo el texto
-en vez de en el extremo derecho) y `VersionStep` con `disposicion="columna"`
+es el hero de Rediseño general, Wedify y HandiSport. Además, `VersionStep` con `disposicion="columna"`
 (dos versiones lado a lado, cada captura pegada a su texto) o
 `"completa"`. `CaseSubsection` admite también `etiqueta`, una línea en
 mayúsculas encima del subtítulo.
@@ -121,3 +120,9 @@ Si se añaden temas claro/oscuro (`markdown.shikiConfig.themes`), el CSS se escr
 `markdown.remarkPlugins` y `rehypePlugins` están **deprecados** en esta versión de Astro: los plugins van dentro de `markdown.processor`.
 
 El estilado del Markdown renderizado está en `ProjectLayout` y `PostLayout` bajo la clase `.prose-portfolio`, con selectores `:global()` — ver `styling.md` para por qué son necesarios.
+
+**Ancho del texto:** en los case studies el texto (secciones, subsecciones,
+CaseText, versiones y cierre) crece hasta `52rem` (~95 caracteres) y ocupa 9 de
+12 columnas en las composiciones apiladas; los destacados de las apiladas van
+siempre debajo del texto y con su mismo ancho. Antes se quedaban en 7 columnas
+y dejaban media pantalla vacía a la derecha.
