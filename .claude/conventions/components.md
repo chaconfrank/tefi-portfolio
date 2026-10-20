@@ -54,3 +54,14 @@ Si el componente puede aparecer **varias veces en la misma página**, envuélvel
 ## Si algún día se añade `<ClientRouter />`
 
 Las view transitions rompen estos scripts al navegar: los bundled se ejecutan una sola vez en toda la visita, y los inline pueden reejecutarse de forma impredecible. Habría que colgar el menú de `astro:page-load` y el tema de `astro:after-swap` (si no, se ve el flash claro en cada navegación). No lo añadas sin hacer ese cambio a la vez.
+
+## El abanico de proyectos (`ProjectFan`)
+
+Inicio y Proyectos listan los case studies con `ProjectFan`: una fila
+horizontal a sangre de tarjetas inclinadas (inspirada en el carrusel de Google
+Labs). Es un **scroller nativo con scroll-snap**, así que sin JavaScript se
+desliza igual; el script sólo añade las flechas y recalcula `data-hueco`
+(par/impar) según la posición visible, para que al avanzar cada tarjeta cambie
+de inclinación. La portada de cada tarjeta es `portada` del frontmatter (la
+composición del hero de cada caso). Con `prefers-reduced-motion` las tarjetas
+van rectas y sin transiciones.

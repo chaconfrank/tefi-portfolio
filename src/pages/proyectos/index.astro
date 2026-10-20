@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import ProjectFan from '../../components/ProjectFan.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 
 const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
@@ -23,18 +23,8 @@ const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador
       escalables y accesibles</strong>.
     </p>
 
-    <!--
-      Rejilla según el ancho: apiladas en móvil, dos arriba y la tercera a
-      todo el ancho en mediano, y las tres en fila en pantallas grandes.
-    -->
-    <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-      {
-        proyectos.map((proyecto, i) => (
-          <div class:list={[i === 2 && 'md:col-span-2 xl:col-span-1']}>
-            <CaseStudyCard proyecto={proyecto} />
-          </div>
-        ))
-      }
+    <div class="mt-6">
+      <ProjectFan proyectos={proyectos} etiqueta="Proyectos" />
     </div>
   </section>
 

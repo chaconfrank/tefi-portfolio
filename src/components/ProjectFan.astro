@@ -1,0 +1,155 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  proyectos: CollectionEntry<'proyectos'>[];
+  // Nombre accesible del carrusel ("Case studies").
+  etiqueta: string;
+}
+
+const { proyectos, etiqueta } = Astro.props;
+---
+
+<!--
+  Abanico de tarjetas (inspirado en el carrusel de Google Labs): una fila
+  horizontal a sangre con las tarjetas ligeramente inclinadas y a alturas
+  alternas, como cartas repartidas, y flechas ‹ › para avanzar.
+
+  - La fila es un scroller nativo con scroll-snap: sin JavaScript se desliza
+    con el dedo o la rueda, y cada tarjeta es un enlace enfocable que el
+    navegador trae a la vista al tabular.
+  - El script sólo añade las flechas y recalcula la inclinación de cada
+    tarjeta según el hueco que ocupa en pantalla (data-hueco par/impar), así
+    al avanzar cambian de inclinación con una transición, como en el vídeo.
+  - Hover (sólo con puntero fino): la portada se difumina y aparece encima
+    la acción «Ver case study».
+  - prefers-reduced-motion: tarjetas rectas, sin transiciones ni scroll suave.
+  - La fila se sale del padding de <main> (-mx) para que las tarjetas de los
+    extremos asomen cortadas por el borde de la pantalla.
+-->
+<project-fan class="block">
+  <div
+    data-pista
+    role="region"
+    aria-label={etiqueta}
+    tabindex="-1"
+    class="-mx-6 flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto px-6 pt-6 pb-10 [scrollbar-width:none] sm:-mx-10 sm:scroll-px-10 sm:gap-7 sm:px-10 motion-safe:scroll-smooth [&::-webkit-scrollbar]:hidden"
+  >
+    {
+      proyectos.map((proyecto, i) => {
+        const { titulo, titular, descripcion, empresa, rol, rolResumen, portada, portadaAlt } = proyecto.data;
+        const chip = empresa ?? titulo.split('—')[0].trim();
+        return (
+          <article
+            data-tarjeta
+            data-hueco={i % 2 === 0 ? 'par' : 'impar'}
+            class="group relative w-[17.5rem] shrink-0 snap-start rounded-3xl border border-line bg-paper p-3 shadow-lg shadow-ink/5 transition-[transform,box-shadow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-xl sm:w-[20rem] motion-safe:data-[hueco=impar]:translate-y-4 motion-safe:data-[hueco=impar]:rotate-[2deg] motion-safe:data-[hueco=par]:-rotate-[2deg] motion-reduce:transition-none"
+          >
+            <div class="relative overflow-hidden rounded-2xl bg-paper-soft">
+              {portada ? (
+                <Image
+                  src={portada}
+                  alt={portadaAlt ?? ''}
+                  widths={[320, 640, 960]}
+                  sizes="(min-width: 640px) 320px, 280px"
+                  class="aspect-[4/3] h-auto w-full object-contain p-3 transition duration-500 group-hover:scale-[1.02] group-hover:opacity-40 group-hover:blur-sm motion-reduce:transition-none"
+                />
+              ) : (
+                <div class="aspect-[4/3] w-full" aria-hidden="true" />
+              )}
+              <span class="glass-strong absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-medium text-ink">
+                {chip}
+              </span>
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute inset-0 m-auto h-fit w-fit translate-y-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper opacity-0 shadow-lg transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none"
+              >
+                Ver case study
+              </span>
+            </div>
+
+            <div class="px-2 pt-5 pb-3">
+              <p class="text-xs font-medium tracking-wide text-ink-soft uppercase">{rolResumen ?? rol}</p>
+              <h3 class="mt-1.5 text-lg leading-snug font-semibold tracking-tight text-balance">
+                <a href={`/proyectos/${proyecto.id}/`} class="after:absolute after:inset-0 after:rounded-3xl group-hover:text-accent">
+                  {titular ?? titulo}
+                </a>
+              </h3>
+              <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-pretty text-ink-soft">{descripcion}</p>
+              <p aria-hidden="true" class="mt-4 text-sm font-medium text-accent">
+                Ver case study <span class="inline-block transition group-hover:translate-x-1">→</span>
+              </p>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+
+  <div data-controles hidden class="mt-2 flex justify-center gap-3">
+    <button
+      type="button"
+      data-anterior
+      aria-label="Proyectos anteriores"
+      class="glass flex size-10 items-center justify-center rounded-full text-ink transition hover:bg-accent-soft disabled:opacity-30 disabled:hover:bg-transparent"
+    >
+      <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+    </button>
+    <button
+      type="button"
+      data-siguiente
+      aria-label="Más proyectos"
+      class="glass flex size-10 items-center justify-center rounded-full text-ink transition hover:bg-accent-soft disabled:opacity-30 disabled:hover:bg-transparent"
+    >
+      <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    </button>
+  </div>
+</project-fan>
+
+<script>
+  class ProjectFan extends HTMLElement {
+    connectedCallback() {
+      const pista = this.querySelector<HTMLElement>('[data-pista]');
+      const controles = this.querySelector<HTMLElement>('[data-controles]');
+      const anterior = this.querySelector<HTMLButtonElement>('[data-anterior]');
+      const siguiente = this.querySelector<HTMLButtonElement>('[data-siguiente]');
+      const tarjetas = [...this.querySelectorAll<HTMLElement>('[data-tarjeta]')];
+      if (!pista || !controles || !anterior || !siguiente || tarjetas.length === 0) return;
+
+      const paso = () => {
+        const [a, b] = tarjetas;
+        return b ? b.offsetLeft - a.offsetLeft : a.offsetWidth;
+      };
+
+      // Inclinación según el hueco visible que ocupa cada tarjeta, no según
+      // su posición en la lista: al avanzar una, todas cambian de lado.
+      let pendiente = false;
+      const actualizar = () => {
+        pendiente = false;
+        const p = paso();
+        const primera = Math.round(pista.scrollLeft / p);
+        tarjetas.forEach((t, i) => (t.dataset.hueco = (i - primera) % 2 === 0 ? 'par' : 'impar'));
+        anterior.disabled = pista.scrollLeft <= 2;
+        siguiente.disabled = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 2;
+        controles.hidden = pista.scrollWidth <= pista.clientWidth + 2;
+      };
+      const programar = () => {
+        if (!pendiente) {
+          pendiente = true;
+          requestAnimationFrame(actualizar);
+        }
+      };
+
+      anterior.addEventListener('click', () => pista.scrollBy({ left: -paso() }));
+      siguiente.addEventListener('click', () => pista.scrollBy({ left: paso() }));
+      pista.addEventListener('scroll', programar, { passive: true });
+      window.addEventListener('resize', programar);
+      actualizar();
+    }
+  }
+
+  if (!customElements.get('project-fan')) {
+    customElements.define('project-fan', ProjectFan);
+  }
+</script>
