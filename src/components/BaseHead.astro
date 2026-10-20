@@ -1,6 +1,7 @@
 ---
 import { Font } from 'astro:assets';
 import { SITE_TITLE, SITE_AUTHOR, SITE_ROLE } from '../consts';
+import { getLang, equivalente } from '../i18n';
 import '../styles/global.css';
 
 interface Props {
@@ -12,6 +13,13 @@ interface Props {
 const { title, description, image = '/og-default.png' } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// La misma página en cada idioma, para los buscadores (hreflang).
+const lang = getLang(Astro.url);
+const otro = lang === 'es' ? 'en' : 'es';
+const alternas = {
+  [lang]: canonicalURL,
+  [otro]: new URL(equivalente(Astro.url.pathname, otro), Astro.site),
+};
 const socialImage = new URL(image, Astro.site);
 const pageTitle =
   title === SITE_TITLE ? `${SITE_AUTHOR} · ${SITE_ROLE}` : `${title} · ${SITE_TITLE}`;
@@ -23,6 +31,9 @@ const pageTitle =
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="canonical" href={canonicalURL} />
+<link rel="alternate" hreflang="es" href={alternas.es} />
+<link rel="alternate" hreflang="en" href={alternas.en} />
+<link rel="alternate" hreflang="x-default" href={alternas.es} />
 
 <Font cssVariable="--font-inter" preload />
 <Font cssVariable="--font-caveat" />
@@ -32,6 +43,7 @@ const pageTitle =
 <meta name="author" content={SITE_AUTHOR} />
 
 <meta property="og:type" content="website" />
+<meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />

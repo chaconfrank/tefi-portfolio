@@ -41,7 +41,7 @@ const { id, titulo, compacta = false } = Astro.props;
     class:list={[
       'text-lg leading-relaxed text-pretty text-ink-soft lg:columns-2 lg:gap-x-16 [&>p]:mb-6 [&>p]:break-inside-avoid',
       // Compacta: el texto no pasa de 64rem (dos columnas de ~480 px).
-      compacta ? 'mt-8 sm:mt-10 lg:max-w-5xl [&>p:last-child]:mb-0' : 'mt-12 sm:mt-16',
+      compacta ? 'mt-8 sm:mt-10 [&>p:last-child]:mb-0' : 'mt-12 sm:mt-16',
     ]}
   >
     <slot />
@@ -50,9 +50,9 @@ const { id, titulo, compacta = false } = Astro.props;
   <div class:list={['lg:grid lg:grid-cols-12 lg:gap-x-10', compacta ? 'mt-8 lg:mt-10' : 'mt-16 lg:mt-24']}>
     <div
       class:list={[
-        'border-l-2 border-amaia-ink pl-6 text-lg leading-relaxed text-pretty text-ink-soft sm:pl-8 [&>p]:max-w-3xl [&>p+p]:mt-6 [&>p+p]:max-w-2xl [&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl',
+        'border-l-2 border-amaia-ink pl-6 text-lg leading-relaxed text-pretty text-ink-soft sm:pl-8 [&>p+p]:mt-6 [&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl',
         // Compacta: alineado con el texto, no desplazado al centro.
-        compacta ? 'lg:col-span-9' : 'lg:col-span-9 lg:col-start-4',
+        compacta ? 'lg:col-span-12' : 'lg:col-span-9 lg:col-start-4',
       ]}
     >
       <slot name="destacado" />

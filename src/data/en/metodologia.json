@@ -1,0 +1,26 @@
+[
+  {
+    "paso": "01",
+    "titulo": "Understand the problem",
+    "texto": "I explore data, user signals and market context until I can state the problem clearly. What comes out of it becomes ideas that set the direction, support decisions and give the project a solid foundation.",
+    "icono": "lupa"
+  },
+  {
+    "paso": "02",
+    "titulo": "Define the solution",
+    "texto": "This is where I bring order: information architecture, user flows and design system. The goal is a product that is easy to use, easy to maintain and able to grow without being rebuilt.",
+    "icono": "estructura"
+  },
+  {
+    "paso": "03",
+    "titulo": "Prototype and improve",
+    "texto": "I prototype to see what works and what doesn't. When the project allows it, I put it in front of the people who will use it and refine the details with what I learn before handing it over to development.",
+    "icono": "test"
+  },
+  {
+    "paso": "04",
+    "titulo": "Test and iterate",
+    "texto": "What reaches production has to meet the standard. I lead the QA process and review the details so the experience is consistent and reliable, not just in Figma.",
+    "icono": "calidad"
+  }
+]

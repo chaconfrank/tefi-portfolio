@@ -1,0 +1,422 @@
+---
+titulo: 'Redesigning a complex platform to make it understandable and scalable'
+descripcion: 'Reorganizing the architecture, adapting the interface to different levels of responsibility, and turning complex processes into clearer, reusable flows.'
+tipo: Freelance
+empresa: 'Wedify'
+rol: 'Lead Product Designer UX/UI'
+rolResumen: 'Product Designer · UX/UI'
+periodo: 'Oct 2024 – Apr 2025'
+herramientas: []
+aprendizaje: "Simplifying a complex SaaS doesn't mean removing features, but deciding how they're grouped, when they appear, and who they're relevant for."
+plantilla: editorial
+# Portada de la tarjeta: la misma composición del hero.
+portada: '../../../assets/proyectos/wedify/composicion-hero.png'
+portadaAlt: 'The old Plan de Bodas behind and the redesigned event page in Wedify in front, on two laptops.'
+destacado: true
+orden: 2
+fecha: 2025-04-30
+borrador: false
+---
+
+import CaseHero from '../../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../../components/case-study/CaseFacts.astro';
+import CaseSection from '../../../components/case-study/CaseSection.astro';
+import CaseSubsection from '../../../components/case-study/CaseSubsection.astro';
+import CaseText from '../../../components/case-study/CaseText.astro';
+import Diagram from '../../../components/case-study/Diagram.astro';
+import InsightGrid from '../../../components/case-study/InsightGrid.astro';
+import composicionHero from '../../../assets/proyectos/wedify/composicion-hero.png';
+import puntoDePartida from '../../../assets/proyectos/wedify/punto-de-partida.png';
+import arquitectura from '../../../assets/proyectos/wedify/arquitectura-definicion-bocetos-interfaz.png';
+import accesoSegunRol from '../../../assets/proyectos/wedify/acceso-segun-rol.png';
+import accesoSegunRolMovil from '../../../assets/proyectos/wedify/acceso-segun-rol-movil.png';
+import dashboardSegunRol from '../../../assets/proyectos/wedify/dashboard-segun-rol.png';
+import dashboardSegunRolMovil from '../../../assets/proyectos/wedify/dashboard-segun-rol-movil.png';
+import servicioSencillo from '../../../assets/proyectos/wedify/servicio-sencillo.png';
+import servicioAgrupado from '../../../assets/proyectos/wedify/servicio-agrupado.png';
+import dependenciaServicios from '../../../assets/proyectos/wedify/dependencia-servicios.png';
+import dependenciaServiciosMovil from '../../../assets/proyectos/wedify/dependencia-servicios-movil.png';
+import packs from '../../../assets/proyectos/wedify/packs.png';
+import invitacionesSelector from '../../../assets/proyectos/wedify/invitaciones-selector.png';
+import invitacionesEdicionResultado from '../../../assets/proyectos/wedify/invitaciones-edicion-resultado.png';
+import resultadoWebMobile from '../../../assets/proyectos/wedify/resultado-web-mobile.png';
+
+{/* Los textos son los del documento «Prompts Claude · Wedify Case Study —
+    ACTUALIZADO», sin reescribir. No hubo research, tests ni feedback con
+    usuarios reales, no hay métricas y la plataforma no estaba terminada
+    cuando ella salió del proyecto: no añadir nada de eso. Tampoco hay
+    dashboard de Trabajador.
+
+    El envoltorio reasigna el acento de los componentes (--color-amaia-*) al
+    morado de Wedify: así se tiñen sin tocar los componentes compartidos. */}
+
+<div class="[--color-amaia-ink:var(--color-wedify-ink)] [--color-amaia-soft:var(--color-wedify-soft)]">
+
+<CaseHero
+  compacta
+  lateral
+  entradillaAncha
+  banda={false}
+  producto="Wedify"
+  disciplina="Product Design / UX/UI"
+  titulo={frontmatter.titulo}
+  contexto="Wedify — formerly Plan de Bodas — is a platform for centralizing the management of weddings and other events across venues, teams, and clients."
+  imagen={composicionHero}
+  imagenAlt="Two laptops: behind, the event page of the old Plan de Bodas, with saturated-colored modules over a background photo; in front, the same page redesigned in Wedify, with a side menu, event details, tabs, and cards for tasks, budget, tables, and guests."
+  recorrido={['Architecture', 'Roles', 'Services', 'Self-service']}
+>
+
+The previous version brought together many features, but its architecture and navigation made it hard to understand what each profile was supposed to do and where to find it. Part of the setup — especially loading each venue's services — ended up depending on the platform's own team.
+
+The project involved rethinking the whole experience: reorganizing the architecture, adapting the interface to different levels of responsibility, and turning complex processes into clearer, reusable flows.
+
+</CaseHero>
+
+<CaseFacts
+  fondo={false}
+  datos={[
+    { etiqueta: 'Role', valor: 'Lead Product Designer UX/UI' },
+    { etiqueta: 'Type', valor: 'Paid freelance project' },
+    { etiqueta: 'Period', valor: 'Oct 2024 – Apr 2025' },
+    { etiqueta: 'Platforms', valor: 'Web + Mobile' },
+  ]}
+/>
+
+<CaseSection
+  compacta
+  id="punto-de-partida"
+  numero="01"
+  etiqueta="The starting point"
+  titulo="A platform with many features, but hard to understand"
+  destacado="The redesign couldn't just be about making the interface cleaner: how the product was understood had to be reorganized."
+>
+
+Plan de Bodas already made it possible to manage most of a wedding: events, venues, spaces, services, tasks, attendees, or tables. The problem wasn't a lack of features, but how they were organized.
+
+Sections that belonged to different contexts sat side by side at the same level within the main navigation. When entering an event, modules, actions, and icons competed for attention and required already knowing the system's internal logic to know where to act.
+
+The complexity also repeated itself inside the forms. Creating or editing information meant facing dense screens, with little prioritization and many decisions visible at the same time.
+
+With few clients using the platform, part of the operation also still depended on the previous owner, who manually loaded each venue's services so they could later be used in their events.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={puntoDePartida}
+  desplazable={false}
+  ancho={1100}
+  alt="“The starting point”: the old Plan de Bodas event page with callouts —Too many areas at the same level, Little prioritization of information, Actions too dependent on icons, and Too many modules competing for attention—. Overlaid, smaller, the old attendees form with the callouts “The density also repeated itself in other flows” and “Too many fields concentrated in a single form”."
+/>
+
+<CaseText compacta conclusion>
+
+The challenge wasn't reducing the number of things Wedify needed to allow, but finding a structure that made that complexity manageable.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="reorganizar"
+  numero="02"
+  etiqueta="Reorganizing the complexity"
+  titulo="Moving from a flat menu to a contextual architecture"
+  composicion="apilada"
+  destacado="The complexity was still there, but it was no longer presented all at once."
+>
+
+The starting point was a functional document previously worked on by the partners and the technical team. It laid out the product's main entities, data, relationships, and needs, but that logic still had to be turned into an experience that could be navigated and understood.
+
+Translating those requirements into screens raised new questions: what should be global, what belonged to a Masía, what lived inside an Event, and what information each profile actually needed at each moment.
+
+We also refined naming that was initially hard to understand, and reviewed references from the industry — especially Bodas.net — to understand known patterns, without replicating their structure. Wedify needed to solve for multi-venue management and a different user hierarchy.
+
+The main change was separating global navigation from contextual navigation.
+
+That way, the main menu could stay compact while specific functions appeared within the entity they actually belonged to.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={arquitectura}
+  desplazable={false}
+  alt="Three stages connected by arrows. 01 Initial functional definition: handwritten notes with the entities (Customer, Operator, Coordinator, Masía, Spaces) and the flow for creating masías, spaces, services, and templates. 02 Paper sketches: wireframes of the global navigation, the inside of an event, and the inside of a masía. 03 Final interface: the event page and the masía page in Wedify. Below, the architecture: Masía → Events, Spaces, Services, Packs, Tasks; Event → Schedules, Tasks, Guests, Tables, Floor plan, Budget."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+Navigation stopped trying to explain the whole product at once and started guiding the user according to the context they were working in.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="responsabilidad"
+  numero="03"
+  etiqueta="Designing by responsibility"
+  titulo="The same platform shouldn't show the same thing to everyone"
+>
+
+Wedify had to work for profiles with very different responsibilities and different levels of digital experience as well.
+
+A Super Admin might need to access several organizations, masías, and events. Other profiles only needed to work with the masías or events assigned to them. The couple, on the other hand, didn't need to understand the business's internal structure: they needed to organize their own event.
+
+That's why the solution wasn't just about hiding buttons based on permissions. Access, navigation depth, and the entry information were all adapted to each person's actual scope.
+
+The interface also relied on clear hierarchies, recognizable iconography, visible states, and contextual help to reduce the need to learn the system before being able to use it.
+
+<Fragment slot="media">
+
+<CaseSubsection compacta titulo="Accessing only the context that applies" composicion="apilada" />
+
+<Diagram
+  imagen={accesoSegunRol}
+  imagenMovil={accesoSegunRolMovil}
+  movilCompleto
+  desplazable={false}
+  alt="Three access screens connected by arrows. Super Admin: “Elige la organización o el evento al que desees acceder” (Choose the organization or event you want to access), with masías grouped by city (Valencia, Madrid, Barcelona). Worker: “Elige la masía o el evento” (Choose the masía or the event), with their assigned masías. Coordinator: “Elige el evento” (Choose the event), with a table of assigned events showing date, status, type, and masía."
+/>
+
+<CaseSubsection compacta titulo="Changing the entry information too" composicion="apilada">
+
+The same logic carried over to the dashboards.
+
+The goal was for each profile to start with the information most useful for their work, avoiding forcing every user through the same generic view.
+
+<p class="font-medium text-ink">Global view <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Operational management <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Organizing your own event</p>
+
+</CaseSubsection>
+
+<Diagram
+  imagen={dashboardSegunRol}
+  imagenMovil={dashboardSegunRolMovil}
+  movilCompleto
+  desplazable={false}
+  alt="Three dashboards connected by arrows. Super Admin, global view: events from all masías, booking statistics, calendar, and the list of coordinators and masías. Admin, operational management: events at their masía, internal tasks, task bank, statistics, and calendar. Couple, organizing their own event: event details, pending tasks, budget, tables, and guests."
+/>
+
+<CaseText compacta conclusion>
+
+Designing by responsibility reduced noise without creating a different product for each profile: the foundation was the same, but the context changed.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="servicios-y-packs"
+  numero="04"
+  etiqueta="Services and Packs"
+  titulo="Turning the product's most complex part into a progressive system"
+  composicion="apilada"
+>
+
+Services were one of the most complex flows in the previous platform.
+
+Setting up a venue's offering could involve prices, costs, per-person values, VAT, categories, options, questions for the client, and relationships between different elements. The difficulty was enough that, in practice, the owner of Plan de Bodas ended up loading most of that information for their clients.
+
+In the redesign, we didn't try to eliminate that complexity. We organized it into a progressive, reusable structure.
+
+<p class="font-medium text-ink">Simple service <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Grouped service <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Pack</p>
+
+<Fragment slot="media">
+
+<CaseSubsection compacta etiqueta="Starting with reusable pieces" titulo="Simple service" composicion="apilada">
+
+The first level is the simple service: an independent piece that can later be reused within larger structures.
+
+From a single interface, you could define data like name, category, image, price, cost, per-person values, VAT, and description.
+
+Once saved, the service became available within the Masía's catalog, where it could later be viewed, edited, and reused.
+
+</CaseSubsection>
+
+<Diagram
+  imagen={servicioSencillo}
+  desplazable={false}
+  alt="Simple service flow in four steps. 01 Create: the “Nuevo servicio” (New service) form with photo, name, category, price, price per person, cost, VAT, and description. 02 Saved: the service “Croquetas de jamón ibérico” (Iberian ham croquettes) with its data. 03 List: the masía's Services tab with the table of simple services. 04 Edit: the “Editar servicio” (Edit service) pop-up over the list."
+/>
+
+<CaseSubsection compacta etiqueta="Composing without re-entering the same information" titulo="Grouped service" composicion="apilada">
+
+Grouped services were built from simple services that were already registered in the system.
+
+This dependency mattered: the base pieces were created first, and could later be combined without re-entering the same information.
+
+Besides selecting which services were part of the grouping, the professional could define rules for interacting with the client. The minimum and maximum values determined how many options could be chosen, and the service's configuration determined the type of associated question: Yes/No, single choice, or multiple choice within a range.
+
+The complexity stayed in the system, but it was turned into explicit decisions within the flow.
+
+</CaseSubsection>
+
+<Diagram
+  imagen={servicioAgrupado}
+  desplazable={false}
+  alt="Grouped service flow in four steps. 01 Create: “Entrantes calientes” (Hot starters) with the simple services added as items, minimum and maximum items to choose, and a question for the client. 02 Saved: the grouped service with its added options and the linked question. 03 List: grouped services with the number of items included. 04 Edit: the pop-up with three callouts: Service reuse, Minimum and maximum selection, and Question linked to the client."
+/>
+
+<Diagram
+  imagen={dependenciaServicios}
+  imagenMovil={dependenciaServiciosMovil}
+  desplazable={false}
+  ancho={640}
+  alt="Three pills connected by arrows: Simple service → Grouped service → Pack."
+/>
+
+<CaseSubsection compacta etiqueta="Scaling up to a full offering" titulo="Pack" composicion="apilada">
+
+Once the simple and grouped services were created, the Masía could build Packs with a more complete offering.
+
+A Pack could combine elements from different categories — for example catering, decoration, photography, or entertainment — and bring them together into a single proposal.
+
+Besides the included services, the configuration also covered commercial information like price, cost, per-person values, VAT, and the expected level of interaction with the client.
+
+This way, the offering could be built in layers and reuse work already configured instead of starting from scratch for every event.
+
+</CaseSubsection>
+
+<Diagram
+  imagen={packs}
+  desplazable={false}
+  alt="Pack flow in four steps. 01 Create: “Pack completo” (Full pack) with images, name, interaction with the client (closed or open), cost, price, per-person values, VAT, and added items. 02 Saved: the expanded pack with its added options. 03 List: the masía's Packs tab with a card for each pack, included services, and price. 04 Edit: the “Pack completo” (Full pack) pop-up over the list."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+The solution wasn't about artificially simplifying the offering, but building it in layers: create once, reuse, and combine.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="invitaciones"
+  numero="05"
+  etiqueta="Self-service invitations"
+  titulo="Integrating a task that used to live outside the platform"
+  destacado="A task that used to depend on the vendor became part of the client's own experience."
+>
+
+Wedding invitations weren't part of the old platform.
+
+The owner of Plan de Bodas offered them as an additional service, and it was he who put them together for clients.
+
+In Wedify, we integrated that process inside the event itself, so the couple could choose a base, customize it, and manage the result from the same product.
+
+We designed three templates with different styles. From the event page, the couple could select one and fill in content like names, dates, locations, transportation, the celebration, attire, photos, and RSVP.
+
+The final result also needed to be viewable from Mobile, something especially important for an invitation that guests would usually receive and open from their phone.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={invitacionesSelector}
+  desplazable={false}
+  ancho={1000}
+  alt="Templates tab on the event page, on laptop and on mobile: three templates to choose from — Directo al grano (Straight to the point), Frescura y sencillez (Freshness and simplicity), and Romanticismo y encanto (Romance and charm) — each with its description, a preview, and the “Ver plantilla” (View template) button."
+/>
+
+<Diagram
+  imagen={invitacionesEdicionResultado}
+  desplazable={false}
+  ancho={820}
+  alt="The same invitation template in three columns. Desktop view: in edit mode, with fields for names, date, photos, ceremony, transportation, celebration, attire, and RSVP, and the finished template with that content already filled in. Mobile view: the finished template."
+/>
+
+<CaseText compacta conclusion>
+
+Integrating invitations into Wedify expanded the couple's self-service and kept another part of the event's organization within the same environment.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="resultado"
+  numero="06"
+  etiqueta="Result + implementation"
+  titulo="A clearer foundation to keep building the product"
+  composicion="apilada"
+>
+
+The redesign turned a hard-to-learn platform into a system organized around contexts, responsibilities, and reusable pieces.
+
+The new architecture made it possible to separate global management from the operations of each Masía and each Event. Access and dashboards were adapted to different levels of responsibility, while complex flows like Services and Packs were structured progressively.
+
+The work covered both Web and Mobile, and also included client-facing experiences, such as editing invitations within the event itself.
+
+<Fragment slot="media">
+
+<InsightGrid
+  insights={[
+    {
+      titulo: 'Contextual architecture',
+      parrafos: ['Features appear within the entity they belong to, instead of all competing within a global navigation.'],
+    },
+    {
+      titulo: 'Experience by responsibility',
+      parrafos: ["The product changes access depth and entry information depending on each profile's scope."],
+    },
+    {
+      titulo: 'Reusable configuration',
+      parrafos: ['Simple services, grouped services, and Packs make it possible to build complex offerings from previously configured pieces.'],
+    },
+    {
+      titulo: 'More self-service',
+      parrafos: ["Features like invitations become integrated into the clients' own experience."],
+    },
+  ]}
+/>
+
+<CaseSubsection compacta titulo="Design and implementation in parallel" composicion="apilada">
+
+To make implementation easier, we worked on top of Material Design, and I customized a Flutter theme to adapt Wedify's visual language.
+
+I didn't build a standalone Design System from scratch. The foundation was Material Design: I configured the theme, customized components when needed, and we reviewed several times how that configuration translated into the real interface.
+
+Some decisions couldn't be resolved through the theme alone and needed specific adjustments from development. That collaboration was part of the everyday work between design and code.
+
+I worked as the lead Product Designer, with occasional support from another designer to speed up part of the visual production, and with final review/refinement on my end, in collaboration with Samuel and the development team.
+
+Before my involvement ended, I was able to see parts of the product implemented, such as access, some dashboards, and the invitation templates. However, I left the project before the complete platform was finished.
+
+</CaseSubsection>
+
+<Diagram
+  imagen={resultadoWebMobile}
+  desplazable={false}
+  ancho={1000}
+  alt="Product composition with two desktop screens and two mobile screens: the Wedify login on web and on mobile, and the “Añadir mesa” (Add table) window — with table types, name, number of guests, and guest selection with their allergies — on the event's floor plan on desktop and on mobile."
+/>
+
+<CaseSubsection compacta titulo="Takeaway" composicion="apilada" conclusion final>
+
+Simplifying a complex SaaS doesn't mean removing features, but deciding how they're grouped, when they appear, and who they're relevant for.
+
+Wedify forced me to work with real complexity: multiple user levels, related entities, and flows where one piece could become part of a larger one.
+
+The main takeaway was understanding that an interface can feel much simpler without reducing the product's capability, as long as the architecture, context, and hierarchy help surface each decision at the right moment.
+
+</CaseSubsection>
+
+</Fragment>
+
+</CaseSection>
+
+</div>

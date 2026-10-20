@@ -1,8 +1,12 @@
 ---
-import Avatar from './Avatar.astro';
 import NavPill from './NavPill.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import { CV_PATH } from '../consts';
+import { equivalente, getLang, UI } from '../i18n';
+
+const lang = getLang(Astro.url);
+const ui = UI[lang];
+const otro = lang === 'es' ? 'en' : 'es';
+const hrefOtro = equivalente(Astro.url.pathname, otro);
 ---
 
 <!--
@@ -12,49 +16,44 @@ import { CV_PATH } from '../consts';
 -->
 <header class="sticky top-0 z-50 py-3">
   <!--
-    En móvil el header son dos filas: avatar + toggle arriba y la pastilla
-    centrada debajo a todo el ancho (en una fila se cortaba o aplastaba el
-    avatar a 2px por el max-width:100% del preflight). En sm+ vuelve la
-    rejilla 1fr/auto/1fr que centra la pastilla exactamente.
+    Sin avatar. En móvil, pastilla y controles en una fila centrada si caben;
+    si no, los controles bajan a una segunda fila. En sm+ la rejilla
+    1fr/auto/1fr centra la pastilla exactamente con los controles a la derecha.
   -->
-  <div class="flex w-full flex-wrap items-center gap-2 px-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-10">
-    <a href="/" class="shrink-0 sm:col-start-1 sm:justify-self-start" aria-label="Inicio">
-      <Avatar />
-    </a>
-
+  <div class="flex w-full flex-wrap items-center justify-center gap-1.5 px-3 min-[25rem]:gap-2 min-[25rem]:px-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-10">
     <!--
       El overflow-x-auto es SÓLO para móvil (la pastilla puede no caber): en
       sm+ tiene que ser visible — un scroller recorta el backdrop-blur del
       cristal en un rectángulo y sus esquinas asoman al hacer scroll.
     -->
-    <div class="order-3 flex w-full justify-center overflow-x-auto sm:order-none sm:col-start-2 sm:w-auto sm:overflow-visible">
+    <div class="flex max-w-full justify-center overflow-x-auto sm:col-start-2 sm:w-auto sm:overflow-visible">
       <NavPill />
     </div>
 
-    <div class="ml-auto flex items-center gap-2 sm:col-start-3 sm:ml-0 sm:justify-self-end">
-      <ThemeToggle />
-
-      <!-- Acceso rápido al CV: outlined compacto, a la altura del toggle. -->
+    <div class="flex items-center gap-1.5 min-[25rem]:gap-2 sm:col-start-3 sm:justify-self-end">
+      <!--
+        Cambio de idioma: un enlace con globo (no un toggle) a la misma página
+        en el otro idioma. Misma altura y cristal que la pastilla del menú. En
+        móvil, el globo y el código del idioma; por debajo de 400 px, sólo el
+        globo para que menú, idioma y tema quepan en una fila.
+      -->
       <a
-        href={CV_PATH}
-        class="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-line bg-paper/40 px-3.5 text-sm font-medium whitespace-nowrap text-accent transition hover:border-accent/50 hover:bg-accent-soft"
+        href={hrefOtro}
+        hreflang={otro}
+        lang={otro}
+        aria-label={ui.cambiarIdiomaAria}
+        class="glass inline-flex h-9.5 shrink-0 items-center justify-center gap-1.5 rounded-full px-3 max-[25rem]:w-9.5 max-[25rem]:px-0 text-sm font-medium text-ink-soft transition hover:bg-accent-soft hover:text-ink sm:h-10.5 sm:px-4"
       >
-        <svg
-          class="size-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M12 3v12" />
-          <path d="m7 10 5 5 5-5" />
-          <path d="M4 19h16" />
+        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18" />
         </svg>
-        Descargar CV
+        <span class="uppercase max-[25rem]:hidden sm:hidden" aria-hidden="true">{otro}</span>
+        <span class="hidden sm:inline" aria-hidden="true">{ui.cambiarIdioma}</span>
       </a>
+
+      <ThemeToggle />
     </div>
   </div>
 </header>

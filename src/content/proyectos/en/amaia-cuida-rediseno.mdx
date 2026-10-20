@@ -1,0 +1,410 @@
+---
+titulo: 'Redesigning a care ecosystem without stopping its growth'
+descripcion: 'A more consistent, understandable and scalable foundation for three platforms already used by real care homes, built without stopping their evolution.'
+tipo: Startup
+empresa: 'Amaia Cuida'
+rol: 'Sole Product Designer across the three platforms'
+rolResumen: 'Product Designer · UX/UI'
+periodo: '2023 — 2025'
+equipo: 'CEO, Frontend, Backend and Customer Success'
+herramientas: []
+aprendizaje: "The challenge wasn't showing more data, but distinguishing between what the professional needed to know and what they needed to act on."
+plantilla: editorial
+# Card cover: the same composition as the hero.
+portada: '../../../assets/proyectos/amaia-cuida-rediseno/composicion-hero.png'
+portadaAlt: 'The three Amaia Cuida platforms: Amaia Profesionales on a laptop, Amaia Conecta on a tablet, and Amaia App on a phone.'
+destacado: true
+orden: 1
+fecha: 2025-09-30
+borrador: false
+---
+
+import CaseHero from '../../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../../components/case-study/CaseFacts.astro';
+import CaseSection from '../../../components/case-study/CaseSection.astro';
+import ScreenCollage from '../../../components/case-study/ScreenCollage.astro';
+import ScreenPair from '../../../components/case-study/ScreenPair.astro';
+import ScreenEvolution from '../../../components/case-study/ScreenEvolution.astro';
+import SystemShowcase from '../../../components/case-study/SystemShowcase.astro';
+import CaseReflection from '../../../components/case-study/CaseReflection.astro';
+import VersionStep from '../../../components/case-study/VersionStep.astro';
+import FocusAreas from '../../../components/case-study/FocusAreas.astro';
+import CaseTakeaway from '../../../components/case-study/CaseTakeaway.astro';
+import ImpactPillars from '../../../components/case-study/ImpactPillars.astro';
+import CaseNote from '../../../components/case-study/CaseNote.astro';
+import CaseClosing from '../../../components/case-study/CaseClosing.astro';
+import composicionHero from '../../../assets/proyectos/amaia-cuida-rediseno/composicion-hero.png';
+import previaPersonas from '../../../assets/proyectos/amaia-cuida-rediseno/interfaz-previa-personas.png';
+import previaEditarPerfil from '../../../assets/proyectos/amaia-cuida-rediseno/interfaz-previa-editar-perfil.png';
+import previaValoraciones from '../../../assets/proyectos/amaia-cuida-rediseno/interfaz-previa-valoraciones.png';
+import primeraEtapaHome from '../../../assets/proyectos/amaia-cuida-rediseno/primera-etapa-home.png';
+import primeraEtapaPerfil from '../../../assets/proyectos/amaia-cuida-rediseno/primera-etapa-perfil.png';
+import perfilV2Final from '../../../assets/proyectos/amaia-cuida-rediseno/perfil-v2-final.png';
+import sistemaTypography from '../../../assets/proyectos/amaia-cuida-rediseno/sistema-typography.png';
+import sistemaColor from '../../../assets/proyectos/amaia-cuida-rediseno/sistema-color-guidance.png';
+import sistemaButtons from '../../../assets/proyectos/amaia-cuida-rediseno/sistema-buttons.png';
+import sistemaDialogs from '../../../assets/proyectos/amaia-cuida-rediseno/sistema-dialogs.png';
+import sistemaNavigationRail from '../../../assets/proyectos/amaia-cuida-rediseno/sistema-navigation-rail.png';
+import homeV2 from '../../../assets/proyectos/amaia-cuida-rediseno/home-v2.png';
+import homeV3 from '../../../assets/proyectos/amaia-cuida-rediseno/home-v3.png';
+
+{/* The text is what Estephany delivered, block by block and without
+    rewriting. Nothing is added that isn't in her content. */}
+
+<CaseHero
+  compacta
+  lateral
+  banda={false}
+  producto="Amaia Cuida"
+  disciplina="Product Design"
+  titulo={frontmatter.titulo}
+  imagen={composicionHero}
+  imagenAlt="The three Amaia Cuida platforms: Amaia Profesionales on a laptop, Amaia Conecta on a tablet, and Amaia App on a phone."
+>
+
+For two years I worked as the sole Product Designer on the evolution of Amaia Cuida, a SaaS ecosystem made up of three connected platforms for care home professionals and families.
+
+The challenge wasn't simply redesigning an interface. The product was growing while real care homes were using it, so the work meant progressively building a more consistent, understandable and scalable foundation without stopping its evolution.
+
+</CaseHero>
+
+<CaseFacts
+  compacta
+  fondo={false}
+  datos={[
+    { etiqueta: 'My role', valor: 'Product Designer UX/UI' },
+    { etiqueta: 'Duration', valor: '2 years', detalle: ['2023–2025'] },
+    { etiqueta: 'Team', valor: 'CEO, Frontend, Backend and Customer Success' },
+    {
+      etiqueta: 'Products',
+      valor: '3 platforms',
+      detalle: ['Amaia Profesionales (web)', 'Amaia Conecta (tablet)', 'Amaia App (families)'],
+    },
+  ]}
+/>
+
+<CaseSection
+  compacta
+  id="punto-de-partida"
+  numero="01"
+  etiqueta="The starting point"
+  titulo="A product that already worked, but needed a common foundation"
+  composicion="apilada"
+>
+
+When I joined, Amaia was already a product in production and kept adding new features. The most obvious problem was the lack of consistency between screens and flows built at different times.
+
+The same action could be represented with buttons of different shapes, colors or styles. Patterns changed between sections, and the interface didn't always help users understand which elements served equivalent functions.
+
+On top of that, the product was going to grow quickly. Before continuing to add new features, we needed to build a foundation that would let us do so without multiplying those differences.
+
+<ScreenCollage
+  compacta
+  slot="media"
+  etiqueta="Earlier version of the product's interface"
+  capturas={[
+    {
+      imagen: previaPersonas,
+      alt: 'The "Residentes" (Residents) listing from an earlier version of Amaia Profesionales: a search box, a table with name, age and completed information, and an outlined "Obtener informe" (Get report) button in each row.',
+    },
+    {
+      imagen: previaEditarPerfil,
+      alt: 'The "Editar perfil residente" (Edit resident profile) screen from an earlier version: a section menu with the active one in pink, an emergency contact form, and an "Actualizar información" (Update information) button with a green background.',
+    },
+    {
+      imagen: previaValoraciones,
+      alt: 'The "Valoraciones" (Assessments) screen from an earlier version: two pink blocks, "Preferencias" (Preferences) and "Evaluación historia de vida" (Life Story assessment), each with its description alongside.',
+    },
+  ]}
+/>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="dar-coherencia"
+  numero="02"
+  etiqueta="First, bringing consistency"
+  titulo="The first layer of the redesign was visual"
+  composicion="apilada"
+  destacado="First stabilize the interface. Then, progressively improve how it was used."
+>
+
+I started with Amaia Profesionales, the main platform and the one that concentrated the most features and client demos.
+
+In this first stage I didn't try to rethink the whole product architecture. The priority was to fix the most visible inconsistencies and carry Amaia's identity over into a more coherent interface.
+
+We progressively unified colors, typography, buttons, containers, hierarchies and visual patterns. The structure of many flows stayed as it was: we first needed to stabilize the foundation before intervening more deeply.
+
+<ScreenPair
+  compacta
+  slot="media"
+  capturas={[
+    {
+      imagen: primeraEtapaHome,
+      etiqueta: 'Home · V1',
+      alt: 'The "Panel de inicio" (Home panel) in Amaia Profesionales during the first stage: a side menu, three counters, cards for mood, isolation risk and upcoming events, and a column of quick actions.',
+    },
+    {
+      imagen: primeraEtapaPerfil,
+      etiqueta: 'Profile · V1',
+      alt: 'A resident\'s profile in the first stage: a green header with her name and the "Obtener informe" (Get report) button, section tabs, and the "Sobre mí" (About me) card with her data in three columns.',
+    },
+  ]}
+/>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="producto-crece"
+  numero="03"
+  etiqueta="When the product started to grow"
+  titulo="Visual consistency was no longer enough"
+  composicion="apilada"
+>
+
+As the product incorporated new features and I understood better how they were used, the work started to go beyond the visual layer.
+
+Resident profiles concentrated more and more information: Preferences, Life Story, Assessments, Planner, Reminiscence, Gallery… Keeping the original navigation made it harder to get oriented and move between areas.
+
+The product's evolution led us to progressively revise navigation structures and patterns. One of the most important changes was introducing a persistent global navigation that stayed accessible even within a person's profile.
+
+This way, the professional could move between the product's main areas without losing track of where they were.
+
+<ScreenEvolution
+  compacta
+  slot="media"
+  antes={{
+    imagen: primeraEtapaPerfil,
+    etiqueta: 'Profile · V1',
+    alt: 'A resident\'s profile in V1: a full-width green header, section tabs and the profile\'s own side menu, with no sign of the product\'s global navigation.',
+  }}
+  despues={{
+    imagen: perfilV2Final,
+    etiqueta: 'Profile · V2 · final',
+    alt: 'The same profile in the final V2: persistent global navigation on the left (Getting started, Home, People, Daily log, Preferences, Chat, Tutorials, Settings) and, inside the profile, tabs for Information, Preferences, Life Story, Assessments, Planner, Reminiscence and Gallery.',
+  }}
+/>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="lenguaje-compartido"
+  numero="04"
+  etiqueta="Building a shared language"
+  titulo="From consistent screens to a shared system"
+  composicion="apilada"
+>
+
+As the product grew, keeping consistency screen by screen stopped being enough. We needed decisions that could be reused.
+
+Working directly with frontend, we decided to lean on Material Design and adapt it to Amaia's identity. I used FlexColorScheme to define the theme and make it easier to translate into Flutter, while building a component library in Figma aligned with that same language.
+
+The system grew alongside the product: typography, color, buttons, dialogs, navigation and other components were documented and reused as new needs appeared.
+
+<SystemShowcase
+  compacta
+  slot="media"
+  flujo={['Material Design', 'Amaia System', ['Figma', 'Flutter']]}
+  sistema="Amaia System"
+  foundations={[
+    {
+      imagen: sistemaTypography,
+      etiqueta: 'Typography',
+      alt: 'The system\'s Typography page: a type scale in two columns, Baseline in Poppins and Emphasis in Roboto, from Display Large to Body Small.',
+    },
+    {
+      imagen: sistemaColor,
+      etiqueta: 'Color Guidance',
+      alt: 'The system\'s Color Guidance page: tonal palettes from 0 to 100 for Primary, Secondary, Tertiary, Error, Neutral and Neutral Variant, and the theme\'s color roles.',
+    },
+  ]}
+  componentes={[
+    {
+      imagen: sistemaButtons,
+      etiqueta: 'Buttons',
+      alt: 'The system\'s Buttons page: filled, outlined, text, elevated and tonal buttons in Amaia green, each with its states and with and without an icon.',
+    },
+    {
+      imagen: sistemaDialogs,
+      etiqueta: 'Dialogs',
+      alt: 'The system\'s Dialogs page: variants for a basic dialog, one with a highlighted icon, and one with a list of selectable items.',
+    },
+  ]}
+  navegacion={{
+    imagen: sistemaNavigationRail,
+    etiqueta: 'Navigation Rail',
+    alt: 'The system\'s Navigation Rail page: the rail\'s base pieces with their states, and the assembled variants with the care home\'s logo, the destinations and the "Mis personas" (My people) switch.',
+  }}
+/>
+
+</CaseSection>
+
+<CaseReflection compacta id="reflexion-sistema" titulo="It wasn't just about everything looking the same">
+
+Standardization also affected less visible decisions, like typography.
+
+I didn't want to define styles only by size or appearance, but also by their function within the interface. A Label, a Body and a Title could share certain visual properties, but they served different functions and had to be used consistently.
+
+The same logic was progressively carried over to components and patterns.
+
+With a more mature system, Figma and Flutter shared a much closer language. We reused components more easily, there were fewer doubts during implementation, and many visual fixes decreased.
+
+<Fragment slot="destacado">
+
+But there was an even more important outcome: decisions were starting to no longer depend exclusively on the knowledge that frontend and I had built by working together.
+
+The system made it possible to document and reuse them so other people could keep growing the product.
+
+</Fragment>
+
+</CaseReflection>
+
+<CaseSection
+  compacta
+  id="iterar-descartar"
+  numero="05"
+  etiqueta="Iterating also meant discarding"
+  titulo="More information didn't mean more usefulness"
+  composicion="apilada"
+>
+
+Home was one of the spaces where we could best observe how our understanding of the professionals evolved.
+
+<Fragment slot="media">
+
+{/* V1 and V2 in a row of two; V3, the final direction, larger below. */}
+<div class="mt-10 grid gap-y-14 sm:mt-12 lg:grid-cols-2 lg:items-start lg:gap-x-12">
+
+<VersionStep
+  version="V1"
+  titulo="Giving it identity"
+  disposicion="columna"
+  imagen={primeraEtapaHome}
+  alt="Home V1, &quot;Panel de inicio&quot; (Home panel): a side menu with the care home, three counters, cards for mood, isolation risk and upcoming events, and a column of quick actions."
+>
+
+The first version was shaped by the need to quickly improve the interface. The focus was on carrying Amaia's identity over into the product and organizing the available information better.
+
+</VersionStep>
+
+<VersionStep
+  version="V2"
+  titulo="Building a more complete dashboard"
+  disposicion="columna"
+  imagen={homeV2}
+  alt="Home V2: five indicators at the top, two of them marked as pending, notices with a confirmation percentage, workshop statistics, individual and overall mood, isolation risk with a preventive action, upcoming birthdays and quick actions."
+>
+
+As we got to know the product better, we added indicators, statistics, quick access points and data about residents' status.
+
+The information was much more complete, but another problem appeared: having more data available didn't necessarily make Home more useful.
+
+Some professionals told us that suddenly facing so many indicators and pending items could feel overwhelming. Some even preferred to avoid that section because they already knew they had many things left unfinished.
+
+</VersionStep>
+
+</div>
+
+<VersionStep
+  version="V3"
+  titulo="From showing information to enabling the next action"
+  disposicion="completa"
+  imagen={homeV3}
+  alt="Home V3 with the global navigation on the left and four blocks: Pending tasks with one action button per row (Review, Approve, Get), New information, Care indicators and Upcoming birthdays."
+>
+
+In the final iteration we changed the approach.
+
+Instead of using Home mainly to show the product's status, we organized the information around what could be useful in day-to-day work:
+
+</VersionStep>
+
+<FocusAreas
+  compacta
+  areas={[
+    {
+      titulo: 'Pending tasks',
+      texto: 'Pending tasks turned incomplete processes into concrete actions: approving a Life Story, generating a pictogram, or finishing pending information on a profile.',
+    },
+    {
+      titulo: 'New information',
+      texto: 'New information worked as a board to stay up to date without mixing it with things that required an action.',
+    },
+    {
+      titulo: 'Care indicators',
+      texto: 'Care indicators made it possible to understand overall progress without turning it into the centerpiece of the experience.',
+    },
+    {
+      titulo: 'Upcoming birthdays',
+      texto: 'And we kept Upcoming birthdays, a simple feature that professionals already used and that brought into the product a task some care homes were still managing with physical calendars.',
+    },
+  ]}
+/>
+
+<CaseTakeaway compacta etiqueta="Takeaway">{frontmatter.aprendizaje}</CaseTakeaway>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="base-para-crecer"
+  numero="06"
+  etiqueta="A foundation ready to keep growing"
+  titulo="More than an interface, a foundation for the future"
+  composicion="apilada"
+>
+
+The result of these two years wasn't just an interface different from the one I found when I joined.
+
+Amaia had also grown as a product and as an ecosystem. That growth forced us to progressively move from solving individual screens to thinking in terms of patterns, navigation, components and shared rules.
+
+<Fragment slot="media">
+
+<ImpactPillars
+  compacta
+  pilares={[
+    {
+      titulo: 'Consistency',
+      texto: 'A common base of components, styles and patterns reduced the differences between areas created at different points in the product.',
+    },
+    {
+      titulo: 'Collaboration',
+      texto: 'Design and frontend built a shared language that made the transition between Figma and Flutter more direct and reduced doubts during implementation.',
+    },
+    {
+      titulo: 'Continuity',
+      texto: "Documenting decisions meant knowledge didn't depend solely on the people who had worked on the product day to day.",
+    },
+  ]}
+/>
+
+<CaseNote compacta etiqueta="About the metrics">We didn't measure these improvements with speed metrics or error-reduction numbers, so I don't want to artificially turn them into percentages. The impact I can stand behind is qualitative: a clearer way of working, reusable and ready to keep evolving.</CaseNote>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseClosing
+  compacta
+  id="lo-que-me-llevo"
+  numero="07"
+  etiqueta="What I take away"
+  titulo="Designing a system is also designing how a team works"
+>
+
+I joined Amaia trying to bring order to an interface that urgently needed improving. Two years later, I was leaving a product far broader than the one I had found, but also a design foundation ready to keep evolving.
+
+The process wasn't linear. There were quick decisions, versions we had to rethink, and parts of the system that took much longer than I would have liked to standardize.
+
+<Fragment slot="reflexion">
+
+That's precisely why one of my biggest takeaways was understanding that a design system isn't just about creating consistent components, but about building agreements between design, technology and product that can be sustained over time.
+
+</Fragment>
+
+</CaseClosing>

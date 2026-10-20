@@ -1,17 +1,23 @@
 ---
-import {
-  SITE_AUTHOR,
-  SITE_ROLE,
-  SITE_TAGLINE,
-  UBICACION,
-  CV_PATH,
-  EMAIL,
-  BUSCANDO_TRABAJO,
-  DISPONIBILIDAD,
-} from '../consts';
+import { SITE_AUTHOR, SITE_ROLE, EMAIL, BUSCANDO_TRABAJO } from '../consts';
+import { cvPath, getLang, ruta, UI } from '../i18n';
+
+const lang = getLang(Astro.url);
+const ui = UI[lang];
+const complemento =
+  lang === 'es'
+    ? 'Con sistemas de diseño que sostienen el producto y un proceso que conecta diseño y desarrollo.'
+    : 'With design systems that hold the product together and a process that connects design and development.';
 ---
 
-<section class="pt-10 pb-12 sm:pt-16 sm:pb-16">
+<!--
+  Dos columnas desde lg: quién (disponibilidad, nombre y rol) a la izquierda y
+  qué hace (frase y botones) a la derecha, a todo el ancho y sin líneas
+  kilométricas. Poca altura a propósito: el abanico de proyectos tiene que
+  asomar en la primera pantalla.
+-->
+<section class="pt-8 pb-6 sm:pt-12 sm:pb-8 lg:grid lg:grid-cols-2 lg:items-end lg:gap-x-16">
+  <div>
   {
     BUSCANDO_TRABAJO && (
       <p class="glass-strong inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-ink">
@@ -20,7 +26,7 @@ import {
           <span class="absolute inline-flex size-full animate-ping rounded-full bg-online" />
           <span class="relative inline-flex size-2 rounded-full bg-online" />
         </span>
-        {DISPONIBILIDAD} · {UBICACION}
+        {ui.disponibilidad} · {ui.ubicacion}
       </p>
     )
   }
@@ -29,13 +35,13 @@ import {
     {SITE_AUTHOR}
     <span class="mt-1 block text-2xl font-normal text-ink-soft sm:text-3xl">{SITE_ROLE}</span>
   </h1>
+  </div>
 
-  <p class="mt-5 text-base leading-relaxed text-pretty sm:text-lg">
-    {SITE_TAGLINE}{' '}
-    <span class="text-ink-soft">
-      Con sistemas de diseño que sostienen el producto y decisiones respaldadas
-      por datos.
-    </span>
+  <div>
+
+  <p class="mt-5 text-base leading-relaxed text-pretty sm:text-lg lg:mt-0">
+    {ui.tagline}{' '}
+    <span class="text-ink-soft">{complemento}</span>
   </p>
 
   <!-- Un único CTA primario: el resto son secundarios y no compiten.
@@ -43,17 +49,17 @@ import {
        primary, sin relleno). -->
   <div class="mt-8 flex flex-wrap items-center gap-2.5">
     <a
-      href="/proyectos/"
+      href={ruta(lang, 'proyectos')}
       class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90"
     >
       <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M5 12h14" />
         <path d="m13 6 6 6-6 6" />
       </svg>
-      Ver proyectos
+      {ui.verProyectos}
     </a>
     <a
-      href={CV_PATH}
+      href={cvPath(lang)}
       class="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-accent transition hover:border-accent/50 hover:bg-accent-soft"
     >
       <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -61,7 +67,7 @@ import {
         <path d="m7 10 5 5 5-5" />
         <path d="M4 19h16" />
       </svg>
-      Descargar CV
+      {ui.descargarCv}
     </a>
     <a
       href={`mailto:${EMAIL}`}
@@ -71,7 +77,8 @@ import {
         <rect x="3" y="5" width="18" height="14" rx="2" />
         <path d="m3 7 9 6 9-6" />
       </svg>
-      Escríbeme
+      {ui.escribeme}
     </a>
+  </div>
   </div>
 </section>

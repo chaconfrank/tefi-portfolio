@@ -1,5 +1,24 @@
 ---
-import metodologia from '../data/metodologia.json';
+import metodologiaEs from '../data/metodologia.json';
+import metodologiaEn from '../data/en/metodologia.json';
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const metodologia = lang === 'en' ? metodologiaEn : metodologiaEs;
+const textos = {
+  es: {
+    etiqueta: 'Cómo trabajo',
+    titulo: 'Diseño estratégico que hace que los productos funcionen.',
+    texto:
+      'Trabajo para reducir la fricción entre la visión de diseño y la realidad del desarrollo. Desde la investigación inicial hasta el QA final sigo un método estructurado, pero ágil, para que cada funcionalidad aporte valor real.',
+  },
+  en: {
+    etiqueta: 'How I work',
+    titulo: 'Strategic design that makes products work.',
+    texto:
+      'I work to reduce the friction between the design vision and the reality of development. From the initial research to the final QA, I follow a structured but agile method so that every feature delivers real value.',
+  },
+}[lang];
 
 // Iconos de línea grandes y tenues, protagonistas del centro de cada tarjeta.
 const iconos: Record<string, string> = {
@@ -23,16 +42,14 @@ const iconos: Record<string, string> = {
   quedarían congeladas a mitad de animación.
 -->
 <section id="metodo" class="py-10">
-  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> Cómo trabajo</h2>
+  <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {textos.etiqueta}</h2>
 
-  <p class="mt-5 pl-4 text-2xl font-semibold sm:pl-6 tracking-tight text-balance sm:text-3xl">
-    Diseño estratégico que hace que los productos funcionen.
-  </p>
-  <p class="mt-4 pl-4 text-pretty text-ink-soft sm:pl-6">
-    Trabajo para reducir la fricción entre la visión de diseño y la realidad del
-    desarrollo. Desde la investigación inicial hasta el QA final sigo un método
-    estructurado, pero ágil, para que cada funcionalidad aporte valor real.
-  </p>
+  <!-- Frase a la izquierda y párrafo a la derecha desde lg: a todo el ancho
+       pero sin líneas de 1.300 px. -->
+  <div class="mt-5 pl-4 sm:pl-6 lg:grid lg:grid-cols-2 lg:items-end lg:gap-x-16">
+    <p class="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">{textos.titulo}</p>
+    <p class="mt-4 text-pretty text-ink-soft lg:mt-0">{textos.texto}</p>
+  </div>
 
   <ol
     class="reveal mt-10 flex flex-col gap-5 pl-4 sm:pl-6 md:snap-x md:snap-mandatory md:flex-row md:overflow-x-auto md:pb-2 lg:gap-8 lg:overflow-visible lg:pb-0"

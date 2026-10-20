@@ -13,6 +13,8 @@ interface Props {
 }
 
 const { datos, participantes, compacta = false } = Astro.props;
+import { getLang, UI } from '../../i18n';
+const ui = UI[getLang(Astro.url)];
 ---
 
 <!--
@@ -42,7 +44,7 @@ const { datos, participantes, compacta = false } = Astro.props;
     }
   </dl>
 
-  <ul aria-label="Participantes" class="mt-8 flex flex-wrap gap-2 lg:col-span-6 lg:mt-0 lg:justify-end">
+  <ul aria-label={ui.participantes} class="mt-8 flex flex-wrap gap-2 lg:col-span-6 lg:mt-0 lg:justify-end">
     {participantes.map((p) => <li class="rounded-full border border-line px-3.5 py-1.5 text-sm text-ink">{p}</li>)}
   </ul>
 </div>

@@ -1,7 +1,7 @@
 ---
 interface Props {
-  // Columna en escritorio. 'derecha' sigue la línea del texto de una sección
-  // 'dividida'; 'izquierda', la de una 'apilada'.
+  // Se mantiene por compatibilidad con los MDX: el texto va siempre a todo
+  // el ancho del contenedor.
   columna?: 'izquierda' | 'derecha';
   // El primer párrafo sube de tamaño y pasa a tinta: para la frase que
   // cierra el razonamiento de un bloque, no para un párrafo cualquiera.
@@ -16,26 +16,19 @@ interface Props {
 }
 
 const { columna = 'derecha', conclusion = false, titulo, pegado = false, compacta = false } = Astro.props;
+void columna;
 ---
 
 <!--
   Texto que continúa una sección después de un visual, para alternar texto y
-  capturas sin abrir una sección nueva. Mismo ancho de lectura (max-w-2xl)
-  y mismo cuerpo que el texto de CaseSection.
+  capturas sin abrir una sección nueva. Mismo ancho (todo el contenedor) y
+  mismo cuerpo que el texto de CaseSection.
 -->
-<div
-  class:list={[
-    pegado ? 'mt-10 sm:mt-12' : compacta ? 'mt-10 sm:mt-12' : 'mt-20 sm:mt-24 lg:mt-28',
-    'lg:grid lg:grid-cols-12 lg:gap-x-10',
-  ]}
->
+<div class:list={[pegado ? 'mt-10 sm:mt-12' : compacta ? 'mt-10 sm:mt-12' : 'mt-20 sm:mt-24 lg:mt-28']}>
   {
     titulo && (
       <h4
-        class:list={[
-          'mb-6 max-w-2xl text-xl leading-snug font-semibold tracking-tight text-balance',
-          columna === 'derecha' ? 'lg:col-span-6 lg:col-start-7' : 'lg:col-span-7',
-        ]}
+        class="mb-6 text-xl leading-snug font-semibold tracking-tight text-balance"
       >
         {titulo}
       </h4>
@@ -43,8 +36,7 @@ const { columna = 'derecha', conclusion = false, titulo, pegado = false, compact
   }
   <div
     class:list={[
-      'max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
-      columna === 'derecha' ? 'lg:col-span-6 lg:col-start-7' : 'lg:col-span-7',
+      'space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
       conclusion &&
         '[&>p:first-child]:text-xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-ink sm:[&>p:first-child]:text-2xl',
     ]}

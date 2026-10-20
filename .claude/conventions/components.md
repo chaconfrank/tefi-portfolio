@@ -54,3 +54,23 @@ Si el componente puede aparecer **varias veces en la misma página**, envuélvel
 ## Si algún día se añade `<ClientRouter />`
 
 Las view transitions rompen estos scripts al navegar: los bundled se ejecutan una sola vez en toda la visita, y los inline pueden reejecutarse de forma impredecible. Habría que colgar el menú de `astro:page-load` y el tema de `astro:after-swap` (si no, se ve el flash claro en cada navegación). No lo añadas sin hacer ese cambio a la vez.
+
+## El abanico de proyectos (`ProjectFan`)
+
+Inicio y Proyectos listan los case studies con `ProjectFan`: un **abanico en
+bucle** (inspirado en el carrusel de Google Labs). La tarjeta activa va recta
+en el centro y las vecinas giradas hacia fuera y más bajas; las flechas, el
+deslizamiento con el dedo y ← → lo giran sin final.
+
+- El script sólo pone `data-modo="abanico"` y da a cada tarjeta `--k`
+  (posición circular respecto a la activa) y `--ak`. Todo el movimiento sale
+  de esas variables en el `<style>` scoped del componente, que gana a las
+  utilidades de Tailwind por ir sin capa.
+- La tarjeta que pasa de un extremo al otro se recoloca sin transición
+  (`data-salto`) y entra con un fundido; más allá de ±2 van ocultas.
+- **En móvil (< md) no hay abanico**: las mismas variables con giro y caída a
+  cero lo convierten en un carrusel de tarjetas rectas en fila, con la misma
+  dinámica (bucle, deslizar y flechas).
+- Sin JavaScript es una fila deslizable con scroll-snap.
+- La portada de cada tarjeta es `portada` del frontmatter (la composición
+  del hero de cada caso).

@@ -1,0 +1,366 @@
+---
+titulo: 'From an informational website to an experience designed to find and manage adapted activities'
+descripcion: 'Rethinking a very outdated website and turning it into a responsive experience that would guide the user from discovering an activity through to requesting and managing their booking.'
+tipo: Freelance
+empresa: 'HandiSport Mallorca'
+rol: 'Product Designer UX/UI'
+rolResumen: 'Product Designer · UX/UI'
+periodo: 'May — Aug 2024'
+herramientas: []
+aprendizaje: 'The main shift was moving from displaying information to building a journey: finding a suitable activity, requesting it, and being able to track its management within the same product.'
+demo: https://handisportmallorca.org/
+plantilla: editorial
+# Card cover: the same composition as the hero.
+portada: '../../../assets/proyectos/handisport/composicion-hero.png'
+portadaAlt: 'The old HandiSport Activities section next to the new one, with accessibility filters.'
+orden: 3
+fecha: 2024-08-31
+borrador: false
+---
+
+import CaseHero from '../../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../../components/case-study/CaseFacts.astro';
+import CaseSection from '../../../components/case-study/CaseSection.astro';
+import CaseText from '../../../components/case-study/CaseText.astro';
+import Diagram from '../../../components/case-study/Diagram.astro';
+import composicionHero from '../../../assets/proyectos/handisport/composicion-hero.png';
+import actividadesAntigua from '../../../assets/proyectos/handisport/actividades-antigua.png';
+import homeContactoAntiguos from '../../../assets/proyectos/handisport/home-contacto-antiguos.png';
+import fundamentosVisuales from '../../../assets/proyectos/handisport/fundamentos-visuales.png';
+import bienvenida from '../../../assets/proyectos/handisport/bienvenida.png';
+import perfilAutofiltrado from '../../../assets/proyectos/handisport/perfil-autofiltrado.png';
+import actividadesFiltros from '../../../assets/proyectos/handisport/actividades-filtros.png';
+import actividadNavegar from '../../../assets/proyectos/handisport/actividad-navegar.png';
+import flujoPerfilReservar from '../../../assets/proyectos/handisport/flujo-perfil-reservar.png';
+import reservaIndividualGrupal from '../../../assets/proyectos/handisport/reserva-individual-grupal.png';
+import reservasUsuarioGestion from '../../../assets/proyectos/handisport/reservas-usuario-gestion.png';
+import gestionActividades from '../../../assets/proyectos/handisport/gestion-actividades.png';
+import crearArticulo from '../../../assets/proyectos/handisport/crear-articulo.png';
+import layoutsArticulos from '../../../assets/proyectos/handisport/layouts-articulos.png';
+import resultadoAlcance from '../../../assets/proyectos/handisport/resultado-alcance.png';
+
+{/* The text follows the "HandiSport Mallorca — Master prompt document for
+    Claude — UPDATED" document, unrewritten. There was no contact with real
+    users, no tests, and no metrics, and her involvement ended with the
+    handoff of the designs: do not add any of that. Color Guidance +
+    Typography is not a Design System.
+
+    The wrapper reassigns the components' accent (--color-amaia-*) to
+    HandiSport orange, same as in Wedify. */}
+
+<div class="[--color-amaia-ink:var(--color-handisport-ink)] [--color-amaia-soft:var(--color-handisport-soft)]">
+
+<CaseHero
+  compacta
+  lateral
+  producto="HandiSport Mallorca"
+  titulo={frontmatter.titulo}
+  imagen={composicionHero}
+  imagenAlt="Before and after of the Activities section. On the left, the old page recovered from the Wayback Machine: a gray header with «Actividades» (Activities) and a long column of text with no images or filters. On the right, the new one: a header with a photo, activity filters by accessibility need, activity cards with a Book button, the three steps Auto-filter, Booking, and Request, and Other activities."
+  banda={false}
+>
+
+HandiSport Mallorca connects people with specific accessibility needs to adapted sports and tourism activities. The project involved rethinking a very outdated website and turning it into a responsive experience that would guide the user from discovering an activity through to requesting and managing their booking.
+
+</CaseHero>
+
+<CaseFacts
+  fondo={false}
+  datos={[
+    { etiqueta: 'Role', valor: 'Product Designer UX/UI' },
+    { etiqueta: 'Type', valor: 'Freelance project' },
+    { etiqueta: 'Product', valor: 'Responsive web app' },
+    { etiqueta: 'Platforms', valor: 'Desktop + Mobile' },
+  ]}
+/>
+
+<CaseSection
+  compacta
+  id="punto-de-partida"
+  numero="01"
+  etiqueta="The starting point"
+  titulo="A website with information, but no clear journey"
+  composicion="apilada"
+>
+
+When I joined the project, the HandiSport website worked mainly as an informational repository. The activities section was especially long: each offering appeared one after another, with large blocks of text, little visual hierarchy, and no tools to help find an activity based on each person's needs.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={actividadesAntigua}
+  desplazable={false}
+  ancho={620}
+  alt="The full old Activities page, very long: a gray header, a list of activities (Sailing, Blokart, Water skiing, Kayaking, Golf, Hiking, Diving) with blocks of text and no images, and at the end, the phrase «Puedes registrarte a través de el siguiente formulario» (You can register through the following form). Three callouts: Flat content that's hard to scan; No filters by activity or need; The CTA to book is at the end and isn't clearly a button."
+/>
+
+<CaseText compacta columna="izquierda">
+
+Booking wasn't part of an obvious flow either. The CTA appeared at the bottom of the page and it wasn't clear that it was a booking action; from there, the journey ended up routing to a generic contact form. Other areas of the site followed a similar structure, with a lot of empty space, information that was hard to scan, and little consistency between sections.
+
+</CaseText>
+
+<Diagram
+  imagen={homeContactoAntiguos}
+  desplazable={false}
+  ancho={760}
+  alt="Two pages from the old website: the old Home, with a header photo, welcome text, a video that wasn't archived, and a text list of activities; and the old Contact page, with a basic form, lots of empty space, and large Facebook and Twitter icons."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+The challenge wasn't just updating the look. An informational website had to become an understandable journey, from "I want to find an activity" to "I want to request my spot".
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="base-visual"
+  numero="02"
+  etiqueta="Building a clearer foundation"
+  titulo="Carrying HandiSport's identity into a coherent interface"
+  destacado="More than creating a new system, we needed a foundation solid enough for the whole experience to speak the same language."
+>
+
+We didn't need to create a new identity. HandiSport already had a recognizable brand built around orange; the work consisted of carrying that identity into a more consistent, easier-to-maintain interface.
+
+I worked from a Material Design base and a Flutter theme to define a tonal palette, color roles, and a shared typographic hierarchy. Montserrat was used mainly for headlines and higher-hierarchy elements, while Roboto was applied to content, labels, and functional text.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={fundamentosVisuales}
+  desplazable={false}
+  alt="Visual foundations: Color Guidance, with the tonal palettes (Primary, Secondary, Tertiary, Error, Neutral, and Neutral Variant) and the color roles for light and dark themes; and Typography, with Montserrat as the primary font for headlines and Roboto as the secondary font, and the Display, Headline, Title, Label, and Body style scale."
+/>
+
+<CaseText compacta>
+
+I didn't build a full Design System. The goal was to establish enough shared rules so that forms, filters, cards, states, galleries, and management tools would feel like part of the same product.
+
+</CaseText>
+
+<Diagram
+  imagen={bienvenida}
+  desplazable={false}
+  ancho={1000}
+  alt="The Welcome section applied on desktop and mobile: header «Disfruta de tus capacidades» (Enjoy your abilities), welcome text, «¿Por qué elegirnos?» (Why choose us?) with a video, the Activities carousel on an orange background, Articles, and Reviews."
+/>
+
+<CaseText compacta>
+
+I also worked on standardizing text and copy to reduce inconsistencies and make working alongside development easier.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="encontrar-actividades"
+  numero="03"
+  etiqueta="Finding activities based on each need"
+  titulo="Turning accessibility into part of discovery"
+  composicion="apilada"
+>
+
+One of my main UX contributions was proposing that accessibility needs shouldn't appear only as information within an activity's page, but could also be used to find compatible activities.
+
+Together with Samuel, we defined the categories the platform would include:
+
+<p class="font-medium text-ink">Hearing access · Cognitive support · Visual access · Mobility access · Sensory access.</p>
+
+From the Profile, the user can add the needs that apply to them or indicate that they have no disability. Based on that information, I designed the auto-filter option, meant to reduce the effort of reselecting the same filters every time the catalog is checked.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={perfilAutofiltrado}
+  desplazable={false}
+  alt="The Profile before and after. Before: no needs configured, with the «Añadir discapacidades» (Add disabilities) field empty and auto-filter off. After: disabilities added (Hearing Access, Cognitive Support, Visual Access, Mobility Access, Sensory Access) and auto-filter on, with the «¿Qué es el auto filtrado?» (What is auto-filtering?) link."
+/>
+
+<CaseText compacta columna="izquierda">
+
+Auto-filtering came with an accessible explanation right inside the interface. The goal was for the user to understand that the platform would use the needs saved in their Profile to show them activities adapted to those needs, and to be able to go straight to configuring them if they hadn't done so yet.
+
+In the Activities section, I also added a small journey guide to reduce doubts:
+
+<p class="font-medium text-ink">Auto-filter <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Booking <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Request.</p>
+
+</CaseText>
+
+<Diagram
+  imagen={actividadesFiltros}
+  desplazable={false}
+  ancho={1000}
+  alt="The Activities page on desktop and mobile: «Filtros de Actividades» (Activity filters) with chips by need (See all, Hearing Access, Cognitive Support, Visual Access, Mobility Access, Sensory Access) and the «Auto filtrado desactivado» (Auto-filtering off) toggle; activity cards with Book and Read more; and the «Considera estos pasos» (Consider these steps) block: Auto-filter, Booking, and Request."
+/>
+
+<CaseText compacta columna="izquierda">
+
+The same logic continues inside each activity. The chips show again which needs it's adapted to before the user reaches the “Reservar mi plaza” (Book my place) CTA. That way, the activity's compatibility stays visible throughout the journey and doesn't depend on remembering the filter applied earlier.
+
+</CaseText>
+
+<Diagram
+  imagen={actividadNavegar}
+  desplazable={false}
+  ancho={1000}
+  alt="Detail of the Sailing activity on desktop and mobile, with three callouts: Activity detail; Accessibility chips (Hearing Access, Cognitive Support, Visual Access, Mobility Access) under the title «Iníciate en vela adaptada» (Get started in adapted sailing); and the «Reservar mi plaza» (Book my place) CTA. Below, a photo gallery, a note, and other activities."
+/>
+
+<Diagram
+  imagen={flujoPerfilReservar}
+  desplazable={false}
+  ancho={560}
+  alt="Four steps connected by arrows: Profile → Filter → Activity → Book."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+Accessibility stopped being just a feature of the activity page and became part of how content is discovered.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="reserva-y-gestion"
+  numero="04"
+  etiqueta="From booking to management"
+  titulo="Designing the journey after finding the activity"
+  destacado="Needs don't belong only to the booking: they belong to each person taking part in it."
+>
+
+Requesting a spot didn't always mean booking for a single person. The form also had to adapt to groups and allow each participant's needs to be registered independently.
+
+As the number of attendees increases, per-person blocks appear. Each one allows indicating who's participating and what accessibility needs they have. Accordions help keep the form manageable even when the booking includes several people.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={reservaIndividualGrupal}
+  desplazable={false}
+  alt="From the individual booking form to the group one. Individual booking: the Sailing form with personal details, date, total people (1), and language, on desktop and mobile. Group booking: with 5 people, accordions appear from Person 1 to Person 5; Person 1 «soy yo» (that's me) with their disabilities added, Person 2 with their own disability selector, and the rest collapsed. Callout: Needs per participant."
+/>
+
+<CaseText compacta>
+
+Once the request is submitted, the user can track its progress from My bookings. I designed a distinct visual hierarchy for states like Pending, Confirmed, and Expired, plus filters to access other states like Rejected or Cancelled.
+
+The same request has a complementary view for the HandiSport team. From internal management, a pending request shows the information needed to review it and allows accepting or rejecting it.
+
+</CaseText>
+
+<Diagram
+  imagen={reservasUsuarioGestion}
+  desplazable={false}
+  alt="A request seen from both sides. User · My bookings: booking cards with Pending, Confirmed, and Expired status, and filters by status. HandiSport · Management: «Solicitudes» (Requests) with the same pending booking expanded, the requester's details, and the Reject request and Accept request buttons. At the bottom: Check the status → Manage the request."
+/>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="autonomia-equipo"
+  numero="05"
+  etiqueta="Giving the team autonomy to maintain content"
+  titulo="Designing for those who manage the platform too"
+  composicion="apilada"
+>
+
+The experience didn't end on the public side. HandiSport needed tools to maintain activities, requests, and content from within the platform itself.
+
+When creating an activity, the administrator can define a title, subtitle, description, content, compatible accessibility needs, notes, and gallery. Associating those needs at the moment the activity is created is what later allows them to appear as chips, filters, and auto-filtering criteria.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={gestionActividades}
+  desplazable={false}
+  alt="Activity management: the «Nueva actividad» (New activity) form on desktop, with title, subtitle, short description, content, the disability selector with chips for the five needs, note, and gallery, and the «Publicar actividad» (Publish activity) button; and the same screen on mobile. Callouts: Activity management and Accessibility needs."
+/>
+
+<CaseText compacta columna="izquierda">
+
+I also designed the article creation flow so the team could maintain editorial content from the platform. The form allows preparing a title, subtitle, short description, content, and gallery, as well as selecting a cover image and describing the pictures.
+
+</CaseText>
+
+<Diagram
+  imagen={crearArticulo}
+  desplazable={false}
+  alt="Create article → Published result. On the left, the «Artículo nuevo» (New article) form with title, subtitle, short description, content, and gallery with a description for each photo and the option to choose a cover image. On the right, the published article on desktop and mobile, with title, images, «Más fotos del artículo» (More photos from the article), and related articles."
+/>
+
+<CaseText compacta columna="izquierda">
+
+So publishing wouldn't depend on always having the same amount of visual material, I designed four layout variants based on the number of available photographs:
+
+<p class="font-medium text-ink">3 photos · 4 photos · 5 photos · +5 photos.</p>
+
+Each variant reorganizes the content and keeps its mobile adaptation, so the team can publish different pieces without breaking the site's overall consistency.
+
+</CaseText>
+
+<Diagram
+  imagen={layoutsArticulos}
+  desplazable={false}
+  alt="The four layout variants for an article, each on desktop and mobile: Layout 3 photos, Layout 4 photos, Layout 5 photos, and Layout +5 photos, which reorganize images and text based on the number of photographs; the +5 one adds a «Más fotos del artículo» (More photos from the article) carousel."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+The product had to be clear for the person booking, but also easy to maintain for whoever publishes and manages the content.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="resultado"
+  numero="06"
+  etiqueta="Outcome + scope"
+  titulo="An experience connecting users and internal management"
+>
+
+The final design expanded the old website's scope to cover much of the full journey: discovering activities, checking their accessibility needs, requesting spots, checking statuses, managing bookings, and maintaining activities and articles from within the platform itself.
+
+The work was approached responsively for desktop and mobile and was developed in close collaboration with the technical team. Samuel centralized communication with HandiSport, and I worked especially closely with Daniela, on the frontend, sharing designs, visual assets, photographs, copy, and the criteria needed to turn the screens into product.
+
+My involvement ended with the handoff of the designs. I didn't conduct interviews or tests with real users, and I don't have any later metrics that would let me attribute quantitative results to the redesign.
+
+<Fragment slot="media">
+
+<Diagram
+  imagen={resultadoAlcance}
+  desplazable={false}
+  alt="Closing composition. User experience: the Activities page on desktop and mobile. Internal management: the user's My bookings on desktop and the team's request management on mobile, with the Accept and Reject buttons."
+/>
+
+<CaseText compacta conclusion>
+
+The main shift was moving from displaying information to building a journey: finding a suitable activity, requesting it, and being able to track its management within the same product.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+</div>

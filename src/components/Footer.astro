@@ -1,7 +1,13 @@
 ---
-import { SOCIALS, SITE_AUTHOR, SITE_ROLE } from '../consts';
+import { EMAIL, LINKEDIN, SITE_AUTHOR, SITE_ROLE } from '../consts';
+import { cvPath, getLang } from '../i18n';
 
 const year = new Date().getFullYear();
+const SOCIALS = [
+  { href: `mailto:${EMAIL}`, label: 'Email', externo: false },
+  { href: LINKEDIN, label: 'LinkedIn', externo: true },
+  { href: cvPath(getLang(Astro.url)), label: 'CV (PDF)', externo: false },
+];
 ---
 
 <!--

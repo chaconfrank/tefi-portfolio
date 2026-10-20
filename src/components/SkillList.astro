@@ -1,11 +1,16 @@
 ---
-import skills from '../data/skills.json';
+import skillsEs from '../data/skills.json';
+import skillsEn from '../data/en/skills.json';
+import { getLang, UI } from '../i18n';
 
 interface Props {
   titulo?: string;
 }
 
-const { titulo = 'Áreas de experiencia' } = Astro.props;
+const lang = getLang(Astro.url);
+const ui = UI[lang];
+const skills = lang === 'en' ? skillsEn : skillsEs;
+const { titulo = ui.areasExperiencia } = Astro.props;
 
 // Cada mitad del marquee repite la lista varias veces: así cada mitad supera
 // el ancho de cualquier viewport y el bucle (-50%) nunca muestra huecos.
@@ -38,7 +43,7 @@ const cinta = Array.from({ length: 4 }, () => skills.herramientas).flat();
     </div>
 
     <h2 class="mt-10 text-sm font-medium tracking-wide text-ink-soft uppercase">
-      <span aria-hidden="true">—</span> Idiomas
+      <span aria-hidden="true">—</span> {ui.idiomas}
     </h2>
     <p class="mt-2 pl-4 text-base font-semibold tracking-tight sm:pl-6">
       {skills.idiomas.map(({ nombre, nivel }) => `${nombre} (${nivel.toLowerCase()})`).join(' · ')}
@@ -49,7 +54,7 @@ const cinta = Array.from({ length: 4 }, () => skills.herramientas).flat();
 <!-- Cinta de herramientas, en bucle continuo -->
 <div
   class="mx-[calc(50%-50vw)] mb-12 overflow-hidden border-b border-line bg-paper py-3 whitespace-nowrap"
-  aria-label="Herramientas que uso"
+  aria-label={ui.herramientasQueUso}
 >
   <div class="flex w-max animate-marquee motion-reduce:animate-none">
     {

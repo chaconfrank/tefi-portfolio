@@ -6,10 +6,15 @@
 // Envuelto en un custom element para funcionar aunque se pinte más de una vez
 // por página.
 //
+// Por debajo de 400 px es un botón redondo (sólo el pomo con el icono del
+// tema activo): así menú, idioma y tema caben en una fila.
+//
 // La POSICIÓN del pomo la decide el CSS con la variante `dark:` sobre el
 // deslizador, no el JavaScript: el script inline de BaseHead aplica la clase
 // `dark` antes del primer pintado, así que nace en la posición correcta. El JS
 // sólo alterna la clase, guarda la preferencia y sincroniza aria-checked.
+import { UI, getLang } from '../i18n';
+const ui = UI[getLang(Astro.url)];
 ---
 
 <theme-toggle>
@@ -17,31 +22,31 @@
     type="button"
     role="switch"
     aria-checked="false"
-    aria-label="Modo oscuro"
-    class="glass relative flex h-8 w-14 cursor-pointer items-center rounded-full p-1 transition"
+    aria-label={ui.modoOscuro}
+    class="glass relative flex h-9.5 w-[4.25rem] cursor-pointer max-[25rem]:w-9.5 sm:h-10.5 sm:w-[4.5rem] items-center rounded-full p-[5px] transition"
   >
     <!-- Iconos fijos de la pista: el pomo tapa el del tema activo. -->
-    <span class="pointer-events-none absolute top-1/2 left-1 flex size-6 -translate-y-1/2 items-center justify-center text-ink-soft/60" aria-hidden="true">
-      <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <span class="pointer-events-none absolute top-1/2 left-[5px] flex size-7 -translate-y-1/2 max-[25rem]:hidden sm:size-8 items-center justify-center text-ink-soft/60" aria-hidden="true">
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round" />
       </svg>
     </span>
-    <span class="pointer-events-none absolute top-1/2 right-1 flex size-6 -translate-y-1/2 items-center justify-center text-ink-soft/60" aria-hidden="true">
-      <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <span class="pointer-events-none absolute top-1/2 right-[5px] flex size-7 -translate-y-1/2 max-[25rem]:hidden sm:size-8 items-center justify-center text-ink-soft/60" aria-hidden="true">
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linejoin="round" />
       </svg>
     </span>
 
     <!-- Pomo deslizante con el icono del tema activo. -->
     <span
-      class="relative z-10 flex size-6 items-center justify-center rounded-full bg-highlight text-highlight-ink shadow-sm transition-transform duration-200 ease-out dark:translate-x-6 dark:bg-link"
+      class="relative z-10 flex size-7 items-center sm:size-8 justify-center rounded-full bg-highlight text-highlight-ink shadow-sm transition-transform duration-200 ease-out dark:translate-x-[30px] dark:bg-link max-[25rem]:dark:translate-x-0"
     >
-      <svg class="size-3.5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <svg class="size-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round" />
       </svg>
-      <svg class="hidden size-3.5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <svg class="hidden size-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linejoin="round" />
       </svg>
     </span>

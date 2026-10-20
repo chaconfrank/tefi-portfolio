@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectFan from '../ProjectFan.astro';
+import ContactCTA from '../ContactCTA.astro';
+import { getLang, getProyectos } from '../../i18n';
+
+// Listado de proyectos, en los dos idiomas (src/pages/proyectos/index.astro
+// y src/pages/en/projects/index.astro).
+const lang = getLang(Astro.url);
+const proyectos = await getProyectos(lang);
+const c = {
+  es: {
+    titulo: 'Proyectos',
+    descripcion: 'Case studies de producto: el problema, el proceso, mi rol y el impacto.',
+  },
+  en: {
+    titulo: 'Projects',
+    descripcion: 'Product case studies: the problem, the process, my role and the impact.',
+  },
+}[lang];
+---
+
+<BaseLayout title={c.titulo} description={c.descripcion}>
+  <section class="py-12">
+    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{c.titulo}</h1>
+    <!-- Las negritas marcan lo que un recruiter tiene que retener del vistazo. -->
+
+    <div class="mt-6">
+      <ProjectFan proyectos={proyectos} etiqueta={c.titulo} />
+    </div>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>

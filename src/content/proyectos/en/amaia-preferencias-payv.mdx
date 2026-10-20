@@ -1,0 +1,465 @@
+---
+titulo: 'From knowing preferences to turning them into care decisions'
+descripcion: 'Collecting preferences through an interview, analysing them with AI and turning them into useful information for the Care and Life Plan, while always keeping professional validation.'
+tipo: Startup
+empresa: 'Amaia Cuida'
+rol: 'Sole Product Designer across the three platforms'
+rolResumen: 'Product Designer · UX/UI · AI'
+periodo: '2023 — 2025'
+herramientas: []
+plantilla: editorial
+# Card cover: the same composition as the hero.
+portada: '../../../assets/proyectos/amaia-preferencias-payv/composicion-hero.png'
+portadaAlt: 'The flow from Preferences to the Care and Life Plan across three Amaia screens.'
+destacado: true
+# Same order as the other two Amaia case studies: they go together and the
+# listing grouped by project is still pending.
+orden: 1
+fecha: 2025-09-30
+borrador: false
+---
+
+import CaseHero from '../../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../../components/case-study/CaseFacts.astro';
+import CaseSection from '../../../components/case-study/CaseSection.astro';
+import CaseSubsection from '../../../components/case-study/CaseSubsection.astro';
+import CaseText from '../../../components/case-study/CaseText.astro';
+import Diagram from '../../../components/case-study/Diagram.astro';
+import AnnotatedScreenshot from '../../../components/case-study/AnnotatedScreenshot.astro';
+import HighlightedShot from '../../../components/case-study/HighlightedShot.astro';
+import InsightGrid from '../../../components/case-study/InsightGrid.astro';
+import ImpactPillars from '../../../components/case-study/ImpactPillars.astro';
+import composicionHero from '../../../assets/proyectos/amaia-preferencias-payv/composicion-hero.png';
+import flujoAnterior from '../../../assets/proyectos/amaia-preferencias-payv/flujo-anterior.png';
+import flujoAnteriorMovil from '../../../assets/proyectos/amaia-preferencias-payv/flujo-anterior-movil.png';
+import acEntrevista from '../../../assets/proyectos/amaia-preferencias-payv/ac-entrevista-preferencias.png';
+import apNuevasPreferencias from '../../../assets/proyectos/amaia-preferencias-payv/ap-nuevas-preferencias.png';
+import perfilValidado from '../../../assets/proyectos/amaia-preferencias-payv/perfil-validado.png';
+import fuentesPayv from '../../../assets/proyectos/amaia-preferencias-payv/fuentes-payv.png';
+import preferenciasARevision from '../../../assets/proyectos/amaia-preferencias-payv/preferencias-a-revision.png';
+import preferenciasARevisionMovil from '../../../assets/proyectos/amaia-preferencias-payv/preferencias-a-revision-movil.png';
+import resumenObjetivosEdicion from '../../../assets/proyectos/amaia-preferencias-payv/resumen-objetivos-edicion.png';
+import resumenObjetivosEdicionMovil from '../../../assets/proyectos/amaia-preferencias-payv/resumen-objetivos-edicion-movil.png';
+import generarConIa from '../../../assets/proyectos/amaia-preferencias-payv/generar-con-ia.png';
+import flujoFinal from '../../../assets/proyectos/amaia-preferencias-payv/flujo-final.png';
+import flujoFinalMovil from '../../../assets/proyectos/amaia-preferencias-payv/flujo-final-movil.png';
+
+{/* The texts are from the "Prompts Claude · Preferencias + PAyV" document,
+    unrewritten. Nothing is added that isn't in its content. Desktop is
+    always Amaia Profesionales and tablet, Amaia Conecta. Centers only
+    appear as Center A–F. */}
+
+<CaseHero
+  compacta
+  lateral
+  producto="Amaia Cuida"
+  disciplina="Preferences → Care and Life Plan"
+  titulo={frontmatter.titulo}
+  contexto="Amaia Cuida helps centers and care homes apply Person-Centred Care (PCC), connecting personal information with care decisions."
+  imagen={composicionHero}
+  imagenAlt="The flow across three screens joined by arrows: the Preferences interview in Amaia Conecta (tablet), the preferences extracted and validated in Amaia Profesionales, and the Care and Life Plan with 'Revision available'."
+  banda={false}
+  recorrido={['Interview', 'Group', 'Validate', 'Apply']}
+>
+
+A person's preferences used to be recorded manually, one by one, but collecting that information wasn't enough if it was later not taken into account within their Care Plan.
+
+The challenge was to design a flow that would make it faster to collect those preferences, analyse them with AI and turn them into useful information to enrich the Care and Life Plan (PAyV), while always keeping professional validation.
+
+</CaseHero>
+
+{/* The same project facts as "General redesign" and "Life Story": it's the
+    same work at Amaia Cuida. */}
+<CaseFacts
+  fondo={false}
+  datos={[
+    { etiqueta: 'My role', valor: 'Product Designer UX/UI' },
+    { etiqueta: 'Duration', valor: '2 years', detalle: ['2023–2025'] },
+    { etiqueta: 'Team', valor: 'CEO, Frontend, Backend and Customer Success' },
+    {
+      etiqueta: 'Products',
+      valor: '3 platforms',
+      detalle: ['Amaia Profesionales (web)', 'Amaia Conecta (tablet)', 'Amaia App (families)'],
+    },
+  ]}
+/>
+
+<CaseSection
+  compacta
+  id="punto-de-partida"
+  numero="01"
+  etiqueta="The starting point"
+  titulo="Recording preferences didn't guarantee they were used in care"
+  composicion="apilada"
+  destacado="The problem wasn't just collecting more information, but making sure that knowing the person better actually changed how their care was planned."
+>
+
+Preferences were already part of each person's profile, but they had to be recorded manually one by one. In an environment with little available time, completing that information could become a task that was hard to keep up.
+
+What's more, collecting them didn't solve the whole problem. The information stayed available within the profile, but it wasn't connected to the Care and Life Plan, so knowing how a person wanted to live didn't necessarily mean those preferences ended up reflected in their care planning.
+
+The challenge therefore had two parts:
+
+Reducing the effort needed to collect preferences, and making sure that information could later be used to personalise the care plan.
+
+<Diagram
+  compacta
+  slot="media"
+  imagen={flujoAnterior}
+  imagenMovil={flujoAnteriorMovil}
+  alt="Previous flow in four steps: 01 Add preference manually, 02 Save to profile, 03 Information available and 04 Care and Life Plan. Between step 03 and 04 the line is cut with a red cross: 'No direct connection'."
+/>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="recoger-preferencias"
+  numero="02"
+  etiqueta="Making it easier to collect preferences"
+  titulo="From recording data one by one to holding a guided conversation"
+  composicion="apilada"
+>
+
+Until then, adding preferences depended on the professional identifying and manually adding them to the profile.
+
+To reduce that work, we designed a specific Preferences interview in Amaia Conecta, the device professionals used to carry out assessments together with the person.
+
+Instead of filling in each preference in isolation, the professional could hold a conversation, record it and rely on a question script to explore different aspects of the person's daily life.
+
+The goal wasn't to replace the conversation with a rigid questionnaire, but to give the interview structure and make sure relevant information didn't depend solely on what the professional remembered to record afterwards.
+
+<Fragment slot="media">
+
+<AnnotatedScreenshot
+  compacta
+  ancha
+  imagen={acEntrevista}
+  alt="Preferences interview in Amaia Conecta, Preferences tab: on the left, 'Valoración finalizada' (Assessment finished) with the 'Subir Valoración' (Upload assessment) button, the recorded audio and the language and speaker selectors; on the right, the interview script with questions about care, bathing, grooming and mobility."
+  notas={[
+    {
+      texto: 'Interview recording',
+      detalle: 'The conversation is recorded so it can be processed afterwards.',
+      x: 12.5,
+      y: 66.5,
+    },
+    {
+      texto: 'Script as support',
+      detalle: 'Questions organised by topic help the professional guide the conversation.',
+      x: 71.5,
+      y: 43,
+    },
+    {
+      texto: 'Validation before sending',
+      detalle: 'Language, speakers and audio can be reviewed before uploading the assessment.',
+      x: 43,
+      y: 81,
+    },
+  ]}
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+Collecting more information didn't solve the problem yet. A lengthy conversation had to be turned into specific preferences that the professional could review and use.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="informacion-estructurada"
+  numero="03"
+  etiqueta="From conversation to structured information"
+  titulo="AI extracts. The professional decides what gets incorporated."
+  composicion="apilada"
+>
+
+Once the interview was uploaded, the AI analysed the conversation and extracted the detected preferences, grouping them into categories such as care, routines or food.
+
+Instead of forcing the professional to listen back to the whole interview and transfer each piece of data manually, Amaia presented the new preferences directly within the profile.
+
+But the extraction wasn't incorporated automatically.
+
+Each new preference was flagged so the professional could review it, approve it or discard it before it was definitively incorporated.
+
+AI reduced the extraction work; the professional kept control over which information became part of the profile.
+
+<Fragment slot="media">
+
+<AnnotatedScreenshot
+  compacta
+  ancha
+  imagen={apNuevasPreferencias}
+  alt="Preferences tab in Amaia Profesionales with the notice 'Nuevas preferencias extraídas: puedes añadir, aprobar o descartar cada preferencia' (New preferences extracted: you can add, approve or discard each preference) and the 'Ver transcripción' (View transcript) button. Preferences are grouped into Care, Routines and Food; new ones carry a NEW label and buttons to discard or approve, while existing ones appear without those controls."
+  notas={[
+    {
+      texto: 'New preferences detected',
+      detalle: 'Preferences extracted from the interview are distinguished from content that already existed.',
+      x: 7.4,
+      y: 63.5,
+    },
+    {
+      texto: 'Grouped information',
+      detalle: 'Categories make review easier.',
+      x: 23.5,
+      y: 57.8,
+    },
+    {
+      texto: 'Approve or discard',
+      detalle: 'Each new preference can be validated individually.',
+      x: 45.5,
+      y: 45.5,
+    },
+    {
+      texto: 'Cross-check against the interview',
+      detalle: '"Ver transcripción" (View transcript) lets you check the context when needed.',
+      x: 79,
+      y: 30.5,
+    },
+  ]}
+/>
+
+<CaseSubsection compacta titulo="Automating without closing the system" composicion="apilada">
+
+Professionals could still add information manually when it came up during the day-to-day or didn't come from an interview.
+
+This made it possible to combine two ways of feeding the profile:
+
+<p class="font-medium text-ink">AI to speed up extraction from interviews<br /><span class="text-amaia-ink">+</span><br />manual editing to keep information alive</p>
+
+</CaseSubsection>
+
+<Diagram
+  compacta
+  imagen={perfilValidado}
+  desplazable={false}
+  ancho={640}
+  alt="Two sources that add up: 'Interview + AI, extract new preferences' and 'Professional, add information manually'; both lead to 'Validated preferences profile'."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+We had already reduced the effort needed to collect and structure preferences. The next challenge was making sure that information didn't end up isolated within the profile again.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="conectar-payv"
+  numero="04"
+  etiqueta="Connecting the information with the Care and Life Plan"
+  titulo="A plan that evolves as we get to know the person better"
+  composicion="apilada"
+>
+
+Amaia's Care and Life Plan wasn't designed as a document the professional had to build from scratch. It was generated and evolved as more information about the person became available.
+
+A first, basic version — the Welcome Plan — was generated from the initial questionnaires. From there, completing a Life Story, a My Care interview or adding new Preferences could provide enough information to generate a new revision of the PAyV.
+
+The logic had to work regardless of the order in which these sources were completed: any new relevant information could keep enriching the plan.
+
+<Fragment slot="media">
+
+<Diagram
+  compacta
+  imagen={fuentesPayv}
+  desplazable={false}
+  ancho={720}
+  alt="The Welcome Plan comes out of the initial questionnaires. Below, at the same level, three sources: My Care, Life Story and Preferences; any of them leads to a new revision of the PAyV. At the bottom: 'More information about the person → a progressively more personalised plan'."
+/>
+
+<CaseSubsection compacta titulo="Preferences had to genuinely influence the plan" composicion="apilada">
+
+Although the PAyV could be enriched from different sources, Preferences had a particular problem.
+
+They were already considered relevant information for personalising the plan, but recording them manually one by one took too much time, so many profiles contained little information of this kind.
+
+What's more, even when new preferences existed, the system could indicate there was a new revision available without actually incorporating them into the content of the PAyV.
+
+Making it easier to collect them had little value if that information then ended up isolated again. That's why the redesign didn't end with the interview and AI extraction: we also worked on the connection between validated preferences and the next revision of the plan.
+
+</CaseSubsection>
+
+<Diagram
+  compacta
+  imagen={preferenciasARevision}
+  amplio
+  imagenMovil={preferenciasARevisionMovil}
+  movilCompleto
+  pie="New validated information → new revision of the PAyV"
+  alt="Two Amaia Profesionales screens joined by an arrow: 01 Approved preferences, with the profile's preferences saved by category; and 02 Revision available, the Care and Life Plan with the orange notice 'Revisión disponible' (Revision available) and the Plan Summary."
+/>
+
+<CaseSubsection
+  compacta
+  titulo="Reviewing before incorporating the changes"
+  composicion="apilada"
+  destacado="Amaia connected and proposed information; the professional decided what ended up as part of the plan."
+>
+
+Amaia generating a new version from Life Story, My Care or Preferences didn't mean the changes had to be accepted automatically.
+
+Before approving it, the professional could review and edit both the Plan Summary and the Goals and interventions, removing proposals that didn't fit, modifying them or adding new actions based on the person's reality and the resources available at the center.
+
+The logic held throughout the whole journey:
+
+</CaseSubsection>
+
+<Diagram
+  compacta
+  imagen={resumenObjetivosEdicion}
+  amplio
+  imagenMovil={resumenObjetivosEdicionMovil}
+  movilCompleto
+  alt="The two parts of the Care and Life Plan in edit mode, side by side: the Plan Summary, with its editable text, and Goals and interventions, a table of goals with their interventions and the option to remove rows; both with an 'Aprobar' (Approve) button."
+/>
+
+<CaseSubsection compacta titulo="AI could also help build the interventions" composicion="apilada">
+
+Editing wasn't limited to correcting generated content.
+
+The professional could also define a new goal and ask the AI for proposed related interventions, using them as a starting point to then modify, remove or adapt them to the center's real context.
+
+So AI could help both turn information about the person into a plan proposal and support the professional when they needed to develop new actions, without replacing their judgement.
+
+</CaseSubsection>
+
+<HighlightedShot
+  compacta
+  imagen={generarConIa}
+  ancho={760}
+  zona={{ x: 73.4, y: 66.9, ancho: 13.1, alto: 5.2 }}
+  alt="Goals and interventions in edit mode in Amaia Profesionales: a new row with 'Escribe el objetivo' (Write the goal) and, in the interventions field, 'Puedes escribir las intervenciones o generarlas con Inteligencia Artificial' (You can write the interventions or generate them with Artificial Intelligence) with the 'Generar con IA' (Generate with AI) button, highlighted."
+/>
+
+<CaseSubsection compacta titulo="Validating the flow in the centers' real context" composicion="apilada">
+
+We ran 6 test sessions with professionals from 5 centers to see not only whether they could use the Planner, but how it fit within their real care-planning process.
+
+The sessions showed that the general logic was understood and that professionals valued having a base to review, select and adapt information from, rather than building the plan from scratch.
+
+The main friction points appeared elsewhere: discovering some of the interface's capabilities, prioritising the information that was genuinely actionable, and making the PAyV reach beyond planning into everyday care.
+
+</CaseSubsection>
+
+<InsightGrid
+  compacta
+  insights={[
+    {
+      titulo: 'AI as support, not as decision',
+      parrafos: [
+        'Automation could recover and structure information that would otherwise go unnoticed, but professional validation remained essential.',
+        'As an example, at Center E it was valued that during a conversation the AI could detect preferences the professional might not have identified or classified manually.',
+      ],
+    },
+    {
+      titulo: 'Valuable features, but not very visible',
+      parrafos: [
+        'Some of the capabilities with the greatest potential weren’t always discovered on their own.',
+        'At Center F, the professional was about to write the interventions manually and discovered the "Generar con IA" (Generate with AI) help during the test itself.',
+        'The same pattern appeared at Center A.',
+      ],
+    },
+    {
+      titulo: 'Less text, more action',
+      parrafos: [
+        'Information worked better when it was short, structured and easy to turn into a care decision.',
+        'At Center E they asked for preferences to be shorter and more schematic to make them easier to read.',
+        'At Center C we also observed that Goals and interventions got more attention than a summary perceived as too similar to Life Story.',
+      ],
+    },
+    {
+      titulo: 'The challenge continued after approval',
+      parrafos: [
+        'Generating a good PAyV didn’t guarantee that knowledge reached everyday care.',
+        'At Center F they identified bringing what was worked on in planning into the care home’s daily routine as one of their biggest difficulties. Some information kept circulating through mechanisms such as post-its or incident logs.',
+        'At Center D, the same challenge appeared from another angle: getting more care assistants involved in collecting and using this information also depended on care workload and the team’s capacity to bring new tools into their routine.',
+      ],
+    },
+  ]}
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+The goal wasn't to generate more versions of the plan, but to make sure every new piece of information about the person could translate into more personalised care decisions.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="resultado"
+  numero="05"
+  etiqueta="Result"
+  titulo="From collecting information to using it to personalise care"
+  composicion="apilada"
+>
+
+The work connected pieces that had previously worked too independently of each other.
+
+The interview made it possible to collect preferences through a conversation, AI helped turn them into structured information, and the professional kept control over what should be incorporated into the profile.
+
+From there, Preferences became part of a broader logic alongside Life Story and My Care: new information about the person could trigger a revision and progressively enrich their Care and Life Plan.
+
+The result was a flow in which knowing the person better could have a direct consequence on how their care was planned.
+
+<Fragment slot="media">
+
+<ImpactPillars
+  compacta
+  numerados
+  pilares={[
+    {
+      titulo: 'Less registration work',
+      texto: [
+        'A conversation could turn into multiple preferences without having to identify and record them manually one by one.',
+        'AI took on part of the extraction and classification work, reducing the effort needed to structure the information.',
+      ],
+    },
+    {
+      titulo: 'Connected information',
+      texto: [
+        'Preferences stopped working solely as data stored within the profile.',
+        'Alongside Life Story and My Care, they could become a new source of information to review and enrich the PAyV.',
+      ],
+    },
+    {
+      titulo: 'The professional keeps control',
+      texto: [
+        'Automating didn’t mean removing human review.',
+        'Extracted preferences had to be validated, and the PAyV’s proposals could be reviewed, edited or discarded before becoming part of the final plan.',
+      ],
+    },
+  ]}
+/>
+
+<Diagram
+  compacta
+  imagen={flujoFinal}
+  imagenMovil={flujoFinalMovil}
+  alt="The full journey in four steps: Interview, Structure, Validate and Apply. Below, what's obtained at each one: Conversation, Preferences, Validated information and PAyV."
+/>
+
+<CaseSubsection compacta titulo="Takeaway" composicion="apilada" conclusion final>
+
+The value of collecting information lies in what the product then lets you do with it.
+
+At first, the problem seemed to centre on making it easier to record preferences. But automating that task wasn't enough if the result ended up isolated in another section of the profile.
+
+Designing this flow led me to think of AI as part of a connected system: collecting information, structuring it, validating it and making sure it can influence a later decision, keeping professional judgement at every critical point.
+
+</CaseSubsection>
+
+</Fragment>
+
+</CaseSection>

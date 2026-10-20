@@ -115,16 +115,14 @@ y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
   **no estaba terminada** cuando ella salió — no decir que llegó a producción.
 - **El blog está oculto**: el único post era de relleno y va con `borrador: true`.
   La colección y el feed siguen compilando por si se retoma.
-- **Pendiente de decidir**: el sitio será bilingüe ES/EN — español por defecto en
-  `/`, inglés en `/en/`, traducción completa incluidos los case studies, y un
-  enlace con globo (no un toggle) arriba a la derecha. Se hace **después** de
-  cerrar el contenido, para no traducir textos que aún se están puliendo.
+- **El sitio es bilingüe ES/EN**: español en `/`, inglés en `/en/` (rutas en
+  inglés: `/en/projects/`, `/en/about/`, `/en/contact/`), con un enlace de
+  globo arriba a la derecha. Cualquier cambio de copy en un case study o en
+  una página hay que hacerlo **en los dos idiomas**. Detalle en
+  `architecture.md` («Idiomas»).
 
 Puntos donde el código todavía no sigue las convenciones — arréglalos si tocas esa zona:
 
 1. **Sin `astro check`.** `@astrojs/check` no está instalado, así que nada comprueba tipos.
-2. **Sin imágenes.** Ningún case study tiene `portada`; las tarjetas se pintan sin
-   imagen. Al añadirlas, van en `src/content/proyectos/` o `src/assets/`, nunca en
-   `public/` (ver `assets.md`).
-3. **Sin `og-default.png`.** `BaseHead` apunta a `/og-default.png` y ese archivo no
+2. **Sin `og-default.png`.** `BaseHead` apunta a `/og-default.png` y ese archivo no
    existe: las previsualizaciones en LinkedIn salen sin imagen.

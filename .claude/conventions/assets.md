@@ -7,7 +7,7 @@
 | Carpeta | Para qué | Qué le pasa |
 | --- | --- | --- |
 | `src/assets/` | Imágenes del sitio y de los proyectos | Astro las optimiza: WebP/AVIF, `srcset`, dimensiones inferidas |
-| `public/` | Favicon, `robots.txt`, el PDF del CV | Se copian tal cual, **nunca se optimizan** |
+| `public/` | Favicon, `robots.txt`, los PDF del CV (ES y EN) | Se copian tal cual, **nunca se optimizan** |
 
 Una imagen en `public/` referenciada desde `<Image>` no da error: simplemente no se optimiza. Si una portada se ve pesada, lo primero que hay que mirar es en qué carpeta está.
 
@@ -25,22 +25,14 @@ Este proyecto usa **la estrategia Tailwind**: clases de utilidad en el `<img>` r
 
 La alternativa (prop `layout` de Astro + `responsiveStyles: true`) es válida, pero implica renunciar a estilar imágenes con Tailwind. No mezcles las dos.
 
-## El avatar
+## La foto de perfil
 
-`Avatar.astro` vive en la esquina superior izquierda del `Header` y es **cuadrado
-con el mismo radio que las tarjetas** (`rounded-xl`), no un círculo.
-
-La fuente es `src/assets/avatar.jpg`, recortada a cuadrado **483×483 sin
-ampliar** desde `IMG_2927_bajaRes2.jpg` (725×483): se usa la altura completa del
-original y el recorte se centra en la cara. El recorte anterior (290 px ampliado
-a 400) pixelaba en la foto grande de Sobre mí a 240 px sobre pantallas retina.
-El original es apaisado: si hay que rehacer el recorte, hazlo **antes** de meter
-el archivo, no con `object-position` — `<Image>` no recorta, sólo redimensiona.
-Y nunca pidas en `widths` más píxeles de los que tiene el archivo fuente.
-
-```bash
-magick IMG_2927_bajaRes2.jpg -crop 483x483+104+0 +repage src/assets/avatar.jpg
-```
+El header **no lleva avatar** (se quitó a propósito). La única foto es la de
+Sobre mí, `src/assets/foto-sobre-mi.png`: el retrato granate **recortado con
+fondo transparente**, de la carpeta `portafolio tefy/Fotos profesionales/`. Se
+pinta entero, sin marco y a escala del texto (144–192 px de ancho), para que se
+vea el fondo del portfolio detrás. No la conviertas a JPG ni le pongas
+`object-cover`: pierde la transparencia o la corta.
 
 ## Fuentes
 
