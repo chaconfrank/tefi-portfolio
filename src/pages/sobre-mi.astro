@@ -48,13 +48,13 @@ const iconos: Record<string, string> = {
       marco ni recorte, para que detrás se vea el fondo del portfolio en
       claro y en oscuro. Alineado abajo con el bloque de texto.
     -->
-    <div class="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:gap-10">
-      <div class="w-52 shrink-0 sm:w-64 lg:w-72">
+    <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
+      <div class="w-36 shrink-0 sm:w-44 lg:w-48">
         <Image
           src={fotoSobreMi}
           alt={`${SITE_AUTHOR}, ${SITE_ROLE}`}
-          widths={[320, 576, 994]}
-          sizes="(max-width: 640px) 208px, 288px"
+          widths={[288, 384, 576]}
+          sizes="(max-width: 640px) 144px, 192px"
           class="h-auto w-full"
         />
       </div>

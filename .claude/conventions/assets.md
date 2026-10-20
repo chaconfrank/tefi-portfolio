@@ -25,25 +25,14 @@ Este proyecto usa **la estrategia Tailwind**: clases de utilidad en el `<img>` r
 
 La alternativa (prop `layout` de Astro + `responsiveStyles: true`) es válida, pero implica renunciar a estilar imágenes con Tailwind. No mezcles las dos.
 
-## El avatar
+## La foto de perfil
 
-`Avatar.astro` vive en la esquina superior izquierda del `Header` y es **cuadrado
-con el mismo radio que las tarjetas** (`rounded-xl`), no un círculo.
-
-La fuente es `src/assets/avatar.jpg`, recortada a cuadrado **600×600** desde
-«Retrato profesional con rizos cobrizos.png» (1024×1536, carpeta
-`portafolio tefy/Fotos profesionales/`), centrada en la cara. Sobre mí usa otra
-foto, `src/assets/foto-sobre-mi.png`: el retrato granate **recortado con fondo
-transparente**. Se pinta entero y sin marco, para que se vea el fondo del
-portfolio; no la conviertas a JPG ni le pongas `object-cover`, que pierde la
-transparencia o la corta.
-Si hay que rehacer el recorte del avatar, hazlo **antes** de meter el archivo,
-no con `object-position` — `<Image>` no recorta, sólo redimensiona. Y nunca
-pidas en `widths` más píxeles de los que tiene el archivo fuente.
-
-```bash
-magick "Retrato profesional con rizos cobrizos.png" -crop 600x600+212+60 +repage src/assets/avatar.jpg
-```
+El header **no lleva avatar** (se quitó a propósito). La única foto es la de
+Sobre mí, `src/assets/foto-sobre-mi.png`: el retrato granate **recortado con
+fondo transparente**, de la carpeta `portafolio tefy/Fotos profesionales/`. Se
+pinta entero, sin marco y a escala del texto (144–192 px de ancho), para que se
+vea el fondo del portfolio detrás. No la conviertas a JPG ni le pongas
+`object-cover`: pierde la transparencia o la corta.
 
 ## Fuentes
 

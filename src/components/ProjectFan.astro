@@ -124,7 +124,8 @@ const { proyectos, etiqueta } = Astro.props;
   project-fan[data-modo='abanico'] [data-pista] {
     display: grid;
     justify-items: center;
-    align-items: start;
+    /* Todas en la misma celda y estiradas: miden lo que la más alta. */
+    align-items: stretch;
     overflow: visible;
     padding-block: 2.5rem 5rem;
     --paso: calc(min(21rem, 78vw) * 0.92);
@@ -238,6 +239,34 @@ const { proyectos, etiqueta } = Astro.props;
             colocar();
           }
         }),
+      );
+
+      // Trackpad: el desplazamiento horizontal (deltaX) mueve el abanico. Se
+      // acumula y, al pasar el umbral, avanza una tarjeta y espera a que
+      // termine el gesto (la inercia sigue mandando eventos un rato). El
+      // scroll vertical no se toca.
+      let acumulado = 0;
+      let bloqueado = false;
+      let fin: number | undefined;
+      escena.addEventListener(
+        'wheel',
+        (e) => {
+          if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+          e.preventDefault();
+          window.clearTimeout(fin);
+          fin = window.setTimeout(() => {
+            bloqueado = false;
+            acumulado = 0;
+          }, 180);
+          if (bloqueado) return;
+          acumulado += e.deltaX;
+          if (Math.abs(acumulado) > 40) {
+            mover(acumulado > 0 ? 1 : -1);
+            bloqueado = true;
+            acumulado = 0;
+          }
+        },
+        { passive: false },
       );
 
       // Deslizar con el dedo. Si hubo arrastre, se anula el clic en el enlace.
