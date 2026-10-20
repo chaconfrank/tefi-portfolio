@@ -43,6 +43,21 @@ ideas de la autora). Un único botón resaltado sobre una pantalla va con
 `HighlightedShot` (aro en `--color-metric`, sin halos) e insights compactos
 de research con `InsightGrid`.
 
+`CaseHero`, `CaseSection`, `CaseSubsection` y `CaseText` aceptan
+`compacta`: el mismo componente con el ritmo vertical apretado (capítulos a
+~112 px, subsecciones a ~80 px). Wedify y HandiSport lo usan enteros; Amaia
+va sin él. `CaseSubsection` admite también `etiqueta`, una línea en
+mayúsculas encima del subtítulo.
+
+**Acento por producto:** los componentes pintan el acento con
+`--color-amaia-*`. Un caso de otro producto no los toca: envuelve su MDX en
+un `<div>` que reasigna esas variables a sus propios tokens
+(`[--color-amaia-ink:var(--color-wedify-ink)]`, ver `wedify.mdx` y
+`handisport.mdx`). `CaseHero` sin `disciplina` deja el eyebrow sólo con el
+producto. Si el
+dev server no tiñe tras crear un `.mdx` nuevo, reinícialo: Tailwind no
+había escaneado el archivo.
+
 Los `<p>` del MDX no llevan el scope de esos componentes: se estilan con
 variantes `[&>p]`, no con `<style>`. En MDX los comentarios son `{/* */}`
 (`<!-- -->` rompe el build), y el texto que va dentro de un `<p>` del
