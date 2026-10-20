@@ -6,7 +6,7 @@ import ContactCTA from '../components/ContactCTA.astro';
 import { SITE_AUTHOR, SITE_ROLE, UBICACION, CV_PATH } from '../consts';
 import experiencia from '../data/experiencia.json';
 import educacion from '../data/educacion.json';
-import avatar from '../assets/avatar.jpg';
+import fotoSobreMi from '../assets/foto-sobre-mi.jpg';
 
 // Las tres cosas que un hiring manager tiene que recordar del perfil.
 // Los iconos van igual que los de metodología en el inicio: caja naranja
@@ -52,11 +52,11 @@ const iconos: Record<string, string> = {
     <div class="flex flex-col items-start gap-8 sm:flex-row sm:items-stretch sm:gap-10">
       <div class="relative size-40 shrink-0 sm:h-auto sm:w-64 sm:self-stretch lg:w-72">
         <Image
-          src={avatar}
+          src={fotoSobreMi}
           alt={`${SITE_AUTHOR}, ${SITE_ROLE}`}
-          widths={[320, 483]}
+          widths={[320, 640, 1024]}
           sizes="(max-width: 640px) 160px, 288px"
-          class="size-full rounded-2xl border border-white/60 object-cover shadow-sm sm:absolute sm:inset-0 dark:border-white/15"
+          class="size-full rounded-2xl border border-white/60 object-cover object-[50%_22%] shadow-sm sm:absolute sm:inset-0 dark:border-white/15"
         />
       </div>
 

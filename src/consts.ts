@@ -18,6 +18,8 @@ export const LINKEDIN = 'https://www.linkedin.com/in/estephanymago';
 
 // El archivo vive en public/ con este nombre exacto.
 export const CV_PATH = '/cv-estephany-mago.pdf';
+// Versión en inglés, para cuando exista la web en /en/ (pendiente).
+export const CV_PATH_EN = '/cv-estephany-mago-en.pdf';
 
 // El móvil no se pinta en ninguna página: en HTML indexado es un imán de spam.
 // Sí viaja dentro del CV en PDF, y es deliberado — descargarlo es un acto
