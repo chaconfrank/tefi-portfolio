@@ -176,6 +176,13 @@ const ui = UI[lang];
       </ol>
     )
   }
+
+  {/* Sólo en inglés: las capturas son del producto real, que está en español. */}
+  {
+    ui.notaIdioma && (
+      <p class:list={['mt-6 text-sm text-ink-soft', ancha && 'lg:col-span-2 lg:row-start-7']}>{ui.notaIdioma}</p>
+    )
+  }
 </header>
 
 <figure
