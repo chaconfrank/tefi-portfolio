@@ -121,8 +121,9 @@ Si se añaden temas claro/oscuro (`markdown.shikiConfig.themes`), el CSS se escr
 
 El estilado del Markdown renderizado está en `ProjectLayout` y `PostLayout` bajo la clase `.prose-portfolio`, con selectores `:global()` — ver `styling.md` para por qué son necesarios.
 
-**Ancho del texto:** en los case studies el texto (secciones, subsecciones,
-CaseText, versiones y cierre) crece hasta `52rem` (~95 caracteres) y ocupa 9 de
-12 columnas en las composiciones apiladas; los destacados de las apiladas van
-siempre debajo del texto y con su mismo ancho. Antes se quedaban en 7 columnas
-y dejaban media pantalla vacía a la derecha.
+**Ancho del texto:** en los case studies las secciones, subsecciones,
+CaseText, versiones, pausas y cierre son **una sola columna a todo el ancho
+del contenedor**: encabezado, texto, destacado (debajo del texto) y visual
+en vertical. Antes el texto se quedaba en 7–9 de 12 columnas y dejaba un
+hueco vacío a la derecha; `composicion` sigue aceptándose pero ya no parte
+el bloque en dos columnas.

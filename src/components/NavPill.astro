@@ -19,7 +19,7 @@ const isActive = (href: string) => (href === inicio ? path === inicio : path.sta
         href={href}
         aria-current={isActive(href) ? 'page' : undefined}
         class:list={[
-          'rounded-full px-2 py-1.5 text-xs whitespace-nowrap transition sm:px-3.5 sm:text-sm',
+          'rounded-full px-2 py-1.5 text-xs whitespace-nowrap transition max-[25rem]:px-1.5 sm:px-3.5 sm:text-sm',
           isActive(href)
             ? 'bg-paper/90 text-ink font-medium shadow-sm'
             : 'text-ink-soft hover:text-ink',

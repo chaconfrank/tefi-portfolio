@@ -1,9 +1,7 @@
 ---
 interface Props {
   titulo: string;
-  // Mismo par que CaseSection, a escala de subsección: 'dividida' pone el
-  // subtítulo a la izquierda y el texto a la derecha; 'apilada', el
-  // subtítulo arriba y el texto debajo a la izquierda.
+  // Se mantiene por compatibilidad con los MDX; hoy las dos apilan igual.
   composicion?: 'dividida' | 'apilada';
   // Frase que cierra el razonamiento de la subsección. Mismo recurso que el
   // destacado de CaseSection (filete de Amaia), en la columna del texto.
@@ -33,24 +31,22 @@ const {
   etiqueta,
   compacta = false,
 } = Astro.props;
-const apilada = composicion === 'apilada';
+// Las dos composiciones apilan a todo el ancho (ver CaseSection).
+void composicion;
 const conTexto = Astro.slots.has('default');
 ---
 
 <!--
   Subsección (h3) dentro de una sección numerada, para bloques largos que
   avanzan en varios pasos. Más margen arriba que un CaseText para que el
-  cambio de paso se note; el texto crece hasta 52rem.
+  cambio de paso se note; subtítulo arriba y texto debajo, a todo el ancho.
   Puede ir sin texto cuando sólo presenta el visual que sigue.
 -->
 <div
   class:list={[
-    // Con el título oculto no hay nada visible que separar: sólo el hueco
-    // hasta el visual que lleva el título dibujado.
     // Con el título oculto no hay nada visible que separar: en compacta el
     // visual que sigue ya trae su margen, y sumar otro era altura vacía.
     tituloOculto ? (compacta ? '' : 'mt-16 sm:mt-20') : compacta ? 'mt-14 sm:mt-16 lg:mt-20' : 'mt-28 sm:mt-32 lg:mt-40',
-    'lg:grid lg:grid-cols-12 lg:gap-x-10',
     final && 'mb-12 sm:mb-20 lg:mb-28',
   ]}
 >
@@ -59,8 +55,6 @@ const conTexto = Astro.slots.has('default');
       <p
         class:list={[
           'mb-4 text-xs font-medium tracking-[0.14em] text-amaia-ink uppercase',
-          apilada ? 'lg:col-span-8' : 'lg:col-span-5',
-          'lg:col-start-1',
         ]}
       >
         {etiqueta}
@@ -70,8 +64,7 @@ const conTexto = Astro.slots.has('default');
 
   <h3
     class:list={[
-      'max-w-2xl text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-3xl',
-      apilada ? 'lg:col-span-8' : 'lg:col-span-5',
+      'max-w-4xl text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-3xl',
       tituloOculto && 'sr-only',
     ]}
   >
@@ -82,9 +75,8 @@ const conTexto = Astro.slots.has('default');
     conTexto && (
       <div
         class:list={[
-          'max-w-[52rem] space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
-          compacta ? 'mt-5 sm:mt-6' : 'mt-8',
-          apilada ? ['lg:col-span-9 lg:col-start-1', compacta ? 'lg:mt-6' : 'lg:mt-10'] : 'lg:col-span-6 lg:col-start-7 lg:mt-1',
+          'space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
+          compacta ? 'mt-5 sm:mt-6' : 'mt-8 lg:mt-10',
           conclusion &&
             '[&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl',
         ]}
@@ -98,8 +90,7 @@ const conTexto = Astro.slots.has('default');
     destacado && (
       <p
         class:list={[
-          'mt-10 max-w-[52rem] border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
-          apilada ? 'lg:col-span-9 lg:col-start-1' : 'lg:col-span-6 lg:col-start-7',
+          'mt-10 border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
         ]}
       >
         {destacado}

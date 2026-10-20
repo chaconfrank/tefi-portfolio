@@ -51,7 +51,7 @@ const c = {
         icono: 'ciclo',
         titulo: 'Busco aprender, entender e iterar',
         texto:
-          'Valido decisiones con usuarios, itero con el equipo y acompaño las soluciones hasta producción, incluyendo QA y mejora continua.',
+          'Valido decisiones con usuarios cuando el proyecto lo permite, itero con el equipo y acompaño las soluciones hasta producción, incluyendo QA y mejora continua.',
       },
     ],
   },
@@ -83,7 +83,7 @@ const c = {
         icono: 'ciclo',
         titulo: 'I learn, understand and iterate',
         texto:
-          'I validate decisions with users, iterate with the team and see solutions through to production, including QA and continuous improvement.',
+          'I validate decisions with users when the project allows it, iterate with the team and see solutions through to production, including QA and continuous improvement.',
       },
     ],
   },
@@ -113,14 +113,19 @@ const iconos: Record<string, string> = {
         />
       </div>
 
-      <div class="grow">
-        <p class="text-sm font-medium text-link">{SITE_ROLE} · {ui.ubicacion}</p>
-        <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-          {c.hola}
-        </h1>
-
-        <p class="mt-5 text-lg text-pretty">{c.lead}</p>
-        {c.parrafos.map((p) => <p class="mt-4 text-pretty text-ink-soft">{p}</p>)}
+      <!-- Presentación a la izquierda y párrafos a la derecha desde lg: el
+           texto ocupa todo el ancho sin líneas de más de 1.000 px. -->
+      <div class="grow lg:grid lg:grid-cols-2 lg:gap-x-12">
+        <div>
+          <p class="text-sm font-medium text-link">{SITE_ROLE} · {ui.ubicacion}</p>
+          <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+            {c.hola}
+          </h1>
+          <p class="mt-5 text-lg text-pretty">{c.lead}</p>
+        </div>
+        <div class="lg:[&>p:first-child]:mt-0">
+          {c.parrafos.map((p) => <p class="mt-4 text-pretty text-ink-soft">{p}</p>)}
+        </div>
       </div>
     </div>
 

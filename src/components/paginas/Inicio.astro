@@ -14,34 +14,26 @@ const ui = UI[lang];
 const proyectos = await getProyectos(lang);
 
 // Trayectoria, no impacto de proyecto: las dos cifras de años son ciertas y
-// dicen cosas distintas. Los 3 productos son los tres productos con case study.
+// dicen cosas distintas. Los 3 productos son Amaia, Wedify y HandiSport; no
+// dice «de principio a fin» porque en Wedify y HandiSport su trabajo acabó
+// antes de que el producto estuviera terminado.
 const c = {
   es: {
     trayectoria: [
       { valor: `${ANIOS_DISENO} años`, etiqueta: 'En el sector del diseño, desde 2017' },
       { valor: `${ANIOS_PRODUCTO} años`, etiqueta: 'Diseñando producto SaaS' },
-      { valor: '3 productos', etiqueta: 'Llevados de principio a fin' },
+      { valor: '3 productos', etiqueta: 'Diseñados desde la definición hasta la interfaz final' },
     ],
     caseStudies: 'Case studies',
-    sobreMi: 'Sobre mí',
-    sobreMiFrase: 'Diseño productos digitales que convierten procesos complejos en experiencias sencillas.',
-    sobreMiTexto:
-      'Product Designer UX/UI especializada en SaaS B2B. Trabajo los productos de principio a fin —del problema validado a la implementación con desarrollo—, con sistemas de diseño, experiencias multidispositivo y funcionalidades con IA.',
-    masSobreMi: 'Más sobre cómo trabajo →',
     trayectoriaEtiqueta: 'Trayectoria',
   },
   en: {
     trayectoria: [
       { valor: `${ANIOS_DISENO} years`, etiqueta: 'In the design industry, since 2017' },
       { valor: `${ANIOS_PRODUCTO} years`, etiqueta: 'Designing SaaS products' },
-      { valor: '3 products', etiqueta: 'Taken from start to finish' },
+      { valor: '3 products', etiqueta: 'Designed from definition to final interface' },
     ],
     caseStudies: 'Case studies',
-    sobreMi: 'About me',
-    sobreMiFrase: 'I design digital products that turn complex processes into simple experiences.',
-    sobreMiTexto:
-      'Product Designer UX/UI specialized in B2B SaaS. I work on products end to end —from a validated problem to the implementation with development—, with design systems, multi-device experiences and AI-powered features.',
-    masSobreMi: 'More about how I work →',
     trayectoriaEtiqueta: 'Career',
   },
 }[lang];
@@ -59,21 +51,6 @@ const c = {
     <div class="mt-2">
       <ProjectFan proyectos={proyectos} etiqueta={c.caseStudies} />
     </div>
-  </section>
-
-  <section class="py-10">
-    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {c.sobreMi}</h2>
-    <!-- Mismo patrón que «Cómo trabajo»: etiqueta + frase grande + un párrafo.
-         Aquí sólo un vistazo; el perfil completo vive en /sobre-mi. -->
-    <p class="mt-5 pl-4 text-2xl font-semibold tracking-tight text-balance sm:pl-6 sm:text-3xl">
-      {c.sobreMiFrase}
-    </p>
-    <p class="mt-4 pl-4 text-pretty text-ink-soft sm:pl-6">
-      {c.sobreMiTexto}
-    </p>
-    <p class="mt-4 pl-4 sm:pl-6">
-      <a href={ruta(lang, 'sobreMi')} class="text-sm font-medium text-link underline-offset-4 hover:underline">{c.masSobreMi}</a>
-    </p>
   </section>
 
   <!--

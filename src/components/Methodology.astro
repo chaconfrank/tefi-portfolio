@@ -44,12 +44,12 @@ const iconos: Record<string, string> = {
 <section id="metodo" class="py-10">
   <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {textos.etiqueta}</h2>
 
-  <p class="mt-5 pl-4 text-2xl font-semibold sm:pl-6 tracking-tight text-balance sm:text-3xl">
-    {textos.titulo}
-  </p>
-  <p class="mt-4 pl-4 text-pretty text-ink-soft sm:pl-6">
-    {textos.texto}
-  </p>
+  <!-- Frase a la izquierda y párrafo a la derecha desde lg: a todo el ancho
+       pero sin líneas de 1.300 px. -->
+  <div class="mt-5 pl-4 sm:pl-6 lg:grid lg:grid-cols-2 lg:items-end lg:gap-x-16">
+    <p class="text-2xl font-semibold tracking-tight text-balance sm:text-3xl">{textos.titulo}</p>
+    <p class="mt-4 text-pretty text-ink-soft lg:mt-0">{textos.texto}</p>
+  </div>
 
   <ol
     class="reveal mt-10 flex flex-col gap-5 pl-4 sm:pl-6 md:snap-x md:snap-mandatory md:flex-row md:overflow-x-auto md:pb-2 lg:gap-8 lg:overflow-visible lg:pb-0"
