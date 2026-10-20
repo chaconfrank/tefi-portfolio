@@ -26,10 +26,13 @@ import composicionHero from '../../assets/proyectos/wedify/composicion-hero.png'
 import puntoDePartida from '../../assets/proyectos/wedify/punto-de-partida.png';
 import arquitectura from '../../assets/proyectos/wedify/arquitectura-definicion-bocetos-interfaz.png';
 import accesoSegunRol from '../../assets/proyectos/wedify/acceso-segun-rol.png';
+import accesoSegunRolMovil from '../../assets/proyectos/wedify/acceso-segun-rol-movil.png';
 import dashboardSegunRol from '../../assets/proyectos/wedify/dashboard-segun-rol.png';
+import dashboardSegunRolMovil from '../../assets/proyectos/wedify/dashboard-segun-rol-movil.png';
 import servicioSencillo from '../../assets/proyectos/wedify/servicio-sencillo.png';
 import servicioAgrupado from '../../assets/proyectos/wedify/servicio-agrupado.png';
 import dependenciaServicios from '../../assets/proyectos/wedify/dependencia-servicios.png';
+import dependenciaServiciosMovil from '../../assets/proyectos/wedify/dependencia-servicios-movil.png';
 import packs from '../../assets/proyectos/wedify/packs.png';
 import invitacionesSelector from '../../assets/proyectos/wedify/invitaciones-selector.png';
 import invitacionesEdicionResultado from '../../assets/proyectos/wedify/invitaciones-edicion-resultado.png';
@@ -172,6 +175,8 @@ La interfaz se apoyó además en jerarquías claras, iconografía reconocible, e
 
 <Diagram
   imagen={accesoSegunRol}
+  imagenMovil={accesoSegunRolMovil}
+  movilCompleto
   desplazable={false}
   alt="Tres pantallas de acceso unidas por flechas. Super Admin: «Elige la organización o el evento al que desees acceder», con masías agrupadas por ciudad (Valencia, Madrid, Barcelona). Trabajador: «Elige la masía o el evento», con sus masías asignadas. Coordinador: «Elige el evento», con una tabla de eventos asignados con fecha, estado, tipo y masía."
 />
@@ -188,6 +193,8 @@ El objetivo era que cada perfil comenzara por la información más útil para su
 
 <Diagram
   imagen={dashboardSegunRol}
+  imagenMovil={dashboardSegunRolMovil}
+  movilCompleto
   desplazable={false}
   alt="Tres dashboards unidos por flechas. Super Admin, visión global: eventos de todas las masías, estadísticas de reservas, calendario y la lista de coordinadores y masías. Admin, gestión operativa: eventos de su masía, tareas internas, banco de tareas, estadísticas y calendario. Novios, organización del propio evento: detalles del evento, tareas pendientes, presupuesto, mesas e invitados."
 />
@@ -257,6 +264,7 @@ La complejidad se mantenía en el sistema, pero quedaba convertida en decisiones
 
 <Diagram
   imagen={dependenciaServicios}
+  imagenMovil={dependenciaServiciosMovil}
   desplazable={false}
   ancho={640}
   alt="Tres pastillas conectadas por flechas: Servicio sencillo → Servicio agrupado → Pack."

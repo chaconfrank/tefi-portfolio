@@ -27,14 +27,18 @@ import InsightGrid from '../../components/case-study/InsightGrid.astro';
 import ImpactPillars from '../../components/case-study/ImpactPillars.astro';
 import composicionHero from '../../assets/proyectos/amaia-preferencias-payv/composicion-hero.png';
 import flujoAnterior from '../../assets/proyectos/amaia-preferencias-payv/flujo-anterior.png';
+import flujoAnteriorMovil from '../../assets/proyectos/amaia-preferencias-payv/flujo-anterior-movil.png';
 import acEntrevista from '../../assets/proyectos/amaia-preferencias-payv/ac-entrevista-preferencias.png';
 import apNuevasPreferencias from '../../assets/proyectos/amaia-preferencias-payv/ap-nuevas-preferencias.png';
 import perfilValidado from '../../assets/proyectos/amaia-preferencias-payv/perfil-validado.png';
 import fuentesPayv from '../../assets/proyectos/amaia-preferencias-payv/fuentes-payv.png';
 import preferenciasARevision from '../../assets/proyectos/amaia-preferencias-payv/preferencias-a-revision.png';
+import preferenciasARevisionMovil from '../../assets/proyectos/amaia-preferencias-payv/preferencias-a-revision-movil.png';
 import resumenObjetivosEdicion from '../../assets/proyectos/amaia-preferencias-payv/resumen-objetivos-edicion.png';
+import resumenObjetivosEdicionMovil from '../../assets/proyectos/amaia-preferencias-payv/resumen-objetivos-edicion-movil.png';
 import generarConIa from '../../assets/proyectos/amaia-preferencias-payv/generar-con-ia.png';
 import flujoFinal from '../../assets/proyectos/amaia-preferencias-payv/flujo-final.png';
+import flujoFinalMovil from '../../assets/proyectos/amaia-preferencias-payv/flujo-final-movil.png';
 
 {/* Los textos son los del documento «Prompts Claude · Preferencias + PAyV»,
     sin reescribir. No se añade nada que no esté en su contenido. Desktop es
@@ -77,6 +81,7 @@ Reducir el esfuerzo necesario para recoger las preferencias y conseguir que esa 
 <Diagram
   slot="media"
   imagen={flujoAnterior}
+  imagenMovil={flujoAnteriorMovil}
   alt="Flujo anterior en cuatro pasos: 01 Añadir preferencia manualmente, 02 Guardar en el perfil, 03 Información disponible y 04 Plan de Atención y Vida. Entre el paso 03 y el 04 la línea se corta con una cruz roja: «Sin conexión directa»."
 />
 
@@ -251,6 +256,8 @@ Facilitar su recogida tenía poco valor si después esa información volvía a q
 
 <Diagram
   imagen={preferenciasARevision}
+  imagenMovil={preferenciasARevisionMovil}
+  movilCompleto
   pie="Nueva información validada → nueva revisión del PAyV"
   alt="Dos pantallas de Amaia Profesionales unidas por una flecha: 01 Preferencias aprobadas, con las preferencias del perfil guardadas por categorías; y 02 Revisión disponible, el Plan de Atención y Vida con el aviso naranja «Revisión disponible» y el Resumen del Plan."
 />
@@ -271,6 +278,8 @@ La lógica se mantenía así durante todo el recorrido:
 
 <Diagram
   imagen={resumenObjetivosEdicion}
+  imagenMovil={resumenObjetivosEdicionMovil}
+  movilCompleto
   alt="Las dos partes del Plan de Atención y Vida en modo edición, lado a lado: el Resumen del Plan, con su texto editable, y Objetivos e intervenciones, una tabla de objetivos con sus intervenciones y la opción de eliminar filas; ambas con el botón «Aprobar»."
 />
 
@@ -393,6 +402,7 @@ El resultado fue un flujo en el que conocer mejor a la persona podía tener una 
 
 <Diagram
   imagen={flujoFinal}
+  imagenMovil={flujoFinalMovil}
   alt="El recorrido completo en cuatro pasos: Entrevistar, Estructurar, Validar y Aplicar. Debajo, lo que se obtiene en cada uno: Conversación, Preferencias, Información validada y PAyV."
 />
 
