@@ -61,3 +61,10 @@ que LinkedIn no recorte las portadas cuadradas o muy apaisadas. Son archivos
 generados a mano (con Pillow), no por el build: si cambia una portada o se
 añade un caso, hay que regenerar su imagen o se publicará la antigua (o
 ninguna).
+
+## Los PDF del CV
+
+Llegan exportados con la foto a resolución completa (~3,5 MB cada uno).
+Antes de copiarlos a `public/` se recomprime la foto a 300 ppp (con
+PyMuPDF, `rewrite_images`): quedan en ~100 KB con el texto y los enlaces
+intactos. Un CV que se descarga desde el móvil no debería pesar megas.

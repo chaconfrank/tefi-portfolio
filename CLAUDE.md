@@ -69,9 +69,9 @@ Requiere **Node ≥ 22.12** (ver `.nvmrc`). El Node por defecto del sistema es v
 | Logs del dev server | `npx astro dev logs` |
 | Build estático a `./dist/` | `npm run build` |
 | Servir el build | `npm run preview` |
-| Type-check (requiere `@astrojs/check`) | `npx astro check` |
+| Type-check suelto | `npm run check` |
 
-**No hay tests ni linter.** `npm run build` es la única verificación automática: falla si un `.md` incumple su schema Zod, si una utilidad de Tailwind no existe o si un import se rompe. Ejecútalo antes de dar por terminado un cambio.
+**No hay tests ni linter.** `npm run build` es la única verificación automática: corre `astro check` (tipos) antes de compilar, y falla si hay un error de tipos, si un `.md` incumple su schema Zod, si una utilidad de Tailwind no existe o si un import se rompe. Ejecútalo antes de dar por terminado un cambio.
 
 ## Idioma
 
@@ -119,7 +119,3 @@ y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
   globo arriba a la derecha. Cualquier cambio de copy en un case study o en
   una página hay que hacerlo **en los dos idiomas**. Detalle en
   `architecture.md` («Idiomas»).
-
-Puntos donde el código todavía no sigue las convenciones — arréglalos si tocas esa zona:
-
-1. **Sin `astro check`.** `@astrojs/check` no está instalado, así que nada comprueba tipos.
