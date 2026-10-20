@@ -227,9 +227,15 @@ Configurar la oferta de una finca podía implicar precios, costes, valores por p
 
 En el rediseño no intentamos eliminar esa complejidad. La organizamos en una estructura progresiva y reutilizable.
 
-<p class="font-medium text-ink">Servicio sencillo <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Servicio agrupado <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Pack</p>
-
 <Fragment slot="media">
+
+<Diagram
+  imagen={dependenciaServicios}
+  imagenMovil={dependenciaServiciosMovil}
+  desplazable={false}
+  ancho={640}
+  alt="Tres pastillas conectadas por flechas: Servicio sencillo → Servicio agrupado → Pack."
+/>
 
 <CaseSubsection compacta etiqueta="Empezar por piezas reutilizables" titulo="Servicio sencillo" composicion="apilada">
 
@@ -263,14 +269,6 @@ La complejidad se mantenía en el sistema, pero quedaba convertida en decisiones
   imagen={servicioAgrupado}
   desplazable={false}
   alt="Flujo de servicio agrupado en cuatro pasos. 01 Crear: «Entrantes calientes» con los servicios sencillos añadidos como ítems, mínimo y máximo de ítems a elegir y una pregunta para el cliente. 02 Guardado: el agrupado con sus opciones añadidas y la pregunta vinculada. 03 Listado: servicios agrupados con el número de elementos incluidos. 04 Editar: la ventana emergente con tres callouts: Reutilización de servicios, Mínimo y máximo de selección y Pregunta vinculada al cliente."
-/>
-
-<Diagram
-  imagen={dependenciaServicios}
-  imagenMovil={dependenciaServiciosMovil}
-  desplazable={false}
-  ancho={640}
-  alt="Tres pastillas conectadas por flechas: Servicio sencillo → Servicio agrupado → Pack."
 />
 
 <CaseSubsection compacta etiqueta="Escalar hasta una oferta completa" titulo="Pack" composicion="apilada">

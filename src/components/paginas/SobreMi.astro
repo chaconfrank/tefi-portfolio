@@ -113,19 +113,14 @@ const iconos: Record<string, string> = {
         />
       </div>
 
-      <!-- Presentación a la izquierda y párrafos a la derecha desde lg: el
-           texto ocupa todo el ancho sin líneas de más de 1.000 px. -->
-      <div class="grow lg:grid lg:grid-cols-2 lg:gap-x-12">
-        <div>
-          <p class="text-sm font-medium text-link">{SITE_ROLE} · {ui.ubicacion}</p>
-          <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-            {c.hola}
-          </h1>
-          <p class="mt-5 text-lg text-pretty">{c.lead}</p>
-        </div>
-        <div class="lg:[&>p:first-child]:mt-0">
-          {c.parrafos.map((p) => <p class="mt-4 text-pretty text-ink-soft">{p}</p>)}
-        </div>
+      <div class="grow">
+        <p class="text-sm font-medium text-link">{SITE_ROLE}</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          {c.hola}
+        </h1>
+
+        <p class="mt-5 text-lg text-pretty">{c.lead}</p>
+        {c.parrafos.map((p) => <p class="mt-4 text-pretty text-ink-soft">{p}</p>)}
       </div>
     </div>
 

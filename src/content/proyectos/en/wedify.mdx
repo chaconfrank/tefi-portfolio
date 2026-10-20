@@ -227,9 +227,15 @@ Setting up a venue's offering could involve prices, costs, per-person values, VA
 
 In the redesign, we didn't try to eliminate that complexity. We organized it into a progressive, reusable structure.
 
-<p class="font-medium text-ink">Simple service <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Grouped service <span aria-hidden="true" class="text-amaia-ink">→</span><span class="sr-only">,</span> Pack</p>
-
 <Fragment slot="media">
+
+<Diagram
+  imagen={dependenciaServicios}
+  imagenMovil={dependenciaServiciosMovil}
+  desplazable={false}
+  ancho={640}
+  alt="Three pills connected by arrows: Simple service → Grouped service → Pack."
+/>
 
 <CaseSubsection compacta etiqueta="Starting with reusable pieces" titulo="Simple service" composicion="apilada">
 
@@ -263,14 +269,6 @@ The complexity stayed in the system, but it was turned into explicit decisions w
   imagen={servicioAgrupado}
   desplazable={false}
   alt="Grouped service flow in four steps. 01 Create: “Entrantes calientes” (Hot starters) with the simple services added as items, minimum and maximum items to choose, and a question for the client. 02 Saved: the grouped service with its added options and the linked question. 03 List: grouped services with the number of items included. 04 Edit: the pop-up with three callouts: Service reuse, Minimum and maximum selection, and Question linked to the client."
-/>
-
-<Diagram
-  imagen={dependenciaServicios}
-  imagenMovil={dependenciaServiciosMovil}
-  desplazable={false}
-  ancho={640}
-  alt="Three pills connected by arrows: Simple service → Grouped service → Pack."
 />
 
 <CaseSubsection compacta etiqueta="Scaling up to a full offering" titulo="Pack" composicion="apilada">
