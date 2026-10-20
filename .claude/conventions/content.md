@@ -127,3 +127,14 @@ del contenedor**: encabezado, texto, destacado (debajo del texto) y visual
 en vertical. Antes el texto se quedaba en 7–9 de 12 columnas y dejaba un
 hueco vacío a la derecha; `composicion` sigue aceptándose pero ya no parte
 el bloque en dos columnas.
+`CaseReflection` tampoco reparte su texto en dos columnas.
+
+Cuando la composición del hero lateral es baja (más ancha que alta), el
+hero lleva `entradillaAncha`: la entradilla y el recorrido pasan a todo el
+ancho debajo de título e imagen, en lugar de quedarse en la columna
+izquierda con un hueco debajo de la imagen. Lo usan Wedify y Preferencias.
+
+Fuera de los case studies, las entradillas del hero de Inicio, de «Cómo
+trabajo» y de Sobre mí van **en una columna, con el párrafo debajo del
+título**. Se probaron a dos columnas (título a la izquierda, párrafo a la
+derecha) y se descartaron.
