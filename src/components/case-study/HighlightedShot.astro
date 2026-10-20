@@ -10,9 +10,11 @@ interface Props {
   // Rectángulo a resaltar, en % de la imagen (0–100), medido sobre el
   // archivo original: no cambia aunque la imagen se escale.
   zona: { x: number; y: number; ancho: number; alto: number };
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { imagen, alt, ancho, zona } = Astro.props;
+const { imagen, alt, ancho, zona, compacta = false } = Astro.props;
 const widths = [...new Set([ancho, ancho * 2].map((w) => Math.min(w, imagen.width)))];
 ---
 
@@ -23,7 +25,7 @@ const widths = [...new Set([ancho, ancho * 2].map((w) => Math.min(w, imagen.widt
   ni brillos, sólo el contorno. Es decorativo (aria-hidden): el alt ya dice
   qué botón es.
 -->
-<figure class="relative mx-auto mt-14 sm:mt-16" style={`max-width: ${ancho}px`}>
+<figure class:list={['relative mx-auto', compacta ? 'mt-10 sm:mt-12' : 'mt-14 sm:mt-16']} style={`max-width: ${ancho}px`}>
   <Image src={imagen} alt={alt} widths={widths} sizes={`(max-width: ${ancho}px) 100vw, ${ancho}px`} quality="high" class="h-auto w-full" />
   <span
     aria-hidden="true"

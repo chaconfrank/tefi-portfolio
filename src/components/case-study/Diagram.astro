@@ -26,12 +26,15 @@ interface Props {
   // a la escala del escritorio. Para composiciones de pantallas, que a 0,45
   // no se leerían; los diagramas de pasos van sin ella.
   movilCompleto?: boolean;
+  // En escritorio se sale de max-w-6xl hasta 80rem, como las parejas de
+  // capturas: para la composición protagonista de una sección.
+  amplio?: boolean;
 }
 
-const { imagen, alt, ancho, pie, imagenMovil, compacta = false, movilCompleto = false } = Astro.props;
+const { imagen, alt, ancho, pie, imagenMovil, compacta = false, movilCompleto = false, amplio = false } = Astro.props;
 // Con versión vertical no hace falta desplazar en horizontal: ya se lee.
 const desplazable = imagenMovil ? false : (Astro.props.desplazable ?? true);
-const maximo = ancho ?? 1152;
+const maximo = ancho ?? (amplio ? 1280 : 1152);
 const widths = [...new Set([768, maximo, maximo * 2].map((w) => Math.min(w, imagen.width)))];
 const movil = imagenMovil
   ? await getImage({
@@ -70,6 +73,7 @@ const estilo = [ancho && `--ancho-max: ${ancho}px`, anchoMovil && `--ancho-movil
     'mx-auto',
     compacta ? 'mt-10 sm:mt-12' : 'mt-12 sm:mt-14 lg:mt-16',
     ancho && 'max-w-(--ancho-max)',
+    amplio && 'lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:max-w-none lg:-translate-x-1/2',
     anchoMovil && 'max-md:max-w-(--ancho-movil)',
     // Pantallas a todo el ancho sólo hasta 32rem: en tablet vertical una
     // composición apilada de tres pantallas pasaba de 2.700 px de alto.
