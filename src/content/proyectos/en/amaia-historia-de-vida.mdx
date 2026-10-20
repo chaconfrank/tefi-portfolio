@@ -1,0 +1,609 @@
+---
+titulo: 'From an AI interview to information useful for care'
+descripcion: "Evolving Life Story to turn the AI-generated report into information useful for daily care, with professional judgment validating the AI's work."
+tipo: Startup
+empresa: 'Amaia Cuida'
+rol: 'Sole Product Designer across the three platforms'
+rolResumen: 'Product Designer · UX/UI · AI'
+periodo: '2023 — 2025'
+herramientas: []
+plantilla: editorial
+# Card cover: the same hero composition.
+portada: '../../../assets/proyectos/amaia-historia-de-vida/composicion-hero.png'
+portadaAlt: 'Life Story in Amaia Profesionales (laptop) and Amaia Conecta (tablet).'
+destacado: true
+# Same order as "General redesign": all three Amaia case studies go together and
+# the project-grouped listing is pending.
+orden: 1
+fecha: 2025-09-30
+borrador: false
+---
+
+import CaseHero from '../../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../../components/case-study/CaseFacts.astro';
+import CaseSection from '../../../components/case-study/CaseSection.astro';
+import CaseText from '../../../components/case-study/CaseText.astro';
+import Screenshot from '../../../components/case-study/Screenshot.astro';
+import Diagram from '../../../components/case-study/Diagram.astro';
+import CaseSubsection from '../../../components/case-study/CaseSubsection.astro';
+import AnnotatedScreenshot from '../../../components/case-study/AnnotatedScreenshot.astro';
+import DeviceShot from '../../../components/case-study/DeviceShot.astro';
+import ProposalPair from '../../../components/case-study/ProposalPair.astro';
+import ProductHandoff from '../../../components/case-study/ProductHandoff.astro';
+import StudyContext from '../../../components/case-study/StudyContext.astro';
+import FindingsMatrix from '../../../components/case-study/FindingsMatrix.astro';
+import ScreenDuo from '../../../components/case-study/ScreenDuo.astro';
+import ScreenEvolution from '../../../components/case-study/ScreenEvolution.astro';
+import QuoteSet from '../../../components/case-study/QuoteSet.astro';
+import composicionHero from '../../../assets/proyectos/amaia-historia-de-vida/composicion-hero.png';
+import interfazInicial from '../../../assets/proyectos/amaia-historia-de-vida/interfaz-inicial.png';
+import flujoInicial from '../../../assets/proyectos/amaia-historia-de-vida/flujo-inicial.png';
+import flujoInicialMovil from '../../../assets/proyectos/amaia-historia-de-vida/flujo-inicial-movil.png';
+import primeraIteracion from '../../../assets/proyectos/amaia-historia-de-vida/primera-iteracion.png';
+import flujoManual from '../../../assets/proyectos/amaia-historia-de-vida/flujo-manual.png';
+import flujoManualMovil from '../../../assets/proyectos/amaia-historia-de-vida/flujo-manual-movil.png';
+import propuestaEstructurado from '../../../assets/proyectos/amaia-historia-de-vida/propuesta-resumen-estructurado.png';
+import propuestaNarrativo from '../../../assets/proyectos/amaia-historia-de-vida/propuesta-resumen-narrativo.png';
+import primeraNavegacion from '../../../assets/proyectos/amaia-historia-de-vida/primera-navegacion-analisis-resumen.png';
+import decisionesValidacion from '../../../assets/proyectos/amaia-historia-de-vida/decisiones-primera-validacion.png';
+import decisionesValidacionMovil from '../../../assets/proyectos/amaia-historia-de-vida/decisiones-primera-validacion-movil.png';
+import flujoCompleto from '../../../assets/proyectos/amaia-historia-de-vida/flujo-completo.png';
+import flujoCompletoMovil from '../../../assets/proyectos/amaia-historia-de-vida/flujo-completo-movil.png';
+import apAnalisis from '../../../assets/proyectos/amaia-historia-de-vida/ap-analisis.png';
+import apResumen from '../../../assets/proyectos/amaia-historia-de-vida/ap-resumen.png';
+import acResumen from '../../../assets/proyectos/amaia-historia-de-vida/ac-resumen.png';
+import resumenVacio from '../../../assets/proyectos/amaia-historia-de-vida/resumen-estado-vacio.png';
+import resumenGenerando from '../../../assets/proyectos/amaia-historia-de-vida/resumen-estado-generando.png';
+import grabarAntes from '../../../assets/proyectos/amaia-historia-de-vida/grabar-antes-valoraciones.png';
+import grabarDespues from '../../../assets/proyectos/amaia-historia-de-vida/grabar-despues-historia-de-vida.png';
+import composicionFinal from '../../../assets/proyectos/amaia-historia-de-vida/composicion-final.png';
+import impactoObservado from '../../../assets/proyectos/amaia-historia-de-vida/impacto-observado.png';
+import impactoObservadoMovil from '../../../assets/proyectos/amaia-historia-de-vida/impacto-observado-movil.png';
+
+{/* The texts are the ones Estephany delivered, block by block and without
+    rewriting. Nothing is added that isn't in her content. Desktop is
+    always Amaia Profesionales and tablet, Amaia Conecta. */}
+
+<CaseHero
+  compacta
+  lateral
+  producto="Amaia Cuida"
+  disciplina="Life Story"
+  titulo={frontmatter.titulo}
+  contexto="Amaia Cuida is a digital ecosystem that helps centers and care homes apply Person-Centred Care (PCC) in daily care."
+  imagen={composicionHero}
+  imagenAlt="Amaia Profesionales on a laptop showing the summary of key points of a Life Story, and Amaia Conecta on a tablet showing Life Story with the interview script."
+  banda={false}
+>
+
+Life Story already used AI to turn interviews into a structured report on each person's life. However, some professionals still left Amaia to manually create a shorter, easier-to-consult version.
+
+The challenge was to evolve the feature so that content became useful information for daily care, without losing something essential: professional judgment still had to validate the AI's work.
+
+</CaseHero>
+
+{/* The same project facts as "General redesign": it's the same work at Amaia Cuida. */}
+<CaseFacts
+  fondo={false}
+  datos={[
+    { etiqueta: 'My role', valor: 'Product Designer UX/UI' },
+    { etiqueta: 'Duration', valor: '2 years', detalle: ['2023–2025'] },
+    { etiqueta: 'Team', valor: 'CEO, Frontend, Backend, and Customer Success' },
+    {
+      etiqueta: 'Products',
+      valor: '3 platforms',
+      detalle: ['Amaia Profesionales (web)', 'Amaia Conecta (tablet)', 'Amaia App (families)'],
+    },
+  ]}
+/>
+
+<CaseSection
+  compacta
+  id="punto-de-partida"
+  numero="01"
+  etiqueta="The starting point"
+  titulo="A complete report that still required work outside Amaia"
+  composicion="apilada"
+>
+
+Life Story already allowed recording an interview from Amaia Conecta and using AI to transcribe it and organize the information by life stages into a report.
+
+<Fragment slot="media">
+
+<Screenshot
+  imagen={interfazInicial}
+  alt='Initial Life Story interface, "Valoración de Historia de Vida" (Life Story Assessment): the interview transcript by interviewer and interviewee turns, the "Aprobar valoración" (Approve assessment) button, the audio player, and the "Obtener informe" (Get report) button.'
+  pie="Reconstruction of the initial interface based on later designs."
+  ancho={864}
+  class="mx-auto mt-10 max-w-[54rem] sm:mt-12"
+/>
+
+<CaseText compacta columna="izquierda">
+
+The report served its purpose as complete documentation of the person's life story, but regular conversations with care centers began to reveal a different kind of need: some professionals would later extract the most relevant information and manually create a shorter version in Word or other tools.
+
+Depending on the center, that summary could be added to the person's documentation, moved into internal tools, or made available so other professionals could consult it more quickly.
+
+</CaseText>
+
+<Diagram
+  compacta
+  imagen={flujoInicial}
+  imagenMovil={flujoInicialMovil}
+  desplazable={false}
+  alt="Initial flow in five steps: Interview, Transcribe with AI, Generate report, Leave Amaia, and Summarize manually. The last two steps, outside Amaia, are marked in red."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+The problem wasn't that information was missing, but that it still had to be manually transformed to make it easier to consult and use day to day.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="primera-iteracion"
+  numero="02"
+  etiqueta="The first iteration"
+  titulo="Making the AI's work visible and editable"
+  composicion="apilada"
+  destacado="If we show the analysis alongside the transcript, the professional will be able to cross-check the interview content and correct the AI's output without leaving Amaia."
+>
+
+Before considering the summary, the first problem we needed to solve was more immediate: professionals wanted to review and correct the AI-generated analysis without relying solely on the downloaded report.
+
+Based on the feedback we were getting from the centers, we put forward a first hypothesis:
+
+<Fragment slot="media">
+
+<CaseText compacta columna="izquierda">
+
+The first iteration brought the analysis directly into the interface and made it editable. Transcript and analysis were shown side by side so the professional could check the original content while reviewing each life stage.
+
+</CaseText>
+
+<AnnotatedScreenshot
+  compacta
+  ancha
+  imagen={primeraIteracion}
+  alt='First iteration of "Valoración de Historia de Vida": on the left, the interview transcript; on the right, the AI analysis by life stages (Childhood, Adolescence/Youth/Adulthood, Retirement, Present and future, Closing questions) with answers in editable fields and the "Modo edición" (Edit mode) button; below, the "Aprobar valoración" button.'
+  notas={[
+    { texto: 'Transcript as reference', x: 20, y: 15.9 },
+    { texto: 'Analysis visible and editable', x: 78, y: 16.4 },
+    { texto: 'Professional validation', x: 38.6, y: 85.2 },
+  ]}
+/>
+
+<CaseSubsection
+  compacta
+  titulo="A logical solution that revealed a new problem"
+  composicion="apilada"
+  destacado="The transcript needed to remain available for checking information, but it didn't need to visually compete with the output the professional had to review and use."
+>
+
+By using both sources side by side, we discovered we were giving nearly equal weight to two kinds of content that didn't hold the same value for the professional.
+
+The transcript could contain errors —for example, misreading a sentence or confusing speakers— that didn't always carry over into the analysis. By keeping both pieces of content constantly facing each other, the interface invited comparison and put too much focus on transcript errors when what they actually needed to work on was the analysis.
+
+This led us to rethink the hierarchy:
+
+</CaseSubsection>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="informacion-dia-a-dia"
+  numero="03"
+  etiqueta="Turning the analysis into day-to-day information"
+  titulo="Professionals needed a shorter, more actionable layer"
+  composicion="apilada"
+>
+
+Amaia already automated much of the process, but turning the output into easy-to-consult information still required manual work.
+
+<Fragment slot="media">
+
+<Diagram
+  compacta
+  imagen={flujoManual}
+  imagenMovil={flujoManualMovil}
+  desplazable={false}
+  alt='Workflow in four steps: 01 AI-generated analysis, the AI transcribes and analyzes the interview; 02 Select relevant information, the professional extracts the most important points; 03 Create manual summary, in a shorter format adapted to their needs; 04 Share / consult, the summary is added to the person’s documentation. Steps 02 and 03 are grouped as "Trabajo manual del profesional" (Professional’s manual work).'
+/>
+
+<CaseSubsection compacta titulo="What if Amaia also generated that first summary?" composicion="apilada">
+
+Since the AI already had the interview and analysis information, we proposed adding a second layer of information: an AI-generated summary that would serve as a starting point, which each professional could review and adapt.
+
+We weren't trying to reproduce each center's particular format. The goal was to find a common structure that could be useful across different care contexts.
+
+The question then shifted from only what information to summarize to also deciding how to present it so it would actually be easy to consult.
+
+</CaseSubsection>
+
+<CaseSubsection compacta titulo="We explored two ways of synthesizing the information" composicion="apilada" />
+
+<ProposalPair
+  compacta
+  propuestas={[
+    {
+      titulo: 'Structured summary',
+      texto: 'It organized information into blocks such as key data, relevant events, and narrative themes, making it easier to read directly and to locate specific information.',
+      imagen: propuestaEstructurado,
+      alt: 'Structured summary proposal in Amaia Profesionales: blocks "Datos principales extraídos" (Key data extracted), "Logros personales e historias de redención" (Personal achievements and stories of redemption), and "Temas narrativos" (Narrative themes), in lists.',
+    },
+    {
+      titulo: 'Narrative summary',
+      texto: 'It transformed the information into memories, experiences, and possible topics to talk about with the person, with a more narrative approach.',
+      imagen: propuestaNarrativo,
+      alt: 'Narrative summary proposal in Amaia Profesionales: topics to talk about, such as "Hablar sobre mi infancia en Galicia" (Talk about my childhood in Galicia), with first-person memories in quotes.',
+    },
+  ]}
+/>
+
+<CaseSubsection compacta titulo="A first test helped us decide the direction" composicion="apilada">
+
+We took both proposals to a first test with professionals to compare which type of information was most useful.
+
+The test helped us move toward a more direct, organized structure, closer to the type of information professionals needed to consult and later adapt.
+
+But it also let us detect a different problem.
+
+In that first proposal, Analysis and Summary already appeared as the two main outputs, while the transcript remained available as supporting information. However, the Summary tab stayed inactive until the professional approved the Analysis.
+
+</CaseSubsection>
+
+<DeviceShot
+  imagen={primeraNavegacion}
+  alt='First architecture with two tabs in Amaia Profesionales: "Análisis de la entrevista" (Interview analysis) active and "Resumen" (Summary) in gray, with an inactive appearance; top right, the "Ver transcripción" (View transcript) button.'
+  pie="First navigation proposal between Analysis and Summary used during the test."
+  ancho={960}
+  class="mx-auto mt-10 max-w-[60rem] sm:mt-12"
+/>
+
+<CaseSubsection compacta titulo="A visible tab wasn't enough if it looked inaccessible" composicion="apilada">
+
+During the test we observed that professionals didn't try to explore a tab they perceived as disabled.
+
+The intention was to show that a step came after the Analysis, but the inactive state achieved the opposite: the Summary was present in the interface, but it didn't help convey what would happen after approving.
+
+This led us to change the interaction: Analysis and Summary needed to stay visible and accessible, even when the Summary hadn't been generated yet.
+
+This first validation therefore produced two decisions that would shape the next version: moving forward with a more structured, direct Summary, and keeping both sections accessible to make the path between Analysis and Summary understandable.
+
+</CaseSubsection>
+
+<Diagram
+  compacta
+  imagen={decisionesValidacion}
+  imagenMovil={decisionesValidacionMovil}
+  desplazable={false}
+  alt="Decisions after the first validation. Content: from Narrative to Structured. Interaction: from inactive Summary to accessible Analysis + Summary."
+/>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="flujo-completo"
+  numero="04"
+  etiqueta="Designing the complete flow"
+  titulo="The AI generates. The professional validates."
+  composicion="apilada"
+  destacado="We prioritized the quality of information over immediacy: AI speeds up the work, but professional judgment remains part of the process."
+>
+
+Adding the Summary raised an important decision: at what point should it be generated, and from which information?
+
+Generating it directly from the interview would have been more immediate, but it could also carry AI errors from one output to the next. That's why we decided to keep an intermediate validation step.
+
+The professional had to review, edit, and approve the Analysis first. Only then would the AI use that already-validated information to generate the Summary.
+
+<Fragment slot="media">
+
+<Diagram
+  compacta
+  imagen={flujoCompleto}
+  imagenMovil={flujoCompletoMovil}
+  desplazable={false}
+  alt='Complete flow in five steps: 01 Interview, the professional records the Life Story from the tablet; 02 AI analysis, the AI transcribes and analyzes the interview; 03 Professional review, reviews, consults the transcript if needed, and edits the analysis; 04 Analysis approval; 05 AI summary, generated from the approved analysis. A dashed line goes back from step 05 to step 03: "Se puede volver a editar y regenerar" (It can be edited and regenerated again).'
+/>
+
+<CaseSubsection compacta titulo="Two outputs with different functions" composicion="apilada">
+
+With the new architecture, Analysis and Summary moved to the first level of Life Story, while the transcript remained available as supporting information.
+
+The Analysis kept the complete content organized by life stages and was the space where the professional could review and correct the AI's work.
+
+The Summary offered a shorter, more structured version, designed to quickly locate the most relevant information.
+
+After the first validation, both sections remained visible and accessible, making it more evident that they were part of the same process.
+
+</CaseSubsection>
+
+<ProposalPair
+  compacta
+  marco
+  propuestas={[
+    {
+      titulo: 'Analysis',
+      texto: 'Review and validate the complete information.',
+      imagen: apAnalisis,
+      alt: 'Life Story "Análisis" (Analysis) tab in Amaia Profesionales: "Análisis de las entrevistas" (Interview analysis) with the Childhood stage expanded and its editable text, and the "Aprobar análisis" (Approve analysis) button; above, the Analysis and Summary tabs next to "Subir entrevista" (Upload interview) and "Audios entrevistas" (Interview audio), the access to the transcript.',
+    },
+    {
+      titulo: 'Summary',
+      texto: 'Consult and adapt the synthesized information.',
+      imagen: apResumen,
+      alt: 'Amaia Profesionales "Resumen" (Summary) tab: "Resumen de puntos claves" (Key points summary) with the Download summary, Regenerate, and Edit buttons, the notice that it was generated with AI, and the blocks Key data extracted, Personal achievements and stories of redemption, and Narrative themes.',
+    },
+  ]}
+/>
+
+<CaseSubsection compacta titulo="From the desktop to the care context" composicion="apilada">
+
+Adding the Summary also expanded Life Story's role within Amaia Conecta.
+
+We added a dedicated Life Story section within each person's profile. Once the professional had reviewed and approved the Analysis from Amaia Profesionales and the Summary had been generated, it could also be consulted from the tablet.
+
+Content management stayed on the computer; Amaia Conecta worked as a place to consult the synthesized result.
+
+This avoided moving all the complexity of review and editing onto the tablet, and kept a clear function for each environment.
+
+</CaseSubsection>
+
+<ProductHandoff
+  compacta
+  origen={{
+    producto: 'Amaia Profesionales · Computer',
+    funcion: 'Review and validate',
+    imagen: apAnalisis,
+    alt: 'Life Story in Amaia Profesionales: the Analysis by life stages, editable and with the "Aprobar análisis" (Approve analysis) button.',
+  }}
+  destino={{
+    producto: 'Amaia Conecta · Tablet',
+    funcion: 'Consult',
+    imagen: acResumen,
+    alt: 'Life Story in a person\'s profile in Amaia Conecta: the "Resumen de puntos claves" (Key points summary) for consulting, with no editing buttons.',
+  }}
+  pie="Amaia Profesionales concentrated the review and management of content. Amaia Conecta made the result accessible for consultation from the tablet."
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+Life Story thus moved from generating a report to connecting the collection, validation, and consultation of information between both products.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="validar-flujo"
+  numero="05"
+  etiqueta="Validating the complete flow"
+  titulo="The same journey, tested with five centers"
+  composicion="apilada"
+>
+
+With the new flow already integrated into Amaia, we ran 5 usability sessions with professionals from five different centers, represented here as Center A, B, C, D, and E to preserve their identity.
+
+Everyone tested the same Life Story journey: from starting the interview in Amaia Conecta to reviewing the Analysis and consulting the Summary.
+
+Participants had different levels of familiarity with Amaia and different comfort with digital tools. So the goal wasn't to expect identical behavior, but to identify which friction points repeated across sessions and which were more one-off situations.
+
+To analyze the results, I compared the observations from the five sessions against the hypotheses I had previously defined about the happy path.
+
+<Fragment slot="media">
+
+<StudyContext
+  compacta
+  datos={[
+    { valor: '5', etiqueta: 'centers' },
+    { valor: '5', etiqueta: 'professionals' },
+    { valor: '1', etiqueta: 'same flow' },
+  ]}
+  participantes={['Center A', 'Center B', 'Center C', 'Center D', 'Center E']}
+/>
+
+<CaseSubsection
+  compacta
+  titulo="Problems didn't always show up in the same place, but we did find patterns"
+  composicion="apilada"
+/>
+
+<FindingsMatrix
+  compacta
+  titulo="Findings summary · 5 usability sessions"
+  columnas={['Recurring finding', 'What we observed', 'What it told us']}
+  hallazgos={[
+    {
+      hallazgo: "The entry point to Life Story wasn't clear enough",
+      observamos: 'In Centers A, B, D, and E, confusion arose between Life Story, Assessments, and other entry points during the journey.',
+      indicaba: "We needed to reduce the ambiguity of the entry point and make the destination match the professional's expectation more closely.",
+    },
+    {
+      hallazgo: "Pending tasks wasn't part of everyone's natural journey",
+      observamos: "In Centers A and B, professionals tended to go directly to the person's profile. In Center C, by contrast, they alternated between the profile and the Home.",
+      indicaba: "We couldn't rely on the Home as the only place to communicate that there was content pending review.",
+    },
+    {
+      hallazgo: 'AI processing times created uncertainty',
+      observamos: 'In several tests, doubts came up about whether to wait, refresh, or repeat an action when the Analysis or Summary took time to appear. In one case, the task was temporarily abandoned.',
+      indicaba: "We needed to better communicate the system's states while Amaia processed the information.",
+    },
+    {
+      hallazgo: "The Summary added value, but wasn't always discovered on its own",
+      observamos: 'In Centers A, D, and E, there were difficulties anticipating or locating the Summary after approving. In Center C, by contrast, it was already part of their regular review.',
+      indicaba: "Generating the Summary wasn't enough: the system needed to better communicate when it was being generated and when it was available.",
+    },
+    {
+      hallazgo: 'Professional review really was part of actual behavior',
+      observamos: 'In Centers B, C, and D, we observed professionals reviewing stages, correcting errors, removing repetitions, or adapting content before approving it.',
+      indicaba: "Human validation wasn't an artificial barrier: it fit the way professionals checked the AI's work.",
+    },
+  ]}
+/>
+
+<CaseSubsection compacta titulo="Not all observations carried the same weight" composicion="apilada">
+
+The tests also revealed more isolated issues: confusion about what Regenerate did, low visibility of some editing tools, or differences in how certain flow elements were used.
+
+We logged them as opportunities for improvement, but didn't treat them as general problems when the evidence only appeared in one or a few sessions.
+
+</CaseSubsection>
+
+<CaseSubsection
+  compacta
+  titulo="What we validated"
+  composicion="apilada"
+  destacado="The value of the Summary was understood once reached. The main friction was in making the path to it clearer."
+>
+
+Despite the friction along the way, the sessions reinforced two fundamental decisions.
+
+The first was the value of the Summary. When professionals reached it, they understood its role as a shorter version of the Life Story and found it useful to be able to consult and adapt it.
+
+The second was keeping the professional within the generation process. During the tests we observed how they reviewed, corrected, and adapted the AI-generated content before approving it, confirming that professional validation fit how they actually worked.
+
+</CaseSubsection>
+
+<CaseSubsection compacta titulo="Adjustments after the tests" composicion="apilada" />
+
+<CaseText compacta titulo="Making visible what the AI was doing" columna="izquierda" pegado>
+
+One of the clearest patterns appeared during wait times. When the Analysis or Summary weren't immediately available, professionals could be unsure whether the process was still running or whether they needed to do something.
+
+To reduce that uncertainty we worked on specific states to communicate what was happening while the information was being processed.
+
+</CaseText>
+
+<ScreenDuo
+  compacta
+  capturas={[
+    {
+      imagen: resumenVacio,
+      etiqueta: 'Empty state',
+      alt: 'Summary tab in empty state: "Aún no se ha grabado su Historia de Vida. Graba la entrevista desde Amaia Conecta, una vez apruebes el análisis se genera el resumen" (Your Life Story hasn\'t been recorded yet. Record the interview from Amaia Conecta — once you approve the analysis, the summary is generated), with a prompt to the "¿Cómo funciona?" (How does it work?) button.',
+    },
+    {
+      imagen: resumenGenerando,
+      etiqueta: 'Generating state',
+      pie: 'Proposed state during Summary generation.',
+      alt: 'Summary tab while generating: "El resumen de su Historia de Vida se está generando… Esto puede demorar unos minutos" (Your Life Story summary is being generated… This may take a few minutes), with the "Comprobar disponibilidad" (Check availability) button.',
+    },
+  ]}
+/>
+
+<CaseText compacta titulo="Making the entry point lead where the user expects" columna="izquierda">
+
+The tests also showed friction between the name of the action and its destination. A professional could select "Grabar Historia de Vida" (Record Life Story) and end up inside Assessments, where the recording interface was technically located.
+
+For the user, however, the two didn't necessarily represent the same context.
+
+We adjusted the journey so "Grabar Historia de Vida" would lead directly to Life Story, aligning the action's destination with the expectation created by its name.
+
+</CaseText>
+
+<ScreenEvolution
+  compacta
+  antes={{
+    imagen: grabarAntes,
+    etiqueta: 'Before · Assessments',
+    alt: 'Before: recording the interview in Amaia Conecta opened inside the Assessments tab, marked in orange.',
+  }}
+  despues={{
+    imagen: grabarDespues,
+    etiqueta: 'After · Life Story',
+    alt: 'After: the same recording opens inside the Life Story tab, marked in orange.',
+  }}
+/>
+
+<CaseText compacta conclusion columna="izquierda">
+
+The tests didn't change the direction of the solution. They helped us detect where the flow needed to better explain what was happening and make each action match the professional's expectation.
+
+</CaseText>
+
+</Fragment>
+
+</CaseSection>
+
+<CaseSection
+  compacta
+  id="resultado"
+  numero="06"
+  etiqueta="Result"
+  titulo="From generating a report to supporting care"
+  composicion="apilada"
+>
+
+Life Story evolved from a process focused mainly on generating a report into a flow where AI and professional judgment each play different roles.
+
+The AI processes the interview and structures the information; the professional reviews, corrects, and validates the content; and the Summary turns that work into a shorter version that can later be consulted from Amaia Profesionales and Amaia Conecta.
+
+The goal wasn't to replace professional judgment, but to reduce the work needed to turn a long interview into information that could be reused in daily care.
+
+<Fragment slot="media">
+
+<Diagram
+  compacta
+  imagen={composicionFinal}
+  desplazable={false}
+  alt="Final composition: Amaia Profesionales on a laptop with the Life Story's key points Summary, with Download summary, Regenerate, and Edit; and Amaia Conecta on a tablet with the same Summary inside the Life Story tab."
+/>
+
+<CaseSubsection compacta titulo="The Summary found its place in real-world work" composicion="apilada">
+
+The sessions showed that, once discovered, professionals understood the difference between the full Analysis and the Summary, and could decide when they needed to review, modify, or simply consult the result.
+
+The value wasn't just in shortening information. The Summary allowed what was learned during an interview to also remain available to other professionals who later cared for that person.
+
+</CaseSubsection>
+
+<QuoteSet
+  compacta
+  principal={{
+    texto: 'The good thing is that if at some point this person were taken off my caseload, another colleague could find out everything she needs to know about her life.',
+    autoria: 'Participating professional',
+  }}
+  secundarias={[
+    { texto: "If I like the summary I don't edit it, and if I don't like it I modify it.", autoria: 'Participating professional' },
+    { texto: "I think it's wonderful because it already gives you everything, then I just have to tweak it.", autoria: 'Participating professional' },
+  ]}
+/>
+
+<CaseSubsection compacta titulo="Observed impact" tituloOculto />
+
+<Diagram
+  compacta
+  imagen={impactoObservado}
+  imagenMovil={impactoObservadoMovil}
+  desplazable={false}
+  alt="Observed impact, in three cards: 01 Less manual work, relevant information no longer had to be summarized from scratch; 02 More accessible information, key content could be consulted more quickly and directly; 03 Professional judgment, the AI proposed and the professional reviewed and decided."
+/>
+
+<CaseSubsection compacta titulo="My takeaway" composicion="apilada" conclusion final>
+
+Automating doesn't always mean removing steps.
+
+In a product that uses AI to work with personal information, reducing friction mattered, but so did deciding where not to. Professional review added a step to the process, but it allowed the information to be validated before using it to generate a new output.
+
+This project taught me to design AI not as a final answer, but as a tool within a process where the user still has the ability to review, correct, and decide.
+
+</CaseSubsection>
+
+</Fragment>
+
+</CaseSection>
