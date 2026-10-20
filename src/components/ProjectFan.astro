@@ -28,6 +28,8 @@ const ui = UI[lang];
   - Se avanza con las flechas, deslizando el dedo o con ← → con el foco
     dentro. Enfocar una tarjeta con el tabulador la trae al centro.
   - prefers-reduced-motion: mismo abanico, sin transiciones.
+  - La portada de la primera tarjeta (la activa al cargar) es la imagen más
+    grande de la portada del sitio en móvil (LCP): va eager y con prioridad.
 -->
 <project-fan class="block">
   <div class="-mx-6 overflow-hidden sm:-mx-10" data-escena>
@@ -39,7 +41,7 @@ const ui = UI[lang];
       class="flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto px-6 pt-6 pb-10 [scrollbar-width:none] sm:scroll-px-10 sm:px-10 [&::-webkit-scrollbar]:hidden"
     >
       {
-        proyectos.map((proyecto) => {
+        proyectos.map((proyecto, i) => {
           const { titulo, titular, descripcion, tipo, periodo, empresa, rol, rolResumen, portada, portadaAlt } = proyecto.data;
           const chip = empresa ?? titulo.split('—')[0].trim();
           return (
@@ -52,8 +54,10 @@ const ui = UI[lang];
                   <Image
                     src={portada}
                     alt={portadaAlt ?? ''}
-                    widths={[360, 720, 1080]}
+                    widths={[360, 540, 720, 1080]}
                     sizes="(min-width: 1024px) 368px, 78vw"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={i === 0 ? 'high' : 'auto'}
                     class="aspect-[4/3] h-auto w-full object-contain p-3 transition duration-500 group-hover:opacity-40 group-hover:blur-sm motion-reduce:transition-none"
                   />
                 ) : (

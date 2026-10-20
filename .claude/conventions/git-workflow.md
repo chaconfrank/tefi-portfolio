@@ -2,12 +2,16 @@
 
 > Convenciones específicas de este proyecto.
 
-**Estado actual: el proyecto no es todavía un repositorio git.** Estas reglas aplican desde el `git init`.
 
 ## Ramas
 
 - Rama principal: `main`.
 - **Nunca commitear directamente en `main`.** Una rama por cambio: `feature/<slug>`, `fix/<slug>`.
+- **Cada rama sale de `main` y su PR va contra `main`.** No se apilan ramas
+  (una PR con base en otra rama): al fusionar la de arriba primero, sus
+  cambios acaban en la rama de abajo y no en `main`, que es lo que publica
+  Render. Si un cambio depende de otro sin fusionar, se espera a que entre.
+- PR pequeñas, de un solo tema: una PR de 70 archivos no se revisa de verdad.
 
 ## Commits
 

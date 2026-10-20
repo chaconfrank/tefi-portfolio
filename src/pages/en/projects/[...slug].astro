@@ -1,11 +1,11 @@
 ---
 import { render } from 'astro:content';
 import { getProyectos, slugDe } from '../../../i18n';
-import type { GetStaticPaths } from 'astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import ProjectLayout from '../../../layouts/ProjectLayout.astro';
 import CaseStudyLayout from '../../../layouts/CaseStudyLayout.astro';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = (async () => {
   // Los case studies en inglés (src/content/proyectos/en/), en /en/projects/.
   const proyectos = await getProyectos('en');
 
@@ -15,7 +15,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     // así nunca se llega a un callejón sin salida.
     props: { proyecto, siguiente: proyectos[(i + 1) % proyectos.length] },
   }));
-};
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { proyecto, siguiente } = Astro.props;
 const { Content } = await render(proyecto);
