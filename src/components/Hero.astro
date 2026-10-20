@@ -4,10 +4,13 @@ import { cvPath, getLang, ruta, UI } from '../i18n';
 
 const lang = getLang(Astro.url);
 const ui = UI[lang];
+// Lo que no dice Sobre mí: en qué sectores ha diseñado (los de los case
+// studies) y su papel en Amaia, tal como figura en el CV («Única diseñadora
+// de producto del equipo», oct 2023 – sep 2025).
 const complemento =
   lang === 'es'
-    ? 'Con sistemas de diseño que sostienen el producto y un proceso que conecta diseño y desarrollo.'
-    : 'With design systems that hold the product together and a process that connects design and development.';
+    ? 'Con sistemas de diseño que sostienen el producto y un proceso que conecta diseño y desarrollo. He diseñado para el cuidado en residencias, la gestión de eventos y el turismo adaptado: productos en los que cada perfil necesita ver algo distinto. En Amaia Cuida fui la única diseñadora de producto del equipo durante dos años.'
+    : "With design systems that hold the product together and a process that connects design and development. I've designed for care homes, event management and adapted tourism: products where each profile needs to see something different. At Amaia Cuida I was the team's only product designer for two years.";
 ---
 
 <!--
