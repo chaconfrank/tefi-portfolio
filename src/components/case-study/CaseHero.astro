@@ -5,7 +5,8 @@ import { Image } from 'astro:assets';
 interface Props {
   // Producto del caso; va en el acento de su marca, delante de la disciplina.
   producto: string;
-  disciplina: string;
+  // Sin disciplina, el eyebrow es sólo el producto.
+  disciplina?: string;
   titulo: string;
   imagen: ImageMetadata;
   imagenAlt: string;
@@ -18,9 +19,11 @@ interface Props {
   // Pasos del recorrido en una línea bajo la entradilla ("Entrevistar →
   // Agrupar → …"): resume el caso de un vistazo sin otro visual.
   recorrido?: string[];
+  // Menos aire entre las piezas del hero, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { producto, disciplina, titulo, imagen, imagenAlt, contexto, banda = true, recorrido } = Astro.props;
+const { producto, disciplina, titulo, imagen, imagenAlt, contexto, banda = true, recorrido, compacta = false } = Astro.props;
 const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width)))];
 ---
 
@@ -41,26 +44,47 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
 <header class="mx-auto max-w-6xl pt-10 sm:pt-16 lg:pt-24">
   <a href="/proyectos/" class="text-sm text-ink-soft transition hover:text-ink">← Proyectos</a>
 
-  <p class="mt-12 text-xs font-medium tracking-[0.14em] uppercase sm:mt-16">
-    <span class="text-amaia-ink">{producto}</span>{' '}
-    <span class="text-ink-soft"><span aria-hidden="true">·</span> {disciplina}</span>
+  <p class:list={['text-xs font-medium tracking-[0.14em] uppercase', compacta ? 'mt-10 sm:mt-12' : 'mt-12 sm:mt-16']}>
+    <span class="text-amaia-ink">{producto}</span>
+    {
+      disciplina && (
+        <>
+          {' '}
+          <span class="text-ink-soft">
+            <span aria-hidden="true">·</span> {disciplina}
+          </span>
+        </>
+      )
+    }
   </p>
 
   <h1 class="mt-5 max-w-4xl text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
     {titulo}
   </h1>
 
-  {contexto && <p class="mt-8 max-w-xl text-base leading-relaxed text-pretty text-ink-soft sm:mt-10">{contexto}</p>}
+  {
+    contexto && (
+      <p class:list={['max-w-xl text-base leading-relaxed text-pretty text-ink-soft', compacta ? 'mt-6 sm:mt-8' : 'mt-8 sm:mt-10']}>
+        {contexto}
+      </p>
+    )
+  }
 
   <div
-    class="mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-pretty text-ink-soft sm:mt-12 [&>p:first-child]:text-xl [&>p:first-child]:text-ink sm:[&>p:first-child]:text-2xl sm:[&>p:first-child]:leading-snug"
+    class:list={[
+      'max-w-2xl space-y-5 text-lg leading-relaxed text-pretty text-ink-soft [&>p:first-child]:text-xl [&>p:first-child]:text-ink sm:[&>p:first-child]:text-2xl sm:[&>p:first-child]:leading-snug',
+      compacta ? 'mt-6 sm:mt-8' : 'mt-10 sm:mt-12',
+    ]}
   >
     <slot />
   </div>
 
   {
     recorrido && (
-      <ol aria-label="Recorrido" class="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-base font-medium sm:mt-12 sm:text-lg">
+      <ol
+        aria-label="Recorrido"
+        class:list={['flex flex-wrap items-center gap-x-3 gap-y-2 text-base font-medium sm:text-lg', compacta ? 'mt-8' : 'mt-10 sm:mt-12']}
+      >
         {recorrido.map((paso, i) => (
           <li class="flex items-center gap-x-3">
             {i > 0 && (
@@ -78,7 +102,8 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
 
 <figure
   class:list={[
-    'relative isolate mt-20 sm:mt-28 lg:mt-32',
+    'relative isolate',
+    compacta ? 'mt-12 sm:mt-16' : 'mt-20 sm:mt-28 lg:mt-32',
     banda && 'after:absolute after:inset-x-[calc(50%-50vw)] after:top-[68%] after:bottom-0 after:-z-10 after:bg-paper-soft',
   ]}
 >

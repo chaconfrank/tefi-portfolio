@@ -11,9 +11,11 @@ interface Props {
   // Pegado al subtítulo que lo precede (una CaseSubsection sin texto propio):
   // margen corto, para que subtítulo y primer paso se lean juntos.
   pegado?: boolean;
+  // Ritmo apretado: el texto que sigue a un visual queda a ~48 px de él.
+  compacta?: boolean;
 }
 
-const { columna = 'derecha', conclusion = false, titulo, pegado = false } = Astro.props;
+const { columna = 'derecha', conclusion = false, titulo, pegado = false, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -21,7 +23,12 @@ const { columna = 'derecha', conclusion = false, titulo, pegado = false } = Astr
   capturas sin abrir una sección nueva. Mismo ancho de lectura (max-w-2xl)
   y mismo cuerpo que el texto de CaseSection.
 -->
-<div class:list={[pegado ? 'mt-10 sm:mt-12' : 'mt-20 sm:mt-24 lg:mt-28', 'lg:grid lg:grid-cols-12 lg:gap-x-10']}>
+<div
+  class:list={[
+    pegado ? 'mt-10 sm:mt-12' : compacta ? 'mt-10 sm:mt-12' : 'mt-20 sm:mt-24 lg:mt-28',
+    'lg:grid lg:grid-cols-12 lg:gap-x-10',
+  ]}
+>
   {
     titulo && (
       <h4
