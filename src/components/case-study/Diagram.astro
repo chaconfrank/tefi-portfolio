@@ -22,9 +22,15 @@ interface Props {
   // El de 64 compensaba el aire transparente que traían los PNG; con ese
   // aire recortado, sobra.
   compacta?: boolean;
+  // Con imagenMovil: la versión vertical a todo el ancho del móvil en vez de
+  // a la escala del escritorio. Para composiciones de pantallas, que a 0,45
+  // no se leerían; los diagramas de pasos van sin ella.
+  movilCompleto?: boolean;
 }
 
-const { imagen, alt, desplazable = true, ancho, pie, imagenMovil, compacta = false } = Astro.props;
+const { imagen, alt, ancho, pie, imagenMovil, compacta = false, movilCompleto = false } = Astro.props;
+// Con versión vertical no hace falta desplazar en horizontal: ya se lee.
+const desplazable = imagenMovil ? false : (Astro.props.desplazable ?? true);
 const maximo = ancho ?? 1152;
 const widths = [...new Set([768, maximo, maximo * 2].map((w) => Math.min(w, imagen.width)))];
 const movil = imagenMovil
@@ -39,8 +45,10 @@ const Marco = movil ? 'picture' : Fragment;
 // horizontal en escritorio (~0,45 del archivo): el texto se lee igual y no
 // ocupa más de lo necesario. A todo el ancho, un flujo de cinco pasos
 // pasaba de dos pantallas de alto.
-const anchoMovil = imagenMovil ? Math.round(imagenMovil.width * 0.45) : undefined;
-const estilo = [ancho && `max-width: ${ancho}px`, anchoMovil && `--ancho-movil: ${anchoMovil}px`].filter(Boolean).join('; ') || undefined;
+const anchoMovil = imagenMovil && !movilCompleto ? Math.round(imagenMovil.width * 0.45) : undefined;
+// Los anchos van como variables y se aplican con clases: un max-width en
+// línea ganaría a la clase de móvil.
+const estilo = [ancho && `--ancho-max: ${ancho}px`, anchoMovil && `--ancho-movil: ${anchoMovil}px`].filter(Boolean).join('; ') || undefined;
 ---
 
 <!--
@@ -61,7 +69,11 @@ const estilo = [ancho && `max-width: ${ancho}px`, anchoMovil && `--ancho-movil: 
   class:list={[
     'mx-auto',
     compacta ? 'mt-10 sm:mt-12' : 'mt-12 sm:mt-14 lg:mt-16',
-    imagenMovil && 'max-md:max-w-(--ancho-movil)',
+    ancho && 'max-w-(--ancho-max)',
+    anchoMovil && 'max-md:max-w-(--ancho-movil)',
+    // Pantallas a todo el ancho sólo hasta 32rem: en tablet vertical una
+    // composición apilada de tres pantallas pasaba de 2.700 px de alto.
+    imagenMovil && movilCompleto && 'max-md:max-w-[32rem]',
   ]}
   style={estilo}
 >
@@ -72,7 +84,7 @@ const estilo = [ancho && `max-width: ${ancho}px`, anchoMovil && `--ancho-movil: 
         <source
           media="(max-width: 47.99rem)"
           srcset={movil.srcSet.attribute}
-          sizes={`${anchoMovil}px`}
+          sizes={anchoMovil ? `${anchoMovil}px` : '(max-width: 32rem) 100vw, 32rem'}
           type="image/webp"
           width={imagenMovil.width}
           height={imagenMovil.height}
