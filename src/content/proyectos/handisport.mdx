@@ -16,6 +16,7 @@ borrador: false
 ---
 
 import CaseHero from '../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../components/case-study/CaseFacts.astro';
 import CaseSection from '../../components/case-study/CaseSection.astro';
 import CaseText from '../../components/case-study/CaseText.astro';
 import Diagram from '../../components/case-study/Diagram.astro';
@@ -48,6 +49,7 @@ import resultadoAlcance from '../../assets/proyectos/handisport/resultado-alcanc
 
 <CaseHero
   compacta
+  lateral
   producto="HandiSport Mallorca"
   titulo={frontmatter.titulo}
   imagen={composicionHero}
@@ -57,26 +59,17 @@ import resultadoAlcance from '../../assets/proyectos/handisport/resultado-alcanc
 
 HandiSport Mallorca conecta a personas con determinadas necesidades de accesibilidad con actividades deportivas y turísticas adaptadas. El proyecto consistió en replantear una web muy desactualizada y convertirla en una experiencia responsive que acompañara al usuario desde el descubrimiento de una actividad hasta la solicitud y gestión de su reserva.
 
-<dl aria-label="Datos del proyecto" class="mt-5 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-6 text-base sm:mt-7 lg:w-[54rem] lg:grid-cols-4">
-  <div>
-    <dt class="text-xs font-medium tracking-[0.14em] uppercase">Rol</dt>
-    <dd class="mt-2 leading-snug font-medium text-ink">Product Designer UX/UI</dd>
-  </div>
-  <div>
-    <dt class="text-xs font-medium tracking-[0.14em] uppercase">Tipo</dt>
-    <dd class="mt-2 leading-snug font-medium text-ink">Proyecto freelance</dd>
-  </div>
-  <div>
-    <dt class="text-xs font-medium tracking-[0.14em] uppercase">Producto</dt>
-    <dd class="mt-2 leading-snug font-medium text-ink">Web app responsive</dd>
-  </div>
-  <div>
-    <dt class="text-xs font-medium tracking-[0.14em] uppercase">Plataformas</dt>
-    <dd class="mt-2 leading-snug font-medium text-ink">Desktop + Mobile</dd>
-  </div>
-</dl>
-
 </CaseHero>
+
+<CaseFacts
+  fondo={false}
+  datos={[
+    { etiqueta: 'Rol', valor: 'Product Designer UX/UI' },
+    { etiqueta: 'Tipo', valor: 'Proyecto freelance' },
+    { etiqueta: 'Producto', valor: 'Web app responsive' },
+    { etiqueta: 'Plataformas', valor: 'Desktop + Mobile' },
+  ]}
+/>
 
 <CaseSection
   compacta
