@@ -19,9 +19,11 @@ interface Props {
   // Captura apaisada: 8 de 12 columnas (≈ 755 px) en vez de 7 (≈ 655), y la
   // leyenda en las 4 restantes.
   ancha?: boolean;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { imagen, alt, notas, ancha = false } = Astro.props;
+const { imagen, alt, notas, ancha = false, compacta = false } = Astro.props;
 const ancho = ancha ? 755 : 655;
 const widths = [...new Set([ancho, ancho * 2].map((w) => Math.min(w, imagen.width)))];
 const numero = (i: number) => String(i + 1).padStart(2, '0');
@@ -35,7 +37,14 @@ const numero = (i: number) => String(i + 1).padStart(2, '0');
   que se separen de la interfaz sin tapar nada que haya que leer. En móvil
   bajan de tamaño: la captura se reduce mucho y a 28 px tapaban la interfaz.
 -->
-<figure class="mt-20 sm:mt-24 lg:mt-28 lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-10">
+<figure
+  class:list={[
+    'lg:grid lg:grid-cols-12 lg:gap-x-10',
+    // Compacta: la leyenda arriba, junto al inicio de la captura. Centrada,
+    // con capturas altas quedaba flotando a media altura con mucho vacío.
+    compacta ? 'mt-10 sm:mt-12 lg:items-start' : 'mt-20 sm:mt-24 lg:mt-28 lg:items-center',
+  ]}
+>
   <div class:list={['relative', ancha ? 'lg:col-span-8' : 'lg:col-span-7']}>
     <div class="overflow-hidden rounded-xl bg-paper shadow-xl ring-1 shadow-ink/10 ring-ink/10">
       <Image src={imagen} alt={alt} widths={widths} sizes={`(min-width: 64rem) ${ancho}px, 100vw`} quality="high" class="h-auto w-full" />
@@ -53,7 +62,7 @@ const numero = (i: number) => String(i + 1).padStart(2, '0');
     }
   </div>
 
-  <figcaption class:list={['mt-10 lg:col-span-4 lg:mt-0', !ancha && 'lg:col-start-9']}>
+  <figcaption class:list={['lg:col-span-4 lg:mt-0', compacta ? 'mt-8 lg:pt-2' : 'mt-10', !ancha && 'lg:col-start-9']}>
     <ol class="space-y-5">
       {
         notas.map(({ texto, detalle }, i) => (

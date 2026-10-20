@@ -5,52 +5,47 @@ import { Image } from 'astro:assets';
 interface Captura {
   imagen: ImageMetadata;
   alt: string;
-  // Nombre corto de la pantalla, va al lado de la captura.
+  // Nombre corto de la pantalla, va debajo de la captura.
   etiqueta: string;
 }
 
 interface Props {
   capturas: [Captura, Captura];
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { capturas } = Astro.props;
+const { capturas, compacta = false } = Astro.props;
 ---
 
 <!--
-  Dos capturas grandes y escalonadas: la primera ocupa 9 de 12 columnas a la
-  izquierda y la segunda 9 a la derecha, así cada una se ve a ~850 px y se
-  lee la interfaz. Los huecos que deja el escalón los ocupa la etiqueta de
-  cada pantalla, que así no necesita más espacio ni anotaciones encima.
-  Sin solape: las dos capturas llevan interfaz hasta el borde.
-  En móvil se apilan a todo el ancho con la etiqueta debajo.
+  Dos pantallas relacionadas, lado a lado y a la misma altura, ocupando
+  juntas el contenedor visual: en escritorio el bloque se sale de max-w-6xl
+  hasta 80rem (sin pasar del viewport menos el margen de página), igual que
+  ScreenEvolution, para que cada captura se vea a ~610 px y no quede pequeña
+  en medio de blanco. La etiqueta va debajo de cada una.
+  Por debajo de lg se apilan a todo el ancho.
 -->
-<div class="mt-20 space-y-12 sm:mt-24 lg:mt-28 lg:space-y-20">
+<div
+  class:list={[
+    'grid gap-y-10 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2 lg:grid-cols-2 lg:gap-x-8',
+    compacta ? 'mt-10 sm:mt-12' : 'mt-20 sm:mt-24 lg:mt-28',
+  ]}
+>
   {
-    capturas.map(({ imagen, alt, etiqueta }, i) => (
-      <figure class="lg:grid lg:grid-cols-12 lg:gap-x-10">
-        <div
-          class:list={[
-            'overflow-hidden rounded-xl bg-paper shadow-xl ring-1 shadow-ink/10 ring-ink/10 lg:col-span-9',
-            i === 1 && 'lg:col-start-4',
-          ]}
-        >
+    capturas.map(({ imagen, alt, etiqueta }) => (
+      <figure>
+        <div class="overflow-hidden rounded-xl bg-paper shadow-xl ring-1 shadow-ink/10 ring-ink/10">
           <Image
             src={imagen}
             alt={alt}
-            widths={[768, 1152, Math.min(imagen.width, 1708)]}
-            sizes="(min-width: 72rem) 854px, 100vw"
+            widths={[640, 1280, Math.min(imagen.width, 1708)]}
+            sizes="(min-width: 64rem) 624px, 100vw"
             quality="high"
             class="h-auto w-full"
           />
         </div>
-        <figcaption
-          class:list={[
-            'mt-4 text-xs font-medium tracking-[0.14em] text-ink-soft uppercase lg:col-span-3 lg:mt-0',
-            i === 0 ? 'lg:self-end' : 'lg:col-start-1 lg:row-start-1 lg:text-right',
-          ]}
-        >
-          {etiqueta}
-        </figcaption>
+        <figcaption class="mt-4 text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">{etiqueta}</figcaption>
       </figure>
     ))
   }

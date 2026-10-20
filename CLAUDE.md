@@ -106,10 +106,13 @@ y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
   bloque a bloque. El primero (`amaia-cuida-rediseno.mdx`) usa la plantilla
   editorial; las cifras de QA del case study antiguo (24 h, backlog 70 → 15) no
   vuelven salvo que lleguen en algún bloque.
-- **Métricas de los case studies**: Handisport lleva los 4 tipos
-  de discapacidad; Wedify, que la plataforma llegó a producción. Lo que **no**
-  hay y no se va a inventar: datos de uso de Wedify (ella no siguió en el
-  proyecto) ni research con usuarios en Handisport (no lo hubo).
+- **HandiSport** (`handisport.mdx`, editorial) sale de su documento maestro de
+  prompts: 5 categorías de accesibilidad, sin métricas, sin contacto ni tests
+  con usuarios, y su participación terminó con la entrega de los diseños.
+  Color Guidance + Typography **no** es un Design System.
+- **Wedify** (`wedify.mdx`, editorial) sale del documento de prompts de
+  Wedify: sin métricas, sin research ni tests con usuarios, y la plataforma
+  **no estaba terminada** cuando ella salió — no decir que llegó a producción.
 - **El blog está oculto**: el único post era de relleno y va con `borrador: true`.
   La colección y el feed siguen compilando por si se retoma.
 - **Pendiente de decidir**: el sitio será bilingüe ES/EN — español por defecto en

@@ -66,6 +66,19 @@
      que una pausa no se confunda con la banda del design system. */
   --color-amaia-soft: #eef7f4;
 
+  /* Morado de Wedify, del tono de sus botones, como acento de su case study
+     (8,6:1 sobre el papel). No se usa como token propio en los componentes:
+     el MDX de Wedify reasigna --color-amaia-* a estos dos en su envoltorio,
+     así los componentes compartidos se tiñen sin tocarlos. */
+  --color-wedify-ink: #5b4593;
+  --color-wedify-soft: #f3f0fa;
+
+  /* Naranja de HandiSport Mallorca, oscurecido para usarse como texto
+     pequeño (6:1 sobre el papel; el naranja de su marca no llega a 3:1).
+     Mismo mecanismo que Wedify: su MDX reasigna --color-amaia-* a estos. */
+  --color-handisport-ink: #a24a06;
+  --color-handisport-soft: #fdf1e7;
+
   /* Giro del sello. Lento a propósito: a más velocidad marea y distrae del CTA. */
   --animate-seal-spin: seal-spin 22s linear infinite;
 
@@ -211,6 +224,14 @@
     /* El verde de Amaia, aclarado para leerse sobre el papel oscuro (8,9:1). */
     --color-amaia-ink: #5fd0b8;
     --color-amaia-soft: #16201d;
+
+    /* El lila de Wedify, aclarado para el papel oscuro (8,1:1). */
+    --color-wedify-ink: #b9a7ec;
+    --color-wedify-soft: #1c1a24;
+
+    /* El naranja de HandiSport, aclarado para el papel oscuro (9:1). */
+    --color-handisport-ink: #f5a35c;
+    --color-handisport-soft: #221a14;
 
     /* El verde se aclara en oscuro para no apagarse sobre el cristal. */
     --color-online: #4ade80;

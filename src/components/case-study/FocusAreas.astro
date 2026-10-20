@@ -9,9 +9,11 @@ interface Props {
   // como están colocadas en la captura: así cada explicación cae en el
   // mismo cuadrante que su tarjeta en el Home.
   areas: [Area, Area, Area, Area];
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { areas } = Astro.props;
+const { areas, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -19,7 +21,12 @@ const { areas } = Astro.props;
   Las columnas siguen la proporción de la captura (la de la izquierda es
   más ancha) para que la correspondencia se vea sin flechas ni números.
 -->
-<dl class="mt-14 grid gap-y-10 sm:grid-cols-2 sm:grid-rows-2 sm:grid-flow-col sm:gap-x-10 sm:gap-y-12 lg:grid-cols-[57fr_43fr]">
+<dl
+  class:list={[
+    'grid gap-y-8 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-10 sm:gap-y-12 lg:grid-cols-[57fr_43fr]',
+    compacta ? 'mt-10' : 'mt-14',
+  ]}
+>
   {
     areas.map(({ titulo, texto }) => (
       <div class="border-t border-line pt-5">

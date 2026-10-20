@@ -16,9 +16,23 @@ interface Props {
   // Última subsección del caso: más aire debajo antes de "Siguiente case
   // study", para que se lea como final.
   final?: boolean;
+  // Línea corta en mayúsculas encima del subtítulo, para subsecciones que
+  // tienen a la vez nombre de paso y titular ("Servicio sencillo").
+  etiqueta?: string;
+  // Mismo ritmo apretado que CaseSection compacta: ~72 px entre subsecciones.
+  compacta?: boolean;
 }
 
-const { titulo, composicion = 'dividida', destacado, tituloOculto = false, conclusion = false, final = false } = Astro.props;
+const {
+  titulo,
+  composicion = 'dividida',
+  destacado,
+  tituloOculto = false,
+  conclusion = false,
+  final = false,
+  etiqueta,
+  compacta = false,
+} = Astro.props;
 const apilada = composicion === 'apilada';
 const conTexto = Astro.slots.has('default');
 ---
@@ -33,11 +47,27 @@ const conTexto = Astro.slots.has('default');
   class:list={[
     // Con el título oculto no hay nada visible que separar: sólo el hueco
     // hasta el visual que lleva el título dibujado.
-    tituloOculto ? 'mt-16 sm:mt-20' : 'mt-28 sm:mt-32 lg:mt-40',
+    // Con el título oculto no hay nada visible que separar: en compacta el
+    // visual que sigue ya trae su margen, y sumar otro era altura vacía.
+    tituloOculto ? (compacta ? '' : 'mt-16 sm:mt-20') : compacta ? 'mt-14 sm:mt-16 lg:mt-20' : 'mt-28 sm:mt-32 lg:mt-40',
     'lg:grid lg:grid-cols-12 lg:gap-x-10',
     final && 'mb-12 sm:mb-20 lg:mb-28',
   ]}
 >
+  {
+    etiqueta && (
+      <p
+        class:list={[
+          'mb-4 text-xs font-medium tracking-[0.14em] text-amaia-ink uppercase',
+          apilada ? 'lg:col-span-8' : 'lg:col-span-5',
+          'lg:col-start-1',
+        ]}
+      >
+        {etiqueta}
+      </p>
+    )
+  }
+
   <h3
     class:list={[
       'max-w-2xl text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-3xl',
@@ -52,8 +82,9 @@ const conTexto = Astro.slots.has('default');
     conTexto && (
       <div
         class:list={[
-          'mt-8 max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
-          apilada ? 'lg:col-span-7 lg:col-start-1 lg:mt-10' : 'lg:col-span-6 lg:col-start-7 lg:mt-1',
+          'max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft',
+          compacta ? 'mt-5 sm:mt-6' : 'mt-8',
+          apilada ? ['lg:col-span-7 lg:col-start-1', compacta ? 'lg:mt-6' : 'lg:mt-10'] : 'lg:col-span-6 lg:col-start-7 lg:mt-1',
           conclusion &&
             '[&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl',
         ]}

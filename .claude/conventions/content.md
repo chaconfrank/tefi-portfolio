@@ -43,6 +43,30 @@ ideas de la autora). Un único botón resaltado sobre una pantalla va con
 `HighlightedShot` (aro en `--color-metric`, sin halos) e insights compactos
 de research con `InsightGrid`.
 
+`CaseHero`, `CaseSection`, `CaseSubsection` y `CaseText` aceptan
+`compacta`: el mismo componente con el ritmo vertical apretado (capítulos a
+~112 px, subsecciones a ~80 px, texto → visual ~48 px). Wedify, HandiSport y
+Amaia · Rediseño general lo usan enteros; Historia de Vida y Preferencias van
+sin él. Los componentes de visual, franja y cierre que usa Rediseño general
+también la aceptan, con valor por defecto sin cambios. Para la composición
+de ese caso hay además `CaseHero lateral` (texto a la izquierda y composición
+a la derecha desde lg, alineada arriba con el eyebrow para que se vea al
+entrar) con `CaseFacts fondo={false}` debajo (franja entre filetes, sin gris):
+es el hero de Rediseño general, Wedify y HandiSport. Además, `CaseSection destacadoDebajo` (en 'apilada', el destacado bajo el texto
+en vez de en el extremo derecho) y `VersionStep` con `disposicion="columna"`
+(dos versiones lado a lado, cada captura pegada a su texto) o
+`"completa"`. `CaseSubsection` admite también `etiqueta`, una línea en
+mayúsculas encima del subtítulo.
+
+**Acento por producto:** los componentes pintan el acento con
+`--color-amaia-*`. Un caso de otro producto no los toca: envuelve su MDX en
+un `<div>` que reasigna esas variables a sus propios tokens
+(`[--color-amaia-ink:var(--color-wedify-ink)]`, ver `wedify.mdx` y
+`handisport.mdx`). `CaseHero` sin `disciplina` deja el eyebrow sólo con el
+producto. Si el
+dev server no tiñe tras crear un `.mdx` nuevo, reinícialo: Tailwind no
+había escaneado el archivo.
+
 Los `<p>` del MDX no llevan el scope de esos componentes: se estilan con
 variantes `[&>p]`, no con `<style>`. En MDX los comentarios son `{/* */}`
 (`<!-- -->` rompe el build), y el texto que va dentro de un `<p>` del
