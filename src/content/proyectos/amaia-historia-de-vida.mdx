@@ -17,6 +17,7 @@ borrador: false
 ---
 
 import CaseHero from '../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../components/case-study/CaseFacts.astro';
 import CaseSection from '../../components/case-study/CaseSection.astro';
 import CaseText from '../../components/case-study/CaseText.astro';
 import Screenshot from '../../components/case-study/Screenshot.astro';
@@ -34,13 +35,17 @@ import QuoteSet from '../../components/case-study/QuoteSet.astro';
 import composicionHero from '../../assets/proyectos/amaia-historia-de-vida/composicion-hero.png';
 import interfazInicial from '../../assets/proyectos/amaia-historia-de-vida/interfaz-inicial.png';
 import flujoInicial from '../../assets/proyectos/amaia-historia-de-vida/flujo-inicial.png';
+import flujoInicialMovil from '../../assets/proyectos/amaia-historia-de-vida/flujo-inicial-movil.png';
 import primeraIteracion from '../../assets/proyectos/amaia-historia-de-vida/primera-iteracion.png';
 import flujoManual from '../../assets/proyectos/amaia-historia-de-vida/flujo-manual.png';
+import flujoManualMovil from '../../assets/proyectos/amaia-historia-de-vida/flujo-manual-movil.png';
 import propuestaEstructurado from '../../assets/proyectos/amaia-historia-de-vida/propuesta-resumen-estructurado.png';
 import propuestaNarrativo from '../../assets/proyectos/amaia-historia-de-vida/propuesta-resumen-narrativo.png';
 import primeraNavegacion from '../../assets/proyectos/amaia-historia-de-vida/primera-navegacion-analisis-resumen.png';
 import decisionesValidacion from '../../assets/proyectos/amaia-historia-de-vida/decisiones-primera-validacion.png';
+import decisionesValidacionMovil from '../../assets/proyectos/amaia-historia-de-vida/decisiones-primera-validacion-movil.png';
 import flujoCompleto from '../../assets/proyectos/amaia-historia-de-vida/flujo-completo.png';
+import flujoCompletoMovil from '../../assets/proyectos/amaia-historia-de-vida/flujo-completo-movil.png';
 import apAnalisis from '../../assets/proyectos/amaia-historia-de-vida/ap-analisis.png';
 import apResumen from '../../assets/proyectos/amaia-historia-de-vida/ap-resumen.png';
 import acResumen from '../../assets/proyectos/amaia-historia-de-vida/ac-resumen.png';
@@ -50,12 +55,15 @@ import grabarAntes from '../../assets/proyectos/amaia-historia-de-vida/grabar-an
 import grabarDespues from '../../assets/proyectos/amaia-historia-de-vida/grabar-despues-historia-de-vida.png';
 import composicionFinal from '../../assets/proyectos/amaia-historia-de-vida/composicion-final.png';
 import impactoObservado from '../../assets/proyectos/amaia-historia-de-vida/impacto-observado.png';
+import impactoObservadoMovil from '../../assets/proyectos/amaia-historia-de-vida/impacto-observado-movil.png';
 
 {/* Los textos son los que ha entregado Estephany, bloque a bloque y sin
     reescribir. No se añade nada que no esté en su contenido. Desktop es
     siempre Amaia Profesionales y tablet, Amaia Conecta. */}
 
 <CaseHero
+  compacta
+  lateral
   producto="Amaia Cuida"
   disciplina="Historia de Vida"
   titulo={frontmatter.titulo}
@@ -71,11 +79,29 @@ El reto fue evolucionar la funcionalidad para convertir ese contenido en informa
 
 </CaseHero>
 
+{/* Los mismos datos del proyecto que «Rediseño general»: es el mismo
+    trabajo en Amaia Cuida. */}
+<CaseFacts
+  fondo={false}
+  datos={[
+    { etiqueta: 'Mi rol', valor: 'Product Designer UX/UI' },
+    { etiqueta: 'Duración', valor: '2 años', detalle: ['2023–2025'] },
+    { etiqueta: 'Equipo', valor: 'CEO, Frontend, Backend y Customer Success' },
+    {
+      etiqueta: 'Productos',
+      valor: '3 plataformas',
+      detalle: ['Amaia Profesionales (web)', 'Amaia Conecta (tablet)', 'Amaia App (familias)'],
+    },
+  ]}
+/>
+
 <CaseSection
+  compacta
   id="punto-de-partida"
   numero="01"
   etiqueta="El punto de partida"
   titulo="Un informe completo que aún requería trabajo fuera de Amaia"
+  composicion="apilada"
 >
 
 Historia de Vida ya permitía grabar una entrevista desde Amaia Conecta y utilizar IA para transcribirla y organizar la información por etapas vitales en un informe.
@@ -87,10 +113,10 @@ Historia de Vida ya permitía grabar una entrevista desde Amaia Conecta y utiliz
   alt="Interfaz inicial de Historia de Vida, «Valoración de Historia de Vida»: la transcripción de la entrevista por turnos de entrevistador y entrevistado, el botón «Aprobar valoración», el reproductor del audio y el botón «Obtener informe»."
   pie="Reconstrucción de la interfaz inicial a partir de diseños posteriores."
   ancho={864}
-  class="mx-auto mt-20 max-w-[54rem] sm:mt-24 lg:mt-28"
+  class="mx-auto mt-10 max-w-[54rem] sm:mt-12"
 />
 
-<CaseText columna="izquierda">
+<CaseText compacta columna="izquierda">
 
 El informe cumplía su función como documentación completa de la historia de la persona, pero las conversaciones habituales con los centros empezaron a revelar otro tipo de necesidad: algunos profesionales extraían después la información más relevante y creaban manualmente una versión más breve en Word u otras herramientas.
 
@@ -99,11 +125,14 @@ Dependiendo del centro, ese resumen podía incorporarse a la documentación de l
 </CaseText>
 
 <Diagram
+  compacta
   imagen={flujoInicial}
+  imagenMovil={flujoInicialMovil}
+  desplazable={false}
   alt="Flujo inicial en cinco pasos: Entrevistar, Transcribir con IA, Generar informe, Salir de Amaia y Resumir manualmente. Los dos últimos pasos, fuera de Amaia, van marcados en rojo."
 />
 
-<CaseText conclusion>
+<CaseText compacta conclusion columna="izquierda">
 
 El problema no era que faltase información, sino que todavía había que transformarla manualmente para hacerla más fácil de consultar y utilizar en el día a día.
 
@@ -114,11 +143,13 @@ El problema no era que faltase información, sino que todavía había que transf
 </CaseSection>
 
 <CaseSection
+  compacta
   id="primera-iteracion"
   numero="02"
   etiqueta="La primera iteración"
   titulo="Hacer visible y editable el trabajo de la IA"
   composicion="apilada"
+  destacadoDebajo
   destacado="Si mostramos el análisis junto a la transcripción, el profesional podrá contrastar el contenido de la entrevista y corregir el resultado de la IA sin salir de Amaia."
 >
 
@@ -128,13 +159,15 @@ A partir del feedback que recibíamos de los centros, planteamos una primera hip
 
 <Fragment slot="media">
 
-<CaseText columna="izquierda">
+<CaseText compacta columna="izquierda">
 
 La primera iteración llevó el análisis directamente a la interfaz y lo hizo editable. Transcripción y análisis se mostraban en paralelo para que el profesional pudiera comprobar el contenido original mientras revisaba cada etapa vital.
 
 </CaseText>
 
 <AnnotatedScreenshot
+  compacta
+  ancha
   imagen={primeraIteracion}
   alt="Primera iteración de «Valoración de Historia de Vida»: a la izquierda, la transcripción de la entrevista; a la derecha, el análisis de la IA por etapas vitales (Infancia, Adolescencia/Juventud/Madurez, Jubilación, Presente y futuro, Preguntas de cierre) con las respuestas en campos editables y el botón «Modo edición»; debajo, el botón «Aprobar valoración»."
   notas={[
@@ -145,7 +178,9 @@ La primera iteración llevó el análisis directamente a la interfaz y lo hizo e
 />
 
 <CaseSubsection
+  compacta
   titulo="Una solución lógica que reveló un nuevo problema"
+  composicion="apilada"
   destacado="La transcripción debía seguir disponible para comprobar información, pero no necesitaba competir visualmente con el resultado que el profesional debía revisar y utilizar."
 >
 
@@ -162,10 +197,12 @@ Esto nos llevó a replantear la jerarquía:
 </CaseSection>
 
 <CaseSection
+  compacta
   id="informacion-dia-a-dia"
   numero="03"
   etiqueta="Convertir el análisis en información para el día a día"
   titulo="Los profesionales necesitaban una capa más breve y accionable"
+  composicion="apilada"
 >
 
 Amaia ya automatizaba gran parte del proceso, pero convertir el resultado en información fácil de consultar seguía requiriendo trabajo manual.
@@ -173,11 +210,14 @@ Amaia ya automatizaba gran parte del proceso, pero convertir el resultado en inf
 <Fragment slot="media">
 
 <Diagram
+  compacta
   imagen={flujoManual}
+  imagenMovil={flujoManualMovil}
+  desplazable={false}
   alt="Flujo de trabajo en cuatro pasos: 01 Análisis generado por IA, la IA transcribe y analiza la entrevista; 02 Seleccionar información relevante, el profesional extrae los puntos más importantes; 03 Crear resumen manual, en un formato más breve y adaptado a sus necesidades; 04 Compartir / consultar, el resumen se incorpora a la documentación de la persona. Los pasos 02 y 03 van agrupados como «Trabajo manual del profesional»."
 />
 
-<CaseSubsection titulo="¿Y si Amaia generase también ese primer resumen?" composicion="apilada">
+<CaseSubsection compacta titulo="¿Y si Amaia generase también ese primer resumen?" composicion="apilada">
 
 Como la IA ya disponía de la información de la entrevista y del análisis, planteamos incorporar un segundo nivel de información: un resumen generado por IA que sirviera como punto de partida y que cada profesional pudiera revisar y adaptar.
 
@@ -187,9 +227,10 @@ La pregunta pasó entonces de ser únicamente qué información resumir a decidi
 
 </CaseSubsection>
 
-<CaseSubsection titulo="Exploramos dos maneras de sintetizar la información" />
+<CaseSubsection compacta titulo="Exploramos dos maneras de sintetizar la información" composicion="apilada" />
 
 <ProposalPair
+  compacta
   propuestas={[
     {
       titulo: 'Resumen estructurado',
@@ -206,7 +247,7 @@ La pregunta pasó entonces de ser únicamente qué información resumir a decidi
   ]}
 />
 
-<CaseSubsection titulo="Una primera prueba nos ayudó a decidir la dirección" composicion="apilada">
+<CaseSubsection compacta titulo="Una primera prueba nos ayudó a decidir la dirección" composicion="apilada">
 
 Llevamos ambas propuestas a una primera prueba con profesionales para contrastar qué tipo de información resultaba más útil.
 
@@ -223,10 +264,10 @@ En aquella primera propuesta, Análisis y Resumen ya aparecían como los dos res
   alt="Primera arquitectura con dos pestañas en Amaia Profesionales: «Análisis de la entrevista» activa y «Resumen» en gris, con apariencia inactiva; arriba a la derecha, el botón «Ver transcripción»."
   pie="Primera propuesta de navegación entre Análisis y Resumen utilizada durante la prueba."
   ancho={960}
-  class="mx-auto mt-16 max-w-[60rem] sm:mt-20"
+  class="mx-auto mt-10 max-w-[60rem] sm:mt-12"
 />
 
-<CaseSubsection titulo="Una pestaña visible no servía si parecía inaccesible">
+<CaseSubsection compacta titulo="Una pestaña visible no servía si parecía inaccesible" composicion="apilada">
 
 Durante la prueba observamos que los profesionales no intentaban explorar una pestaña que percibían como deshabilitada.
 
@@ -239,7 +280,10 @@ De esta primera validación salieron, por tanto, dos decisiones que marcarían l
 </CaseSubsection>
 
 <Diagram
+  compacta
   imagen={decisionesValidacion}
+  imagenMovil={decisionesValidacionMovil}
+  desplazable={false}
   alt="Decisiones tras la primera validación. Contenido: de Narrativo a Estructurado. Interacción: de Resumen inactivo a Análisis + Resumen accesibles."
 />
 
@@ -248,11 +292,13 @@ De esta primera validación salieron, por tanto, dos decisiones que marcarían l
 </CaseSection>
 
 <CaseSection
+  compacta
   id="flujo-completo"
   numero="04"
   etiqueta="Diseñar el flujo completo"
   titulo="La IA genera. El profesional valida."
   composicion="apilada"
+  destacadoDebajo
   destacado="Priorizamos la calidad de la información frente a la inmediatez: la IA agiliza el trabajo, pero el criterio profesional sigue formando parte del proceso."
 >
 
@@ -265,11 +311,14 @@ El profesional debía revisar, editar y aprobar primero el Análisis. Solo enton
 <Fragment slot="media">
 
 <Diagram
+  compacta
   imagen={flujoCompleto}
+  imagenMovil={flujoCompletoMovil}
+  desplazable={false}
   alt="Flujo completo en cinco pasos: 01 Entrevista, el profesional graba la Historia de Vida desde la tablet; 02 Análisis IA, la IA transcribe y analiza la entrevista; 03 Revisión profesional, revisa, consulta la transcripción si lo necesita y edita el análisis; 04 Aprobación del análisis; 05 Resumen IA, generado a partir del análisis aprobado. Una línea discontinua vuelve del paso 05 al 03: «Se puede volver a editar y regenerar»."
 />
 
-<CaseSubsection titulo="Dos resultados con funciones diferentes">
+<CaseSubsection compacta titulo="Dos resultados con funciones diferentes" composicion="apilada">
 
 Con la nueva arquitectura, Análisis y Resumen pasaron a ocupar el primer nivel de Historia de Vida, mientras que la transcripción quedó disponible como información de apoyo.
 
@@ -282,6 +331,7 @@ Tras la primera validación, ambas secciones permanecían visibles y accesibles,
 </CaseSubsection>
 
 <ProposalPair
+  compacta
   marco
   propuestas={[
     {
@@ -299,7 +349,7 @@ Tras la primera validación, ambas secciones permanecían visibles y accesibles,
   ]}
 />
 
-<CaseSubsection titulo="Del escritorio al contexto de cuidado" composicion="apilada">
+<CaseSubsection compacta titulo="Del escritorio al contexto de cuidado" composicion="apilada">
 
 La incorporación del Resumen también amplió el papel de Historia de Vida dentro de Amaia Conecta.
 
@@ -312,6 +362,7 @@ Esto evitaba trasladar toda la complejidad de revisión y edición a la tablet y
 </CaseSubsection>
 
 <ProductHandoff
+  compacta
   origen={{
     producto: 'Amaia Profesionales · Ordenador',
     funcion: 'Revisar y validar',
@@ -327,7 +378,7 @@ Esto evitaba trasladar toda la complejidad de revisión y edición a la tablet y
   pie="Amaia Profesionales concentraba la revisión y gestión del contenido. Amaia Conecta hacía accesible el resultado para consulta desde la tablet."
 />
 
-<CaseText conclusion>
+<CaseText compacta conclusion columna="izquierda">
 
 Historia de Vida pasaba así de generar un informe a conectar la recogida, validación y consulta de la información entre ambos productos.
 
@@ -338,10 +389,12 @@ Historia de Vida pasaba así de generar un informe a conectar la recogida, valid
 </CaseSection>
 
 <CaseSection
+  compacta
   id="validar-flujo"
   numero="05"
   etiqueta="Validar el flujo completo"
   titulo="El mismo recorrido, probado con cinco centros"
+  composicion="apilada"
 >
 
 Con el nuevo flujo ya integrado en Amaia, realizamos 5 sesiones de usabilidad con profesionales de cinco centros diferentes, representados en este caso como Centro A, B, C, D y E para preservar su identidad.
@@ -355,6 +408,7 @@ Para analizar los resultados, contrasté las observaciones de las cinco sesiones
 <Fragment slot="media">
 
 <StudyContext
+  compacta
   datos={[
     { valor: '5', etiqueta: 'centros' },
     { valor: '5', etiqueta: 'profesionales' },
@@ -364,11 +418,13 @@ Para analizar los resultados, contrasté las observaciones de las cinco sesiones
 />
 
 <CaseSubsection
+  compacta
   titulo="Los problemas no aparecían siempre en el mismo lugar, pero sí encontramos patrones"
   composicion="apilada"
 />
 
 <FindingsMatrix
+  compacta
   titulo="Síntesis de hallazgos · 5 sesiones de usabilidad"
   columnas={['Hallazgo recurrente', 'Qué observamos', 'Qué nos indicaba']}
   hallazgos={[
@@ -400,7 +456,7 @@ Para analizar los resultados, contrasté las observaciones de las cinco sesiones
   ]}
 />
 
-<CaseSubsection titulo="No todas las observaciones tenían el mismo peso">
+<CaseSubsection compacta titulo="No todas las observaciones tenían el mismo peso" composicion="apilada">
 
 Los tests también revelaron cuestiones más puntuales: dudas sobre qué hacía Regenerar, poca visibilidad de algunas herramientas de edición o diferencias en la forma de utilizar determinados elementos del flujo.
 
@@ -409,6 +465,7 @@ Las registramos como oportunidades de mejora, pero no las tratamos como problema
 </CaseSubsection>
 
 <CaseSubsection
+  compacta
   titulo="Lo que validamos"
   composicion="apilada"
   destacado="El valor del Resumen se entendía una vez alcanzado. La principal fricción estaba en hacer más claro el recorrido hasta él."
@@ -422,9 +479,9 @@ La segunda fue mantener al profesional dentro del proceso de generación. Durant
 
 </CaseSubsection>
 
-<CaseSubsection titulo="Ajustes después de los tests" />
+<CaseSubsection compacta titulo="Ajustes después de los tests" composicion="apilada" />
 
-<CaseText titulo="Hacer visible lo que estaba haciendo la IA" pegado>
+<CaseText compacta titulo="Hacer visible lo que estaba haciendo la IA" columna="izquierda" pegado>
 
 Uno de los patrones más claros apareció durante los tiempos de espera. Cuando el Análisis o el Resumen no estaban disponibles inmediatamente, los profesionales podían dudar sobre si el proceso seguía funcionando o si debían realizar alguna acción.
 
@@ -433,6 +490,7 @@ Para reducir esa incertidumbre trabajamos estados específicos para comunicar qu
 </CaseText>
 
 <ScreenDuo
+  compacta
   capturas={[
     {
       imagen: resumenVacio,
@@ -448,7 +506,7 @@ Para reducir esa incertidumbre trabajamos estados específicos para comunicar qu
   ]}
 />
 
-<CaseText titulo="Hacer que el acceso lleve donde el usuario espera" columna="izquierda">
+<CaseText compacta titulo="Hacer que el acceso lleve donde el usuario espera" columna="izquierda">
 
 Los tests también mostraron una fricción entre el nombre de la acción y su destino. El profesional podía seleccionar “Grabar Historia de Vida” y terminar dentro de Valoraciones, donde se encontraba técnicamente la interfaz de grabación.
 
@@ -459,6 +517,7 @@ Ajustamos el recorrido para que “Grabar Historia de Vida” llevase directamen
 </CaseText>
 
 <ScreenEvolution
+  compacta
   antes={{
     imagen: grabarAntes,
     etiqueta: 'Antes · Valoraciones',
@@ -471,7 +530,7 @@ Ajustamos el recorrido para que “Grabar Historia de Vida” llevase directamen
   }}
 />
 
-<CaseText conclusion>
+<CaseText compacta conclusion columna="izquierda">
 
 Los tests no cambiaron la dirección de la solución. Nos ayudaron a detectar dónde el flujo necesitaba explicar mejor qué estaba ocurriendo y hacer que cada acción respondiera a la expectativa del profesional.
 
@@ -482,6 +541,7 @@ Los tests no cambiaron la dirección de la solución. Nos ayudaron a detectar d�
 </CaseSection>
 
 <CaseSection
+  compacta
   id="resultado"
   numero="06"
   etiqueta="Resultado"
@@ -498,12 +558,13 @@ El objetivo no era sustituir el criterio profesional, sino reducir el trabajo ne
 <Fragment slot="media">
 
 <Diagram
+  compacta
   imagen={composicionFinal}
   desplazable={false}
   alt="Composición final: Amaia Profesionales en un portátil con el Resumen de puntos claves de la Historia de Vida, con Descargar resumen, Regenerar y Editar; y Amaia Conecta en una tablet con el mismo Resumen dentro de la pestaña Historia de Vida."
 />
 
-<CaseSubsection titulo="El Resumen encontró su lugar en el trabajo real">
+<CaseSubsection compacta titulo="El Resumen encontró su lugar en el trabajo real" composicion="apilada">
 
 Las sesiones mostraron que, una vez descubierto, los profesionales entendían la diferencia entre el Análisis completo y el Resumen y podían decidir cuándo necesitaban revisar, modificar o simplemente consultar el resultado.
 
@@ -512,6 +573,7 @@ El valor no estaba únicamente en acortar información. El Resumen permitía que
 </CaseSubsection>
 
 <QuoteSet
+  compacta
   principal={{
     texto: 'Lo bueno es que si en algún momento me quitasen a esta persona, otra compañera puede saber todo lo que necesita de su vida.',
     autoria: 'Profesional participante',
@@ -522,14 +584,17 @@ El valor no estaba únicamente en acortar información. El Resumen permitía que
   ]}
 />
 
-<CaseSubsection titulo="Impacto observado" tituloOculto />
+<CaseSubsection compacta titulo="Impacto observado" tituloOculto />
 
 <Diagram
+  compacta
   imagen={impactoObservado}
+  imagenMovil={impactoObservadoMovil}
+  desplazable={false}
   alt="Impacto observado, en tres tarjetas: 01 Menos trabajo manual, la información relevante ya no tenía que resumirse desde cero; 02 Información más accesible, el contenido clave podía consultarse de forma más rápida y directa; 03 Criterio profesional, la IA proponía y el profesional revisaba y decidía."
 />
 
-<CaseSubsection titulo="Mi aprendizaje" composicion="apilada" conclusion final>
+<CaseSubsection compacta titulo="Mi aprendizaje" composicion="apilada" conclusion final>
 
 Automatizar no siempre significa eliminar pasos.
 

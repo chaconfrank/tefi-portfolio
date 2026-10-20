@@ -15,9 +15,11 @@ interface Props {
   origen: Extremo;
   destino: Extremo;
   pie?: string;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { origen, destino, pie } = Astro.props;
+const { origen, destino, pie, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -31,7 +33,12 @@ const { origen, destino, pie } = Astro.props;
   columnas se alinean arriba para que las etiquetas queden a la misma altura,
   y sólo la flecha se centra. No se recortan.
 -->
-<figure class="mt-16 sm:mt-20 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2">
+<figure
+  class:list={[
+    'lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2',
+    compacta ? 'mt-10 sm:mt-12' : 'mt-16 sm:mt-20',
+  ]}
+>
   <div class="grid items-start gap-y-8 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-6">
     {
       [origen, destino].map(({ producto, funcion, imagen, alt }, i) => (
@@ -52,5 +59,11 @@ const { origen, destino, pie } = Astro.props;
     </svg>
   </div>
 
-  {pie && <figcaption class="mt-8 max-w-2xl text-sm leading-relaxed text-pretty text-ink-soft lg:mt-10">{pie}</figcaption>}
+  {
+    pie && (
+      <figcaption class:list={['max-w-2xl text-sm leading-relaxed text-pretty text-ink-soft', compacta ? 'mt-5' : 'mt-8 lg:mt-10']}>
+        {pie}
+      </figcaption>
+    )
+  }
 </figure>

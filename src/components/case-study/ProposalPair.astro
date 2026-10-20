@@ -15,9 +15,11 @@ interface Props {
   // true para capturas planas (llevan el marco de Screenshot); false para
   // las que ya llegan dentro de un dispositivo (DeviceShot, sin marco).
   marco?: boolean;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { propuestas, marco = false } = Astro.props;
+const { propuestas, marco = false, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -31,13 +33,18 @@ const { propuestas, marco = false } = Astro.props;
   propuesta se quedaba pequeña para leer la interfaz.
 -->
 <div
-  class="mt-14 grid gap-y-16 sm:mt-16 md:grid-cols-2 md:gap-x-10 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2"
+  class:list={[
+    'grid lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2',
+    // Compacta: lado a lado sólo desde lg; a 768 px cada pantalla se quedaba
+    // en ~320 px y no se leía.
+    compacta ? 'mt-10 gap-y-12 sm:mt-12 lg:grid-cols-2 lg:gap-x-10' : 'mt-14 gap-y-16 sm:mt-16 md:grid-cols-2 md:gap-x-10',
+  ]}
 >
   {
     propuestas.map(({ titulo, texto, imagen, alt }, i) => (
       <div>
         {marco ? <Screenshot imagen={imagen} alt={alt} ancho={620} /> : <DeviceShot imagen={imagen} alt={alt} ancho={620} />}
-        <h4 class="mt-8 text-xl leading-tight font-semibold tracking-tight">
+        <h4 class:list={[compacta ? 'mt-6' : 'mt-8', 'text-xl leading-tight font-semibold tracking-tight']}>
           <span class="text-amaia-ink tabular-nums">{String(i + 1).padStart(2, '0')}</span>{' '}
           <span aria-hidden="true" class="text-ink-soft">
             ·

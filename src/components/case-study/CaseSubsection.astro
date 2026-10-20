@@ -47,7 +47,9 @@ const conTexto = Astro.slots.has('default');
   class:list={[
     // Con el título oculto no hay nada visible que separar: sólo el hueco
     // hasta el visual que lleva el título dibujado.
-    tituloOculto ? 'mt-16 sm:mt-20' : compacta ? 'mt-14 sm:mt-16 lg:mt-20' : 'mt-28 sm:mt-32 lg:mt-40',
+    // Con el título oculto no hay nada visible que separar: en compacta el
+    // visual que sigue ya trae su margen, y sumar otro era altura vacía.
+    tituloOculto ? (compacta ? '' : 'mt-16 sm:mt-20') : compacta ? 'mt-14 sm:mt-16 lg:mt-20' : 'mt-28 sm:mt-32 lg:mt-40',
     'lg:grid lg:grid-cols-12 lg:gap-x-10',
     final && 'mb-12 sm:mb-20 lg:mb-28',
   ]}

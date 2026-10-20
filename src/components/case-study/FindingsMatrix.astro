@@ -10,9 +10,13 @@ interface Props {
   // Cabeceras de las tres columnas, en el orden de los campos.
   columnas: [string, string, string];
   hallazgos: Hallazgo[];
+  // Ritmo apretado y ancho del contenedor visual (hasta 80rem, como las
+  // parejas de capturas): a 72rem las dos columnas de texto se quedaban en
+  // ~290 px.
+  compacta?: boolean;
 }
 
-const { titulo, columnas, hallazgos } = Astro.props;
+const { titulo, columnas, hallazgos, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -26,36 +30,78 @@ const { titulo, columnas, hallazgos } = Astro.props;
   etiqueta de columna: visible en móvil, sólo para lector de pantalla en
   escritorio, donde la cabecera común (aria-hidden) ya la muestra.
 -->
-<figure class="mt-12 rounded-2xl bg-paper-soft px-6 py-10 sm:mt-14 sm:px-10 lg:px-12 lg:py-12">
+<figure
+  class:list={[
+    'rounded-2xl bg-paper-soft px-6 sm:px-10 lg:px-12',
+    compacta
+      ? 'mt-8 py-8 sm:mt-10 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2 lg:py-10'
+      : 'mt-12 py-10 sm:mt-14 lg:py-12',
+  ]}
+>
   <figcaption class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">{titulo}</figcaption>
 
+  <!--
+    Compacta: la tabla de cuatro columnas sólo desde xl. Entre lg y xl cada
+    fila pone el hallazgo arriba y «qué observamos» / «qué nos indicaba» en
+    dos columnas debajo, con su etiqueta visible: a 1024 px la tabla dejaba
+    el texto en ~220 px. Por debajo de lg, todo apilado.
+  -->
   <div
     aria-hidden="true"
-    class="mt-10 hidden gap-x-10 border-b border-line pb-4 text-sm font-medium text-ink-soft lg:grid lg:grid-cols-[2.5rem_1.1fr_1fr_1fr]"
+    class:list={[
+      'hidden gap-x-10 border-b border-line pb-4 text-sm font-medium text-ink-soft',
+      compacta ? 'mt-8 xl:grid xl:grid-cols-[2.5rem_1.1fr_1fr_1fr]' : 'mt-10 lg:grid lg:grid-cols-[2.5rem_1.1fr_1fr_1fr]',
+    ]}
   >
     <span></span>
     {columnas.map((c) => <span>{c}</span>)}
   </div>
 
-  <ol class="mt-8 lg:mt-0">
+  <ol class:list={['mt-8', compacta ? 'xl:mt-0' : 'lg:mt-0']}>
     {
       hallazgos.map(({ hallazgo, observamos, indicaba }, i) => (
-        <li class="border-t border-line py-8 first:border-t-0 first:pt-0 lg:grid lg:grid-cols-[2.5rem_1.1fr_1fr_1fr] lg:gap-x-10 lg:first:border-t-0 lg:first:pt-8">
-          <span aria-hidden="true" class="text-sm font-medium text-amaia-ink tabular-nums lg:pt-1">
+        <li
+          class:list={[
+            'border-t border-line first:border-t-0 first:pt-0',
+            compacta
+              ? 'py-6 last:pb-0 lg:grid lg:grid-cols-2 lg:gap-x-10 xl:grid-cols-[2.5rem_1.1fr_1fr_1fr] xl:first:pt-6'
+              : 'py-8 lg:grid lg:grid-cols-[2.5rem_1.1fr_1fr_1fr] lg:gap-x-10 lg:first:border-t-0 lg:first:pt-8',
+          ]}
+        >
+          <span
+            aria-hidden="true"
+            class:list={[
+              'text-sm font-medium text-amaia-ink tabular-nums',
+              compacta ? 'lg:col-span-2 xl:col-span-1 xl:pt-1' : 'lg:pt-1',
+            ]}
+          >
             {String(i + 1).padStart(2, '0')}
           </span>
-          <h4 class="mt-2 text-lg leading-snug font-semibold text-balance lg:mt-0">
+          <h4
+            class:list={[
+              'mt-2 text-lg leading-snug font-semibold text-balance',
+              compacta ? 'lg:col-span-2 xl:col-span-1 xl:mt-0' : 'lg:mt-0',
+            ]}
+          >
             <span class="sr-only">{columnas[0]}: </span>
             {hallazgo}
           </h4>
-          <div class="mt-5 lg:mt-0">
-            <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase lg:sr-only">{columnas[1]}</p>
-            <p class="mt-1.5 leading-relaxed text-pretty text-ink-soft lg:mt-0">{observamos}</p>
-          </div>
-          <div class="mt-5 lg:mt-0">
-            <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase lg:sr-only">{columnas[2]}</p>
-            <p class="mt-1.5 leading-relaxed text-pretty text-ink lg:mt-0">{indicaba}</p>
-          </div>
+          {[
+            [columnas[1], observamos, 'text-ink-soft'],
+            [columnas[2], indicaba, 'text-ink'],
+          ].map(([etiqueta, texto, tinta]) => (
+            <div class:list={['mt-5', compacta ? 'xl:mt-0' : 'lg:mt-0']}>
+              <p
+                class:list={[
+                  'text-xs font-medium tracking-[0.14em] text-ink-soft uppercase',
+                  compacta ? 'xl:sr-only' : 'lg:sr-only',
+                ]}
+              >
+                {etiqueta}
+              </p>
+              <p class:list={['mt-1.5 leading-relaxed text-pretty', tinta, compacta ? 'xl:mt-0' : 'lg:mt-0']}>{texto}</p>
+            </div>
+          ))}
         </li>
       ))
     }

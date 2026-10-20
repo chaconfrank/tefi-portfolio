@@ -11,9 +11,11 @@ interface Captura {
 
 interface Props {
   capturas: [Captura, Captura];
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { capturas } = Astro.props;
+const { capturas, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -23,7 +25,11 @@ const { capturas } = Astro.props;
   Columnas alineadas arriba: las etiquetas quedan a la misma altura.
 -->
 <div
-  class="mt-14 grid items-start gap-y-14 sm:mt-16 md:grid-cols-2 md:gap-x-10 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2"
+  class:list={[
+    'grid items-start lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2',
+    // Compacta: lado a lado sólo desde lg (ver ProposalPair).
+    compacta ? 'mt-10 gap-y-10 sm:mt-12 lg:grid-cols-2 lg:gap-x-10' : 'mt-14 gap-y-14 sm:mt-16 md:grid-cols-2 md:gap-x-10',
+  ]}
 >
   {capturas.map((captura) => <Screenshot {...captura} ancho={620} />)}
 </div>

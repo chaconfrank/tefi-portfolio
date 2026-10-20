@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from 'astro';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 
 interface Props {
   imagen: ImageMetadata;
@@ -14,11 +14,33 @@ interface Props {
   // la sección; se centran. Sin él, van a todo el ancho (72rem).
   ancho?: number;
   pie?: string;
+  // Versión vertical del mismo gráfico para móvil (por debajo de md). Un
+  // diagrama horizontal escalado a ~340 px deja el texto en 4–5 px; con esta
+  // versión el navegador elige la imagen según el ancho, sin JavaScript.
+  imagenMovil?: ImageMetadata;
+  // Margen texto → gráfico de 48 px, como el resto de visuales compactos.
+  // El de 64 compensaba el aire transparente que traían los PNG; con ese
+  // aire recortado, sobra.
+  compacta?: boolean;
 }
 
-const { imagen, alt, desplazable = true, ancho, pie } = Astro.props;
+const { imagen, alt, desplazable = true, ancho, pie, imagenMovil, compacta = false } = Astro.props;
 const maximo = ancho ?? 1152;
 const widths = [...new Set([768, maximo, maximo * 2].map((w) => Math.min(w, imagen.width)))];
+const movil = imagenMovil
+  ? await getImage({
+      src: imagenMovil,
+      widths: [...new Set([480, 720, imagenMovil.width].map((w) => Math.min(w, imagenMovil.width)))],
+      quality: 'high',
+    })
+  : undefined;
+const Marco = movil ? 'picture' : Fragment;
+// La versión vertical se pinta en móvil a la misma escala que el gráfico
+// horizontal en escritorio (~0,45 del archivo): el texto se lee igual y no
+// ocupa más de lo necesario. A todo el ancho, un flujo de cinco pasos
+// pasaba de dos pantallas de alto.
+const anchoMovil = imagenMovil ? Math.round(imagenMovil.width * 0.45) : undefined;
+const estilo = [ancho && `max-width: ${ancho}px`, anchoMovil && `--ancho-movil: ${anchoMovil}px`].filter(Boolean).join('; ') || undefined;
 ---
 
 <!--
@@ -35,8 +57,28 @@ const widths = [...new Set([768, maximo, maximo * 2].map((w) => Math.min(w, imag
   Margen superior menor que el de una captura: estos PNG traen su propio
   aire transparente arriba y abajo, y sumado al margen el hueco se duplicaba.
 -->
-<figure class="mx-auto mt-12 sm:mt-14 lg:mt-16" style={ancho ? `max-width: ${ancho}px` : undefined}>
+<figure
+  class:list={[
+    'mx-auto',
+    compacta ? 'mt-10 sm:mt-12' : 'mt-12 sm:mt-14 lg:mt-16',
+    imagenMovil && 'max-md:max-w-(--ancho-movil)',
+  ]}
+  style={estilo}
+>
   <div class:list={['rounded-2xl', desplazable ? 'overflow-x-auto md:overflow-hidden' : 'overflow-hidden']}>
+    <Marco>
+    {
+      movil && imagenMovil && (
+        <source
+          media="(max-width: 47.99rem)"
+          srcset={movil.srcSet.attribute}
+          sizes={`${anchoMovil}px`}
+          type="image/webp"
+          width={imagenMovil.width}
+          height={imagenMovil.height}
+        />
+      )
+    }
     <Image
       src={imagen}
       alt={alt}
@@ -45,6 +87,7 @@ const widths = [...new Set([768, maximo, maximo * 2].map((w) => Math.min(w, imag
       quality="high"
       class:list={['h-auto w-full', desplazable && 'min-w-[44rem] md:min-w-0']}
     />
+    </Marco>
   </div>
   {pie && <figcaption class="mt-4 text-sm leading-relaxed text-pretty text-ink-soft">{pie}</figcaption>}
 </figure>

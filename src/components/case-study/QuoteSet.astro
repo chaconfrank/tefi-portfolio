@@ -9,9 +9,11 @@ interface Props {
   // tamaño de lectura a la derecha.
   principal: Cita;
   secundarias: Cita[];
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { principal, secundarias } = Astro.props;
+const { principal, secundarias, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -21,15 +23,31 @@ const { principal, secundarias } = Astro.props;
   La principal va a 7 columnas y en grande; las secundarias, a 4 columnas,
   separadas por un filete y alineadas abajo con la principal en escritorio.
 -->
-<div class="mt-14 grid gap-y-12 sm:mt-16 lg:grid-cols-12 lg:items-end lg:gap-x-10">
-  <figure class="lg:col-span-7">
+<!--
+  Compacta: la composición 7 + 4 sólo desde xl. Entre lg y xl la principal va
+  a todo el ancho y las secundarias en dos columnas debajo: a 1024 px la
+  columna de 4 se quedaba en ~290 px.
+-->
+<div
+  class:list={[
+    'grid',
+    compacta ? 'mt-10 gap-y-10 sm:mt-12 xl:grid-cols-12 xl:items-end xl:gap-x-10' : 'mt-14 gap-y-12 sm:mt-16 lg:grid-cols-12 lg:items-end lg:gap-x-10',
+  ]}
+>
+  <figure class:list={[compacta ? 'xl:col-span-7' : 'lg:col-span-7']}>
     <blockquote class="text-2xl leading-snug font-medium tracking-tight text-pretty text-ink sm:text-3xl lg:text-[2.125rem]">
       <p>“{principal.texto}”</p>
     </blockquote>
     <figcaption class="mt-5 text-sm text-ink-soft">— {principal.autoria}</figcaption>
   </figure>
 
-  <div class="space-y-8 lg:col-span-4 lg:col-start-9">
+  <div
+    class:list={[
+      compacta
+        ? 'space-y-8 lg:grid lg:grid-cols-2 lg:gap-x-10 lg:space-y-0 xl:col-span-4 xl:col-start-9 xl:block xl:space-y-8'
+        : 'space-y-8 lg:col-span-4 lg:col-start-9',
+    ]}
+  >
     {
       secundarias.map(({ texto, autoria }) => (
         <figure class="border-t border-line pt-6">
