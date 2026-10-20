@@ -34,7 +34,10 @@ CaseStudyLayout       BaseLayout + siguiente caso + cierre; el MDX maqueta el re
 ```
 
 El `Header` es igual en todas las páginas: **sin fondo propio**, con la nav centrada
-en una pastilla translúcida (`NavPill`) y el toggle a la derecha. El color de la
+en una pastilla translúcida (`NavPill`) y, a la derecha, sólo el cambio de
+idioma y el toggle de tema (el CV se descarga desde el hero y Sobre mí). Por
+debajo de 400 px los dos controles pasan a botones redondos para que todo
+quepa en una fila. El color de la
 cabecera no lo pone el header sino un **halo teal** que pinta `BaseLayout` como
 `<div>` decorativo absoluto en `-z-10`, centrado arriba y disuelto en transparente.
 Si le pones fondo sólido al header, tapas el halo y se pierde el efecto.
