@@ -1,7 +1,12 @@
 ---
 import NavPill from './NavPill.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import { CV_PATH } from '../consts';
+import { cvPath, equivalente, getLang, UI } from '../i18n';
+
+const lang = getLang(Astro.url);
+const ui = UI[lang];
+const otro = lang === 'es' ? 'en' : 'es';
+const hrefOtro = equivalente(Astro.url.pathname, otro);
 ---
 
 <!--
@@ -26,6 +31,26 @@ import { CV_PATH } from '../consts';
     </div>
 
     <div class="flex items-center gap-2 sm:col-start-3 sm:justify-self-end">
+      <!--
+        Cambio de idioma: un enlace con globo (no un toggle) a la misma página
+        en el otro idioma. En móvil sólo el globo y el código del idioma.
+      -->
+      <a
+        href={hrefOtro}
+        hreflang={otro}
+        lang={otro}
+        aria-label={ui.cambiarIdiomaAria}
+        class="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-ink-soft transition hover:text-ink"
+      >
+        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18" />
+        </svg>
+        <span class="uppercase sm:hidden" aria-hidden="true">{otro}</span>
+        <span class="hidden sm:inline" aria-hidden="true">{ui.cambiarIdioma}</span>
+      </a>
+
       <ThemeToggle />
 
       <!--
@@ -34,8 +59,8 @@ import { CV_PATH } from '../consts';
         lectores de pantalla.
       -->
       <a
-        href={CV_PATH}
-        aria-label="Descargar CV"
+        href={cvPath(lang)}
+        aria-label={ui.descargarCv}
         class="inline-flex size-8 shrink-0 items-center justify-center gap-1.5 rounded-full border border-line bg-paper/40 text-sm font-medium whitespace-nowrap text-accent transition hover:border-accent/50 hover:bg-accent-soft sm:h-8 sm:w-auto sm:px-3.5"
       >
         <svg
@@ -52,7 +77,7 @@ import { CV_PATH } from '../consts';
           <path d="m7 10 5 5 5-5" />
           <path d="M4 19h16" />
         </svg>
-        <span class="hidden sm:inline" aria-hidden="true">Descargar CV</span>
+        <span class="hidden sm:inline" aria-hidden="true">{ui.descargarCv}</span>
       </a>
     </div>
   </div>

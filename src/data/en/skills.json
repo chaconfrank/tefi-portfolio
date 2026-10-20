@@ -1,0 +1,21 @@
+{
+  "metodos": [
+    {
+      "categoria": "Product design",
+      "items": ["Design systems", "UX/UI design", "Interaction design", "Prototyping", "Responsive design", "Accessibility"]
+    },
+    {
+      "categoria": "Research and strategy",
+      "items": ["User interviews", "Usability testing", "Hypothesis definition", "User flows", "Insight analysis"]
+    },
+    {
+      "categoria": "Product and collaboration",
+      "items": ["User stories", "Acceptance criteria", "Product documentation", "QA and continuous improvement", "Working with technical teams"]
+    }
+  ],
+  "herramientas": ["Figma", "Jira", "Linear", "Notion", "Slack"],
+  "idiomas": [
+    { "nombre": "Spanish", "nivel": "Native" },
+    { "nombre": "English", "nivel": "Fluent" }
+  ]
+}

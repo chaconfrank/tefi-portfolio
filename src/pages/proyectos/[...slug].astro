@@ -1,16 +1,17 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { getProyectos, slugDe } from '../../i18n';
 import type { GetStaticPaths } from 'astro';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const proyectos = (await getCollection('proyectos', ({ data }) => !data.borrador)).sort(
-    (a, b) => a.data.orden - b.data.orden || b.data.fecha.valueOf() - a.data.fecha.valueOf(),
-  );
+  // Sólo los case studies en español: los de src/content/proyectos/en/ los
+  // genera src/pages/en/projects/[...slug].astro.
+  const proyectos = await getProyectos('es');
 
   return proyectos.map((proyecto, i) => ({
-    params: { slug: proyecto.id },
+    params: { slug: slugDe(proyecto) },
     // El siguiente en el orden del listado, y vuelta al primero al final:
     // así nunca se llega a un callejón sin salida.
     props: { proyecto, siguiente: proyectos[(i + 1) % proyectos.length] },

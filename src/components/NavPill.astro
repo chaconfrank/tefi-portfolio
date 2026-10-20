@@ -1,14 +1,20 @@
 ---
-import { NAV_LINKS } from '../consts';
+import { getLang, RUTAS, UI } from '../i18n';
 
 // Nav en pastilla con efecto glass: el halo teal del fondo se ve a través.
 const path = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const lang = getLang(Astro.url);
+const enlaces = (['inicio', 'proyectos', 'sobreMi', 'contacto'] as const).map((clave, i) => ({
+  href: RUTAS[clave][lang],
+  label: UI[lang].nav[i],
+}));
+const inicio = RUTAS.inicio[lang];
+const isActive = (href: string) => (href === inicio ? path === inicio : path.startsWith(href));
 ---
 
-<nav class="glass flex w-max items-center gap-0.5 rounded-full p-1" aria-label="Principal">
+<nav class="glass flex w-max items-center gap-0.5 rounded-full p-1" aria-label={UI[lang].navAria}>
   {
-    NAV_LINKS.map(({ href, label }) => (
+    enlaces.map(({ href, label }) => (
       <a
         href={href}
         aria-current={isActive(href) ? 'page' : undefined}

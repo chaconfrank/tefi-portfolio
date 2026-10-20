@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { getLang, hrefProyecto, slugDe, UI } from '../i18n';
 
 interface Props {
   proyectos: CollectionEntry<'proyectos'>[];
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const { proyectos, etiqueta } = Astro.props;
+const lang = getLang(Astro.url);
+const ui = UI[lang];
 ---
 
 <!--
@@ -31,7 +34,7 @@ const { proyectos, etiqueta } = Astro.props;
     <div
       data-pista
       role="region"
-      aria-roledescription="carrusel"
+      aria-roledescription={ui.carrusel}
       aria-label={etiqueta}
       class="flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto px-6 pt-6 pb-10 [scrollbar-width:none] sm:scroll-px-10 sm:px-10 [&::-webkit-scrollbar]:hidden"
     >
@@ -63,7 +66,7 @@ const { proyectos, etiqueta } = Astro.props;
                   aria-hidden="true"
                   class="pointer-events-none absolute inset-0 m-auto h-fit w-fit translate-y-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper opacity-0 shadow-lg transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none"
                 >
-                  Ver case study
+                  {ui.verCaseStudy}
                 </span>
               </div>
 
@@ -71,7 +74,7 @@ const { proyectos, etiqueta } = Astro.props;
                 <p class="text-xs font-medium tracking-wide text-ink-soft uppercase">{rolResumen ?? rol}</p>
                 <h3 class="mt-1.5 text-xl leading-snug font-semibold tracking-tight text-balance">
                   <a
-                    href={`/proyectos/${proyecto.id}/`}
+                    href={hrefProyecto(lang, slugDe(proyecto))}
                     class="after:absolute after:inset-0 after:rounded-[1.75rem] focus-visible:outline-none group-hover:text-accent"
                   >
                     {titular ?? titulo}
@@ -79,7 +82,7 @@ const { proyectos, etiqueta } = Astro.props;
                 </h3>
                 <p class="mt-2 line-clamp-3 leading-relaxed text-pretty text-ink-soft">{descripcion}</p>
                 <p aria-hidden="true" class="mt-auto pt-4 text-sm font-medium text-accent">
-                  Ver case study <span class="inline-block transition group-hover:translate-x-1">→</span>
+                  {ui.verCaseStudy} <span class="inline-block transition group-hover:translate-x-1">→</span>
                 </p>
               </div>
             </article>
@@ -93,7 +96,7 @@ const { proyectos, etiqueta } = Astro.props;
     <button
       type="button"
       data-anterior
-      aria-label="Proyecto anterior"
+      aria-label={ui.proyectoAnterior}
       class="flex size-12 items-center justify-center rounded-full border border-line bg-paper text-ink transition hover:bg-accent-soft"
     >
       <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
@@ -101,7 +104,7 @@ const { proyectos, etiqueta } = Astro.props;
     <button
       type="button"
       data-siguiente
-      aria-label="Proyecto siguiente"
+      aria-label={ui.proyectoSiguiente}
       class="flex size-12 items-center justify-center rounded-full border border-line bg-paper text-ink transition hover:bg-accent-soft"
     >
       <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>

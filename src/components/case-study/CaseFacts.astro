@@ -16,6 +16,8 @@ interface Props {
 }
 
 const { datos, compacta = false, fondo = true } = Astro.props;
+import { getLang, UI } from '../../i18n';
+const ui = UI[getLang(Astro.url)];
 ---
 
 <!--
@@ -26,7 +28,7 @@ const { datos, compacta = false, fondo = true } = Astro.props;
   horizontal en móvil.
 -->
 <section
-  aria-label="Datos del proyecto"
+  aria-label={ui.datosProyecto}
   class:list={[
     fondo
       ? ['mx-[calc(50%-50vw)] bg-paper-soft px-6 pt-6 sm:px-10 sm:pt-10', compacta ? 'pb-10 sm:pb-12' : 'pb-14 sm:pb-20']

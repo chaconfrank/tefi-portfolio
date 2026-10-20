@@ -2,13 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="404" description="Esta página no existe.">
+<!-- Una sola 404 para los dos idiomas: el servidor no sabe en qué idioma
+     estaba el enlace roto, así que lo dice en los dos. -->
+<BaseLayout title="404" description="Esta página no existe · This page doesn't exist.">
   <section class="flex flex-col items-start py-24">
     <p class="text-sm font-medium text-accent">404</p>
     <h1 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Esta página no existe</h1>
     <p class="mt-3 text-ink-soft">Puede que el enlace esté roto o que la haya movido.</p>
-    <a href="/" class="mt-8 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90">
-      Volver al inicio
-    </a>
+    <p class="mt-6 text-lg font-semibold tracking-tight" lang="en">This page doesn't exist</p>
+    <p class="mt-1 text-ink-soft" lang="en">The link may be broken, or the page may have moved.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-paper transition hover:opacity-90">
+        Volver al inicio
+      </a>
+      <a href="/en/" lang="en" class="rounded-full border border-line px-5 py-2.5 text-sm font-medium text-accent transition hover:bg-accent-soft">
+        Back to home
+      </a>
+    </div>
   </section>
 </BaseLayout>

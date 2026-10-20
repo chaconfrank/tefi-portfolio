@@ -10,6 +10,8 @@
 // deslizador, no el JavaScript: el script inline de BaseHead aplica la clase
 // `dark` antes del primer pintado, así que nace en la posición correcta. El JS
 // sólo alterna la clase, guarda la preferencia y sincroniza aria-checked.
+import { UI, getLang } from '../i18n';
+const ui = UI[getLang(Astro.url)];
 ---
 
 <theme-toggle>
@@ -17,7 +19,7 @@
     type="button"
     role="switch"
     aria-checked="false"
-    aria-label="Modo oscuro"
+    aria-label={ui.modoOscuro}
     class="glass relative flex h-8 w-14 cursor-pointer items-center rounded-full p-1 transition"
   >
     <!-- Iconos fijos de la pista: el pomo tapa el del tema activo. -->

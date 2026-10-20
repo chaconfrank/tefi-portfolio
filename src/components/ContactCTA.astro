@@ -1,12 +1,14 @@
 ---
 import AvailabilityBadge from './AvailabilityBadge.astro';
 import { EMAIL, BUSCANDO_TRABAJO } from '../consts';
+import { getLang, UI } from '../i18n';
 
 // Sin props a propósito: es el footer del sitio y dice LO MISMO en todas las
 // páginas. Hubo una variante por página («¿Hablamos?» en Sobre mí) y sólo
 // generó incoherencia.
-const titulo = 'Lista para unirme a tu equipo de producto.';
-const texto = 'Estoy abierta a nuevos retos profesionales y a oportunidades a jornada completa.';
+const ui = UI[getLang(Astro.url)];
+const titulo = ui.ctaTitulo;
+const texto = ui.ctaTexto;
 ---
 
 <!--
@@ -52,7 +54,7 @@ const texto = 'Estoy abierta a nuevos retos profesionales y a oportunidades a jo
         href={`mailto:${EMAIL}`}
         class="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-medium text-secondary-ink transition hover:opacity-90"
       >
-        ¡Hablemos!
+        {ui.hablemos}
       </a>
 
       <!-- Flecha dibujada + frase manuscrita, como una anotación al margen.
@@ -74,7 +76,7 @@ const texto = 'Estoy abierta a nuevos retos profesionales y a oportunidades a jo
           <path d="M41 31 C 37 17, 26 9, 10 8" />
           <path d="m16 3-7 5 6 6" />
         </svg>
-        <span class="mt-1 ml-5 -rotate-6 font-hand text-2xl leading-none">contáctame hoy</span>
+        <span class="mt-1 ml-5 -rotate-6 font-hand text-2xl leading-none">{ui.contactameHoy}</span>
       </div>
     </div>
   </div>

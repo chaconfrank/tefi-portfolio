@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../Hero.astro';
+import ProjectFan from '../ProjectFan.astro';
+import Methodology from '../Methodology.astro';
+import ContactCTA from '../ContactCTA.astro';
+import { ANIOS_DISENO, ANIOS_PRODUCTO } from '../../consts';
+import { getLang, getProyectos, ruta, UI } from '../../i18n';
+
+// Portada. La renderizan src/pages/index.astro (español) y
+// src/pages/en/index.astro (inglés); el idioma sale de la URL.
+const lang = getLang(Astro.url);
+const ui = UI[lang];
+const proyectos = await getProyectos(lang);
+
+// Trayectoria, no impacto de proyecto: las dos cifras de años son ciertas y
+// dicen cosas distintas. Los 3 productos son los tres productos con case study.
+const c = {
+  es: {
+    trayectoria: [
+      { valor: `${ANIOS_DISENO} años`, etiqueta: 'En el sector del diseño, desde 2017' },
+      { valor: `${ANIOS_PRODUCTO} años`, etiqueta: 'Diseñando producto SaaS' },
+      { valor: '3 productos', etiqueta: 'Llevados de principio a fin' },
+    ],
+    caseStudies: 'Case studies',
+    sobreMi: 'Sobre mí',
+    sobreMiFrase: 'Diseño productos digitales que convierten procesos complejos en experiencias sencillas.',
+    sobreMiTexto:
+      'Product Designer UX/UI especializada en SaaS B2B. Trabajo los productos de principio a fin —del problema validado a la implementación con desarrollo—, con sistemas de diseño, experiencias multidispositivo y funcionalidades con IA.',
+    masSobreMi: 'Más sobre cómo trabajo →',
+    trayectoriaEtiqueta: 'Trayectoria',
+  },
+  en: {
+    trayectoria: [
+      { valor: `${ANIOS_DISENO} years`, etiqueta: 'In the design industry, since 2017' },
+      { valor: `${ANIOS_PRODUCTO} years`, etiqueta: 'Designing SaaS products' },
+      { valor: '3 products', etiqueta: 'Taken from start to finish' },
+    ],
+    caseStudies: 'Case studies',
+    sobreMi: 'About me',
+    sobreMiFrase: 'I design digital products that turn complex processes into simple experiences.',
+    sobreMiTexto:
+      'Product Designer UX/UI specialized in B2B SaaS. I work on products end to end —from a validated problem to the implementation with development—, with design systems, multi-device experiences and AI-powered features.',
+    masSobreMi: 'More about how I work →',
+    trayectoriaEtiqueta: 'Career',
+  },
+}[lang];
+---
+
+<BaseLayout>
+  <Hero />
+
+  <section id="proyectos" class="py-8">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {c.caseStudies}</h2>
+      <a href={ruta(lang, 'proyectos')} class="text-sm font-medium text-link underline-offset-4 hover:underline">{ui.verTodos}</a>
+    </div>
+
+    <div class="mt-2">
+      <ProjectFan proyectos={proyectos} etiqueta={c.caseStudies} />
+    </div>
+  </section>
+
+  <section class="py-10">
+    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {c.sobreMi}</h2>
+    <!-- Mismo patrón que «Cómo trabajo»: etiqueta + frase grande + un párrafo.
+         Aquí sólo un vistazo; el perfil completo vive en /sobre-mi. -->
+    <p class="mt-5 pl-4 text-2xl font-semibold tracking-tight text-balance sm:pl-6 sm:text-3xl">
+      {c.sobreMiFrase}
+    </p>
+    <p class="mt-4 pl-4 text-pretty text-ink-soft sm:pl-6">
+      {c.sobreMiTexto}
+    </p>
+    <p class="mt-4 pl-4 sm:pl-6">
+      <a href={ruta(lang, 'sobreMi')} class="text-sm font-medium text-link underline-offset-4 hover:underline">{c.masSobreMi}</a>
+    </p>
+  </section>
+
+  <!--
+    Franja a sangre completa: los márgenes negativos calc(50% - 50vw) la sacan
+    del contenedor de 3xl hasta los bordes del viewport, y el div interior
+    vuelve a centrar el contenido en la misma columna que el resto.
+  -->
+  <section class="reveal mx-[calc(50%-50vw)] my-10 border-y border-line bg-paper-soft/60 py-10">
+    <div class="w-full px-6 sm:px-10">
+      <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {c.trayectoriaEtiqueta}</h2>
+      <dl class="mt-6 grid gap-8 pl-4 sm:grid-cols-3 sm:pl-6">
+        {
+          c.trayectoria.map(({ valor, etiqueta }) => (
+            <div>
+              <dd class="text-3xl font-semibold tracking-tight text-accent sm:text-4xl">{valor}</dd>
+              <dt class="mt-1 text-sm text-pretty text-ink-soft">{etiqueta}</dt>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <Methodology />
+
+  <ContactCTA />
+</BaseLayout>

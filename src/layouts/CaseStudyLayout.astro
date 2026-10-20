@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import { getLang, hrefProyecto, slugDe, UI } from '../i18n';
 
 interface Props {
   proyecto: CollectionEntry<'proyectos'>;
@@ -10,6 +11,7 @@ interface Props {
 
 const { proyecto, siguiente } = Astro.props;
 const { titulo, descripcion } = proyecto.data;
+const lang = getLang(Astro.url);
 ---
 
 <!--
@@ -27,9 +29,9 @@ const { titulo, descripcion } = proyecto.data;
   {
     siguiente && (
       <nav class="mx-auto mt-24 max-w-6xl border-t border-line pt-8">
-        <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">Siguiente case study</p>
+        <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">{UI[lang].siguienteCaso}</p>
         <a
-          href={`/proyectos/${siguiente.id}/`}
+          href={hrefProyecto(lang, slugDe(siguiente))}
           class="mt-2 block text-xl font-semibold tracking-tight text-balance transition hover:text-accent sm:text-2xl"
         >
           {siguiente.data.titular ?? siguiente.data.titulo} →

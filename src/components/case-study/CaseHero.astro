@@ -73,6 +73,9 @@ const rejillaProps = lateral
         .join(' '),
     }
   : {};
+import { getLang, ruta, UI } from '../../i18n';
+const lang = getLang(Astro.url);
+const ui = UI[lang];
 ---
 
 <!--
@@ -90,10 +93,10 @@ const rejillaProps = lateral
     detrás de la imagen sin que se vaya debajo del fondo de la página.
 -->
 <Bloque {...bloqueProps}>
-{lateral && <a href="/proyectos/" class="text-sm text-ink-soft transition hover:text-ink">← Proyectos</a>}
+{lateral && <a href={ruta(lang, 'proyectos')} class="text-sm text-ink-soft transition hover:text-ink">{ui.volverProyectos}</a>}
 <Rejilla {...rejillaProps}>
 <header class:list={[!lateral && 'mx-auto max-w-6xl pt-10 sm:pt-16 lg:pt-24', ancha && 'lg:contents']}>
-  {!lateral && <a href="/proyectos/" class="text-sm text-ink-soft transition hover:text-ink">← Proyectos</a>}
+  {!lateral && <a href={ruta(lang, 'proyectos')} class="text-sm text-ink-soft transition hover:text-ink">{ui.volverProyectos}</a>}
 
   <p
     class:list={[
@@ -153,7 +156,7 @@ const rejillaProps = lateral
   {
     recorrido && (
       <ol
-        aria-label="Recorrido"
+        aria-label={ui.recorrido}
         class:list={[
           'flex flex-wrap items-center gap-x-3 gap-y-2 text-base font-medium sm:text-lg',
           compacta ? 'mt-8' : 'mt-10 sm:mt-12',

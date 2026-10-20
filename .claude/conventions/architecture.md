@@ -13,12 +13,12 @@ Sitio estático (`output: 'static'`) sin adaptador ni backend. Todo se resuelve 
 Tres fuentes, cada una con su mecanismo. Al añadir datos, elige la que corresponda en vez de crear una cuarta:
 
 1. **Colecciones de contenido** (`src/content/proyectos/`, `src/content/blog/`) — Markdown/MDX cargado con el `glob()` loader y validado con Zod en `src/content.config.ts`. Es lo que crece con el tiempo y necesita validación. Detalle en `content.md`.
-2. **Datos estructurados** (`src/data/*.json`) — experiencia y skills. Listas cortas, sin schema, que sólo se pintan. Si una de estas listas empieza a necesitar validación o cuerpo en Markdown, promociónala a colección.
-3. **Configuración del sitio** (`src/consts.ts`) — título, descripción, navegación y redes. El nav del header y los enlaces del footer se derivan de aquí: **no hardcodees enlaces de navegación en los componentes**.
+2. **Datos estructurados** (`src/data/*.json`, y su versión inglesa en `src/data/en/`) — experiencia y skills. Listas cortas, sin schema, que sólo se pintan. Si una de estas listas empieza a necesitar validación o cuerpo en Markdown, promociónala a colección.
+3. **Configuración del sitio** (`src/consts.ts`) — identidad, email, LinkedIn, rutas del CV y cifras de trayectoria. La navegación, las rutas y los textos de interfaz de cada idioma viven en `src/i18n.ts`: **no hardcodees enlaces ni textos de interfaz en los componentes**.
 
 El portfolio es de **Product Designer**: la navegación son cuatro entradas (Inicio,
 Proyectos, Sobre mí, Contacto) y los proyectos son case studies. La colección `blog`
-y su feed siguen existiendo y compilando, pero **están fuera de `NAV_LINKS`** a
+y su feed siguen existiendo y compilando, pero **están fuera de la navegación** (`RUTAS` en `src/i18n.ts`) a
 propósito: un blog con un post de relleno resta en un portfolio que se enseña a
 recruiters. Si se retoma, se vuelve a añadir al nav.
 
@@ -49,9 +49,31 @@ Las páginas de detalle de contenido no llaman a `BaseLayout` directamente: usan
 
 La decisión está aplicada en **los tres sitios a la vez**; si alguna vez se cambia a `'never'`, hay que cambiarlos los tres:
 
-1. Los `href` de `NAV_LINKS` en `src/consts.ts`.
+1. Las rutas de `RUTAS` en `src/i18n.ts`.
 2. Los `href` construidos con `entry.id` en tarjetas y listados.
 3. El helper `rss()` en `src/pages/rss.xml.js`, que **añade barra final por su cuenta pase lo que pase**: con `trailingSlash: 'never'` hay que pasarle `trailingSlash: false` explícitamente o el feed apuntará a URLs que redirigen.
+
+## Idiomas
+
+El sitio es bilingüe. El español es el idioma por defecto y vive en la raíz;
+el inglés, en `/en/` con rutas propias (`/en/projects/`, `/en/about/`,
+`/en/contact/`). El idioma de cada página **sale de su URL**:
+`getLang(Astro.url)` en `src/i18n.ts`, así que ningún componente lo recibe
+por props.
+
+- **Textos de interfaz** (nav, botones, etiquetas, aria-labels): el objeto
+  `UI` de `src/i18n.ts`. **Páginas**: un componente por página en
+  `src/components/paginas/` con sus textos en un objeto `{ es, en }`; los
+  archivos de `src/pages/` y `src/pages/en/` sólo lo renderizan.
+- **Case studies**: el inglés de cada `proyectos/<slug>.mdx` vive en
+  `proyectos/en/<slug>.mdx` (mismo slug, rutas relativas con un `../` más).
+  Su id lleva el prefijo `en/`: usa siempre `getProyectos(lang)`,
+  `slugDe()` y `hrefProyecto()`; un `getCollection('proyectos')` a pelo
+  mezclaría los dos idiomas.
+- **CV**: `cvPath(lang)` da el PDF de cada idioma.
+- **Cambio de idioma**: el globo del header enlaza `equivalente()`, la misma
+  página en el otro idioma; `BaseHead` emite los `hreflang` con la misma
+  función. El blog sólo existe en español y cae en la portada inglesa.
 
 ## Configuración
 

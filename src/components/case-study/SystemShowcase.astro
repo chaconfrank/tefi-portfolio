@@ -24,6 +24,8 @@ interface Props {
 const { flujo, sistema, foundations, componentes, navegacion, compacta = false } = Astro.props;
 const [tipografia, color] = foundations;
 const [botones, dialogos] = componentes;
+import { getLang, UI } from '../../i18n';
+const ui = UI[getLang(Astro.url)];
 ---
 
 <!--
@@ -57,7 +59,7 @@ const [botones, dialogos] = componentes;
     compacta ? 'mt-10 py-12 sm:mt-12 sm:py-14 lg:py-16' : 'mt-20 py-20 sm:mt-24 lg:mt-28 lg:py-28',
   ]}
 >
-  <ol aria-label="Del sistema base al producto" class="flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-sm font-medium sm:text-base">
+  <ol aria-label={ui.sistemaAProducto} class="flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-sm font-medium sm:text-base">
     {
       flujo.map((paso, i) => (
         <li class="flex items-center gap-x-3">
@@ -109,7 +111,7 @@ const [botones, dialogos] = componentes;
     <Screenshot {...tipografia} ancho={560} class="xl:col-span-4 xl:row-start-2" />
     <Screenshot {...navegacion} ancho={560} acento class="xl:col-span-5 xl:row-span-3 xl:row-start-3 xl:mt-8" />
     <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase md:col-span-2 xl:col-span-7 xl:col-start-6 xl:row-start-4 xl:self-end">
-      Componentes
+      {ui.componentes}
     </p>
     <Screenshot {...botones} ancho={560} class="xl:col-span-3 xl:col-start-6 xl:row-start-5" />
     <Screenshot {...dialogos} ancho={560} class="xl:col-span-4 xl:col-start-9 xl:row-start-5" />

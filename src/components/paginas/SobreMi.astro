@@ -1,0 +1,204 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SkillList from '../SkillList.astro';
+import ContactCTA from '../ContactCTA.astro';
+import { SITE_AUTHOR, SITE_ROLE } from '../../consts';
+import { cvPath, getLang, UI } from '../../i18n';
+import experienciaEs from '../../data/experiencia.json';
+import experienciaEn from '../../data/en/experiencia.json';
+import educacionEs from '../../data/educacion.json';
+import educacionEn from '../../data/en/educacion.json';
+import fotoSobreMi from '../../assets/foto-sobre-mi.png';
+
+// Sobre mí, en los dos idiomas (src/pages/sobre-mi.astro y
+// src/pages/en/about.astro).
+const lang = getLang(Astro.url);
+const ui = UI[lang];
+const experiencia = lang === 'en' ? experienciaEn : experienciaEs;
+const educacion = lang === 'en' ? educacionEn : educacionEs;
+
+// Las tres cosas que un hiring manager tiene que recordar del perfil.
+// Los iconos van igual que los de metodología en el inicio: caja naranja
+// suave con trazo naranja — es el acento cálido de las tarjetas del sitio.
+const c = {
+  es: {
+    titulo: 'Sobre mí',
+    descripcion: 'Product Designer UX/UI en Valencia: sistemas de diseño, accesibilidad y producto SaaS.',
+    hola: `¡Hola! Soy ${SITE_AUTHOR.split(' ')[0]}.`,
+    lead: 'Diseño productos digitales que convierten procesos complejos en experiencias sencillas.',
+    parrafos: [
+      'Soy Product Designer UX/UI con experiencia en productos SaaS B2B, trabajando de principio a fin: desde entender el problema y validar soluciones con usuarios hasta definir flujos, diseñar interfaces y acompañar su implementación junto a desarrollo.',
+      'En los últimos años he trabajado especialmente en productos para profesionales, diseñando experiencias multidispositivo, sistemas de diseño y funcionalidades que incorporan IA para transformar información compleja en herramientas útiles para el trabajo diario. Mi experiencia previa en diseño gráfico me aporta además una base visual sólida que aplico hoy con una mirada mucho más orientada a producto, negocio y usuario.',
+    ],
+    destaco: 'En qué destaco',
+    experiencia: 'Experiencia',
+    formacion: 'Formación',
+    especialidad: [
+      {
+        icono: 'embudo',
+        titulo: 'Simplifico productos complejos',
+        texto:
+          'Convierto procesos, roles y necesidades distintas en flujos claros que funcionan en contextos reales de uso.',
+      },
+      {
+        icono: 'capas',
+        titulo: 'Diseño sistemas, no pantallas aisladas',
+        texto:
+          'Construyo experiencias consistentes y escalables mediante sistemas de diseño que conectan producto, diseño y desarrollo.',
+      },
+      {
+        icono: 'ciclo',
+        titulo: 'Busco aprender, entender e iterar',
+        texto:
+          'Valido decisiones con usuarios, itero con el equipo y acompaño las soluciones hasta producción, incluyendo QA y mejora continua.',
+      },
+    ],
+  },
+  en: {
+    titulo: 'About',
+    descripcion: 'Product Designer UX/UI based in Valencia: design systems, accessibility and SaaS products.',
+    hola: `Hi! I'm ${SITE_AUTHOR.split(' ')[0]}.`,
+    lead: 'I design digital products that turn complex processes into simple experiences.',
+    parrafos: [
+      "I'm a Product Designer UX/UI with experience in B2B SaaS products, working end to end: from understanding the problem and validating solutions with users to defining flows, designing interfaces and supporting their implementation alongside development.",
+      'In recent years I have worked mainly on products for professionals, designing multi-device experiences, design systems and features that use AI to turn complex information into useful tools for everyday work. My background in graphic design also gives me a solid visual foundation, which I now apply with a much stronger focus on product, business and users.',
+    ],
+    destaco: 'What I bring',
+    experiencia: 'Experience',
+    formacion: 'Education',
+    especialidad: [
+      {
+        icono: 'embudo',
+        titulo: 'I simplify complex products',
+        texto: 'I turn different processes, roles and needs into clear flows that work in real-world contexts of use.',
+      },
+      {
+        icono: 'capas',
+        titulo: 'I design systems, not isolated screens',
+        texto:
+          'I build consistent, scalable experiences through design systems that connect product, design and development.',
+      },
+      {
+        icono: 'ciclo',
+        titulo: 'I learn, understand and iterate',
+        texto:
+          'I validate decisions with users, iterate with the team and see solutions through to production, including QA and continuous improvement.',
+      },
+    ],
+  },
+}[lang];
+
+const iconos: Record<string, string> = {
+  embudo: '<path d="M4 5h16l-6.5 7.5V19l-3 1.5v-8L4 5Z"/>',
+  capas: '<path d="m12 3 8 4.5-8 4.5-8-4.5L12 3Z"/><path d="m4 12.5 8 4.5 8-4.5"/><path d="m4 16.5 8 4.5 8-4.5"/>',
+  ciclo: '<path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v5h-5"/><path d="m9 12.5 2 2 4-4.5"/>',
+};---
+
+<BaseLayout title={c.titulo} description={c.descripcion}>
+  <section class="py-12">
+    <!--
+      Retrato recortado (PNG con fondo transparente): se pinta entero, sin
+      marco ni recorte, para que detrás se vea el fondo del portfolio en
+      claro y en oscuro. Alineado abajo con el bloque de texto.
+    -->
+    <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10">
+      <div class="w-36 shrink-0 sm:w-44 lg:w-48">
+        <Image
+          src={fotoSobreMi}
+          alt={`${SITE_AUTHOR}, ${SITE_ROLE}`}
+          widths={[288, 384, 576]}
+          sizes="(max-width: 640px) 144px, 192px"
+          class="h-auto w-full"
+        />
+      </div>
+
+      <div class="grow">
+        <p class="text-sm font-medium text-link">{SITE_ROLE} · {ui.ubicacion}</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          {c.hola}
+        </h1>
+
+        <p class="mt-5 text-lg text-pretty">{c.lead}</p>
+        {c.parrafos.map((p) => <p class="mt-4 text-pretty text-ink-soft">{p}</p>)}
+      </div>
+    </div>
+
+    <h2 class="mt-24 text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {c.destaco}</h2>
+    <!--
+      Tres afirmaciones lado a lado, sin tarjeta: icono en caja blanca elevada
+      con trazo primary a la izquierda, texto a la derecha. El hover levanta la
+      caja del icono — el detalle vivo que evita que la fila sea plana.
+    -->
+    <div class="reveal mt-8 grid gap-8 pl-4 sm:pl-6 md:grid-cols-3 md:gap-6 lg:gap-10">
+      {
+        c.especialidad.map(({ icono, titulo, texto }) => (
+          <div class="group flex items-start gap-4">
+            <span
+              class="flex size-12 shrink-0 items-center justify-center rounded-2xl border border-accent/15 bg-accent-soft text-accent shadow-[0_14px_30px_-18px_rgb(0_0_0/0.4)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:border-accent/40"
+              aria-hidden="true"
+            >
+              <svg
+                class="size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={iconos[icono]}
+              />
+            </span>
+            <div>
+              <h3 class="font-semibold tracking-tight text-balance text-accent">{titulo}</h3>
+              <p class="mt-1.5 text-sm text-pretty text-ink-soft">{texto}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <SkillList />
+
+    <!--
+      Comprimidas a propósito: en el portfolio manda el trabajo; la trayectoria
+      completa ya vive en LinkedIn y en el CV. Ni descripciones ni ciudades.
+    -->
+    <h2 class="mt-6 text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {c.experiencia}</h2>
+    <ol class="mt-5 ml-4 space-y-5 border-l border-line pl-6 sm:ml-6">
+      {
+        experiencia.map((item) => (
+          <li class="reveal relative">
+            <span class="absolute top-2 -left-[27px] size-2.5 rounded-full border-2 border-paper bg-metric" />
+            <h3 class="font-medium">
+              <span class="text-ink-soft">{item.periodo} ·</span> {item.puesto}
+            </h3>
+            <p class="text-sm text-ink-soft">{item.empresa}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="mt-12 text-sm font-medium tracking-wide text-ink-soft uppercase"><span aria-hidden="true">—</span> {c.formacion}</h2>
+    <ul class="mt-5 space-y-5 pl-4 sm:pl-6">
+      {
+        educacion.map((item) => (
+          <li>
+            <h3 class="font-medium">
+              <span class="text-ink-soft">{item.anio} ·</span> {item.titulo}
+            </h3>
+            <p class="text-sm text-ink-soft">{item.centro}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-8 pl-4 sm:pl-6">
+      <a href={cvPath(lang)} class="text-sm font-medium text-link underline-offset-4 hover:underline">
+        {ui.descargarCvCompleto}
+      </a>
+    </p>
+  </section>
+
+  <ContactCTA />
+</BaseLayout>
