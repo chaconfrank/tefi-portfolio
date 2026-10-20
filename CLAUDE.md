@@ -101,7 +101,6 @@ Portfolio de **Estephany Mago**, Product Designer UX/UI. El esqueleto está comp
 y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
 `TODO` — búscalos con `grep -rn TODO src astro.config.mjs`:
 
-- `site` en `astro.config.mjs` sigue siendo el placeholder `https://tefi.dev`.
 - **Amaia Cuida se está rehaciendo** como tres case studies con contenido real,
   bloque a bloque. El primero (`amaia-cuida-rediseno.mdx`) usa la plantilla
   editorial; las cifras de QA del case study antiguo (24 h, backlog 70 → 15) no
@@ -124,5 +123,3 @@ y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
 Puntos donde el código todavía no sigue las convenciones — arréglalos si tocas esa zona:
 
 1. **Sin `astro check`.** `@astrojs/check` no está instalado, así que nada comprueba tipos.
-2. **Sin `og-default.png`.** `BaseHead` apunta a `/og-default.png` y ese archivo no
-   existe: las previsualizaciones en LinkedIn salen sin imagen.

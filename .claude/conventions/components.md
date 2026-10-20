@@ -74,3 +74,17 @@ deslizamiento con el dedo y ← → lo giran sin final.
 - Sin JavaScript es una fila deslizable con scroll-snap.
 - La portada de cada tarjeta es `portada` del frontmatter (la composición
   del hero de cada caso).
+
+Cada tarjeta lleva debajo `tipo · periodo` (el tipo traducido con
+`UI[lang].tipos`) y, entre las flechas, el indicador «2 / 5» (el lector de
+pantalla oye «2 de 5»). El enlace del título cubre la tarjeta con `::after`,
+así que el aro de foco se pinta en la tarjeta con `has-[a:focus-visible]`.
+
+## Navegación de un case study (`CaseNav`)
+
+`CaseStudyLayout` pinta `CaseNav`: barra de progreso arriba (CSS con
+`animation-timeline: scroll()`, sin fallback) y, pasada la primera pantalla,
+un botón flotante «Capítulos» con el índice y otro de volver arriba. El
+índice se construye en el navegador con los `section[data-capitulo]` que
+pinta `CaseSection` (`numero · etiqueta`): un capítulo nuevo entra solo en
+el índice, sin tocar nada más. Sin JavaScript no aparece.

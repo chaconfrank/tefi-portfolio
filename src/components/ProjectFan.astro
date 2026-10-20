@@ -40,12 +40,12 @@ const ui = UI[lang];
     >
       {
         proyectos.map((proyecto) => {
-          const { titulo, titular, descripcion, empresa, rol, rolResumen, portada, portadaAlt } = proyecto.data;
+          const { titulo, titular, descripcion, tipo, periodo, empresa, rol, rolResumen, portada, portadaAlt } = proyecto.data;
           const chip = empresa ?? titulo.split('—')[0].trim();
           return (
             <article
               data-tarjeta
-              class="group relative flex w-[min(21rem,78vw)] shrink-0 snap-center flex-col rounded-[1.75rem] bg-paper p-3 shadow-xl ring-1 shadow-ink/10 ring-ink/5 lg:w-[23rem] dark:ring-white/10"
+              class="group relative flex w-[min(21rem,78vw)] shrink-0 snap-center flex-col rounded-[1.75rem] bg-paper p-3 shadow-xl ring-1 shadow-ink/10 ring-ink/5 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-4 has-[a:focus-visible]:outline-accent lg:w-[23rem] dark:ring-white/10"
             >
               <div class="relative overflow-hidden rounded-[1.25rem] bg-paper-soft">
                 {portada ? (
@@ -81,9 +81,12 @@ const ui = UI[lang];
                   </a>
                 </h3>
                 <p class="mt-2 line-clamp-3 leading-relaxed text-pretty text-ink-soft">{descripcion}</p>
-                <p aria-hidden="true" class="mt-auto pt-4 text-sm font-medium text-accent">
-                  {ui.verCaseStudy} <span class="inline-block transition group-hover:translate-x-1">→</span>
-                </p>
+                <div class="mt-auto pt-4 text-sm">
+                  <p class="text-ink-soft">{ui.tipos[tipo]} · {periodo}</p>
+                  <p aria-hidden="true" class="mt-3 font-medium text-accent">
+                    {ui.verCaseStudy} <span class="inline-block transition group-hover:translate-x-1">→</span>
+                  </p>
+                </div>
               </div>
             </article>
           );
@@ -92,7 +95,7 @@ const ui = UI[lang];
     </div>
   </div>
 
-  <div data-controles hidden class="mt-4 flex justify-center gap-3">
+  <div data-controles hidden class="mt-4 flex items-center justify-center gap-3">
     <button
       type="button"
       data-anterior
@@ -101,6 +104,8 @@ const ui = UI[lang];
     >
       <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
     </button>
+    <!-- Posición de la activa («2 / 5»); el lector de pantalla oye «2 de 5». -->
+    <p data-indicador aria-live="polite" class="min-w-14 text-center text-sm font-medium text-ink-soft tabular-nums" data-de={ui.deTotal}></p>
     <button
       type="button"
       data-siguiente
@@ -192,6 +197,7 @@ const ui = UI[lang];
       const controles = this.querySelector<HTMLElement>('[data-controles]');
       const anterior = this.querySelector<HTMLButtonElement>('[data-anterior]');
       const siguiente = this.querySelector<HTMLButtonElement>('[data-siguiente]');
+      const indicador = this.querySelector<HTMLElement>('[data-indicador]');
       const tarjetas = [...this.querySelectorAll<HTMLElement>('[data-tarjeta]')];
       const n = tarjetas.length;
       if (!escena || !controles || !anterior || !siguiente || n < 2) return;
@@ -230,6 +236,10 @@ const ui = UI[lang];
           t.style.setProperty('--ak', String(Math.abs(k)));
           t.setAttribute('aria-current', k === 0 ? 'true' : 'false');
         });
+        if (indicador) {
+          const pos = `${this.activa + 1}`;
+          indicador.innerHTML = `<span aria-hidden="true">${pos} / ${n}</span><span class="sr-only">${pos} ${indicador.dataset.de} ${n}</span>`;
+        }
       };
 
       const mover = (paso: number) => {

@@ -7,9 +7,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: cambiar por el dominio real antes de desplegar.
   // Lo necesitan el sitemap, el RSS y las URLs canónicas.
-  site: 'https://tefi.dev',
+  site: 'https://estephanymago.website',
 
   // build.format es 'directory': cada página se sirve como /ruta/index.html.
   // Con 'always' dev y build coinciden y los href llevan barra final en los tres
