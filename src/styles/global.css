@@ -13,10 +13,10 @@
   /* Teal claro: fondo de estados hover y de superficies de interacción. */
   --color-accent-soft: #ffecef;
 
-  /* Enlaces de acción: EXACTAMENTE el mismo naranja que los puntos de la
-     línea de tiempo (--color-metric), a petición del usuario. Ojo: a 14px da
-     3,2:1; si algún día hay queja de legibilidad, oscurecer a #a85400. */
-  --color-link: #e07312;
+  /* Enlaces de acción: el naranja de las cifras (--color-metric) oscurecido
+     para texto pequeño. El #e07312 original daba 3,2:1 a 14 px y no pasaba
+     AA; éste da 5,3:1 sobre el papel y 4,8:1 sobre paper-soft. */
+  --color-link: #a85400;
   --color-line: #d1d1d1;
 
   /* Naranja (tertiary del tema) de las cifras: métricas de los case studies y trayectoria. Sólo

@@ -6,11 +6,18 @@ const lang = getLang(Astro.url);
 const ui = UI[lang];
 const complemento =
   lang === 'es'
-    ? 'Con sistemas de diseño que sostienen el producto y decisiones respaldadas por datos.'
-    : 'With design systems that hold the product together and data-backed decisions.';
+    ? 'Con sistemas de diseño que sostienen el producto y un proceso que conecta diseño y desarrollo.'
+    : 'With design systems that hold the product together and a process that connects design and development.';
 ---
 
-<section class="pt-10 pb-12 sm:pt-16 sm:pb-16">
+<!--
+  Dos columnas desde lg: quién (disponibilidad, nombre y rol) a la izquierda y
+  qué hace (frase y botones) a la derecha, a todo el ancho y sin líneas
+  kilométricas. Poca altura a propósito: el abanico de proyectos tiene que
+  asomar en la primera pantalla.
+-->
+<section class="pt-8 pb-6 sm:pt-12 sm:pb-8 lg:grid lg:grid-cols-2 lg:items-end lg:gap-x-16">
+  <div>
   {
     BUSCANDO_TRABAJO && (
       <p class="glass-strong inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs text-ink">
@@ -28,8 +35,11 @@ const complemento =
     {SITE_AUTHOR}
     <span class="mt-1 block text-2xl font-normal text-ink-soft sm:text-3xl">{SITE_ROLE}</span>
   </h1>
+  </div>
 
-  <p class="mt-5 text-base leading-relaxed text-pretty sm:text-lg">
+  <div>
+
+  <p class="mt-5 text-base leading-relaxed text-pretty sm:text-lg lg:mt-0">
     {ui.tagline}{' '}
     <span class="text-ink-soft">{complemento}</span>
   </p>
@@ -69,5 +79,6 @@ const complemento =
       </svg>
       {ui.escribeme}
     </a>
+  </div>
   </div>
 </section>
