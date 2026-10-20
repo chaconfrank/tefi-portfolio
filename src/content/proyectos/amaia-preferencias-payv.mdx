@@ -17,6 +17,7 @@ borrador: false
 ---
 
 import CaseHero from '../../components/case-study/CaseHero.astro';
+import CaseFacts from '../../components/case-study/CaseFacts.astro';
 import CaseSection from '../../components/case-study/CaseSection.astro';
 import CaseSubsection from '../../components/case-study/CaseSubsection.astro';
 import CaseText from '../../components/case-study/CaseText.astro';
@@ -46,6 +47,8 @@ import flujoFinalMovil from '../../assets/proyectos/amaia-preferencias-payv/fluj
     aparecen como Centro A–F. */}
 
 <CaseHero
+  compacta
+  lateral
   producto="Amaia Cuida"
   disciplina="Preferencias → Plan de Atención y Vida"
   titulo={frontmatter.titulo}
@@ -62,11 +65,30 @@ El reto fue diseñar un flujo que permitiera recoger esas preferencias de forma 
 
 </CaseHero>
 
+{/* Los mismos datos del proyecto que «Rediseño general» e «Historia de
+    Vida»: es el mismo trabajo en Amaia Cuida. */}
+<CaseFacts
+  fondo={false}
+  datos={[
+    { etiqueta: 'Mi rol', valor: 'Product Designer UX/UI' },
+    { etiqueta: 'Duración', valor: '2 años', detalle: ['2023–2025'] },
+    { etiqueta: 'Equipo', valor: 'CEO, Frontend, Backend y Customer Success' },
+    {
+      etiqueta: 'Productos',
+      valor: '3 plataformas',
+      detalle: ['Amaia Profesionales (web)', 'Amaia Conecta (tablet)', 'Amaia App (familias)'],
+    },
+  ]}
+/>
+
 <CaseSection
+  compacta
   id="punto-de-partida"
   numero="01"
   etiqueta="El punto de partida"
   titulo="Registrar preferencias no garantizaba que se utilizaran en el cuidado"
+  composicion="apilada"
+  destacadoDebajo
   destacado="El problema no era solo recoger más información, sino conseguir que conocer mejor a la persona tuviera consecuencias en cómo se planificaba su cuidado."
 >
 
@@ -79,6 +101,7 @@ El reto tenía, por tanto, dos partes:
 Reducir el esfuerzo necesario para recoger las preferencias y conseguir que esa información pudiera utilizarse posteriormente para personalizar el plan de cuidados.
 
 <Diagram
+  compacta
   slot="media"
   imagen={flujoAnterior}
   imagenMovil={flujoAnteriorMovil}
@@ -88,6 +111,7 @@ Reducir el esfuerzo necesario para recoger las preferencias y conseguir que esa 
 </CaseSection>
 
 <CaseSection
+  compacta
   id="recoger-preferencias"
   numero="02"
   etiqueta="Hacer más fácil recoger las preferencias"
@@ -106,6 +130,7 @@ El objetivo no era sustituir la conversación con un cuestionario rígido, sino 
 <Fragment slot="media">
 
 <AnnotatedScreenshot
+  compacta
   ancha
   imagen={acEntrevista}
   alt="Entrevista de Preferencias en Amaia Conecta, pestaña Preferencias: a la izquierda, «Valoración finalizada» con el botón «Subir Valoración», el audio grabado y los selectores de idioma e interlocutores; a la derecha, el guion de la entrevista con preguntas sobre cuidado, baño, aseo y movilidad."
@@ -131,7 +156,7 @@ El objetivo no era sustituir la conversación con un cuestionario rígido, sino 
   ]}
 />
 
-<CaseText conclusion>
+<CaseText compacta conclusion columna="izquierda">
 
 Recoger más información no resolvía todavía el problema. Había que transformar una conversación extensa en preferencias concretas que el profesional pudiera revisar y utilizar.
 
@@ -142,10 +167,12 @@ Recoger más información no resolvía todavía el problema. Había que transfor
 </CaseSection>
 
 <CaseSection
+  compacta
   id="informacion-estructurada"
   numero="03"
   etiqueta="De conversación a información estructurada"
   titulo="La IA extrae. El profesional decide qué se incorpora."
+  composicion="apilada"
 >
 
 Una vez subida la entrevista, la IA analizaba la conversación y extraía las preferencias detectadas, agrupándolas por categorías como cuidado, rutinas o alimentación.
@@ -161,6 +188,7 @@ La IA reducía el trabajo de extracción; el profesional mantenía el control so
 <Fragment slot="media">
 
 <AnnotatedScreenshot
+  compacta
   ancha
   imagen={apNuevasPreferencias}
   alt="Pestaña Preferencias en Amaia Profesionales con el aviso «Nuevas preferencias extraídas: puedes añadir, aprobar o descartar cada preferencia» y el botón «Ver transcripción». Las preferencias se agrupan en Cuidado, Rutinas y Alimentación; las nuevas llevan la etiqueta NEW y botones para descartar o aprobar, y las que ya existían aparecen sin esos controles."
@@ -192,7 +220,7 @@ La IA reducía el trabajo de extracción; el profesional mantenía el control so
   ]}
 />
 
-<CaseSubsection titulo="Automatizar sin cerrar el sistema">
+<CaseSubsection compacta titulo="Automatizar sin cerrar el sistema" composicion="apilada">
 
 Los profesionales seguían pudiendo incorporar información manualmente cuando surgía durante el día a día o no procedía de una entrevista.
 
@@ -203,13 +231,14 @@ Esto permitía combinar dos formas de alimentar el perfil:
 </CaseSubsection>
 
 <Diagram
+  compacta
   imagen={perfilValidado}
   desplazable={false}
-  ancho={480}
+  ancho={640}
   alt="Dos fuentes que se suman: «Entrevista + IA, extraer nuevas preferencias» y «Profesional, añadir información manualmente»; ambas llevan a «Perfil de preferencias validado»."
 />
 
-<CaseText conclusion>
+<CaseText compacta conclusion columna="izquierda">
 
 Ya habíamos reducido el esfuerzo necesario para recoger y estructurar las preferencias. El siguiente reto era conseguir que esa información no terminara otra vez aislada dentro del perfil.
 
@@ -220,6 +249,7 @@ Ya habíamos reducido el esfuerzo necesario para recoger y estructurar las prefe
 </CaseSection>
 
 <CaseSection
+  compacta
   id="conectar-payv"
   numero="04"
   etiqueta="Conectar la información con el Plan de Atención y Vida"
@@ -236,13 +266,14 @@ La lógica debía funcionar independientemente del orden en que se completasen e
 <Fragment slot="media">
 
 <Diagram
+  compacta
   imagen={fuentesPayv}
   desplazable={false}
-  ancho={560}
+  ancho={720}
   alt="De los cuestionarios iniciales sale el Plan de bienvenida. Debajo, al mismo nivel, tres fuentes: Mis cuidados, Historia de Vida y Preferencias; cualquiera de ellas lleva a una nueva revisión del PAyV. Al pie: «Más información sobre la persona → un plan progresivamente más personalizado»."
 />
 
-<CaseSubsection titulo="Las preferencias debían influir realmente en el plan">
+<CaseSubsection compacta titulo="Las preferencias debían influir realmente en el plan" composicion="apilada">
 
 Aunque el PAyV podía enriquecerse desde distintas fuentes, las Preferencias presentaban un problema particular.
 
@@ -255,7 +286,9 @@ Facilitar su recogida tenía poco valor si después esa información volvía a q
 </CaseSubsection>
 
 <Diagram
+  compacta
   imagen={preferenciasARevision}
+  amplio
   imagenMovil={preferenciasARevisionMovil}
   movilCompleto
   pie="Nueva información validada → nueva revisión del PAyV"
@@ -263,6 +296,7 @@ Facilitar su recogida tenía poco valor si después esa información volvía a q
 />
 
 <CaseSubsection
+  compacta
   titulo="Revisar antes de incorporar los cambios"
   composicion="apilada"
   destacado="Amaia conectaba y proponía información; el profesional decidía qué terminaba formando parte del plan."
@@ -277,13 +311,15 @@ La lógica se mantenía así durante todo el recorrido:
 </CaseSubsection>
 
 <Diagram
+  compacta
   imagen={resumenObjetivosEdicion}
+  amplio
   imagenMovil={resumenObjetivosEdicionMovil}
   movilCompleto
   alt="Las dos partes del Plan de Atención y Vida en modo edición, lado a lado: el Resumen del Plan, con su texto editable, y Objetivos e intervenciones, una tabla de objetivos con sus intervenciones y la opción de eliminar filas; ambas con el botón «Aprobar»."
 />
 
-<CaseSubsection titulo="La IA también podía ayudar a construir las intervenciones">
+<CaseSubsection compacta titulo="La IA también podía ayudar a construir las intervenciones" composicion="apilada">
 
 La edición no se limitaba a corregir contenido generado.
 
@@ -294,13 +330,14 @@ Así, la IA podía ayudar tanto a transformar información sobre la persona en u
 </CaseSubsection>
 
 <HighlightedShot
+  compacta
   imagen={generarConIa}
   ancho={760}
   zona={{ x: 73.4, y: 66.9, ancho: 13.1, alto: 5.2 }}
   alt="Objetivos e intervenciones en modo edición en Amaia Profesionales: una fila nueva con «Escribe el objetivo» y, en las intervenciones, «Puedes escribir las intervenciones o generarlas con Inteligencia Artificial» con el botón «Generar con IA», resaltado."
 />
 
-<CaseSubsection titulo="Validar el flujo en el contexto real de los centros" composicion="apilada">
+<CaseSubsection compacta titulo="Validar el flujo en el contexto real de los centros" composicion="apilada">
 
 Realizamos 6 sesiones de test con profesionales de 5 centros para observar no solo si podían utilizar el Planificador, sino cómo encajaba dentro de su proceso real de planificación del cuidado.
 
@@ -311,6 +348,7 @@ Las principales fricciones aparecieron en otro lugar: descubrir algunas capacida
 </CaseSubsection>
 
 <InsightGrid
+  compacta
   insights={[
     {
       titulo: 'IA como apoyo, no como decisión',
@@ -346,7 +384,7 @@ Las principales fricciones aparecieron en otro lugar: descubrir algunas capacida
   ]}
 />
 
-<CaseText conclusion>
+<CaseText compacta conclusion columna="izquierda">
 
 El objetivo no era generar más versiones del plan, sino conseguir que cada nueva información sobre la persona pudiera traducirse en decisiones de cuidado más personalizadas.
 
@@ -357,10 +395,12 @@ El objetivo no era generar más versiones del plan, sino conseguir que cada nuev
 </CaseSection>
 
 <CaseSection
+  compacta
   id="resultado"
   numero="05"
   etiqueta="Resultado"
   titulo="De recoger información a utilizarla para personalizar el cuidado"
+  composicion="apilada"
 >
 
 El trabajo conectó piezas que antes funcionaban de forma demasiado independiente.
@@ -374,6 +414,7 @@ El resultado fue un flujo en el que conocer mejor a la persona podía tener una 
 <Fragment slot="media">
 
 <ImpactPillars
+  compacta
   numerados
   pilares={[
     {
@@ -401,12 +442,13 @@ El resultado fue un flujo en el que conocer mejor a la persona podía tener una 
 />
 
 <Diagram
+  compacta
   imagen={flujoFinal}
   imagenMovil={flujoFinalMovil}
   alt="El recorrido completo en cuatro pasos: Entrevistar, Estructurar, Validar y Aplicar. Debajo, lo que se obtiene en cada uno: Conversación, Preferencias, Información validada y PAyV."
 />
 
-<CaseSubsection titulo="Mi aprendizaje" composicion="apilada" conclusion final>
+<CaseSubsection compacta titulo="Mi aprendizaje" composicion="apilada" conclusion final>
 
 El valor de recoger información está en lo que el producto permite hacer después con ella.
 
