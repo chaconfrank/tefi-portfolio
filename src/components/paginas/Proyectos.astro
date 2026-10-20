@@ -24,21 +24,6 @@ const c = {
   <section class="py-12">
     <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{c.titulo}</h1>
     <!-- Las negritas marcan lo que un recruiter tiene que retener del vistazo. -->
-    {
-      lang === 'es' ? (
-        <p class="mt-3 text-lg text-pretty text-ink-soft">
-          Una colección de proyectos centrados en <strong class="font-semibold text-ink">resolver problemas reales</strong>,
-          convirtiendo <strong class="font-semibold text-ink">flujos de trabajo complejos</strong> en productos digitales{' '}
-          <strong class="font-semibold text-ink">sencillos, escalables y accesibles</strong>.
-        </p>
-      ) : (
-        <p class="mt-3 text-lg text-pretty text-ink-soft">
-          A collection of projects focused on <strong class="font-semibold text-ink">solving real problems</strong>,
-          turning <strong class="font-semibold text-ink">complex workflows</strong> into{' '}
-          <strong class="font-semibold text-ink">simple, scalable and accessible</strong> digital products.
-        </p>
-      )
-    }
 
     <div class="mt-6">
       <ProjectFan proyectos={proyectos} etiqueta={c.titulo} />

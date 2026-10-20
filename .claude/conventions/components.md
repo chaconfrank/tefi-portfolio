@@ -68,6 +68,9 @@ deslizamiento con el dedo y ← → lo giran sin final.
   utilidades de Tailwind por ir sin capa.
 - La tarjeta que pasa de un extremo al otro se recoloca sin transición
   (`data-salto`) y entra con un fundido; más allá de ±2 van ocultas.
+- **En móvil (< md) no hay abanico**: las mismas variables con giro y caída a
+  cero lo convierten en un carrusel de tarjetas rectas en fila, con la misma
+  dinámica (bucle, deslizar y flechas).
 - Sin JavaScript es una fila deslizable con scroll-snap.
 - La portada de cada tarjeta es `portada` del frontmatter (la composición
   del hero de cada caso).

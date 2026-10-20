@@ -40,7 +40,7 @@ const hrefOtro = equivalente(Astro.url.pathname, otro);
         hreflang={otro}
         lang={otro}
         aria-label={ui.cambiarIdiomaAria}
-        class="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-2 text-sm font-medium text-ink-soft transition hover:text-ink"
+        class="glass inline-flex h-9.5 shrink-0 items-center gap-1.5 rounded-full px-3 text-sm font-medium text-ink-soft transition hover:bg-accent-soft hover:text-ink sm:h-10.5 sm:px-4"
       >
         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9" />
@@ -54,14 +54,15 @@ const hrefOtro = equivalente(Astro.url.pathname, otro);
       <ThemeToggle />
 
       <!--
-        Acceso rápido al CV: outlined compacto, a la altura del toggle. En
-        móvil sólo el icono (botón redondo de 32 px); el texto queda para
-        lectores de pantalla.
+        Acceso rápido al CV. Los tres controles (idioma, tema y CV) tienen la
+        misma altura y el mismo cristal que la pastilla del menú (38 px en móvil,
+        42 px desde sm). En
+        móvil el CV es sólo el icono; el texto queda para lectores de pantalla.
       -->
       <a
         href={cvPath(lang)}
         aria-label={ui.descargarCv}
-        class="inline-flex size-8 shrink-0 items-center justify-center gap-1.5 rounded-full border border-line bg-paper/40 text-sm font-medium whitespace-nowrap text-accent transition hover:border-accent/50 hover:bg-accent-soft sm:h-8 sm:w-auto sm:px-3.5"
+        class="glass inline-flex size-9.5 shrink-0 items-center justify-center gap-1.5 rounded-full text-sm font-medium whitespace-nowrap text-accent transition hover:bg-accent-soft sm:h-10.5 sm:w-auto sm:px-4"
       >
         <svg
           class="size-4"

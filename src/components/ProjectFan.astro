@@ -142,6 +142,19 @@ const ui = UI[lang];
     }
   }
 
+  /*
+    Móvil: el abanico pasa a carrusel horizontal de tarjetas rectas, en fila
+    y sin solaparse; misma dinámica (bucle, deslizar y flechas).
+  */
+  @media (max-width: 47.99rem) {
+    project-fan[data-modo='abanico'] [data-pista] {
+      --paso: calc(min(21rem, 78vw) + 1rem);
+      --giro: 0deg;
+      --caida: 0rem;
+      padding-block: 1.5rem 2.5rem;
+    }
+  }
+
   project-fan[data-modo='abanico'] [data-tarjeta] {
     grid-area: 1 / 1;
     transform: translateX(calc(var(--k) * var(--paso))) translateY(calc(var(--ak) * var(--ak) * var(--caida) * 0.6 + var(--ak) * var(--caida) * 0.4))
