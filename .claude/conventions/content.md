@@ -45,8 +45,17 @@ de research con `InsightGrid`.
 
 `CaseHero`, `CaseSection`, `CaseSubsection` y `CaseText` aceptan
 `compacta`: el mismo componente con el ritmo vertical apretado (capítulos a
-~112 px, subsecciones a ~80 px). Wedify y HandiSport lo usan enteros; Amaia
-va sin él. `CaseSubsection` admite también `etiqueta`, una línea en
+~112 px, subsecciones a ~80 px, texto → visual ~48 px). Wedify, HandiSport y
+Amaia · Rediseño general lo usan enteros; Historia de Vida y Preferencias van
+sin él. Los componentes de visual, franja y cierre que usa Rediseño general
+también la aceptan, con valor por defecto sin cambios. Para la composición
+de ese caso hay además `CaseHero lateral` (texto a la izquierda y composición
+a la derecha desde lg, alineada arriba con el eyebrow para que se vea al
+entrar) con `CaseFacts fondo={false}` debajo (franja entre filetes, sin gris):
+es el hero de Rediseño general, Wedify y HandiSport. Además, `CaseSection destacadoDebajo` (en 'apilada', el destacado bajo el texto
+en vez de en el extremo derecho) y `VersionStep` con `disposicion="columna"`
+(dos versiones lado a lado, cada captura pegada a su texto) o
+`"completa"`. `CaseSubsection` admite también `etiqueta`, una línea en
 mayúsculas encima del subtítulo.
 
 **Acento por producto:** los componentes pintan el acento con

@@ -122,6 +122,21 @@ La animación se declara como `--animate-seal-spin` dentro de `@theme`, con sus
 `@keyframes` anidados —que es como se declaran animaciones propias en Tailwind
 v4—, y el componente la respeta con `motion-reduce:animate-none`.
 
+## Franjas de fondo a sangre
+
+Para que el fondo de un bloque llegue a los bordes del viewport sin sacar el
+contenido de su columna, se pinta con `border-image` extendido hacia fuera:
+
+```
+[border-image:linear-gradient(var(--color-paper-soft),var(--color-paper-soft))_fill_0//0_100vw]
+```
+
+La caja no se mueve, no hacen falta márgenes negativos ni un envoltorio
+interior que devuelva el padding, y lo que se pinta fuera del borde no genera
+scroll horizontal. Así van `SystemShowcase` y `CaseReflection`. Los
+componentes más antiguos (`CaseFacts`, la banda de `CaseHero`) siguen con
+`mx-[calc(50%-50vw)]`; si se tocan, se migran a esto.
+
 ## `@apply` dentro de un componente
 
 Un `<style>` de componente que use `@apply` necesita esto como **primera línea del bloque**:
