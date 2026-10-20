@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import CaseNav from '../components/case-study/CaseNav.astro';
 import { getLang, hrefProyecto, slugDe, UI } from '../i18n';
 
 interface Props {
@@ -21,13 +22,15 @@ const imagenSocial = `/og/${slugDe(proyecto)}.jpg`;
   Case study editorial: a diferencia de ProjectLayout no pinta cabecera ni
   estila Markdown. El cuerpo MDX compone la maqueta entera con los
   componentes de src/components/case-study/, cada sección con su propio
-  ritmo. Aquí sólo queda el marco común: título de página, siguiente caso
-  y cierre.
+  ritmo. Aquí sólo queda el marco común: título de página, índice de
+  capítulos (CaseNav), siguiente caso y cierre.
 -->
 <BaseLayout title={titulo} description={descripcion} image={imagenSocial}>
   <article>
     <slot />
   </article>
+
+  <CaseNav />
 
   {
     siguiente && (
