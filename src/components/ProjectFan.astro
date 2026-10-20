@@ -12,140 +12,262 @@ const { proyectos, etiqueta } = Astro.props;
 ---
 
 <!--
-  Abanico de tarjetas (inspirado en el carrusel de Google Labs): una fila
-  horizontal a sangre con las tarjetas ligeramente inclinadas y a alturas
-  alternas, como cartas repartidas, y flechas ‹ › para avanzar.
+  Abanico de tarjetas en bucle (inspirado en el carrusel de Google Labs): la
+  tarjeta activa recta en el centro y las vecinas giradas hacia fuera y más
+  bajas, como cartas abiertas en abanico. Las flechas lo giran sin final: la
+  tarjeta que sale por un extremo vuelve a entrar por el otro.
 
-  - La fila es un scroller nativo con scroll-snap: sin JavaScript se desliza
-    con el dedo o la rueda, y cada tarjeta es un enlace enfocable que el
-    navegador trae a la vista al tabular.
-  - El script sólo añade las flechas y recalcula la inclinación de cada
-    tarjeta según el hueco que ocupa en pantalla (data-hueco par/impar), así
-    al avanzar cambian de inclinación con una transición, como en el vídeo.
-  - Hover (sólo con puntero fino): la portada se difumina y aparece encima
-    la acción «Ver case study».
-  - prefers-reduced-motion: tarjetas rectas, sin transiciones ni scroll suave.
-  - La fila se sale del padding de <main> (-mx) para que las tarjetas de los
-    extremos asomen cortadas por el borde de la pantalla.
+  - Sin JavaScript es una fila deslizable normal (scroll-snap), con todas las
+    tarjetas enlazadas.
+  - Con JavaScript el script pone data-modo="abanico" y da a cada tarjeta su
+    posición relativa a la activa (--k: …, -1, 0, 1, …). Todo el movimiento
+    sale de esas variables en el <style> de abajo; el script no anima nada.
+  - Se avanza con las flechas, deslizando el dedo o con ← → con el foco
+    dentro. Enfocar una tarjeta con el tabulador la trae al centro.
+  - prefers-reduced-motion: mismo abanico, sin transiciones.
 -->
 <project-fan class="block">
-  <div
-    data-pista
-    role="region"
-    aria-label={etiqueta}
-    tabindex="-1"
-    class="-mx-6 flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto px-6 pt-6 pb-10 [scrollbar-width:none] sm:-mx-10 sm:scroll-px-10 sm:gap-7 sm:px-10 motion-safe:scroll-smooth [&::-webkit-scrollbar]:hidden"
-  >
-    {
-      proyectos.map((proyecto, i) => {
-        const { titulo, titular, descripcion, empresa, rol, rolResumen, portada, portadaAlt } = proyecto.data;
-        const chip = empresa ?? titulo.split('—')[0].trim();
-        return (
-          <article
-            data-tarjeta
-            data-hueco={i % 2 === 0 ? 'par' : 'impar'}
-            class="group relative w-[17.5rem] shrink-0 snap-start rounded-3xl border border-line bg-paper p-3 shadow-lg shadow-ink/5 transition-[transform,box-shadow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-xl sm:w-[20rem] motion-safe:data-[hueco=impar]:translate-y-4 motion-safe:data-[hueco=impar]:rotate-[2deg] motion-safe:data-[hueco=par]:-rotate-[2deg] motion-reduce:transition-none"
-          >
-            <div class="relative overflow-hidden rounded-2xl bg-paper-soft">
-              {portada ? (
-                <Image
-                  src={portada}
-                  alt={portadaAlt ?? ''}
-                  widths={[320, 640, 960]}
-                  sizes="(min-width: 640px) 320px, 280px"
-                  class="aspect-[4/3] h-auto w-full object-contain p-3 transition duration-500 group-hover:scale-[1.02] group-hover:opacity-40 group-hover:blur-sm motion-reduce:transition-none"
-                />
-              ) : (
-                <div class="aspect-[4/3] w-full" aria-hidden="true" />
-              )}
-              <span class="glass-strong absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-medium text-ink">
-                {chip}
-              </span>
-              <span
-                aria-hidden="true"
-                class="pointer-events-none absolute inset-0 m-auto h-fit w-fit translate-y-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper opacity-0 shadow-lg transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none"
-              >
-                Ver case study
-              </span>
-            </div>
+  <div class="-mx-6 overflow-hidden sm:-mx-10" data-escena>
+    <div
+      data-pista
+      role="region"
+      aria-roledescription="carrusel"
+      aria-label={etiqueta}
+      class="flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto px-6 pt-6 pb-10 [scrollbar-width:none] sm:scroll-px-10 sm:px-10 [&::-webkit-scrollbar]:hidden"
+    >
+      {
+        proyectos.map((proyecto) => {
+          const { titulo, titular, descripcion, empresa, rol, rolResumen, portada, portadaAlt } = proyecto.data;
+          const chip = empresa ?? titulo.split('—')[0].trim();
+          return (
+            <article
+              data-tarjeta
+              class="group relative flex w-[min(21rem,78vw)] shrink-0 snap-center flex-col rounded-[1.75rem] bg-paper p-3 shadow-xl ring-1 shadow-ink/10 ring-ink/5 lg:w-[23rem] dark:ring-white/10"
+            >
+              <div class="relative overflow-hidden rounded-[1.25rem] bg-paper-soft">
+                {portada ? (
+                  <Image
+                    src={portada}
+                    alt={portadaAlt ?? ''}
+                    widths={[360, 720, 1080]}
+                    sizes="(min-width: 1024px) 368px, 78vw"
+                    class="aspect-[4/3] h-auto w-full object-contain p-3 transition duration-500 group-hover:opacity-40 group-hover:blur-sm motion-reduce:transition-none"
+                  />
+                ) : (
+                  <div class="aspect-[4/3] w-full" aria-hidden="true" />
+                )}
+                <span class="glass-strong absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-medium text-ink">
+                  {chip}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="pointer-events-none absolute inset-0 m-auto h-fit w-fit translate-y-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper opacity-0 shadow-lg transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none"
+                >
+                  Ver case study
+                </span>
+              </div>
 
-            <div class="px-2 pt-5 pb-3">
-              <p class="text-xs font-medium tracking-wide text-ink-soft uppercase">{rolResumen ?? rol}</p>
-              <h3 class="mt-1.5 text-lg leading-snug font-semibold tracking-tight text-balance">
-                <a href={`/proyectos/${proyecto.id}/`} class="after:absolute after:inset-0 after:rounded-3xl group-hover:text-accent">
-                  {titular ?? titulo}
-                </a>
-              </h3>
-              <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-pretty text-ink-soft">{descripcion}</p>
-              <p aria-hidden="true" class="mt-4 text-sm font-medium text-accent">
-                Ver case study <span class="inline-block transition group-hover:translate-x-1">→</span>
-              </p>
-            </div>
-          </article>
-        );
-      })
-    }
+              <div class="flex grow flex-col px-3 pt-5 pb-3">
+                <p class="text-xs font-medium tracking-wide text-ink-soft uppercase">{rolResumen ?? rol}</p>
+                <h3 class="mt-1.5 text-xl leading-snug font-semibold tracking-tight text-balance">
+                  <a
+                    href={`/proyectos/${proyecto.id}/`}
+                    class="after:absolute after:inset-0 after:rounded-[1.75rem] focus-visible:outline-none group-hover:text-accent"
+                  >
+                    {titular ?? titulo}
+                  </a>
+                </h3>
+                <p class="mt-2 line-clamp-3 leading-relaxed text-pretty text-ink-soft">{descripcion}</p>
+                <p aria-hidden="true" class="mt-auto pt-4 text-sm font-medium text-accent">
+                  Ver case study <span class="inline-block transition group-hover:translate-x-1">→</span>
+                </p>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
   </div>
 
-  <div data-controles hidden class="mt-2 flex justify-center gap-3">
+  <div data-controles hidden class="mt-4 flex justify-center gap-3">
     <button
       type="button"
       data-anterior
-      aria-label="Proyectos anteriores"
-      class="glass flex size-10 items-center justify-center rounded-full text-ink transition hover:bg-accent-soft disabled:opacity-30 disabled:hover:bg-transparent"
+      aria-label="Proyecto anterior"
+      class="flex size-12 items-center justify-center rounded-full border border-line bg-paper text-ink transition hover:bg-accent-soft"
     >
-      <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+      <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
     </button>
     <button
       type="button"
       data-siguiente
-      aria-label="Más proyectos"
-      class="glass flex size-10 items-center justify-center rounded-full text-ink transition hover:bg-accent-soft disabled:opacity-30 disabled:hover:bg-transparent"
+      aria-label="Proyecto siguiente"
+      class="flex size-12 items-center justify-center rounded-full border border-line bg-paper text-ink transition hover:bg-accent-soft"
     >
-      <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
     </button>
   </div>
 </project-fan>
 
+<style>
+  /*
+    Modo abanico. Estilos scoped sin capa: ganan a las utilidades de
+    Tailwind (que van en @layer) sin necesidad de !important.
+    Todas las tarjetas comparten la misma celda y se colocan con --k
+    (posición respecto a la activa) y --ak (su valor absoluto).
+  */
+  /* El gesto horizontal es nuestro; el vertical sigue siendo scroll. */
+  project-fan[data-modo='abanico'] [data-escena] {
+    touch-action: pan-y;
+  }
+
+  project-fan[data-modo='abanico'] [data-pista] {
+    display: grid;
+    justify-items: center;
+    align-items: start;
+    overflow: visible;
+    padding-block: 2.5rem 5rem;
+    --paso: calc(min(21rem, 78vw) * 0.92);
+    --giro: 7deg;
+    --caida: 2.25rem;
+  }
+
+  @media (min-width: 64rem) {
+    project-fan[data-modo='abanico'] [data-pista] {
+      --paso: 25.5rem;
+    }
+  }
+
+  project-fan[data-modo='abanico'] [data-tarjeta] {
+    grid-area: 1 / 1;
+    transform: translateX(calc(var(--k) * var(--paso))) translateY(calc(var(--ak) * var(--ak) * var(--caida) * 0.6 + var(--ak) * var(--caida) * 0.4))
+      rotate(calc(var(--k) * var(--giro)));
+    z-index: calc(20 - var(--ak));
+    transition:
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 500ms ease;
+  }
+
+  /* Más allá de las vecinas visibles: fuera de vista. */
+  project-fan[data-modo='abanico'] [data-tarjeta][data-lejos] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* La tarjeta que da la vuelta de un extremo al otro salta sin animarse. */
+  project-fan[data-modo='abanico'] [data-tarjeta][data-salto] {
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    project-fan[data-modo='abanico'] [data-tarjeta] {
+      transition: none;
+    }
+  }
+</style>
+
 <script>
   class ProjectFan extends HTMLElement {
+    activa = 0;
+
     connectedCallback() {
-      const pista = this.querySelector<HTMLElement>('[data-pista]');
+      const escena = this.querySelector<HTMLElement>('[data-escena]');
       const controles = this.querySelector<HTMLElement>('[data-controles]');
       const anterior = this.querySelector<HTMLButtonElement>('[data-anterior]');
       const siguiente = this.querySelector<HTMLButtonElement>('[data-siguiente]');
       const tarjetas = [...this.querySelectorAll<HTMLElement>('[data-tarjeta]')];
-      if (!pista || !controles || !anterior || !siguiente || tarjetas.length === 0) return;
+      const n = tarjetas.length;
+      if (!escena || !controles || !anterior || !siguiente || n < 2) return;
 
-      const paso = () => {
-        const [a, b] = tarjetas;
-        return b ? b.offsetLeft - a.offsetLeft : a.offsetWidth;
+      this.dataset.modo = 'abanico';
+      controles.hidden = false;
+
+      // Posición circular de cada tarjeta respecto a la activa, en
+      // [-n/2, n/2): con 5 tarjetas, -2…2.
+      const relativa = (i: number) => {
+        let k = (i - this.activa) % n;
+        if (k < -Math.floor(n / 2)) k += n;
+        if (k >= Math.ceil(n / 2)) k -= n;
+        return k;
       };
 
-      // Inclinación según el hueco visible que ocupa cada tarjeta, no según
-      // su posición en la lista: al avanzar una, todas cambian de lado.
-      let pendiente = false;
-      const actualizar = () => {
-        pendiente = false;
-        const p = paso();
-        const primera = Math.round(pista.scrollLeft / p);
-        tarjetas.forEach((t, i) => (t.dataset.hueco = (i - primera) % 2 === 0 ? 'par' : 'impar'));
-        anterior.disabled = pista.scrollLeft <= 2;
-        siguiente.disabled = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 2;
-        controles.hidden = pista.scrollWidth <= pista.clientWidth + 2;
+      const colocar = () => {
+        tarjetas.forEach((t, i) => {
+          const k = relativa(i);
+          const previa = Number(t.style.getPropertyValue('--k') || k);
+          // Si cambia de extremo (salto de más de una posición), se recoloca
+          // sin transición y entra con un fundido.
+          if (Math.abs(k - previa) > 1) {
+            t.toggleAttribute('data-salto', true);
+            t.toggleAttribute('data-lejos', true);
+            requestAnimationFrame(() =>
+              requestAnimationFrame(() => {
+                t.removeAttribute('data-salto');
+                t.toggleAttribute('data-lejos', Math.abs(k) > 2);
+              }),
+            );
+          } else {
+            t.toggleAttribute('data-lejos', Math.abs(k) > 2);
+          }
+          t.style.setProperty('--k', String(k));
+          t.style.setProperty('--ak', String(Math.abs(k)));
+          t.setAttribute('aria-current', k === 0 ? 'true' : 'false');
+        });
       };
-      const programar = () => {
-        if (!pendiente) {
-          pendiente = true;
-          requestAnimationFrame(actualizar);
+
+      const mover = (paso: number) => {
+        this.activa = (this.activa + paso + n) % n;
+        colocar();
+      };
+
+      anterior.addEventListener('click', () => mover(-1));
+      siguiente.addEventListener('click', () => mover(1));
+
+      this.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') mover(-1);
+        else if (e.key === 'ArrowRight') mover(1);
+        else return;
+        e.preventDefault();
+      });
+
+      // Al tabular hasta una tarjeta, se trae al centro.
+      tarjetas.forEach((t, i) =>
+        t.addEventListener('focusin', () => {
+          if (i !== this.activa) {
+            this.activa = i;
+            colocar();
+          }
+        }),
+      );
+
+      // Deslizar con el dedo. Si hubo arrastre, se anula el clic en el enlace.
+      let x0: number | null = null;
+      let arrastre = false;
+      escena.addEventListener('pointerdown', (e) => {
+        x0 = e.clientX;
+        arrastre = false;
+      });
+      escena.addEventListener('pointerup', (e) => {
+        if (x0 === null) return;
+        const dx = e.clientX - x0;
+        x0 = null;
+        if (Math.abs(dx) > 40) {
+          arrastre = true;
+          mover(dx < 0 ? 1 : -1);
         }
-      };
+      });
+      escena.addEventListener(
+        'click',
+        (e) => {
+          if (arrastre) {
+            e.preventDefault();
+            arrastre = false;
+          }
+        },
+        true,
+      );
 
-      anterior.addEventListener('click', () => pista.scrollBy({ left: -paso() }));
-      siguiente.addEventListener('click', () => pista.scrollBy({ left: paso() }));
-      pista.addEventListener('scroll', programar, { passive: true });
-      window.addEventListener('resize', programar);
-      actualizar();
+      colocar();
     }
   }
 

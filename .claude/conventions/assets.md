@@ -33,8 +33,10 @@ con el mismo radio que las tarjetas** (`rounded-xl`), no un círculo.
 La fuente es `src/assets/avatar.jpg`, recortada a cuadrado **600×600** desde
 «Retrato profesional con rizos cobrizos.png» (1024×1536, carpeta
 `portafolio tefy/Fotos profesionales/`), centrada en la cara. Sobre mí usa otra
-foto, `src/assets/foto-sobre-mi.jpg` (el retrato granate entero, 1024×1536),
-con `object-cover` y el foco desplazado hacia la cara (`object-[50%_22%]`).
+foto, `src/assets/foto-sobre-mi.png`: el retrato granate **recortado con fondo
+transparente**. Se pinta entero y sin marco, para que se vea el fondo del
+portfolio; no la conviertas a JPG ni le pongas `object-cover`, que pierde la
+transparencia o la corta.
 Si hay que rehacer el recorte del avatar, hazlo **antes** de meter el archivo,
 no con `object-position` — `<Image>` no recorta, sólo redimensiona. Y nunca
 pidas en `widths` más píxeles de los que tiene el archivo fuente.

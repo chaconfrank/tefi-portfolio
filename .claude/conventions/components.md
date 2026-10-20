@@ -57,11 +57,17 @@ Las view transitions rompen estos scripts al navegar: los bundled se ejecutan un
 
 ## El abanico de proyectos (`ProjectFan`)
 
-Inicio y Proyectos listan los case studies con `ProjectFan`: una fila
-horizontal a sangre de tarjetas inclinadas (inspirada en el carrusel de Google
-Labs). Es un **scroller nativo con scroll-snap**, así que sin JavaScript se
-desliza igual; el script sólo añade las flechas y recalcula `data-hueco`
-(par/impar) según la posición visible, para que al avanzar cada tarjeta cambie
-de inclinación. La portada de cada tarjeta es `portada` del frontmatter (la
-composición del hero de cada caso). Con `prefers-reduced-motion` las tarjetas
-van rectas y sin transiciones.
+Inicio y Proyectos listan los case studies con `ProjectFan`: un **abanico en
+bucle** (inspirado en el carrusel de Google Labs). La tarjeta activa va recta
+en el centro y las vecinas giradas hacia fuera y más bajas; las flechas, el
+deslizamiento con el dedo y ← → lo giran sin final.
+
+- El script sólo pone `data-modo="abanico"` y da a cada tarjeta `--k`
+  (posición circular respecto a la activa) y `--ak`. Todo el movimiento sale
+  de esas variables en el `<style>` scoped del componente, que gana a las
+  utilidades de Tailwind por ir sin capa.
+- La tarjeta que pasa de un extremo al otro se recoloca sin transición
+  (`data-salto`) y entra con un fundido; más allá de ±2 van ocultas.
+- Sin JavaScript es una fila deslizable con scroll-snap.
+- La portada de cada tarjeta es `portada` del frontmatter (la composición
+  del hero de cada caso).
