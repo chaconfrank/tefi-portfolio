@@ -2,9 +2,11 @@
 interface Props {
   id: string;
   titulo: string;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { id, titulo } = Astro.props;
+const { id, titulo, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -21,25 +23,39 @@ const { id, titulo } = Astro.props;
 <section
   id={id}
   aria-labelledby={`${id}-titulo`}
-  class="mx-[calc(50%-50vw)] mt-28 scroll-mt-28 bg-amaia-soft px-6 py-24 sm:mt-36 sm:px-10 sm:py-32 lg:mt-44 lg:py-40"
+  class:list={[
+    // Fondo a sangre con border-image (ver SystemShowcase): la sección se
+    // queda en la columna de la página, sin márgenes negativos.
+    'mx-auto max-w-6xl scroll-mt-28 [border-image:linear-gradient(var(--color-amaia-soft),var(--color-amaia-soft))_fill_0//0_100vw]',
+    // Compacta: menos margen de entrada, porque en este caso llega justo
+    // después de otra franja (la del sistema) y el blanco entre dos fondos
+    // no separa nada; relleno igual al de esa franja.
+    compacta ? 'mt-12 py-12 sm:mt-14 sm:py-14 lg:mt-16 lg:py-16' : 'mt-28 py-24 sm:mt-36 sm:py-32 lg:mt-44 lg:py-40',
+  ]}
 >
-  <div class="mx-auto max-w-6xl">
-    <h2 id={`${id}-titulo`} class="max-w-3xl text-3xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]">
-      {titulo}
-    </h2>
+  <h2 id={`${id}-titulo`} class="max-w-3xl text-3xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]">
+    {titulo}
+  </h2>
 
+  <div
+    class:list={[
+      'text-lg leading-relaxed text-pretty text-ink-soft lg:columns-2 lg:gap-x-16 [&>p]:mb-6 [&>p]:break-inside-avoid',
+      // Compacta: el texto no pasa de 64rem (dos columnas de ~480 px).
+      compacta ? 'mt-8 sm:mt-10 lg:max-w-5xl [&>p:last-child]:mb-0' : 'mt-12 sm:mt-16',
+    ]}
+  >
+    <slot />
+  </div>
+
+  <div class:list={['lg:grid lg:grid-cols-12 lg:gap-x-10', compacta ? 'mt-8 lg:mt-10' : 'mt-16 lg:mt-24']}>
     <div
-      class="mt-12 text-lg leading-relaxed text-pretty text-ink-soft sm:mt-16 lg:columns-2 lg:gap-x-16 [&>p]:mb-6 [&>p]:break-inside-avoid"
+      class:list={[
+        'border-l-2 border-amaia-ink pl-6 text-lg leading-relaxed text-pretty text-ink-soft sm:pl-8 [&>p]:max-w-3xl [&>p+p]:mt-6 [&>p+p]:max-w-2xl [&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl',
+        // Compacta: alineado con el texto, no desplazado al centro.
+        compacta ? 'lg:col-span-9' : 'lg:col-span-9 lg:col-start-4',
+      ]}
     >
-      <slot />
-    </div>
-
-    <div class="mt-16 lg:mt-24 lg:grid lg:grid-cols-12 lg:gap-x-10">
-      <div
-        class="border-l-2 border-amaia-ink pl-6 text-lg leading-relaxed text-pretty text-ink-soft sm:pl-8 lg:col-span-9 lg:col-start-4 [&>p]:max-w-3xl [&>p+p]:mt-6 [&>p+p]:max-w-2xl [&>p:first-child]:text-2xl [&>p:first-child]:leading-snug [&>p:first-child]:font-medium [&>p:first-child]:text-balance [&>p:first-child]:text-ink sm:[&>p:first-child]:text-3xl"
-      >
-        <slot name="destacado" />
-      </div>
+      <slot name="destacado" />
     </div>
   </div>
 </section>

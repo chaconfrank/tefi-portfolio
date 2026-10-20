@@ -15,9 +15,12 @@ interface Props {
   // Ritmo más apretado (capítulos a ~112 px, título y texto más juntos) para
   // casos largos en los que el aire por defecto alarga demasiado la página.
   compacta?: boolean;
+  // En 'apilada', el destacado va debajo del texto en su misma columna en
+  // vez de en el extremo derecho: problema → decisión se leen seguidos.
+  destacadoDebajo?: boolean;
 }
 
-const { id, numero, etiqueta, titulo, composicion = 'dividida', destacado, compacta = false } = Astro.props;
+const { id, numero, etiqueta, titulo, composicion = 'dividida', destacado, compacta = false, destacadoDebajo = false } = Astro.props;
 const apilada = composicion === 'apilada';
 ---
 
@@ -60,9 +63,14 @@ const apilada = composicion === 'apilada';
       destacado && (
         <p
           class:list={[
-            compacta ? 'mt-10' : 'mt-12',
-            'max-w-sm border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
-            apilada ? 'lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end' : 'lg:col-span-6 lg:col-start-7',
+            compacta ? (destacadoDebajo ? 'mt-8' : 'mt-10') : 'mt-12',
+            destacadoDebajo ? 'max-w-xl' : 'max-w-sm',
+            'border-l-2 border-amaia-ink pl-5 text-xl leading-snug font-medium text-balance text-ink',
+            apilada
+              ? destacadoDebajo
+                ? 'lg:col-span-7 lg:col-start-1'
+                : 'lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end'
+              : 'lg:col-span-6 lg:col-start-7',
           ]}
         >
           {destacado}

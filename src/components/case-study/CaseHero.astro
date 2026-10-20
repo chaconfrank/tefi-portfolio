@@ -21,10 +21,58 @@ interface Props {
   recorrido?: string[];
   // Menos aire entre las piezas del hero, a juego con CaseSection compacta.
   compacta?: boolean;
+  // Texto a la izquierda y composición a la derecha desde lg, en una sola
+  // fila: el hero se lee como una apertura y no como texto + imagen apilados.
+  // Sin banda: la franja de datos va debajo con su propio filete.
+  lateral?: boolean;
+  // Sólo con lateral: la entradilla y el recorrido salen de la columna de
+  // texto y ocupan todo el ancho, debajo de la fila título + composición.
+  // Para entradillas largas que alargarían demasiado la columna izquierda.
+  entradillaAncha?: boolean;
 }
 
-const { producto, disciplina, titulo, imagen, imagenAlt, contexto, banda = true, recorrido, compacta = false } = Astro.props;
+const {
+  producto,
+  disciplina,
+  titulo,
+  imagen,
+  imagenAlt,
+  contexto,
+  banda = true,
+  recorrido,
+  compacta = false,
+  lateral = false,
+  entradillaAncha = false,
+} = Astro.props;
+const ancha = lateral && entradillaAncha;
 const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width)))];
+// En lateral hay dos envoltorios: el bloque (con el relleno superior y el
+// enlace de vuelta) y, dentro, la rejilla de dos columnas. Sin lateral no
+// existen y el header lleva su propio relleno.
+// La composición se alinea arriba, con el eyebrow, y no centrada respecto al
+// texto: si el texto es largo (Wedify), centrarla la bajaba hasta quedar
+// medio fuera de la primera pantalla. Por eso el enlace va fuera de la
+// rejilla: si no, la imagen arrancaría por encima del eyebrow.
+const Bloque = lateral ? 'div' : Fragment;
+const bloqueProps = lateral ? { class: 'mx-auto max-w-6xl pt-10 sm:pt-16 lg:pt-24' } : {};
+const Rejilla = lateral ? 'div' : Fragment;
+// Con entradilla ancha el header pasa a `contents` en lg y sus piezas son
+// celdas de la rejilla: eyebrow, título y contexto a la izquierda (filas
+// 1–3), la composición a la derecha ocupando también la fila 4, que es
+// elástica (1fr) para que, si la imagen es más alta que el título, el hueco
+// quede debajo y no repartido entre eyebrow, título y contexto; y la
+// entradilla y el recorrido a todo el ancho en las filas 5 y 6.
+const rejillaProps = lateral
+  ? {
+      class: [
+        compacta ? 'mt-10 sm:mt-12' : 'mt-12 sm:mt-16',
+        'lg:grid lg:grid-cols-[5fr_7fr] lg:items-start lg:gap-x-12',
+        ancha && 'lg:grid-rows-[auto_auto_auto_1fr_auto_auto]',
+      ]
+        .filter(Boolean)
+        .join(' '),
+    }
+  : {};
 ---
 
 <!--
@@ -41,10 +89,19 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
     "posa" la composición y la une a la franja. `isolate` mantiene la banda
     detrás de la imagen sin que se vaya debajo del fondo de la página.
 -->
-<header class="mx-auto max-w-6xl pt-10 sm:pt-16 lg:pt-24">
-  <a href="/proyectos/" class="text-sm text-ink-soft transition hover:text-ink">← Proyectos</a>
+<Bloque {...bloqueProps}>
+{lateral && <a href="/proyectos/" class="text-sm text-ink-soft transition hover:text-ink">← Proyectos</a>}
+<Rejilla {...rejillaProps}>
+<header class:list={[!lateral && 'mx-auto max-w-6xl pt-10 sm:pt-16 lg:pt-24', ancha && 'lg:contents']}>
+  {!lateral && <a href="/proyectos/" class="text-sm text-ink-soft transition hover:text-ink">← Proyectos</a>}
 
-  <p class:list={['text-xs font-medium tracking-[0.14em] uppercase', compacta ? 'mt-10 sm:mt-12' : 'mt-12 sm:mt-16']}>
+  <p
+    class:list={[
+      'text-xs font-medium tracking-[0.14em] uppercase',
+      !lateral && (compacta ? 'mt-10 sm:mt-12' : 'mt-12 sm:mt-16'),
+      ancha && 'lg:col-start-1',
+    ]}
+  >
     <span class="text-amaia-ink">{producto}</span>
     {
       disciplina && (
@@ -58,13 +115,25 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
     }
   </p>
 
-  <h1 class="mt-5 max-w-4xl text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+  <h1
+    class:list={[
+      'mt-5 max-w-4xl text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl',
+      lateral ? 'lg:text-4xl xl:text-5xl' : 'lg:text-6xl',
+      ancha && 'lg:col-start-1',
+    ]}
+  >
     {titulo}
   </h1>
 
   {
     contexto && (
-      <p class:list={['max-w-xl text-base leading-relaxed text-pretty text-ink-soft', compacta ? 'mt-6 sm:mt-8' : 'mt-8 sm:mt-10']}>
+      <p
+        class:list={[
+          'max-w-xl text-base leading-relaxed text-pretty text-ink-soft',
+          compacta ? 'mt-6 sm:mt-8' : 'mt-8 sm:mt-10',
+          ancha && 'lg:col-start-1',
+        ]}
+      >
         {contexto}
       </p>
     )
@@ -74,6 +143,8 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
     class:list={[
       'max-w-2xl space-y-5 text-lg leading-relaxed text-pretty text-ink-soft [&>p:first-child]:text-xl [&>p:first-child]:text-ink sm:[&>p:first-child]:text-2xl sm:[&>p:first-child]:leading-snug',
       compacta ? 'mt-6 sm:mt-8' : 'mt-10 sm:mt-12',
+      lateral && 'lg:[&>p:first-child]:text-xl',
+      ancha && 'lg:col-span-2 lg:row-start-5 lg:mt-10 lg:max-w-none',
     ]}
   >
     <slot />
@@ -83,7 +154,11 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
     recorrido && (
       <ol
         aria-label="Recorrido"
-        class:list={['flex flex-wrap items-center gap-x-3 gap-y-2 text-base font-medium sm:text-lg', compacta ? 'mt-8' : 'mt-10 sm:mt-12']}
+        class:list={[
+          'flex flex-wrap items-center gap-x-3 gap-y-2 text-base font-medium sm:text-lg',
+          compacta ? 'mt-8' : 'mt-10 sm:mt-12',
+          ancha && 'lg:col-span-2 lg:row-start-6',
+        ]}
       >
         {recorrido.map((paso, i) => (
           <li class="flex items-center gap-x-3">
@@ -103,7 +178,8 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
 <figure
   class:list={[
     'relative isolate',
-    compacta ? 'mt-12 sm:mt-16' : 'mt-20 sm:mt-28 lg:mt-32',
+    lateral ? 'mt-10 sm:mt-12 lg:mt-0' : compacta ? 'mt-12 sm:mt-16' : 'mt-20 sm:mt-28 lg:mt-32',
+    ancha && 'lg:col-start-2 lg:row-span-4 lg:row-start-1',
     banda && 'after:absolute after:inset-x-[calc(50%-50vw)] after:top-[68%] after:bottom-0 after:-z-10 after:bg-paper-soft',
   ]}
 >
@@ -111,9 +187,11 @@ const widths = [...new Set([768, 1152, 1800].map((w) => Math.min(w, imagen.width
     src={imagen}
     alt={imagenAlt}
     widths={widths}
-    sizes="(max-width: 72rem) 100vw, 72rem"
+    sizes={lateral ? '(min-width: 64rem) 680px, 100vw' : '(max-width: 72rem) 100vw, 72rem'}
     loading="eager"
     fetchpriority="high"
     class="mx-auto h-auto w-full max-w-6xl"
   />
 </figure>
+</Rejilla>
+</Bloque>

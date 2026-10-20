@@ -4,9 +4,11 @@ interface Props {
   numero: string;
   etiqueta: string;
   titulo: string;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { id, numero, etiqueta, titulo } = Astro.props;
+const { id, numero, etiqueta, titulo, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -23,7 +25,10 @@ const { id, numero, etiqueta, titulo } = Astro.props;
 <section
   id={id}
   aria-labelledby={`${id}-titulo`}
-  class="mx-auto mt-36 mb-24 max-w-6xl scroll-mt-28 sm:mt-44 sm:mb-32 lg:mt-56 lg:mb-48 lg:grid lg:grid-cols-12 lg:gap-x-10"
+  class:list={[
+    'mx-auto max-w-6xl scroll-mt-28 lg:grid lg:grid-cols-12 lg:gap-x-10',
+    compacta ? 'mt-20 mb-12 sm:mt-24 sm:mb-16 lg:mt-28 lg:mb-20' : 'mt-36 mb-24 sm:mt-44 sm:mb-32 lg:mt-56 lg:mb-48',
+  ]}
 >
   <div class="lg:col-span-8 lg:col-start-3">
     <p class="text-xs font-medium tracking-[0.14em] uppercase">
@@ -34,12 +39,15 @@ const { id, numero, etiqueta, titulo } = Astro.props;
       {titulo}
     </h2>
 
-    <div class="mt-12 max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft sm:mt-16">
+    <div class:list={['max-w-2xl space-y-6 text-lg leading-relaxed text-pretty text-ink-soft', compacta ? 'mt-6 sm:mt-8' : 'mt-12 sm:mt-16']}>
       <slot />
     </div>
 
     <div
-      class="mt-20 sm:mt-24 lg:mt-32 [&>p]:max-w-3xl [&>p]:text-2xl [&>p]:leading-snug [&>p]:font-normal [&>p]:tracking-tight [&>p]:text-pretty [&>p]:text-ink sm:[&>p]:text-3xl lg:[&>p]:text-[2.25rem]"
+      class:list={[
+        '[&>p]:max-w-3xl [&>p]:text-2xl [&>p]:leading-snug [&>p]:font-normal [&>p]:tracking-tight [&>p]:text-pretty [&>p]:text-ink sm:[&>p]:text-3xl lg:[&>p]:text-[2.25rem]',
+        compacta ? 'mt-12 sm:mt-14' : 'mt-20 sm:mt-24 lg:mt-32',
+      ]}
     >
       <slot name="reflexion" />
     </div>

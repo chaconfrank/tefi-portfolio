@@ -11,9 +11,11 @@ interface Captura {
 interface Props {
   antes: Captura;
   despues: Captura;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { antes, despues } = Astro.props;
+const { antes, despues, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -27,7 +29,10 @@ const { antes, despues } = Astro.props;
   evolución; en móvil se apilan y la flecha apunta hacia abajo.
 -->
 <div
-  class="mt-20 grid items-center gap-y-6 sm:mt-24 lg:relative lg:left-1/2 lg:mt-28 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-6"
+  class:list={[
+    'grid items-center gap-y-6 lg:relative lg:left-1/2 lg:w-[min(80rem,calc(100vw-5rem))] lg:-translate-x-1/2 lg:grid-cols-[1fr_auto_1fr] lg:gap-x-6',
+    compacta ? 'mt-10 sm:mt-12' : 'mt-20 sm:mt-24 lg:mt-28',
+  ]}
 >
   <Screenshot {...antes} ancho={600} />
 

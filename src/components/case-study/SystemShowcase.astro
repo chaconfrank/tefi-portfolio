@@ -17,9 +17,11 @@ interface Props {
   foundations: [Captura, Captura];
   componentes: [Captura, Captura];
   navegacion: Captura;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { flujo, sistema, foundations, componentes, navegacion } = Astro.props;
+const { flujo, sistema, foundations, componentes, navegacion, compacta = false } = Astro.props;
 const [tipografia, color] = foundations;
 const [botones, dialogos] = componentes;
 ---
@@ -41,59 +43,75 @@ const [botones, dialogos] = componentes;
   - Componentes: Buttons y Dialogs, pegados abajo para cerrar la fila a la
     altura del rail, con las etiquetas alineadas arriba.
 
-  Anchos en escritorio (columnas de 59 px con huecos de 40 px dentro de
-  72rem): 8 col ≈ 755 px, 4 ≈ 357, 5 ≈ 456, 3 de 7 ≈ 270, 4 de 7 ≈ 350.
-  Por debajo de lg todo se apila a todo el ancho.
+  `ancho` de cada captura = el mayor con el que se pinta en cualquier
+  composición: entre md y xl cada media columna llega a ~560 px y Color, a
+  todo el ancho. Así `sizes` nunca pide una versión más pequeña de la que
+  se ve (en xl son 755, 357, 456, 258 y 357 px).
 -->
-<div class="mx-[calc(50%-50vw)] mt-20 bg-paper-soft px-6 py-20 sm:mt-24 sm:px-10 lg:mt-28 lg:py-28">
-  <div class="mx-auto max-w-6xl">
-    <ol aria-label="Del sistema base al producto" class="flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-sm font-medium sm:text-base">
-      {
-        flujo.map((paso, i) => (
-          <li class="flex items-center gap-x-3">
-            {i > 0 && (
-              <span aria-hidden="true" class="text-ink-soft">
-                →
-              </span>
-            )}
-            <span
-              class:list={[
-                'rounded-full border bg-paper px-4 py-2',
-                paso === sistema ? 'border-amaia-ink text-amaia-ink' : 'border-line text-ink',
-              ]}
-            >
-              {Array.isArray(paso) ? (
-                <>
-                  {paso[0]} <span aria-hidden="true" class="px-1 text-ink-soft">↔</span>
-                  <span class="sr-only">y</span> {paso[1]}
-                </>
-              ) : (
-                paso
-              )}
+<div
+  class:list={[
+    // Fondo a sangre sin mover la caja: el border-image pinta el gris 100vw
+    // hacia cada lado (no genera scroll) y el contenido se queda en la
+    // columna de la sección, sin márgenes negativos ni envoltorio interior.
+    '[border-image:linear-gradient(var(--color-paper-soft),var(--color-paper-soft))_fill_0//0_100vw]',
+    compacta ? 'mt-10 py-12 sm:mt-12 sm:py-14 lg:py-16' : 'mt-20 py-20 sm:mt-24 lg:mt-28 lg:py-28',
+  ]}
+>
+  <ol aria-label="Del sistema base al producto" class="flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-sm font-medium sm:text-base">
+    {
+      flujo.map((paso, i) => (
+        <li class="flex items-center gap-x-3">
+          {i > 0 && (
+            <span aria-hidden="true" class="text-ink-soft">
+              →
             </span>
-          </li>
-        ))
-      }
-    </ol>
+          )}
+          <span
+            class:list={[
+              'rounded-full border bg-paper px-4 py-2',
+              paso === sistema ? 'border-amaia-ink text-amaia-ink' : 'border-line text-ink',
+            ]}
+          >
+            {Array.isArray(paso) ? (
+              <>
+                {paso[0]} <span aria-hidden="true" class="px-1 text-ink-soft">↔</span>
+                <span class="sr-only">y</span> {paso[1]}
+              </>
+            ) : (
+              paso
+            )}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
 
-    <div class="mt-16 lg:mt-24">
-      <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">Foundations</p>
-      <div class="mt-6 grid gap-y-10 lg:grid-cols-12 lg:items-start lg:gap-x-10">
-        <Screenshot {...color} ancho={755} class="lg:col-span-8" />
-        <Screenshot {...tipografia} ancho={357} class="lg:col-span-4" />
-      </div>
-    </div>
-
-    <div class="mt-16 grid gap-y-16 lg:mt-24 lg:grid-cols-12 lg:gap-x-10">
-      <Screenshot {...navegacion} ancho={456} acento class="lg:col-span-5" />
-
-      <div class="flex flex-col justify-end lg:col-span-7">
-        <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase">Componentes</p>
-        <div class="mt-6 grid gap-y-10 sm:grid-cols-[3fr_4fr] sm:items-start sm:gap-x-10">
-          <Screenshot {...botones} ancho={270} />
-          <Screenshot {...dialogos} ancho={350} />
-        </div>
-      </div>
-    </div>
+  <!--
+    Una sola rejilla para las cinco páginas, así cada ancho tiene su propia
+    composición sin duplicar marcado:
+    - Móvil: todo apilado.
+    - md–xl: Color a lo ancho; Typography y Navigation Rail lado a lado;
+      Buttons y Dialogs lado a lado. Apilar las cinco a todo el ancho
+      alargaba el bloque a ~3.700 px en tablet, y la composición de 12
+      columnas a 1024 px dejaba Buttons en ~200 px.
+    - xl: la composición de siempre. El rail ocupa las filas 3–5 y la fila 3
+      es elástica (1fr), así Componentes queda pegado abajo, cerrando la
+      fila a la altura del rail.
+  -->
+  <div
+    class:list={[
+      'grid gap-x-8 gap-y-8 md:grid-cols-2 xl:grid-cols-12 xl:grid-rows-[auto_auto_1fr_auto_auto] xl:gap-x-10 xl:gap-y-6',
+      compacta ? 'mt-12 xl:mt-14' : 'mt-16 xl:mt-24',
+    ]}
+  >
+    <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase md:col-span-2 xl:col-span-12">Foundations</p>
+    <Screenshot {...color} ancho={1152} class="md:col-span-2 xl:col-span-8 xl:row-start-2" />
+    <Screenshot {...tipografia} ancho={560} class="xl:col-span-4 xl:row-start-2" />
+    <Screenshot {...navegacion} ancho={560} acento class="xl:col-span-5 xl:row-span-3 xl:row-start-3 xl:mt-8" />
+    <p class="text-xs font-medium tracking-[0.14em] text-ink-soft uppercase md:col-span-2 xl:col-span-7 xl:col-start-6 xl:row-start-4 xl:self-end">
+      Componentes
+    </p>
+    <Screenshot {...botones} ancho={560} class="xl:col-span-3 xl:col-start-6 xl:row-start-5" />
+    <Screenshot {...dialogos} ancho={560} class="xl:col-span-4 xl:col-start-9 xl:row-start-5" />
   </div>
 </div>

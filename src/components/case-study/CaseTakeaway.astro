@@ -1,9 +1,11 @@
 ---
 interface Props {
   etiqueta: string;
+  // Ritmo apretado, a juego con CaseSection compacta.
+  compacta?: boolean;
 }
 
-const { etiqueta } = Astro.props;
+const { etiqueta, compacta = false } = Astro.props;
 ---
 
 <!--
@@ -12,7 +14,7 @@ const { etiqueta } = Astro.props;
   la autora, no una cita. Centrada en un ancho estrecho para que se lea
   como punto final y no como otro párrafo.
 -->
-<div class="mx-auto mt-28 max-w-3xl text-center sm:mt-32 lg:mt-40">
+<div class:list={['mx-auto max-w-3xl text-center', compacta ? 'mt-14 sm:mt-16 lg:mt-20' : 'mt-28 sm:mt-32 lg:mt-40']}>
   <p class="text-xs font-medium tracking-[0.14em] text-amaia-ink uppercase">{etiqueta}</p>
   <p class="mt-5 text-2xl leading-snug font-medium text-balance text-ink sm:text-3xl">
     <slot />
