@@ -12,6 +12,9 @@ interface Props {
 const { proyecto, siguiente } = Astro.props;
 const { titulo, descripcion } = proyecto.data;
 const lang = getLang(Astro.url);
+// Vista previa en redes: la portada del caso centrada en 1200×630, generada
+// en public/og/<slug>.jpg (ver assets.md). Si cambia la portada, regenérala.
+const imagenSocial = `/og/${slugDe(proyecto)}.jpg`;
 ---
 
 <!--
@@ -21,7 +24,7 @@ const lang = getLang(Astro.url);
   ritmo. Aquí sólo queda el marco común: título de página, siguiente caso
   y cierre.
 -->
-<BaseLayout title={titulo} description={descripcion}>
+<BaseLayout title={titulo} description={descripcion} image={imagenSocial}>
   <article>
     <slot />
   </article>

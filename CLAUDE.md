@@ -123,5 +123,3 @@ y el contenido sale de su CV real. Lo que queda por rellenar está marcado con
 Puntos donde el código todavía no sigue las convenciones — arréglalos si tocas esa zona:
 
 1. **Sin `astro check`.** `@astrojs/check` no está instalado, así que nada comprueba tipos.
-2. **Sin `og-default.png`.** `BaseHead` apunta a `/og-default.png` y ese archivo no
-   existe: las previsualizaciones en LinkedIn salen sin imagen.

@@ -51,3 +51,13 @@ Luego se monta con `<Font cssVariable="--font-inter" />` en el `<head>` y se con
 ```
 
 Dos detalles que muerden: Astro descarga **sólo el peso 400** salvo que declares `weights` (para una variable font, `weights: ["100 900"]`), y genera fallbacks con métricas ajustadas a partir de la última familia genérica que listes, para que no haya salto de layout mientras carga.
+
+## Vistas previas en redes (Open Graph)
+
+`public/og-default.png` (1200×630: nombre, rol, dominio y la foto de Sobre
+mí) es la imagen de todas las páginas. Cada case study usa la suya,
+`public/og/<slug>.jpg`: su `portada` centrada sobre blanco en 1200×630, para
+que LinkedIn no recorte las portadas cuadradas o muy apaisadas. Son archivos
+generados a mano (con Pillow), no por el build: si cambia una portada o se
+añade un caso, hay que regenerar su imagen o se publicará la antigua (o
+ninguna).
