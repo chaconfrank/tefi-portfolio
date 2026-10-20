@@ -15,8 +15,8 @@ const { id, titulo, compacta = false } = Astro.props;
   banda del design system para que no se lean como un mismo bloque; el
   margen superior deja papel blanco entre las dos.
 
-  - El texto se reparte en dos columnas de lectura con CSS columns (los <p>
-    del MDX no se parten entre columnas).
+  - El texto va en una sola columna a todo el ancho, como el resto de
+    bloques (antes se repartía en dos columnas con CSS columns).
   - El slot "destacado" es la única idea resaltada de la pausa: el primer
     párrafo grande y en tinta, el resto acompaña en tamaño de lectura.
 -->
@@ -39,8 +39,7 @@ const { id, titulo, compacta = false } = Astro.props;
 
   <div
     class:list={[
-      'text-lg leading-relaxed text-pretty text-ink-soft lg:columns-2 lg:gap-x-16 [&>p]:mb-6 [&>p]:break-inside-avoid',
-      // Compacta: el texto no pasa de 64rem (dos columnas de ~480 px).
+      'text-lg leading-relaxed text-pretty text-ink-soft [&>p]:mb-6',
       compacta ? 'mt-8 sm:mt-10 [&>p:last-child]:mb-0' : 'mt-12 sm:mt-16',
     ]}
   >
